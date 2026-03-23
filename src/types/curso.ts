@@ -16,7 +16,10 @@ export interface ICurso {
   id: string;
   nombre: string;
   descripcion: string;
-  profesor: string;
+  profesor: string;                    // Nombre del profesor (futuro: profesorId)
+  profesorId?: string;                 // FK al profesor (para cuando haya API)
+  categoriaId?: string;                // FK a categoría del curso
+  periodoId?: string;                  // FK a período académico
   duracionHoras: number;
   cantidadDias: number;
   dias: DiaSemana[];
@@ -24,10 +27,13 @@ export interface ICurso {
   horaFin: string;
   topeEstudiantes: number;
   estudiantesInscritos: number;
+  fechaInicio?: string;                // Fecha de inicio del curso
+  fechaFin?: string;                   // Fecha de fin del curso
   tienePrelacion: boolean;
   prelacionCursoId: string | null;
   estatus: EstatusCurso;
   temario: string;
+  plantillaCertificadoId?: string;     // FK a plantilla de certificado
   fechaCreacion: string;
 }
 

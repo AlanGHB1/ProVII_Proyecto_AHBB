@@ -34,7 +34,7 @@ const manejarRegistro_ahbb = async (): Promise<void> => {
   cargando_ahbb.value = true;
   await new Promise((r) => setTimeout(r, 400));
 
-  const exito_ahbb = authStore_ahbb.registrarUsuario_ahbb({
+  const exito_ahbb = await authStore_ahbb.registrarUsuario_ahbb({
     nombre: nombre_ahbb.value,
     apellido: apellido_ahbb.value,
     correo: correo_ahbb.value,

@@ -1,29 +1,67 @@
 /**
  * autenticacionStore_ahbb.ts — Store de Pinia para autenticación
- * Maneja registro, login, logout, sesión activa y persistencia
- * en LocalStorage. Incluye un usuario admin de prueba.
+ * Maneja registro, login, logout, sesión activa.
+ * Delega la persistencia al servicio de autenticación.
+ * Preparado para migrar a JWT cuando el backend esté listo.
  */
 
 import { defineStore } from 'pinia';
-import type { IUsuario, IRegistroUsuario, IClaveSesion } from '../types';
+import type { IUsuario, IRegistroUsuario } from '../types';
+import type { TipoRol_ahbb } from '../constantes/roles_ahbb';
+import { ROLES_AHBB } from '../constantes/roles_ahbb';
 import {
   obtenerDato_ahbb,
   guardarDato_ahbb,
-  eliminarDato_ahbb,
-  generarId_ahbb,
   CLAVES_STORAGE_AHBB,
 } from '../helpers/almacenamiento_ahbb';
+import {
+  iniciarSesion_ahbb as servicioIniciarSesion_ahbb,
+  registrarUsuario_ahbb as servicioRegistrarUsuario_ahbb,
+  cerrarSesion_ahbb as servicioCerrarSesion_ahbb,
+  recuperarSesion_ahbb as servicioRecuperarSesion_ahbb,
+  obtenerUsuarios_ahbb as servicioObtenerUsuarios_ahbb,
+  guardarUsuarios_ahbb as servicioGuardarUsuarios_ahbb,
+} from '../servicios/autenticacionServicio_ahbb';
 
-// Usuario administrador de prueba (se crea al inicializar)
+// ─── Usuarios de prueba ───────────────────────────────
+
 const ADMIN_POR_DEFECTO_AHBB: IUsuario = {
   id: 'admin001',
   nombre: 'Administrador',
   apellido: 'Hidalgo',
   correo: 'admin@hidalgo.edu',
   contrasena: 'admin123',
-  rol: 'administrador',
+  rol: ROLES_AHBB.ADMINISTRADOR,
+  estado: 'activo',
+  requiereCambioContrasena: false,
   fechaCreacion: new Date().toISOString(),
 };
+
+const PROFESOR_POR_DEFECTO_AHBB: IUsuario = {
+  id: 'prof001',
+  nombre: 'Carlos',
+  apellido: 'Mendez',
+  correo: 'carlos@hidalgo.edu',
+  contrasena: 'prof123',
+  rol: ROLES_AHBB.PROFESOR,
+  estado: 'activo',
+  requiereCambioContrasena: false,
+  fechaCreacion: new Date().toISOString(),
+};
+
+const ALUMNO_POR_DEFECTO_AHBB: IUsuario = {
+  id: 'alum001',
+  nombre: 'Maria',
+  apellido: 'Garcia',
+  correo: 'maria@estudiante.edu',
+  contrasena: 'alum123',
+  rol: ROLES_AHBB.ALUMNO,
+  estado: 'activo',
+  requiereCambioContrasena: true,
+  fechaCreacion: new Date().toISOString(),
+};
+
+// ─── Estado del store ─────────────────────────────────
 
 interface EstadoAuth {
   usuarioActivo_ahbb: IUsuario | null;
@@ -58,122 +96,102 @@ export const useAutenticacionStore_ahbb = defineStore('autenticacion_ahbb', {
       return (nombre_ahbb.charAt(0) + apellido_ahbb.charAt(0)).toUpperCase();
     },
 
-    rolUsuario_ahbb: (estado): string => {
-      return estado.usuarioActivo_ahbb?.rol || '';
+    rolUsuario_ahbb: (estado): TipoRol_ahbb | '' => {
+      return estado.usuarioActivo_ahbb?.rol ?? '';
     },
 
     totalUsuarios_ahbb: (estado): number => estado.listaUsuarios_ahbb.length,
+
+    esAdministrador_ahbb: (estado): boolean =>
+      estado.usuarioActivo_ahbb?.rol === ROLES_AHBB.ADMINISTRADOR,
+
+    esProfesor_ahbb: (estado): boolean =>
+      estado.usuarioActivo_ahbb?.rol === ROLES_AHBB.PROFESOR,
+
+    esAlumno_ahbb: (estado): boolean =>
+      estado.usuarioActivo_ahbb?.rol === ROLES_AHBB.ALUMNO,
   },
 
   // ─── Acciones ───────────────────────────────────────
   actions: {
     /**
-     * Inicializa el store: carga usuarios y sesión desde LocalStorage.
-     * Si no hay usuarios, crea el admin por defecto.
+     * Inicializa el store: carga usuarios y sesión.
+     * Delega al servicio de autenticación.
      */
-    inicializar_ahbb(): void {
-      const usuarios_ahbb = obtenerDato_ahbb<IUsuario[]>(
-        CLAVES_STORAGE_AHBB.USUARIOS,
-        []
-      );
+    async inicializar_ahbb(): Promise<void> {
+      // Cargar usuarios
+      const usuarios_ahbb = await servicioObtenerUsuarios_ahbb();
 
       if (usuarios_ahbb.length === 0) {
-        this.listaUsuarios_ahbb = [ADMIN_POR_DEFECTO_AHBB];
-        guardarDato_ahbb<IUsuario[]>(
-          CLAVES_STORAGE_AHBB.USUARIOS,
-          this.listaUsuarios_ahbb
-        );
+        this.listaUsuarios_ahbb = [
+          ADMIN_POR_DEFECTO_AHBB,
+          PROFESOR_POR_DEFECTO_AHBB,
+          ALUMNO_POR_DEFECTO_AHBB,
+        ];
+        servicioGuardarUsuarios_ahbb(this.listaUsuarios_ahbb);
       } else {
         this.listaUsuarios_ahbb = usuarios_ahbb;
       }
 
       // Recuperar sesión activa si existe
-      const sesion_ahbb = obtenerDato_ahbb<IClaveSesion | null>(
-        CLAVES_STORAGE_AHBB.SESION,
-        null
-      );
-      if (sesion_ahbb) {
-        const usuario_ahbb = this.listaUsuarios_ahbb.find(
-          (u) => u.id === sesion_ahbb.id
-        );
-        this.usuarioActivo_ahbb = usuario_ahbb ?? null;
-        if (!usuario_ahbb) {
-          eliminarDato_ahbb(CLAVES_STORAGE_AHBB.SESION);
-        }
-      }
+      const usuarioActivo_ahbb = await servicioRecuperarSesion_ahbb();
+      this.usuarioActivo_ahbb = usuarioActivo_ahbb;
     },
 
     /**
      * Registra un nuevo usuario.
-     * @param datosUsuario_ahbb - { nombre, apellido, correo, contrasena }
-     * @returns true si el registro fue exitoso
      */
-    registrarUsuario_ahbb(datosUsuario_ahbb: IRegistroUsuario): boolean {
+    async registrarUsuario_ahbb(datosUsuario_ahbb: IRegistroUsuario): Promise<boolean> {
       this.errorAuth_ahbb = '';
+      this.cargando_ahbb = true;
 
-      const existeCorreo_ahbb = this.listaUsuarios_ahbb.some(
-        (u) =>
-          u.correo.toLowerCase() === datosUsuario_ahbb.correo.toLowerCase()
-      );
+      try {
+        const resultado_ahbb = await servicioRegistrarUsuario_ahbb(datosUsuario_ahbb);
 
-      if (existeCorreo_ahbb) {
-        this.errorAuth_ahbb = 'Ya existe un usuario con ese correo electrónico.';
-        return false;
+        if (!resultado_ahbb.exito) {
+          this.errorAuth_ahbb = resultado_ahbb.mensaje;
+          return false;
+        }
+
+        // Actualizar lista local
+        if (resultado_ahbb.usuario) {
+          this.listaUsuarios_ahbb.push(resultado_ahbb.usuario);
+        }
+
+        return true;
+      } finally {
+        this.cargando_ahbb = false;
       }
-
-      const nuevoUsuario_ahbb: IUsuario = {
-        id: generarId_ahbb(),
-        nombre: datosUsuario_ahbb.nombre.trim(),
-        apellido: datosUsuario_ahbb.apellido.trim(),
-        correo: datosUsuario_ahbb.correo.trim().toLowerCase(),
-        contrasena: datosUsuario_ahbb.contrasena,
-        rol: 'profesor',
-        fechaCreacion: new Date().toISOString(),
-      };
-
-      this.listaUsuarios_ahbb.push(nuevoUsuario_ahbb);
-      guardarDato_ahbb<IUsuario[]>(
-        CLAVES_STORAGE_AHBB.USUARIOS,
-        this.listaUsuarios_ahbb
-      );
-
-      return true;
     },
 
     /**
      * Inicia sesión con correo y contraseña.
-     * @param correo_ahbb
-     * @param contrasena_ahbb
-     * @returns true si el login fue exitoso
      */
-    iniciarSesion_ahbb(correo_ahbb: string, contrasena_ahbb: string): boolean {
+    async iniciarSesion_ahbb(correo_ahbb: string, contrasena_ahbb: string): Promise<boolean> {
       this.errorAuth_ahbb = '';
+      this.cargando_ahbb = true;
 
-      const usuario_ahbb = this.listaUsuarios_ahbb.find(
-        (u) =>
-          u.correo.toLowerCase() === correo_ahbb.toLowerCase() &&
-          u.contrasena === contrasena_ahbb
-      );
+      try {
+        const resultado_ahbb = await servicioIniciarSesion_ahbb(correo_ahbb, contrasena_ahbb);
 
-      if (!usuario_ahbb) {
-        this.errorAuth_ahbb = 'Correo o contrasena incorrectos.';
-        return false;
+        if (!resultado_ahbb.exito) {
+          this.errorAuth_ahbb = resultado_ahbb.mensaje;
+          return false;
+        }
+
+        this.usuarioActivo_ahbb = resultado_ahbb.usuario;
+        return true;
+      } finally {
+        this.cargando_ahbb = false;
       }
-
-      this.usuarioActivo_ahbb = usuario_ahbb;
-      guardarDato_ahbb<IClaveSesion>(CLAVES_STORAGE_AHBB.SESION, {
-        id: usuario_ahbb.id,
-      });
-
-      return true;
     },
 
     /**
      * Cierra la sesión actual.
      */
-    cerrarSesion_ahbb(): void {
+    async cerrarSesion_ahbb(): Promise<void> {
+      await servicioCerrarSesion_ahbb();
       this.usuarioActivo_ahbb = null;
-      eliminarDato_ahbb(CLAVES_STORAGE_AHBB.SESION);
     },
 
     /**

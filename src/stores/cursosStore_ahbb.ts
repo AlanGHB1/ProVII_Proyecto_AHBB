@@ -1,19 +1,20 @@
 /**
- * cursosStore_ahbb.ts — Store de Pinia para CRUD de Cursos
- * Maneja crear, leer, actualizar, eliminar, filtrar y buscar
- * cursos con persistencia en LocalStorage.
+ * cursosStore_ahbb.ts — Store de Pinia para gestión de Cursos
+ * Maneja crear, leer, actualizar, eliminar, filtrar y buscar cursos.
+ * Delega la persistencia al servicio de cursos.
  */
 
 import { defineStore } from 'pinia';
 import type { ICurso, ICursoFormulario, IOpcionPrelacion, EstatusCurso } from '../types';
 import {
-  obtenerDato_ahbb,
-  guardarDato_ahbb,
-  generarId_ahbb,
-  CLAVES_STORAGE_AHBB,
-} from '../helpers/almacenamiento_ahbb';
+  obtenerCursos_ahbb as servicioObtenerCursos_ahbb,
+  crearCurso_ahbb as servicioCrearCurso_ahbb,
+  actualizarCurso_ahbb as servicioActualizarCurso_ahbb,
+  eliminarCurso_ahbb as servicioEliminarCurso_ahbb,
+  inicializarCursos_ahbb as servicioInicializarCursos_ahbb,
+} from '../servicios/cursosServicio_ahbb';
 
-// Cursos de ejemplo para la primera carga
+// ─── Cursos de ejemplo para la primera carga ──────────
 const CURSOS_INICIALES_AHBB: ICurso[] = [
   {
     id: 'curso001',
@@ -97,11 +98,14 @@ const CURSOS_INICIALES_AHBB: ICurso[] = [
   },
 ];
 
+// ─── Estado del store ─────────────────────────────────
+
 interface EstadoCursos {
   listaCursos_ahbb: ICurso[];
   terminoBusqueda_ahbb: string;
   filtroEstatus_ahbb: EstatusCurso | 'todos';
   cursoSeleccionado_ahbb: ICurso | null;
+  cargando_ahbb: boolean;
 }
 
 export const useCursosStore_ahbb = defineStore('cursos_ahbb', {
@@ -111,19 +115,18 @@ export const useCursosStore_ahbb = defineStore('cursos_ahbb', {
     terminoBusqueda_ahbb: '',
     filtroEstatus_ahbb: 'todos',
     cursoSeleccionado_ahbb: null,
+    cargando_ahbb: false,
   }),
 
   // ─── Getters ────────────────────────────────────────
   getters: {
-    /**
-     * Cursos filtrados por búsqueda y estatus.
-     */
+    /** Cursos filtrados por búsqueda y estatus. */
     cursosFiltrados_ahbb: (estado): ICurso[] => {
       let resultado_ahbb = [...estado.listaCursos_ahbb];
 
       if (estado.filtroEstatus_ahbb !== 'todos') {
         resultado_ahbb = resultado_ahbb.filter(
-          (curso) => curso.estatus === estado.filtroEstatus_ahbb
+          (curso) => curso.estatus === estado.filtroEstatus_ahbb,
         );
       }
 
@@ -133,7 +136,7 @@ export const useCursosStore_ahbb = defineStore('cursos_ahbb', {
           (curso) =>
             curso.nombre.toLowerCase().includes(termino_ahbb) ||
             curso.profesor.toLowerCase().includes(termino_ahbb) ||
-            curso.descripcion.toLowerCase().includes(termino_ahbb)
+            curso.descripcion.toLowerCase().includes(termino_ahbb),
         );
       }
 
@@ -151,12 +154,10 @@ export const useCursosStore_ahbb = defineStore('cursos_ahbb', {
     totalEstudiantes_ahbb: (estado): number =>
       estado.listaCursos_ahbb.reduce(
         (acc, c) => acc + (c.estudiantesInscritos || 0),
-        0
+        0,
       ),
 
-    /**
-     * Lista de nombres de cursos para selects de prelación.
-     */
+    /** Lista de nombres de cursos para selects de prelación. */
     opcionesPrelacion_ahbb: (estado): IOpcionPrelacion[] =>
       estado.listaCursos_ahbb.map((c) => ({
         id: c.id,
@@ -167,37 +168,32 @@ export const useCursosStore_ahbb = defineStore('cursos_ahbb', {
   // ─── Acciones ───────────────────────────────────────
   actions: {
     /**
-     * Inicializa los cursos desde LocalStorage.
+     * Inicializa los cursos desde el servicio.
      * Si no existen, carga los cursos de ejemplo.
      */
-    inicializar_ahbb(): void {
-      const cursos_ahbb = obtenerDato_ahbb<ICurso[] | null>(
-        CLAVES_STORAGE_AHBB.CURSOS,
-        null
-      );
-
-      if (cursos_ahbb === null) {
-        this.listaCursos_ahbb = [...CURSOS_INICIALES_AHBB];
-        this.persistir_ahbb();
-      } else {
-        this.listaCursos_ahbb = cursos_ahbb;
+    async inicializar_ahbb(): Promise<void> {
+      this.cargando_ahbb = true;
+      try {
+        this.listaCursos_ahbb = servicioInicializarCursos_ahbb(CURSOS_INICIALES_AHBB);
+      } finally {
+        this.cargando_ahbb = false;
       }
     },
 
     /**
-     * Guarda la lista actual en LocalStorage.
+     * Recarga los cursos desde el servicio.
      */
-    persistir_ahbb(): void {
-      guardarDato_ahbb<ICurso[]>(
-        CLAVES_STORAGE_AHBB.CURSOS,
-        this.listaCursos_ahbb
-      );
+    async recargarCursos_ahbb(): Promise<void> {
+      this.cargando_ahbb = true;
+      try {
+        this.listaCursos_ahbb = await servicioObtenerCursos_ahbb();
+      } finally {
+        this.cargando_ahbb = false;
+      }
     },
 
     /**
      * Obtiene un curso por su ID.
-     * @param id_ahbb
-     * @returns ICurso o null
      */
     obtenerCursoPorId_ahbb(id_ahbb: string): ICurso | null {
       return this.listaCursos_ahbb.find((c) => c.id === id_ahbb) ?? null;
@@ -205,82 +201,71 @@ export const useCursosStore_ahbb = defineStore('cursos_ahbb', {
 
     /**
      * Crea un curso nuevo.
-     * @param datosCurso_ahbb
-     * @returns El curso creado
      */
-    crearCurso_ahbb(datosCurso_ahbb: ICursoFormulario): ICurso {
-      const nuevoCurso_ahbb: ICurso = {
-        id: generarId_ahbb(),
-        ...datosCurso_ahbb,
-        estudiantesInscritos: 0,
-        fechaCreacion: new Date().toISOString(),
-      };
-
-      this.listaCursos_ahbb.push(nuevoCurso_ahbb);
-      this.persistir_ahbb();
-      return nuevoCurso_ahbb;
+    async crearCurso_ahbb(datosCurso_ahbb: ICursoFormulario): Promise<ICurso> {
+      this.cargando_ahbb = true;
+      try {
+        const nuevoCurso_ahbb = await servicioCrearCurso_ahbb(datosCurso_ahbb);
+        this.listaCursos_ahbb.push(nuevoCurso_ahbb);
+        return nuevoCurso_ahbb;
+      } finally {
+        this.cargando_ahbb = false;
+      }
     },
 
     /**
      * Actualiza un curso existente.
-     * @param id_ahbb - ID del curso
-     * @param datosCurso_ahbb - Campos a actualizar
-     * @returns true si se encontró y actualizó
      */
-    actualizarCurso_ahbb(
+    async actualizarCurso_ahbb(
       id_ahbb: string,
-      datosCurso_ahbb: Partial<ICursoFormulario>
-    ): boolean {
-      const indice_ahbb = this.listaCursos_ahbb.findIndex(
-        (c) => c.id === id_ahbb
-      );
-
-      if (indice_ahbb === -1) return false;
-
-      this.listaCursos_ahbb[indice_ahbb] = {
-        ...this.listaCursos_ahbb[indice_ahbb],
-        ...datosCurso_ahbb,
-      } as ICurso;
-
-      this.persistir_ahbb();
-      return true;
+      datosCurso_ahbb: Partial<ICursoFormulario>,
+    ): Promise<boolean> {
+      this.cargando_ahbb = true;
+      try {
+        const exito_ahbb = await servicioActualizarCurso_ahbb(id_ahbb, datosCurso_ahbb);
+        if (exito_ahbb) {
+          // Actualizar localmente
+          const indice_ahbb = this.listaCursos_ahbb.findIndex((c) => c.id === id_ahbb);
+          if (indice_ahbb !== -1) {
+            this.listaCursos_ahbb[indice_ahbb] = {
+              ...this.listaCursos_ahbb[indice_ahbb],
+              ...datosCurso_ahbb,
+            } as ICurso;
+          }
+        }
+        return exito_ahbb;
+      } finally {
+        this.cargando_ahbb = false;
+      }
     },
 
     /**
      * Elimina un curso por su ID.
-     * @param id_ahbb
-     * @returns true si se eliminó
      */
-    eliminarCurso_ahbb(id_ahbb: string): boolean {
-      const longitudAntes_ahbb = this.listaCursos_ahbb.length;
-      this.listaCursos_ahbb = this.listaCursos_ahbb.filter(
-        (c) => c.id !== id_ahbb
-      );
-
-      if (this.listaCursos_ahbb.length < longitudAntes_ahbb) {
-        this.persistir_ahbb();
-        return true;
+    async eliminarCurso_ahbb(id_ahbb: string): Promise<boolean> {
+      this.cargando_ahbb = true;
+      try {
+        const exito_ahbb = await servicioEliminarCurso_ahbb(id_ahbb);
+        if (exito_ahbb) {
+          this.listaCursos_ahbb = this.listaCursos_ahbb.filter((c) => c.id !== id_ahbb);
+        }
+        return exito_ahbb;
+      } finally {
+        this.cargando_ahbb = false;
       }
-      return false;
     },
 
-    /**
-     * Actualiza el término de búsqueda.
-     */
+    /** Actualiza el término de búsqueda. */
     buscar_ahbb(termino_ahbb: string): void {
       this.terminoBusqueda_ahbb = termino_ahbb;
     },
 
-    /**
-     * Actualiza el filtro de estatus.
-     */
+    /** Actualiza el filtro de estatus. */
     filtrarPorEstatus_ahbb(estatus_ahbb: EstatusCurso | 'todos'): void {
       this.filtroEstatus_ahbb = estatus_ahbb;
     },
 
-    /**
-     * Limpia todos los filtros.
-     */
+    /** Limpia todos los filtros. */
     limpiarFiltros_ahbb(): void {
       this.terminoBusqueda_ahbb = '';
       this.filtroEstatus_ahbb = 'todos';

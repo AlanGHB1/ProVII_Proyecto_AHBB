@@ -20,7 +20,7 @@ const manejarLogin_ahbb = async (): Promise<void> => {
 
   await new Promise((r) => setTimeout(r, 400));
 
-  const exito_ahbb = authStore_ahbb.iniciarSesion_ahbb(
+  const exito_ahbb = await authStore_ahbb.iniciarSesion_ahbb(
     correo_ahbb.value,
     contrasena_ahbb.value
   );
