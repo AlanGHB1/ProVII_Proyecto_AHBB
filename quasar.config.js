@@ -16,9 +16,8 @@ export default defineConfig((/* ctx */) => {
     ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#css
-    css: [
-      'app.scss'
-    ],
+    css: ['app.scss', 'assets/css/main_ah.css'],
+
 
     // https://github.com/quasarframework/quasar/tree/dev/extras
     extras: [
@@ -60,14 +59,16 @@ export default defineConfig((/* ctx */) => {
       // extendViteConf (viteConf) {},
       // viteVuePluginOptions: {},
       
-      vitePlugins: [
-        ['vite-plugin-checker', {
-          eslint: {
-            lintCommand: 'eslint -c ./eslint.config.js "./src*/**/*.{js,mjs,cjs,vue}"',
-            useFlatConfig: true
-          }
-        }, { server: false }]
-      ]
+      // vite-plugin-checker disabled: spawns ESLint via cmd.exe which misparses
+      // the '&' character in the folder name "academia-h&b". Run ESLint manually: pnpm lint
+      // vitePlugins: [
+      //   ['vite-plugin-checker', {
+      //     eslint: {
+      //       lintCommand: 'eslint -c ./eslint.config.js "./src*/**/*.{js,mjs,cjs,vue}"',
+      //       useFlatConfig: true
+      //     }
+      //   }, { server: false }]
+      // ]
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#devserver
@@ -91,7 +92,7 @@ export default defineConfig((/* ctx */) => {
       // directives: [],
 
       // Quasar plugins
-      plugins: []
+      plugins: ['Notify', 'Dialog']
     },
 
     // animations: 'all', // --- includes all animations
