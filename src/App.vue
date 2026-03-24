@@ -142,7 +142,7 @@ const cerrarSesion_ahbb = () => {
         </q-item-section>
         <q-item-section>
           <q-item-label class="text-weight-bold text-white" style="font-size: 1.1rem">
-            Hidalgo <span style="color: #f59e0b">Academy</span>
+            Academia <span style="color: #f59e0b">H&B</span>
           </q-item-label>
           <q-item-label caption class="text-grey-5" style="font-size: 0.7rem">
             {{ etiquetaRol_ahbb }}

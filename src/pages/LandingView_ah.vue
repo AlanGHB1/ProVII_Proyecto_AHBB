@@ -1,5 +1,5 @@
 <!--
-  LandingView_ah.vue — Vista 1: Landing Page de Hidalgo Academy
+  LandingView_ah.vue — Vista 1: Landing Page de Academia H&B
   Compone todas las secciones de la landing según la estructura
   obligatoria (a–i): Hero, Beneficios,
   Galería, Testimonios, Detalles Adicionales y FAQ.

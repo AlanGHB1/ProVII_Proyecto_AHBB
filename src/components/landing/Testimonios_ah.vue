@@ -8,14 +8,14 @@ const listaTestimonios_ah = [
     foto: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face',
     nombre: 'Carlos Mendoza',
     rol: 'Egresado - Desarrollo Web',
-    texto: 'Uso mi franela de Hidalgo Academy en todas mis charlas de programacion. Siempre me preguntan donde la consegui y es una excelente forma de representar mi formacion.',
+    texto: 'Uso mi franela de Academia H&B en todas mis charlas de programación. Siempre me preguntan dónde la conseguí y es una excelente forma de representar mi formación.',
     estrellas: 5,
   },
   {
     foto: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face',
     nombre: 'Maria Fernandez',
     rol: 'Estudiante Activa - Ciencia de Datos',
-    texto: 'La taza oficial me acompania en cada sesion de estudio para mis certificaciones. Es mi talisman de buena suerte en los examenes. La calidad es increible.',
+    texto: 'La taza oficial me acompaña en cada sesión de estudio para mis certificaciones. Es mi talismán de buena suerte en los exámenes. La calidad es increíble.',
     estrellas: 5,
   },
   {

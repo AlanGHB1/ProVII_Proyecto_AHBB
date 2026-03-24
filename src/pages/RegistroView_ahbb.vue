@@ -56,7 +56,7 @@ const manejarRegistro_ahbb = async () => {
       <q-card-section class="text-center q-pb-none">
         <div style="font-size: 2.5rem">🎓</div>
         <div class="text-h5 text-weight-bold text-primary q-mt-sm">
-          Hidalgo <span class="text-accent">Academy</span>
+          Academia <span class="text-accent">H&B</span>
         </div>
         <p class="text-grey-6 q-mt-sm">Crea tu cuenta para acceder al sistema</p>
       </q-card-section>
@@ -99,7 +99,7 @@ const manejarRegistro_ahbb = async () => {
 
           <q-input
             v-model="correo_ahbb"
-            label="Correo electronico"
+            label="Correo electrónico"
             type="email"
             outlined
             dense
@@ -110,11 +110,11 @@ const manejarRegistro_ahbb = async () => {
 
           <q-input
             v-model="contrasena_ahbb"
-            label="Contrasena"
+            label="Contraseña"
             :type="mostrarContrasena_ahbb ? 'text' : 'password'"
             outlined
             dense
-            hint="Minimo 6 caracteres"
+            hint="Mínimo 6 caracteres"
             :rules="[(v) => !!v || 'Requerida']"
           >
             <template v-slot:prepend><q-icon name="lock" /></template>
@@ -129,7 +129,7 @@ const manejarRegistro_ahbb = async () => {
 
           <q-input
             v-model="confirmarContrasena_ahbb"
-            label="Confirmar contrasena"
+            label="Confirmar contraseña"
             :type="mostrarContrasena_ahbb ? 'text' : 'password'"
             outlined
             dense
@@ -150,9 +150,9 @@ const manejarRegistro_ahbb = async () => {
         </q-form>
 
         <p class="text-center text-grey-6 q-mt-md" style="font-size: 0.9rem">
-          Ya tienes cuenta?
+          ¿Ya tienes cuenta?
           <router-link to="/login" class="text-secondary text-weight-bold">
-            Inicia sesion
+            Inicia sesión
           </router-link>
         </p>
       </q-card-section>

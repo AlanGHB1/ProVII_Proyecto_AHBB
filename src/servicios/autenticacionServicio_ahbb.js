@@ -68,7 +68,7 @@ export const iniciarSesion_ahbb = async (correo_ahbb, contrasena_ahbb) => {
   );
 
   if (!usuario_ahbb) {
-    return { exito: false, usuario: null, mensaje: 'Correo o contrasena incorrectos.' };
+    return { exito: false, usuario: null, mensaje: 'Correo o contraseña incorrectos.' };
   }
 
   // Guardar sesión

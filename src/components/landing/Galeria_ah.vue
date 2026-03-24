@@ -1,6 +1,6 @@
 <!--
   Galeria_ah.vue — Sección d) de la landing page
-  Muestra imágenes del merch de Hidalgo Academy en acción.
+  Muestra imágenes del merch de Academia H&B en acción.
   Layout tipo masonry/grid con efecto hover.
 -->
 <script setup>
@@ -12,18 +12,18 @@ const imagenesGaleria_ah = [
   },
   {
     url: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400&h=400&fit=crop',
-    titulo: 'Sesion de estudio',
+    titulo: 'Sesión de estudio',
     categoria: 'Academia',
   },
   {
     url: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&h=400&fit=crop',
-    titulo: 'Evento de certificacion',
+    titulo: 'Evento de certificación',
     categoria: 'Eventos',
   },
   {
     url: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=600&h=400&fit=crop',
     titulo: 'Programando con estilo',
-    categoria: 'Tecnologia',
+    categoria: 'Tecnología',
   },
   {
     url: 'https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?w=400&h=500&fit=crop',
@@ -32,7 +32,7 @@ const imagenesGaleria_ah = [
   },
   {
     url: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&h=400&fit=crop',
-    titulo: 'Graduacion Academy',
+    titulo: 'Graduación Academy',
     categoria: 'Logros',
   },
 ];
@@ -44,10 +44,10 @@ const imagenesGaleria_ah = [
     <div class="contenedor_ah">
       <!-- Título de la sección -->
       <div class="titulo-seccion_ah">
-        <h2>Nuestra Comunidad en Accion</h2>
+        <h2>Nuestra Comunidad en Acción</h2>
         <p>
           Estudiantes y egresados luciendo con orgullo el merch oficial de
-          Hidalgo Academy
+          Academia H&B
         </p>
       </div>
 

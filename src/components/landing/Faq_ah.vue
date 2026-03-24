@@ -7,29 +7,29 @@ import { ref } from 'vue';
 
 const preguntasFrecuentes_ah = [
   {
-    pregunta: 'Hacen envios nacionales e internacionales?',
+    pregunta: '¿Hacen envíos nacionales e internacionales?',
     respuesta:
-      'Si, realizamos envios a todo el territorio nacional con seguimiento en tiempo real. Para envios internacionales, trabajamos con aliados logisticos que cubren Latinoamerica, Estados Unidos y Europa. Los tiempos de entrega varian segun la ubicacion.',
+      'Sí, realizamos envíos a todo el territorio nacional con seguimiento en tiempo real. Para envíos internacionales, trabajamos con aliados logísticos que cubren Latinoamérica, Estados Unidos y Europa. Los tiempos de entrega varían según la ubicación.',
   },
   {
-    pregunta: 'Puedo personalizar mi nombre en las franelas o chaquetas?',
+    pregunta: '¿Puedo personalizar mi nombre en las franelas o chaquetas?',
     respuesta:
-      'Por supuesto. Ofrecemos un servicio de personalizacion donde puedes agregar tu nombre, cohorte, especialidad o cualquier texto corto. Solo debes indicarlo al momento de realizar tu pedido y nuestro equipo se encarga del diseno.',
+      'Por supuesto. Ofrecemos un servicio de personalización donde puedes agregar tu nombre, cohorte, especialidad o cualquier texto corto. Solo debes indicarlo al momento de realizar tu pedido y nuestro equipo se encarga del diseño.',
   },
   {
-    pregunta: 'Que tallas manejan para franelas y chaquetas?',
+    pregunta: '¿Qué tallas manejan para franelas y chaquetas?',
     respuesta:
-      'Nuestras franelas y chaquetas estan disponibles en tallas S, M, L, XL y XXL. Incluimos una guia de tallas en la ficha de cada producto para que puedas elegir la que mejor se ajuste a ti.',
+      'Nuestras franelas y chaquetas están disponibles en tallas S, M, L, XL y XXL. Incluimos una guía de tallas en la ficha de cada producto para que puedas elegir la que mejor se ajuste a ti.',
   },
   {
-    pregunta: 'Que metodos de pago aceptan?',
+    pregunta: '¿Qué métodos de pago aceptan?',
     respuesta:
-      'Aceptamos pagos con tarjetas de credito y debito (Visa, MasterCard), transferencias bancarias, pagos moviles y PayPal. Todos los pagos se procesan de forma segura a traves de nuestra pasarela de pago.',
+      'Aceptamos pagos con tarjetas de crédito y débito (Visa, MasterCard), transferencias bancarias, pagos móviles y PayPal. Todos los pagos se procesan de forma segura a través de nuestra pasarela de pago.',
   },
   {
-    pregunta: 'Cual es la politica de devoluciones?',
+    pregunta: '¿Cuál es la política de devoluciones?',
     respuesta:
-      'Si por algun motivo no estas satisfecho con tu compra, puedes solicitar un cambio o devolucion dentro de los 15 dias posteriores a la recepcion del producto. El articulo debe estar en su estado original, sin uso. Los productos personalizados no aplican para devolucion.',
+      'Si por algún motivo no estás satisfecho con tu compra, puedes solicitar un cambio o devolución dentro de los 15 días posteriores a la recepción del producto. El artículo debe estar en su estado original, sin uso. Los productos personalizados no aplican para devolución.',
   },
 ];
 
@@ -55,7 +55,7 @@ const togglePregunta_ah = (indice) => {
       <div class="titulo-seccion_ah">
         <h2>Preguntas Frecuentes</h2>
         <p>
-          Resolvemos tus dudas mas comunes sobre nuestros productos y servicios
+          Resolvemos tus dudas más comunes sobre nuestros productos y servicios
         </p>
       </div>
 

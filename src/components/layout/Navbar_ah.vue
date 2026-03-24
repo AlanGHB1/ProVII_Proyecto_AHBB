@@ -11,7 +11,7 @@ const authStore_ahbb = useAutenticacionStore_ahbb();
       <router-link to="/" class="navbar-logo_ah">
         <span class="logo-icono_ah">🎓</span>
         <span class="logo-texto_ah"
-          >Hidalgo <span class="logo-acento_ah">Academy</span></span
+          >Academia <span class="logo-acento_ah">H&B</span></span
         >
       </router-link>
 
@@ -37,7 +37,7 @@ const authStore_ahbb = useAutenticacionStore_ahbb();
           class="navbar-enlace_ah"
           active-class="enlace-activo_ah"
         >
-          Iniciar Sesion
+          Iniciar Sesión
         </router-link>
       </div>
     </div>

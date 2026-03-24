@@ -1,6 +1,6 @@
 <!--
   Beneficios_ah.vue — Sección c) de la landing page
-  Muestra los beneficios clave del merch de Hidalgo Academy.
+  Muestra los beneficios clave del merch de Academia H&B.
 -->
 <script setup>
 
@@ -10,25 +10,25 @@ const listaBeneficios_ah = [
     icono: '🏅',
     titulo: 'Marca Profesional',
     descripcion:
-      'Refuerza tu identidad como egresado certificado de Hidalgo Academy en eventos, conferencias y reuniones profesionales.',
+      'Refuerza tu identidad como egresado certificado de Academia H&B en eventos, conferencias y reuniones profesionales.',
   },
   {
     icono: '🎓',
-    titulo: 'Orgullo Academico',
+    titulo: 'Orgullo Académico',
     descripcion:
-      'Demuestra tus logros y certificaciones con disenos exclusivos creados para la comunidad de la academia.',
+      'Demuestra tus logros y certificaciones con diseños exclusivos creados para la comunidad de la academia.',
   },
   {
     icono: '💎',
     titulo: 'Calidad Premium',
     descripcion:
-      'Materiales de primera: algodon 100%, ceramica resistente, impresion duradera. Hecho para durar y lucir siempre bien.',
+      'Materiales de primera: algodón 100%, cerámica resistente, impresión duradera. Hecho para durar y lucir siempre bien.',
   },
   {
     icono: '🎁',
     titulo: 'Descuentos Exclusivos',
     descripcion:
-      'Precios especiales para estudiantes activos, egresados e instructores de Hidalgo Academy. Aprovecha nuestras ofertas.',
+      'Precios especiales para estudiantes activos, egresados e instructores de Academia H&B. Aprovecha nuestras ofertas.',
   },
 ];
 </script>
@@ -39,10 +39,9 @@ const listaBeneficios_ah = [
     <div class="contenedor_ah">
       <!-- Título de la sección con línea decorativa -->
       <div class="titulo-seccion_ah">
-        <h2>Por que elegir nuestro merch</h2>
+        <h2>¿Por qué elegir nuestro merch?</h2>
         <p>
-          Mas que productos, es una forma de pertenecer a la comunidad Hidalgo
-          Academy
+          Más que productos, es una forma de pertenecer a la comunidad Academia H&B
         </p>
       </div>
 

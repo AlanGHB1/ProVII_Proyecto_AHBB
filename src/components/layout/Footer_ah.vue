@@ -1,5 +1,5 @@
 <!--
-  Footer_ah.vue — Pie de página de Hidalgo Academy
+  Footer_ah.vue — Pie de página de Academia H&B
   Contiene: información de contacto, enlaces rápidos,
   redes sociales y derechos reservados.
   Se muestra en todas las vistas de la aplicación.
@@ -20,12 +20,12 @@
           <div class="footer-logo_ah">
             <span class="logo-icono_ah">🎓</span>
             <span class="logo-texto_ah"
-              >Hidalgo <span class="logo-acento_ah">Academy</span></span
+              >Academia <span class="logo-acento_ah">H&B</span></span
             >
           </div>
           <p class="footer-descripcion_ah">
             Tu academia de certificaciones de confianza. Merch oficial para
-            estudiantes, egresados e instructores que viven la tecnologia.
+            estudiantes, egresados e instructores que viven la tecnología.
           </p>
           <!-- Iconos de redes sociales -->
           <div class="footer-redes_ah">
@@ -38,7 +38,7 @@
 
         <!-- Columna 2: Enlaces rápidos -->
         <div class="footer-col_ah">
-          <h4 class="footer-titulo_ah">Enlaces Rapidos</h4>
+          <h4 class="footer-titulo_ah">Enlaces Rápidos</h4>
           <ul class="footer-lista_ah">
             <li>
               <router-link to="/" class="footer-enlace_ah">Inicio</router-link>
@@ -61,10 +61,10 @@
             <li class="footer-contacto-item_ah">
               <span>📧</span>
               <a
-                href="mailto:merch@hidalgoacademy.com"
+                href="mailto:merch@academiah-b.com"
                 class="footer-enlace_ah"
               >
-                merch@hidalgoacademy.com
+                merch@academiah-b.com
               </a>
             </li>
             <li class="footer-contacto-item_ah">
@@ -85,12 +85,12 @@
       <!-- Barra inferior con copyright y enlaces legales -->
       <div class="footer-inferior_ah">
         <p class="footer-copyright_ah">
-          &copy; {{ new Date().getFullYear() }} Hidalgo Academy. Todos los
+          &copy; {{ new Date().getFullYear() }} Academia H&B. Todos los
           derechos reservados.
         </p>
         <div class="footer-legal_ah">
-          <a href="#" class="footer-enlace-legal_ah">Terminos y Condiciones</a>
-          <a href="#" class="footer-enlace-legal_ah">Politica de Privacidad</a>
+          <a href="#" class="footer-enlace-legal_ah">Términos y Condiciones</a>
+          <a href="#" class="footer-enlace-legal_ah">Política de Privacidad</a>
         </div>
       </div>
     </div>

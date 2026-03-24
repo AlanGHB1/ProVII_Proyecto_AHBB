@@ -10,25 +10,25 @@ const listaDetalles_ah = [
     icono: '🧵',
     titulo: 'Materiales de Primera',
     descripcion:
-      'Algodon premium, ceramica de alta resistencia y materiales seleccionados para garantizar durabilidad en cada producto.',
+      'Algodón premium, cerámica de alta resistencia y materiales seleccionados para garantizar durabilidad en cada producto.',
   },
   {
     icono: '🎨',
-    titulo: 'Disenos Exclusivos',
+    titulo: 'Diseños Exclusivos',
     descripcion:
-      'Cada diseno es creado por nuestro equipo creativo, inspirado en la identidad visual de Hidalgo Academy.',
+      'Cada diseño es creado por nuestro equipo creativo, inspirado en la identidad visual de Academia H&B.',
   },
   {
     icono: '✏️',
-    titulo: 'Personalizacion Disponible',
+    titulo: 'Personalización Disponible',
     descripcion:
-      'Agrega tu nombre, cohorte o especialidad a franelas y chaquetas. Hazlo unico y personal.',
+      'Agrega tu nombre, cohorte o especialidad a franelas y chaquetas. Hazlo único y personal.',
   },
   {
     icono: '📦',
-    titulo: 'Envio Seguro',
+    titulo: 'Envío Seguro',
     descripcion:
-      'Empaque especial para proteger cada producto. Envios nacionales e internacionales con seguimiento.',
+      'Empaque especial para proteger cada producto. Envíos nacionales e internacionales con seguimiento.',
   },
 ];
 </script>
@@ -42,14 +42,14 @@ const listaDetalles_ah = [
         <div class="detalles-imagen_ah">
           <img
             src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&h=700&fit=crop"
-            alt="Merch de Hidalgo Academy - Calidad premium"
+            alt="Merch de Academia H&B - Calidad premium"
             class="detalles-img_ah"
             loading="lazy"
           />
           <!-- Badge decorativo sobre la imagen -->
           <div class="detalles-badge_ah">
             <span class="badge-numero_ah">100%</span>
-            <span class="badge-texto_ah">Satisfaccion Garantizada</span>
+            <span class="badge-texto_ah">Satisfacción Garantizada</span>
           </div>
         </div>
 
@@ -57,12 +57,12 @@ const listaDetalles_ah = [
         <div class="detalles-contenido_ah">
           <span class="detalles-etiqueta_ah">Calidad que Respalda</span>
           <h2 class="detalles-titulo_ah">
-            Merch hecho con pasion y atencion al detalle
+            Merch hecho con pasión y atención al detalle
           </h2>
           <p class="detalles-descripcion_ah">
-            En Hidalgo Academy nos tomamos en serio cada producto. Desde la
-            seleccion de materiales hasta el diseno final, cada pieza refleja la
-            excelencia de nuestra comunidad academica.
+            En Academia H&B nos tomamos en serio cada producto. Desde la
+            selección de materiales hasta el diseño final, cada pieza refleja la
+            excelencia de nuestra comunidad académica.
           </p>
 
           <!-- Lista de puntos destacados -->

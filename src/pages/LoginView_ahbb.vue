@@ -40,7 +40,7 @@ const manejarLogin_ahbb = async () => {
       <q-card-section class="text-center q-pb-none">
         <div style="font-size: 2.5rem">🎓</div>
         <div class="text-h5 text-weight-bold text-primary q-mt-sm">
-          Hidalgo <span class="text-accent">Academy</span>
+          Academia <span class="text-accent">H&B</span>
         </div>
         <p class="text-grey-6 q-mt-sm">
           Ingresa tus credenciales para acceder al sistema
@@ -61,7 +61,7 @@ const manejarLogin_ahbb = async () => {
         <q-form @submit.prevent="manejarLogin_ahbb" class="q-gutter-y-md">
           <q-input
             v-model="correo_ahbb"
-            label="Correo electronico"
+            label="Correo electrónico"
             type="email"
             outlined
             dense
@@ -74,11 +74,11 @@ const manejarLogin_ahbb = async () => {
 
           <q-input
             v-model="contrasena_ahbb"
-            label="Contrasena"
+            label="Contraseña"
             :type="mostrarContrasena_ahbb ? 'text' : 'password'"
             outlined
             dense
-            :rules="[(v) => !!v || 'La contrasena es requerida']"
+            :rules="[(v) => !!v || 'La contraseña es requerida']"
           >
             <template v-slot:prepend>
               <q-icon name="lock" />
@@ -94,7 +94,7 @@ const manejarLogin_ahbb = async () => {
 
           <q-btn
             type="submit"
-            label="Iniciar Sesion"
+            label="Iniciar Sesión"
             color="primary"
             class="full-width"
             size="md"
@@ -104,15 +104,15 @@ const manejarLogin_ahbb = async () => {
         </q-form>
 
         <p class="text-center text-grey-6 q-mt-md" style="font-size: 0.9rem">
-          No tienes cuenta?
+          ¿No tienes cuenta?
           <router-link to="/registro" class="text-secondary text-weight-bold">
-            Registrate aqui
+            Regístrate aquí
           </router-link>
         </p>
 
         <!-- Credenciales demo -->
         <q-banner dense rounded class="bg-blue-1 text-primary q-mt-md text-center">
-          <strong>Demo:</strong> admin@hidalgo.edu / admin123
+          <strong>Demo:</strong> admin@academiah-b.edu / admin123
         </q-banner>
       </q-card-section>
     </q-card>

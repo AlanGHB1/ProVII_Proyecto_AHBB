@@ -31,14 +31,14 @@
         <!-- a) Encabezado principal -->
         <h1 class="hero-titulo_ah animar-entrada-retardo1_ah">
           Viste el orgullo de ser parte de
-          <span class="hero-resaltado_ah">Hidalgo Academy</span>
+          <span class="hero-resaltado_ah">Academia H&B</span>
         </h1>
 
         <!-- b) Subtítulo complementario -->
         <p class="hero-subtitulo_ah animar-entrada-retardo2_ah">
           Demuestra tus logros y certificaciones con merch exclusivo: tazas,
-          franelas, chaquetas y accesorios disenados para quienes viven la
-          tecnologia.
+          franelas, chaquetas y accesorios diseñados para quienes viven la
+          tecnología.
         </p>
 
         <!-- Estadísticas sociales -->
@@ -65,7 +65,7 @@
         <div class="hero-imagen-contenedor_ah">
           <img
             src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&h=600&fit=crop"
-            alt="Estudiantes de Hidalgo Academy usando merch oficial"
+            alt="Estudiantes de Academia H&B usando merch oficial"
             class="hero-imagen_ah"
           />
           <!-- Tarjeta flotante decorativa -->
