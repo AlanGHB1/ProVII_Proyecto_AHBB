@@ -29,7 +29,7 @@ const authStore_ahbb = useAutenticacionStore_ahbb();
           class="navbar-enlace_ah"
           active-class="enlace-activo_ah"
         >
-          Dashboard
+          Panel Principal
         </router-link>
         <router-link
           v-else
