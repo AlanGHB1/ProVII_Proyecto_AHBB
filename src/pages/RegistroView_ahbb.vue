@@ -6,10 +6,15 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useQuasar } from 'quasar';
 import { useAutenticacionStore_ahbb } from '../stores/autenticacionStore_ahbb';
+import { LISTA_ROLES_AHBB } from '../constantes/roles_ahbb';
 
 const $q_ahbb = useQuasar();
 const router_ahbb = useRouter();
 const authStore_ahbb = useAutenticacionStore_ahbb();
+
+// Opciones de registro: excluimos Administrador
+const opcionesRol_ahbb = LISTA_ROLES_AHBB.filter(r => r.valor !== 'administrador');
+const rol_ahbb = ref('alumno'); // Por defecto Alumno
 
 const nombre_ahbb = ref('');
 const apellido_ahbb = ref('');
@@ -39,6 +44,7 @@ const manejarRegistro_ahbb = async () => {
     apellido: apellido_ahbb.value,
     correo: correo_ahbb.value,
     contrasena: contrasena_ahbb.value,
+    rol: rol_ahbb.value,
   });
 
   cargando_ahbb.value = false;
@@ -107,6 +113,21 @@ const manejarRegistro_ahbb = async () => {
           >
             <template v-slot:prepend><q-icon name="email" /></template>
           </q-input>
+
+          <q-select
+            v-model="rol_ahbb"
+            :options="opcionesRol_ahbb"
+            option-value="valor"
+            option-label="etiqueta"
+            label="Tipo de Cuenta (Perfil)"
+            outlined
+            dense
+            emit-value
+            map-options
+            :rules="[(v) => !!v || 'Requerido']"
+          >
+            <template v-slot:prepend><q-icon name="badge" /></template>
+          </q-select>
 
           <q-input
             v-model="contrasena_ahbb"

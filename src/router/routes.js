@@ -50,6 +50,12 @@ const routes = [
     component: () => import('pages/compartidas/CambiarContrasenaView_ahbb.vue'),
     meta: { publica_ahbb: false, layout_ahbb: 'sistema', rolesPermitidos_ahbb: TODOS },
   },
+  {
+    path: '/horarios',
+    name: 'horarios',
+    component: () => import('pages/compartidas/HorariosView_ahbb.vue'),
+    meta: { publica_ahbb: false, layout_ahbb: 'sistema', rolesPermitidos_ahbb: TODOS },
+  },
 
   // ─── Rutas de cursos (admin y profesor) ───────────────
   {

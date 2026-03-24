@@ -7,7 +7,8 @@ import { ROLES_AHBB } from './roles_ahbb';
 
 /** Menú del Administrador */
 const MENU_ADMINISTRADOR_AHBB = [
-  { icono: 'dashboard', etiqueta: 'Dashboard', ruta: '/dashboard', encabezado: 'Principal' },
+  { icono: 'dashboard', etiqueta: 'Panel Principal', ruta: '/dashboard', encabezado: 'Principal' },
+  { icono: 'calendar_month', etiqueta: 'Horarios', ruta: '/horarios' },
   { icono: 'people', etiqueta: 'Usuarios', ruta: '/admin/usuarios' },
   { icono: 'upload_file', etiqueta: 'Carga Masiva', ruta: '/admin/carga-masiva' },
   { icono: 'school', etiqueta: 'Cursos', ruta: '/cursos', encabezado: 'Académico', separador: true },
@@ -19,7 +20,8 @@ const MENU_ADMINISTRADOR_AHBB = [
 
 /** Menú del Profesor */
 const MENU_PROFESOR_AHBB = [
-  { icono: 'dashboard', etiqueta: 'Mi Dashboard', ruta: '/dashboard', encabezado: 'Principal' },
+  { icono: 'dashboard', etiqueta: 'Mi Panel', ruta: '/dashboard', encabezado: 'Principal' },
+  { icono: 'calendar_month', etiqueta: 'Mis Horarios', ruta: '/horarios' },
   { icono: 'school', etiqueta: 'Mis Cursos', ruta: '/cursos', encabezado: 'Académico', separador: true },
   { icono: 'add_circle', etiqueta: 'Crear Curso', ruta: '/cursos/nuevo' },
   { icono: 'groups', etiqueta: 'Mis Alumnos', ruta: '/profesor/mis-alumnos' },
@@ -30,7 +32,8 @@ const MENU_PROFESOR_AHBB = [
 
 /** Menú del Alumno */
 const MENU_ALUMNO_AHBB = [
-  { icono: 'dashboard', etiqueta: 'Mi Dashboard', ruta: '/dashboard', encabezado: 'Principal' },
+  { icono: 'dashboard', etiqueta: 'Mi Panel', ruta: '/dashboard', encabezado: 'Principal' },
+  { icono: 'calendar_month', etiqueta: 'Mis Horarios', ruta: '/horarios' },
   { icono: 'menu_book', etiqueta: 'Oferta Académica', ruta: '/alumno/oferta-academica', encabezado: 'Académico', separador: true },
   { icono: 'assignment', etiqueta: 'Mis Inscripciones', ruta: '/alumno/mis-inscripciones' },
   { icono: 'history_edu', etiqueta: 'Historial Académico', ruta: '/alumno/historial' },

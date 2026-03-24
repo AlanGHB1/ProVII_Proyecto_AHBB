@@ -21,10 +21,11 @@ const estadisticas_ahbb = [
     <!-- Encabezado -->
     <div class="row items-center justify-between q-mb-lg">
       <div>
-        <div class="text-h4 text-weight-bold text-primary">Dashboard</div>
+        <div class="text-h4 text-weight-bold text-primary">Panel Principal</div>
         <div class="text-grey-6">Bienvenido, {{ authStore_ahbb.nombreCompleto_ahbb }}</div>
       </div>
       <q-btn
+        v-if="!authStore_ahbb.esAlumno_ahbb"
         label="Nuevo Curso"
         icon="add"
         color="primary"
@@ -58,7 +59,7 @@ const estadisticas_ahbb = [
         <div class="text-h6 text-weight-bold q-mb-md">Accesos Rapidos</div>
         <div class="q-gutter-sm">
           <q-btn outline color="primary" icon="list" label="Ver Cursos" to="/cursos" />
-          <q-btn outline color="primary" icon="add" label="Crear Curso" to="/cursos/nuevo" />
+          <q-btn v-if="!authStore_ahbb.esAlumno_ahbb" outline color="primary" icon="add" label="Crear Curso" to="/cursos/nuevo" />
         </div>
       </q-card-section>
     </q-card>
