@@ -4,7 +4,7 @@
   - a) Encabezado: título principal atractivo
   - b) Subtítulo: refuerza el mensaje
   - e) CTA: botón para ir al catálogo
-  Incluye fondo con gradiente y efectos visuales modernos.
+  Enfocado en la plataforma académica de cursos y certificaciones.
 -->
 <script setup>
 // No se requieren imports, el router-link está disponible globalmente
@@ -25,20 +25,20 @@
       <div class="hero-texto_ah">
         <!-- Etiqueta superior decorativa -->
         <span class="hero-etiqueta_ah animar-entrada_ah">
-          🎓 Tienda Oficial de Merch
+          🎓 Plataforma Académica Online
         </span>
 
         <!-- a) Encabezado principal -->
         <h1 class="hero-titulo_ah animar-entrada-retardo1_ah">
-          Viste el orgullo de ser parte de
+          Transforma tu carrera con
           <span class="hero-resaltado_ah">Academia H&B</span>
         </h1>
 
         <!-- b) Subtítulo complementario -->
         <p class="hero-subtitulo_ah animar-entrada-retardo2_ah">
-          Demuestra tus logros y certificaciones con merch exclusivo: tazas,
-          franelas, chaquetas y accesorios diseñados para quienes viven la
-          tecnología.
+          Cursos especializados en tecnología con certificaciones oficiales.
+          Aprende JavaScript, Vue.js, SQL, Node.js y más, con profesores
+          expertos y un sistema de seguimiento académico personalizado.
         </p>
 
         <!-- Estadísticas sociales -->
@@ -50,12 +50,12 @@
           <div class="estadistica-separador_ah"></div>
           <div class="estadistica_ah">
             <span class="estadistica-numero_ah">50+</span>
-            <span class="estadistica-texto_ah">Certificaciones</span>
+            <span class="estadistica-texto_ah">Certificaciones emitidas</span>
           </div>
           <div class="estadistica-separador_ah"></div>
           <div class="estadistica_ah">
-            <span class="estadistica-numero_ah">1.2K+</span>
-            <span class="estadistica-texto_ah">Merch vendido</span>
+            <span class="estadistica-numero_ah">20+</span>
+            <span class="estadistica-texto_ah">Cursos disponibles</span>
           </div>
         </div>
       </div>
@@ -64,16 +64,16 @@
       <div class="hero-visual_ah animar-entrada-retardo2_ah">
         <div class="hero-imagen-contenedor_ah">
           <img
-            src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&h=600&fit=crop"
-            alt="Estudiantes de Academia H&B usando merch oficial"
+            src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=600&fit=crop"
+            alt="Estudiantes de Academia H&B en clase de tecnología"
             class="hero-imagen_ah"
           />
           <!-- Tarjeta flotante decorativa -->
           <div class="hero-tarjeta-flotante_ah">
             <span class="tarjeta-icono_ah">⭐</span>
             <div>
-              <span class="tarjeta-titulo_ah">Calidad Premium</span>
-              <span class="tarjeta-texto_ah">Materiales de primera</span>
+              <span class="tarjeta-titulo_ah">Certificación Oficial</span>
+              <span class="tarjeta-texto_ah">Válida profesionalmente</span>
             </div>
           </div>
         </div>

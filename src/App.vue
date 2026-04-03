@@ -84,8 +84,8 @@ const cerrarSesion_ahbb = () => {
     <q-header elevated class="bg-primary text-white">
       <q-toolbar>
         <q-btn dense flat round icon="menu" class="lt-md" />
-        <q-toolbar-title class="text-weight-bold">
-          🎓 Sistema de Certificaciones
+        <q-toolbar-title class="text-weight-bold" style="font-family: 'Outfit', 'Inter', sans-serif">
+          🎓 Academia <span style="color: #f59e0b">H&B</span>
         </q-toolbar-title>
         <q-space />
         <div class="row items-center q-gutter-sm">

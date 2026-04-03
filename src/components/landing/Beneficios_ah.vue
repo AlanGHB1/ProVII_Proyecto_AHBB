@@ -1,34 +1,34 @@
 <!--
   Beneficios_ah.vue — Sección c) de la landing page
-  Muestra los beneficios clave del merch de Academia H&B.
+  Muestra los beneficios clave de la plataforma académica Academia H&B.
 -->
 <script setup>
 
 
 const listaBeneficios_ah = [
   {
-    icono: '🏅',
-    titulo: 'Marca Profesional',
+    icono: '📜',
+    titulo: 'Certificaciones Oficiales',
     descripcion:
-      'Refuerza tu identidad como egresado certificado de Academia H&B en eventos, conferencias y reuniones profesionales.',
+      'Obtén certificados válidos profesionalmente al completar cada curso. Refuerza tu perfil y demuestra tus habilidades ante empleadores.',
   },
   {
-    icono: '🎓',
-    titulo: 'Orgullo Académico',
+    icono: '👨‍🏫',
+    titulo: 'Profesores Expertos',
     descripcion:
-      'Demuestra tus logros y certificaciones con diseños exclusivos creados para la comunidad de la academia.',
+      'Aprende de instructores con experiencia real en la industria tecnológica. Clases en vivo con seguimiento personalizado.',
   },
   {
-    icono: '💎',
-    titulo: 'Calidad Premium',
+    icono: '📅',
+    titulo: 'Horarios Flexibles',
     descripcion:
-      'Materiales de primera: algodón 100%, cerámica resistente, impresión duradera. Hecho para durar y lucir siempre bien.',
+      'Elige entre múltiples horarios y días de clase. Cursos de lunes a sábado, en diferentes franjas horarias que se adaptan a ti.',
   },
   {
-    icono: '🎁',
-    titulo: 'Descuentos Exclusivos',
+    icono: '🚀',
+    titulo: 'Ruta de Aprendizaje',
     descripcion:
-      'Precios especiales para estudiantes activos, egresados e instructores de Academia H&B. Aprovecha nuestras ofertas.',
+      'Sistema de prelaciones que guía tu progreso académico. Avanza desde los fundamentos hasta niveles avanzados de forma estructurada.',
   },
 ];
 </script>
@@ -39,9 +39,9 @@ const listaBeneficios_ah = [
     <div class="contenedor_ah">
       <!-- Título de la sección con línea decorativa -->
       <div class="titulo-seccion_ah">
-        <h2>¿Por qué elegir nuestro merch?</h2>
+        <h2>¿Por qué elegir Academia H&B?</h2>
         <p>
-          Más que productos, es una forma de pertenecer a la comunidad Academia H&B
+          Una plataforma diseñada para tu crecimiento profesional en tecnología
         </p>
       </div>
 

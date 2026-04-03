@@ -1,6 +1,7 @@
 <!--
   Testimonios_ah.vue — Sección f) de la landing page
-  Muestra testimonios de estudiantes, egresados e instructores.
+  Muestra testimonios de estudiantes, egresados e instructores
+  sobre su experiencia con los cursos y certificaciones.
 -->
 <script setup>
 const listaTestimonios_ah = [
@@ -8,21 +9,21 @@ const listaTestimonios_ah = [
     foto: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face',
     nombre: 'Carlos Mendoza',
     rol: 'Egresado - Desarrollo Web',
-    texto: 'Uso mi franela de Academia H&B en todas mis charlas de programación. Siempre me preguntan dónde la conseguí y es una excelente forma de representar mi formación.',
+    texto: 'Gracias a los cursos de JavaScript y Vue.js de Academia H&B conseguí mi primer empleo como desarrollador frontend. La certificación fue clave en mi entrevista.',
     estrellas: 5,
   },
   {
     foto: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face',
-    nombre: 'Maria Fernandez',
+    nombre: 'María Fernández',
     rol: 'Estudiante Activa - Ciencia de Datos',
-    texto: 'La taza oficial me acompaña en cada sesión de estudio para mis certificaciones. Es mi talismán de buena suerte en los exámenes. La calidad es increíble.',
+    texto: 'El sistema de prelaciones me ayudó a organizar mi ruta de aprendizaje. Empecé con SQL y ahora estoy en el curso avanzado de Node.js. Los profesores son increíbles.',
     estrellas: 5,
   },
   {
     foto: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face',
-    nombre: 'Andres Gutierrez',
+    nombre: 'Andrés Gutiérrez',
     rol: 'Instructor - Backend con Node.js',
-    texto: 'La chaqueta bomber de la academia es mi favorita para ir a eventos tech. El bordado del logo es impecable y el material es de primera calidad.',
+    texto: 'Como profesor de la academia, la plataforma me permite hacer seguimiento real del progreso de mis alumnos. Las herramientas de gestión facilitan mucho la enseñanza.',
     estrellas: 5,
   },
 ];
@@ -36,8 +37,8 @@ const listaTestimonios_ah = [
       <div class="titulo-seccion_ah">
         <h2>Lo que dice nuestra comunidad</h2>
         <p>
-          Estudiantes, egresados e instructores comparten su experiencia con el
-          merch oficial
+          Estudiantes, egresados e instructores comparten su experiencia en
+          Academia H&B
         </p>
       </div>
 

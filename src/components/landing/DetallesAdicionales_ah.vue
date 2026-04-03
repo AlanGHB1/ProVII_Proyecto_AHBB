@@ -1,81 +1,110 @@
 <!--
   DetallesAdicionales_ah.vue — Sección g) de la landing page
-  Layout de 2 columnas: imagen + lista de detalles.
+  Sección dedicada a la Tienda de Merch oficial de Academia H&B.
+  Presenta los productos exclusivos con un diseño atractivo tipo catálogo.
 -->
 <script setup>
 
-
-const listaDetalles_ah = [
+const productosMerch_ah = [
   {
-    icono: '🧵',
-    titulo: 'Materiales de Primera',
+    icono: '👕',
+    nombre: 'Franelas Oficiales',
     descripcion:
-      'Algodón premium, cerámica de alta resistencia y materiales seleccionados para garantizar durabilidad en cada producto.',
+      'Algodón 100% premium con el logo de Academia H&B. Disponibles en múltiples colores y tallas (S–XXL).',
+    precio: 'Desde $25',
+    etiqueta: 'Más vendido',
   },
   {
-    icono: '🎨',
-    titulo: 'Diseños Exclusivos',
+    icono: '🧥',
+    nombre: 'Chaqueta Bomber',
     descripcion:
-      'Cada diseño es creado por nuestro equipo creativo, inspirado en la identidad visual de Academia H&B.',
+      'Chaqueta bomber con bordado del logo. Perfecta para eventos tech, meetups y tu día a día.',
+    precio: 'Desde $65',
+    etiqueta: 'Nuevo',
   },
   {
-    icono: '✏️',
-    titulo: 'Personalización Disponible',
+    icono: '☕',
+    nombre: 'Taza de Cerámica',
     descripcion:
-      'Agrega tu nombre, cohorte o especialidad a franelas y chaquetas. Hazlo único y personal.',
+      'Cerámica de alta resistencia, ideal para acompañar tus sesiones de código con café o té.',
+    precio: 'Desde $15',
+    etiqueta: 'Popular',
   },
   {
-    icono: '📦',
-    titulo: 'Envío Seguro',
+    icono: '🎒',
+    nombre: 'Accesorios Tech',
     descripcion:
-      'Empaque especial para proteger cada producto. Envíos nacionales e internacionales con seguimiento.',
+      'Stickers, lanyards, libretas y mousepads con diseños exclusivos de la comunidad H&B.',
+    precio: 'Desde $5',
+    etiqueta: 'Pack disponible',
   },
 ];
 </script>
 
 <template>
-  <!-- Sección de detalles adicionales -->
-  <section id="detalles_ah" class="seccion_ah detalles_ah">
+  <!-- Sección de tienda de merch -->
+  <section id="merch_ah" class="seccion_ah merch_ah">
     <div class="contenedor_ah">
-      <div class="detalles-grid_ah">
-        <!-- Columna izquierda: imagen -->
-        <div class="detalles-imagen_ah">
-          <img
-            src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&h=700&fit=crop"
-            alt="Merch de Academia H&B - Calidad premium"
-            class="detalles-img_ah"
-            loading="lazy"
-          />
-          <!-- Badge decorativo sobre la imagen -->
-          <div class="detalles-badge_ah">
-            <span class="badge-numero_ah">100%</span>
-            <span class="badge-texto_ah">Satisfacción Garantizada</span>
+      <div class="merch-layout_ah">
+        <!-- Columna izquierda: imagen promocional -->
+        <div class="merch-imagen-col_ah">
+          <div class="merch-imagen-wrapper_ah">
+            <img
+              src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=600&h=700&fit=crop"
+              alt="Merch oficial de Academia H&B"
+              class="merch-img_ah"
+              loading="lazy"
+            />
+            <!-- Badge decorativo sobre la imagen -->
+            <div class="merch-badge_ah">
+              <span class="badge-icono_ah">🛍️</span>
+              <span class="badge-texto_ah">Tienda Oficial</span>
+            </div>
+            <!-- Tarjeta flotante de descuento -->
+            <div class="merch-descuento_ah">
+              <span class="descuento-numero_ah">15%</span>
+              <span class="descuento-texto_ah">Dcto. para estudiantes activos</span>
+            </div>
           </div>
         </div>
 
-        <!-- Columna derecha: contenido textual -->
-        <div class="detalles-contenido_ah">
-          <span class="detalles-etiqueta_ah">Calidad que Respalda</span>
-          <h2 class="detalles-titulo_ah">
-            Merch hecho con pasión y atención al detalle
+        <!-- Columna derecha: contenido -->
+        <div class="merch-contenido_ah">
+          <span class="merch-etiqueta_ah">🛒 Tienda de Merch</span>
+          <h2 class="merch-titulo_ah">
+            Viste el orgullo de ser parte de
+            <span class="merch-titulo-resaltado_ah">Academia H&B</span>
           </h2>
-          <p class="detalles-descripcion_ah">
-            En Academia H&B nos tomamos en serio cada producto. Desde la
-            selección de materiales hasta el diseño final, cada pieza refleja la
-            excelencia de nuestra comunidad académica.
+          <p class="merch-descripcion_ah">
+            Demuestra tus logros y certificaciones con merch exclusivo diseñado
+            para quienes viven la tecnología. Materiales premium,
+            personalización disponible y envío a todo el país.
           </p>
 
-          <!-- Lista de puntos destacados -->
-          <div class="detalles-lista_ah">
+          <!-- Grid de productos -->
+          <div class="merch-productos_ah">
             <div
-              v-for="(detalle, indice) in listaDetalles_ah"
+              v-for="(producto, indice) in productosMerch_ah"
               :key="indice"
-              class="detalle-item_ah"
+              class="merch-producto_ah"
             >
-              <span class="detalle-icono_ah">{{ detalle.icono }}</span>
+              <div class="producto-header_ah">
+                <span class="producto-icono_ah">{{ producto.icono }}</span>
+                <span class="producto-etiqueta_ah">{{ producto.etiqueta }}</span>
+              </div>
+              <h4 class="producto-nombre_ah">{{ producto.nombre }}</h4>
+              <p class="producto-descripcion_ah">{{ producto.descripcion }}</p>
+              <span class="producto-precio_ah">{{ producto.precio }}</span>
+            </div>
+          </div>
+
+          <!-- CTA de próximamente -->
+          <div class="merch-cta_ah">
+            <div class="merch-proximamente_ah">
+              <span class="proximamente-icono_ah">🚧</span>
               <div>
-                <h4 class="detalle-titulo_ah">{{ detalle.titulo }}</h4>
-                <p class="detalle-descripcion_ah">{{ detalle.descripcion }}</p>
+                <span class="proximamente-titulo_ah">Tienda en construcción</span>
+                <span class="proximamente-texto_ah">Próximamente podrás comprar directamente desde la plataforma</span>
               </div>
             </div>
           </div>
@@ -86,55 +115,89 @@ const listaDetalles_ah = [
 </template>
 
 <style scoped>
-.detalles_ah {
-  background: var(--color-fondo-seccion_ah);
+.merch_ah {
+  background: linear-gradient(
+    180deg,
+    var(--color-fondo-seccion_ah) 0%,
+    #f0f4ff 100%
+  );
 }
 
-.detalles-grid_ah {
+.merch-layout_ah {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1.2fr;
   gap: var(--espacio-3xl_ah);
   align-items: center;
 }
 
-.detalles-imagen_ah {
+/* — Imagen promocional — */
+.merch-imagen-col_ah {
   position: relative;
 }
 
-.detalles-img_ah {
+.merch-imagen-wrapper_ah {
+  position: relative;
+}
+
+.merch-img_ah {
   width: 100%;
-  height: 500px;
+  height: 520px;
   object-fit: cover;
   border-radius: var(--radio-xl_ah);
   box-shadow: var(--sombra-fuerte_ah);
 }
 
-.detalles-badge_ah {
+.merch-badge_ah {
   position: absolute;
-  bottom: -20px;
-  right: -20px;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(8px);
+  color: white;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radio-completo_ah);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.badge-icono_ah {
+  font-size: 1.1rem;
+}
+
+.merch-descuento_ah {
+  position: absolute;
+  bottom: -15px;
+  right: -15px;
   background: var(--color-acento_ah);
   color: white;
   padding: var(--espacio-lg_ah);
   border-radius: var(--radio-xl_ah);
   text-align: center;
   box-shadow: var(--sombra-acento_ah);
+  animation: fadeInUp_ah 0.8s ease 0.3s forwards;
+  opacity: 0;
 }
 
-.badge-numero_ah {
+.descuento-numero_ah {
   display: block;
   font-family: var(--fuente-titulo_ah);
   font-size: 1.75rem;
   font-weight: 800;
 }
 
-.badge-texto_ah {
-  font-size: 0.75rem;
+.descuento-texto_ah {
+  font-size: 0.7rem;
   font-weight: 500;
   opacity: 0.9;
+  display: block;
+  max-width: 120px;
 }
 
-.detalles-etiqueta_ah {
+/* — Contenido — */
+.merch-etiqueta_ah {
   display: inline-block;
   background: rgba(245, 158, 11, 0.1);
   color: var(--color-acento_ah);
@@ -145,67 +208,139 @@ const listaDetalles_ah = [
   margin-bottom: var(--espacio-md_ah);
 }
 
-.detalles-titulo_ah {
+.merch-titulo_ah {
   font-size: clamp(1.5rem, 3vw, 2rem);
   margin-bottom: var(--espacio-md_ah);
   color: var(--color-primario_ah);
+  line-height: 1.3;
 }
 
-.detalles-descripcion_ah {
+.merch-titulo-resaltado_ah {
+  color: var(--color-acento_ah);
+}
+
+.merch-descripcion_ah {
   color: var(--color-texto-claro_ah);
   line-height: 1.7;
   margin-bottom: var(--espacio-xl_ah);
 }
 
-.detalles-lista_ah {
-  display: flex;
-  flex-direction: column;
-  gap: var(--espacio-lg_ah);
-}
-
-.detalle-item_ah {
-  display: flex;
+/* — Grid de productos — */
+.merch-productos_ah {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: var(--espacio-md_ah);
-  align-items: flex-start;
+  margin-bottom: var(--espacio-xl_ah);
 }
 
-.detalle-icono_ah {
-  font-size: 1.5rem;
-  flex-shrink: 0;
-  width: 45px;
-  height: 45px;
+.merch-producto_ah {
+  background: white;
+  padding: var(--espacio-lg_ah);
+  border-radius: var(--radio-lg_ah);
+  border: 1px solid var(--color-borde_ah);
+  transition: all var(--transicion-media_ah);
+}
+
+.merch-producto_ah:hover {
+  border-color: var(--color-acento_ah);
+  box-shadow: var(--sombra-suave_ah);
+  transform: translateY(-3px);
+}
+
+.producto-header_ah {
   display: flex;
   align-items: center;
-  justify-content: center;
-  background: rgba(59, 130, 246, 0.1);
-  border-radius: var(--radio-md_ah);
+  justify-content: space-between;
+  margin-bottom: var(--espacio-sm_ah);
 }
 
-.detalle-titulo_ah {
+.producto-icono_ah {
+  font-size: 1.75rem;
+}
+
+.producto-etiqueta_ah {
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--color-secundario_ah);
+  padding: 2px 8px;
+  border-radius: var(--radio-completo_ah);
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.producto-nombre_ah {
   font-size: 1rem;
+  color: var(--color-primario_ah);
+  margin-bottom: 4px;
+  font-weight: 700;
+}
+
+.producto-descripcion_ah {
+  font-size: 0.8rem;
+  color: var(--color-texto-claro_ah);
+  line-height: 1.5;
+  margin-bottom: var(--espacio-sm_ah);
+}
+
+.producto-precio_ah {
+  font-family: var(--fuente-titulo_ah);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--color-acento_ah);
+}
+
+/* — CTA Proximamente — */
+.merch-proximamente_ah {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-md_ah);
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.08),
+    rgba(245, 158, 11, 0.08)
+  );
+  border: 1px dashed rgba(245, 158, 11, 0.4);
+  padding: var(--espacio-lg_ah) var(--espacio-xl_ah);
+  border-radius: var(--radio-lg_ah);
+}
+
+.proximamente-icono_ah {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.proximamente-titulo_ah {
+  display: block;
+  font-weight: 700;
+  font-size: 0.95rem;
   color: var(--color-primario_ah);
   margin-bottom: 2px;
 }
 
-.detalle-descripcion_ah {
-  font-size: 0.85rem;
+.proximamente-texto_ah {
+  font-size: 0.8rem;
   color: var(--color-texto-claro_ah);
-  line-height: 1.5;
 }
 
-@media (max-width: 768px) {
-  .detalles-grid_ah {
+/* — Responsive — */
+@media (max-width: 968px) {
+  .merch-layout_ah {
     grid-template-columns: 1fr;
     gap: var(--espacio-xl_ah);
   }
 
-  .detalles-img_ah {
+  .merch-img_ah {
     height: 350px;
   }
 
-  .detalles-badge_ah {
+  .merch-descuento_ah {
     right: 10px;
-    bottom: -15px;
+    bottom: -10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .merch-productos_ah {
+    grid-template-columns: 1fr;
   }
 }
 </style>
