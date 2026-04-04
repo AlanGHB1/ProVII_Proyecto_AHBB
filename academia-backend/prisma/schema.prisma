@@ -1,0 +1,121 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma_ahbb"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model td_usuario_ahbb {
+  id_usuario_ahbb                 Int      @id @default(autoincrement())
+  cedula_ahbb                     String   @unique @db.VarChar(50)
+  nombre_ahbb                     String   @db.VarChar(100)
+  apellido_ahbb                   String   @db.VarChar(100)
+  correo_ahbb                     String   @unique @db.VarChar(150)
+  contrasena_ahbb                 String   @db.VarChar(255)
+  rol_ahbb                        String?  @default("ALUMNO") @db.VarChar(20)
+  firmaDigital_ahbb               String?  @db.Text
+  estadoCuenta_ahbb               String   @default("PENDIENTE_APROBACION") @db.VarChar(40)
+  requiereCambioContrasena_ahbb   Boolean  @default(false)
+  referenciaPagoMovil_ahbb        String?  @db.VarChar(120)
+  aprobadoPorUsuarioId_ahbb       Int?
+  creadoEn_ahbb                   DateTime? @default(now()) @db.Timestamp(6)
+  actualizadoEn_ahbb DateTime? @default(now()) @db.Timestamp(6)
+
+  // Relaciones
+  cursos                    td_curso_ahbb[]
+  inscripciones             td_inscripcion_ahbb[]
+  auditoriasAprobadas_ahbb  td_auditoria_aprobacion_ahbb[] @relation("AprobadorAuditoria")
+  auditoriasUsuario_ahbb    td_auditoria_aprobacion_ahbb[] @relation("UsuarioAuditado")
+}
+
+model td_curso_ahbb {
+  id_curso_ahbb                Int      @id @default(autoincrement())
+  nombre_ahbb                  String   @db.VarChar(200)
+  tematica_ahbb                String   @db.VarChar(200)
+  descripcion_ahbb             String?  @db.Text
+  diasDefinidos_ahbb           Int
+  horasDefinidas_ahbb          Int
+  fechaInicio_ahbb             DateTime? @db.Timestamp(6)
+  fechaFin_ahbb                DateTime? @db.Timestamp(6)
+  fechaDuracion_ahbb           DateTime? @db.Timestamp(6)
+  topeEstudiantes_ahbb         Int?     @default(5)
+  temarioTexto_ahbb            String?  @db.Text
+  imagenBasePdf_ahbb           String?  @db.Text
+  imagenBloqueada_ahbb         Boolean? @default(false)
+  isPublished_ahbb             Boolean  @default(false)
+  id_usuario_curso_ahbb        Int
+  id_curso_curso_ahbb          Int?
+  creadoEn_ahbb                DateTime? @default(now()) @db.Timestamp(6)
+  actualizadoEn_ahbb           DateTime? @default(now()) @db.Timestamp(6)
+
+  // Relaciones
+  profesor      td_usuario_ahbb        @relation(fields: [id_usuario_curso_ahbb], references: [id_usuario_ahbb])
+  prelacion     td_curso_ahbb?         @relation("Prelacion", fields: [id_curso_curso_ahbb], references: [id_curso_ahbb])
+  prelaciones   td_curso_ahbb[]        @relation("Prelacion")
+  horarios      td_horario_ahbb[]
+  inscripciones td_inscripcion_ahbb[]
+}
+
+model td_horario_ahbb {
+  id_horario_ahbb       Int      @id @default(autoincrement())
+  diaSemana_ahbb        String   @db.VarChar(20)
+  horaInicio_ahbb       String   @db.VarChar(10)
+  horaFin_ahbb          String   @db.VarChar(10)
+  id_curso_horario_ahbb  Int
+
+  // Relaciones
+  curso                 td_curso_ahbb @relation(fields: [id_curso_horario_ahbb], references: [id_curso_ahbb], onDelete: Cascade)
+}
+
+model td_inscripcion_ahbb {
+  id_inscripcion_ahbb         Int      @id @default(autoincrement())
+  estatus_ahbb                String?  @default("INSCRITO") @db.VarChar(50)
+  intento_ahbb                Int      @default(1)
+  notaFinal_ahbb              Decimal? @db.Decimal(5, 2)
+  observaciones_ahbb          String?  @db.Text
+  id_usuario_inscripcion_ahbb Int
+  id_curso_inscripcion_ahbb   Int
+  creadoEn_ahbb               DateTime? @default(now()) @db.Timestamp(6)
+  actualizadoEn_ahbb           DateTime? @default(now()) @db.Timestamp(6)
+
+  // Relaciones
+  alumno                      td_usuario_ahbb @relation(fields: [id_usuario_inscripcion_ahbb], references: [id_usuario_ahbb], onDelete: Cascade)
+  curso                       td_curso_ahbb   @relation(fields: [id_curso_inscripcion_ahbb], references: [id_curso_ahbb], onDelete: Cascade)
+  certificado                 td_certificado_ahbb?
+
+  // @@unique removed: allows re-enrollment when student was REPROBADO
+  @@index([id_usuario_inscripcion_ahbb, id_curso_inscripcion_ahbb])
+}
+
+model td_certificado_ahbb {
+  id_certificado_ahbb             Int      @id @default(autoincrement())
+  codigoQrUrl_ahbb                String   @db.Text
+  id_inscripcion_certificado_ahbb Int      @unique
+  creadoEn_ahbb                   DateTime? @default(now()) @db.Timestamp(6)
+
+  // Relaciones
+  inscripcion                     td_inscripcion_ahbb @relation(fields: [id_inscripcion_certificado_ahbb], references: [id_inscripcion_ahbb], onDelete: Cascade)
+}
+
+model td_configuracionglobal_ahbb {
+  id_configuracionglobal_ahbb   Int      @id @default(autoincrement())
+  imagenCertificadoGeneral_ahbb String?  @db.Text
+}
+
+model td_auditoria_aprobacion_ahbb {
+  id_auditoria_aprobacion_ahbb Int      @id @default(autoincrement())
+  tipoOperacion_ahbb           String   @db.VarChar(50)
+  referenciaOperacion_ahbb     String   @db.VarChar(120)
+  observacion_ahbb             String?  @db.Text
+  id_usuario_auditado_ahbb     Int
+  id_aprobador_ahbb            Int
+  creadoEn_ahbb                DateTime @default(now()) @db.Timestamp(6)
+
+  usuarioAuditado_ahbb         td_usuario_ahbb @relation("UsuarioAuditado", fields: [id_usuario_auditado_ahbb], references: [id_usuario_ahbb])
+  aprobador_ahbb               td_usuario_ahbb @relation("AprobadorAuditoria", fields: [id_aprobador_ahbb], references: [id_usuario_ahbb])
+}
