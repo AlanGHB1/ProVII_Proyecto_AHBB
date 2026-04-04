@@ -2,7 +2,7 @@
   LandingView_ah.vue — Vista 1: Landing Page de Academia H&B
   Compone todas las secciones de la landing según la estructura
   obligatoria (a–i): Hero, Beneficios,
-  Galería, Testimonios, Detalles Adicionales y FAQ.
+  Galería, Testimonios, Tienda de Merch y FAQ.
   El Footer se renderiza en App.vue (persistente en ambas vistas).
 -->
 <script setup>
@@ -21,16 +21,16 @@ import Faq_ah from '../components/landing/Faq_ah.vue';
     <!-- a) + b) Encabezado, subtítulo y CTA principal -->
     <Hero_ah />
 
-    <!-- c) Sección de beneficios clave -->
+    <!-- c) Sección de beneficios clave de la academia -->
     <Beneficios_ah />
 
-    <!-- d) Galería de imágenes de la comunidad -->
+    <!-- d) Galería de imágenes de la comunidad académica -->
     <Galeria_ah />
 
     <!-- f) Testimonios de estudiantes/instructores -->
     <Testimonios_ah />
 
-    <!-- g) Detalles adicionales: calidad, personalización -->
+    <!-- g) Tienda de Merch oficial (próximamente) -->
     <DetallesAdicionales_ah />
 
     <!-- h) Preguntas frecuentes (FAQ acordeón) -->

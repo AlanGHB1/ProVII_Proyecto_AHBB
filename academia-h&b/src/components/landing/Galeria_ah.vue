@@ -1,38 +1,38 @@
 <!--
   Galeria_ah.vue — Sección d) de la landing page
-  Muestra imágenes del merch de Academia H&B en acción.
+  Muestra imágenes de la comunidad académica de Academia H&B en acción.
   Layout tipo masonry/grid con efecto hover.
 -->
 <script setup>
 const imagenesGaleria_ah = [
   {
     url: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop',
-    titulo: 'Estudiantes en campus',
-    categoria: 'Comunidad',
+    titulo: 'Clases colaborativas',
+    categoria: 'Aprendizaje',
   },
   {
     url: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400&h=400&fit=crop',
-    titulo: 'Sesión de estudio',
+    titulo: 'Sesiones de estudio',
     categoria: 'Academia',
   },
   {
     url: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&h=400&fit=crop',
-    titulo: 'Evento de certificación',
-    categoria: 'Eventos',
+    titulo: 'Entrega de certificados',
+    categoria: 'Certificaciones',
   },
   {
     url: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=600&h=400&fit=crop',
-    titulo: 'Programando con estilo',
+    titulo: 'Programando en clase',
     categoria: 'Tecnología',
   },
   {
     url: 'https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?w=400&h=500&fit=crop',
-    titulo: 'Workspace con merch',
-    categoria: 'Merch',
+    titulo: 'Proyectos prácticos',
+    categoria: 'Práctica',
   },
   {
     url: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&h=400&fit=crop',
-    titulo: 'Graduación Academy',
+    titulo: 'Graduación de la cohorte',
     categoria: 'Logros',
   },
 ];
@@ -46,7 +46,7 @@ const imagenesGaleria_ah = [
       <div class="titulo-seccion_ah">
         <h2>Nuestra Comunidad en Acción</h2>
         <p>
-          Estudiantes y egresados luciendo con orgullo el merch oficial de
+          Estudiantes y egresados construyendo su futuro profesional en
           Academia H&B
         </p>
       </div>

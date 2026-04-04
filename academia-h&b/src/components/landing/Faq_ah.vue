@@ -1,35 +1,41 @@
 <!--
   Faq_ah.vue — Sección h) de la landing page
   Preguntas frecuentes (FAQ) con patrón de acordeón.
+  Incluye preguntas sobre la academia, cursos, certificaciones y merch.
 -->
 <script setup>
 import { ref } from 'vue';
 
 const preguntasFrecuentes_ah = [
   {
-    pregunta: '¿Hacen envíos nacionales e internacionales?',
+    pregunta: '¿Cómo me inscribo en un curso?',
     respuesta:
-      'Sí, realizamos envíos a todo el territorio nacional con seguimiento en tiempo real. Para envíos internacionales, trabajamos con aliados logísticos que cubren Latinoamérica, Estados Unidos y Europa. Los tiempos de entrega varían según la ubicación.',
+      'Primero debes registrarte en la plataforma creando una cuenta como alumno. Una vez dentro, ve a la sección "Oferta Académica" donde podrás explorar todos los cursos disponibles y solicitar tu inscripción directamente.',
   },
   {
-    pregunta: '¿Puedo personalizar mi nombre en las franelas o chaquetas?',
+    pregunta: '¿Qué cursos ofrecen actualmente?',
     respuesta:
-      'Por supuesto. Ofrecemos un servicio de personalización donde puedes agregar tu nombre, cohorte, especialidad o cualquier texto corto. Solo debes indicarlo al momento de realizar tu pedido y nuestro equipo se encarga del diseño.',
+      'Ofrecemos cursos de tecnología como Fundamentos de JavaScript, Vue.js 3 Avanzado, Base de Datos SQL, Node.js y Express, entre otros. Nuestro catálogo se actualiza constantemente con nuevas opciones.',
   },
   {
-    pregunta: '¿Qué tallas manejan para franelas y chaquetas?',
+    pregunta: '¿Cómo obtengo mi certificado al completar un curso?',
     respuesta:
-      'Nuestras franelas y chaquetas están disponibles en tallas S, M, L, XL y XXL. Incluimos una guía de tallas en la ficha de cada producto para que puedas elegir la que mejor se ajuste a ti.',
+      'Al finalizar satisfactoriamente un curso, tu profesor valida tu progreso y el administrador emite tu certificado digital. Puedes descargarlo desde la sección "Mis Certificados" en tu panel de alumno.',
   },
   {
-    pregunta: '¿Qué métodos de pago aceptan?',
+    pregunta: '¿Qué son las prelaciones entre cursos?',
     respuesta:
-      'Aceptamos pagos con tarjetas de crédito y débito (Visa, MasterCard), transferencias bancarias, pagos móviles y PayPal. Todos los pagos se procesan de forma segura a través de nuestra pasarela de pago.',
+      'Las prelaciones son requisitos previos. Algunos cursos avanzados requieren que hayas completado un curso introductorio antes. Por ejemplo, Vue.js 3 Avanzado requiere haber aprobado Fundamentos de JavaScript. El sistema te indica automáticamente qué prelaciones aplican.',
   },
   {
-    pregunta: '¿Cuál es la política de devoluciones?',
+    pregunta: '¿Cuántos estudiantes hay por clase?',
     respuesta:
-      'Si por algún motivo no estás satisfecho con tu compra, puedes solicitar un cambio o devolución dentro de los 15 días posteriores a la recepción del producto. El artículo debe estar en su estado original, sin uso. Los productos personalizados no aplican para devolución.',
+      'Cada curso tiene un tope máximo de estudiantes para garantizar una atención personalizada. Generalmente los cupos van de 5 a 30 alumnos por curso, dependiendo de la materia.',
+  },
+  {
+    pregunta: '¿Puedo comprar merch de la academia?',
+    respuesta:
+      'Estamos trabajando en nuestra tienda oficial de merch donde podrás adquirir franelas, chaquetas, tazas y accesorios con el logo de Academia H&B. Los estudiantes activos tendrán un 15% de descuento. ¡Muy pronto estará disponible!',
   },
 ];
 
@@ -55,7 +61,7 @@ const togglePregunta_ah = (indice) => {
       <div class="titulo-seccion_ah">
         <h2>Preguntas Frecuentes</h2>
         <p>
-          Resolvemos tus dudas más comunes sobre nuestros productos y servicios
+          Resolvemos tus dudas más comunes sobre nuestros cursos, certificaciones y plataforma
         </p>
       </div>
 
