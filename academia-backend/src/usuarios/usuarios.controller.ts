@@ -10,7 +10,11 @@ import {
   Req,
   Query,
   UseGuards,
+  UseInterceptors,
+  UploadedFile,
+  BadRequestException,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { UsuariosService } from './usuarios.service';
 import { JwtAuthGuard_ahbb } from '../common/guards/jwt-auth.guard_ahbb';
 import { RolesGuard_ahbb } from '../common/guards/roles.guard_ahbb';
@@ -46,7 +50,9 @@ export class UsuariosController {
   @UseGuards(JwtAuthGuard_ahbb, RolesGuard_ahbb)
   @RolesDecorator_ahbb('ADMIN')
   @Post('carga-masiva/validar')
-  async validarCargaMasiva_ahbb(@Body() datos_ahbb: CargaMasivaUsuariosDto_ahbb) {
+  async validarCargaMasiva_ahbb(
+    @Body() datos_ahbb: CargaMasivaUsuariosDto_ahbb,
+  ) {
     return this.usuariosService_ahbb.validarCargaMasivaUsuarios_ahbb(
       datos_ahbb.usuarios_ahbb,
     );
@@ -55,8 +61,23 @@ export class UsuariosController {
   @UseGuards(JwtAuthGuard_ahbb, RolesGuard_ahbb)
   @RolesDecorator_ahbb('ADMIN')
   @Post('carga-masiva/confirmar')
-  async confirmarCargaMasiva_ahbb(@Body() datos_ahbb: CargaMasivaUsuariosDto_ahbb) {
-    return this.usuariosService_ahbb.crearUsuariosMasivos_ahbb(datos_ahbb.usuarios_ahbb);
+  async confirmarCargaMasiva_ahbb(
+    @Body() datos_ahbb: CargaMasivaUsuariosDto_ahbb,
+  ) {
+    return this.usuariosService_ahbb.crearUsuariosMasivos_ahbb(
+      datos_ahbb.usuarios_ahbb,
+    );
+  }
+
+  @UseGuards(JwtAuthGuard_ahbb, RolesGuard_ahbb)
+  @RolesDecorator_ahbb('ADMIN')
+  @Post('carga-masiva/profesores-excel')
+  @UseInterceptors(FileInterceptor('file'))
+  async importarProfesoresExcel_ahbb(@UploadedFile() file: Express.Multer.File) {
+    if (!file) {
+      throw new BadRequestException('No se ha proporcionado ningún archivo');
+    }
+    return this.usuariosService_ahbb.importarProfesoresDesdeExcel_ahbb(file.buffer);
   }
 
   @UseGuards(JwtAuthGuard_ahbb, RolesGuard_ahbb)
@@ -68,7 +89,10 @@ export class UsuariosController {
   ) {
     const contrasenaTemporalPlano_ahbb =
       this.usuariosService_ahbb.generarContrasenaTemporal_ahbb();
-    const hashTemporal_ahbb = await bcrypt.hash(contrasenaTemporalPlano_ahbb, 10);
+    const hashTemporal_ahbb = await bcrypt.hash(
+      contrasenaTemporalPlano_ahbb,
+      10,
+    );
 
     const usuario_ahbb = await this.usuariosService_ahbb.aprobarAlumno_ahbb(
       datos_ahbb.id_usuario_ahbb,
@@ -105,7 +129,10 @@ export class UsuariosController {
     @Param('id_usuario_ahbb', ParseIntPipe) id_usuario_ahbb: number,
     @Body() datos_ahbb: ActualizarUsuarioDto_ahbb,
   ) {
-    return this.usuariosService_ahbb.actualizarPerfil_ahbb(id_usuario_ahbb, datos_ahbb);
+    return this.usuariosService_ahbb.actualizarPerfil_ahbb(
+      id_usuario_ahbb,
+      datos_ahbb,
+    );
   }
 
   @UseGuards(JwtAuthGuard_ahbb, RolesGuard_ahbb)

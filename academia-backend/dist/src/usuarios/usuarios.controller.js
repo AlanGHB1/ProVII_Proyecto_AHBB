@@ -47,6 +47,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsuariosController = void 0;
 const common_1 = require("@nestjs/common");
+const platform_express_1 = require("@nestjs/platform-express");
 const usuarios_service_1 = require("./usuarios.service");
 const jwt_auth_guard_ahbb_1 = require("../common/guards/jwt-auth.guard_ahbb");
 const roles_guard_ahbb_1 = require("../common/guards/roles.guard_ahbb");
@@ -73,6 +74,12 @@ let UsuariosController = class UsuariosController {
     }
     async confirmarCargaMasiva_ahbb(datos_ahbb) {
         return this.usuariosService_ahbb.crearUsuariosMasivos_ahbb(datos_ahbb.usuarios_ahbb);
+    }
+    async importarProfesoresExcel_ahbb(file) {
+        if (!file) {
+            throw new common_1.BadRequestException('No se ha proporcionado ningún archivo');
+        }
+        return this.usuariosService_ahbb.importarProfesoresDesdeExcel_ahbb(file.buffer);
     }
     async aprobarAlumno_ahbb(datos_ahbb, request_ahbb) {
         const contrasenaTemporalPlano_ahbb = this.usuariosService_ahbb.generarContrasenaTemporal_ahbb();
@@ -135,6 +142,16 @@ __decorate([
     __metadata("design:paramtypes", [carga_masiva_usuarios_dto_ahbb_1.CargaMasivaUsuariosDto_ahbb]),
     __metadata("design:returntype", Promise)
 ], UsuariosController.prototype, "confirmarCargaMasiva_ahbb", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_ahbb_1.JwtAuthGuard_ahbb, roles_guard_ahbb_1.RolesGuard_ahbb),
+    (0, roles_decorator_ahbb_1.RolesDecorator_ahbb)('ADMIN'),
+    (0, common_1.Post)('carga-masiva/profesores-excel'),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file')),
+    __param(0, (0, common_1.UploadedFile)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UsuariosController.prototype, "importarProfesoresExcel_ahbb", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_ahbb_1.JwtAuthGuard_ahbb, roles_guard_ahbb_1.RolesGuard_ahbb),
     (0, roles_decorator_ahbb_1.RolesDecorator_ahbb)('ADMIN'),

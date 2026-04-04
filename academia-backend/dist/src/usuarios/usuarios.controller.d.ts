@@ -49,6 +49,18 @@ export declare class UsuariosController {
         firmaDigital: any;
         creadoEn: any;
     }[]>;
+    importarProfesoresExcel_ahbb(file: Express.Multer.File): Promise<{
+        id: any;
+        cedula: any;
+        nombre: any;
+        apellido: any;
+        correo: any;
+        rol: string;
+        estadoCuenta: any;
+        requiereCambioContrasena: any;
+        firmaDigital: any;
+        creadoEn: any;
+    }[]>;
     aprobarAlumno_ahbb(datos_ahbb: AprobarAlumnoDto_ahbb, request_ahbb: RequestConUsuario_ahbb): Promise<{
         exito: boolean;
         usuario: {

@@ -16,48 +16,50 @@ export class BootstrapService_ahbb implements OnModuleInit {
       return;
     }
 
-    const [adminHash_ahbb, profesorHash_ahbb, alumnoHash_ahbb] = await Promise.all([
-      bcrypt.hash('admin123', 10),
-      bcrypt.hash('prof123', 10),
-      bcrypt.hash('alum123', 10),
-    ]);
+    const [adminHash_ahbb, profesorHash_ahbb, alumnoHash_ahbb] =
+      await Promise.all([
+        bcrypt.hash('admin123', 10),
+        bcrypt.hash('prof123', 10),
+        bcrypt.hash('alum123', 10),
+      ]);
 
-    const [admin_ahbb, profesor_ahbb, alumno_ahbb] = await this.prisma_ahbb.$transaction([
-      this.prisma_ahbb.td_usuario_ahbb.create({
-        data: {
-          cedula_ahbb: 'V-10000001',
-          nombre_ahbb: 'Administrador',
-          apellido_ahbb: 'H&B',
-          correo_ahbb: 'admin@academiah-b.edu',
-          contrasena_ahbb: adminHash_ahbb,
-          rol_ahbb: 'ADMIN',
-          estadoCuenta_ahbb: 'ACTIVO',
-        },
-      }),
-      this.prisma_ahbb.td_usuario_ahbb.create({
-        data: {
-          cedula_ahbb: 'V-10000002',
-          nombre_ahbb: 'Carlos',
-          apellido_ahbb: 'Mendez',
-          correo_ahbb: 'carlos@academiah-b.edu',
-          contrasena_ahbb: profesorHash_ahbb,
-          rol_ahbb: 'PROFESOR',
-          estadoCuenta_ahbb: 'ACTIVO',
-        },
-      }),
-      this.prisma_ahbb.td_usuario_ahbb.create({
-        data: {
-          cedula_ahbb: 'V-10000003',
-          nombre_ahbb: 'Maria',
-          apellido_ahbb: 'Garcia',
-          correo_ahbb: 'maria@estudiante.edu',
-          contrasena_ahbb: alumnoHash_ahbb,
-          rol_ahbb: 'ALUMNO',
-          estadoCuenta_ahbb: 'ACTIVO',
-          requiereCambioContrasena_ahbb: true,
-        },
-      }),
-    ]);
+    const [admin_ahbb, profesor_ahbb, alumno_ahbb] =
+      await this.prisma_ahbb.$transaction([
+        this.prisma_ahbb.td_usuario_ahbb.create({
+          data: {
+            cedula_ahbb: 'V-10000001',
+            nombre_ahbb: 'Administrador',
+            apellido_ahbb: 'H&B',
+            correo_ahbb: 'admin@academiah-b.edu',
+            contrasena_ahbb: adminHash_ahbb,
+            rol_ahbb: 'ADMIN',
+            estadoCuenta_ahbb: 'ACTIVO',
+          },
+        }),
+        this.prisma_ahbb.td_usuario_ahbb.create({
+          data: {
+            cedula_ahbb: 'V-10000002',
+            nombre_ahbb: 'Carlos',
+            apellido_ahbb: 'Mendez',
+            correo_ahbb: 'carlos@academiah-b.edu',
+            contrasena_ahbb: profesorHash_ahbb,
+            rol_ahbb: 'PROFESOR',
+            estadoCuenta_ahbb: 'ACTIVO',
+          },
+        }),
+        this.prisma_ahbb.td_usuario_ahbb.create({
+          data: {
+            cedula_ahbb: 'V-10000003',
+            nombre_ahbb: 'Maria',
+            apellido_ahbb: 'Garcia',
+            correo_ahbb: 'maria@estudiante.edu',
+            contrasena_ahbb: alumnoHash_ahbb,
+            rol_ahbb: 'ALUMNO',
+            estadoCuenta_ahbb: 'ACTIVO',
+            requiereCambioContrasena_ahbb: true,
+          },
+        }),
+      ]);
 
     const totalCursos_ahbb = await this.prisma_ahbb.td_curso_ahbb.count();
     if (totalCursos_ahbb === 0) {

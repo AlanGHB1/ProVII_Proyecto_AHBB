@@ -56,8 +56,14 @@ export class CursosService {
     return this.mapearCurso_ahbb(curso_ahbb);
   }
 
-  async crearCurso_ahbb(id_profesor_ahbb: number, datos_ahbb: CrearCursoDto_ahbb) {
-    await this.validarSolapamientoProfesor_ahbb(id_profesor_ahbb, datos_ahbb.horarios_ahbb);
+  async crearCurso_ahbb(
+    id_profesor_ahbb: number,
+    datos_ahbb: CrearCursoDto_ahbb,
+  ) {
+    await this.validarSolapamientoProfesor_ahbb(
+      id_profesor_ahbb,
+      datos_ahbb.horarios_ahbb,
+    );
     const fechaInicio_ahbb = datos_ahbb.fechaInicio_ahbb
       ? new Date(datos_ahbb.fechaInicio_ahbb)
       : new Date();
@@ -111,69 +117,80 @@ export class CursosService {
     id_usuario_ahbb: number,
     datos_ahbb: CrearCursoDto_ahbb,
   ) {
-    const cursoExistente_ahbb = await this.prisma_ahbb.td_curso_ahbb.findUnique({
-      where: { id_curso_ahbb },
-    });
+    const cursoExistente_ahbb = await this.prisma_ahbb.td_curso_ahbb.findUnique(
+      {
+        where: { id_curso_ahbb },
+      },
+    );
     if (!cursoExistente_ahbb) {
       throw new NotFoundException('Curso no encontrado.');
     }
 
     const fechaInicio_ahbb = datos_ahbb.fechaInicio_ahbb
       ? new Date(datos_ahbb.fechaInicio_ahbb)
-      : cursoExistente_ahbb.fechaInicio_ahbb ?? new Date();
+      : (cursoExistente_ahbb.fechaInicio_ahbb ?? new Date());
     const fechaFin_ahbb = datos_ahbb.fechaFin_ahbb
       ? new Date(datos_ahbb.fechaFin_ahbb)
       : new Date(
           fechaInicio_ahbb.getTime() +
-            Number(datos_ahbb.diasDefinidos_ahbb ?? cursoExistente_ahbb.diasDefinidos_ahbb ?? 1) *
+            Number(
+              datos_ahbb.diasDefinidos_ahbb ??
+                cursoExistente_ahbb.diasDefinidos_ahbb ??
+                1,
+            ) *
               24 *
               60 *
               60 *
               1000,
         );
 
-    await this.validarSolapamientoProfesor_ahbb(id_usuario_ahbb, datos_ahbb.horarios_ahbb ?? []);
+    await this.validarSolapamientoProfesor_ahbb(
+      id_usuario_ahbb,
+      datos_ahbb.horarios_ahbb ?? [],
+    );
 
-    const cursoActualizado_ahbb = await this.prisma_ahbb.$transaction(async (tx_ahbb) => {
-      await tx_ahbb.td_horario_ahbb.deleteMany({
-        where: { id_curso_horario_ahbb: id_curso_ahbb },
-      });
+    const cursoActualizado_ahbb = await this.prisma_ahbb.$transaction(
+      async (tx_ahbb) => {
+        await tx_ahbb.td_horario_ahbb.deleteMany({
+          where: { id_curso_horario_ahbb: id_curso_ahbb },
+        });
 
-      return tx_ahbb.td_curso_ahbb.update({
-        where: { id_curso_ahbb },
-        data: {
-          nombre_ahbb: datos_ahbb.nombre_ahbb,
-          tematica_ahbb: datos_ahbb.tematica_ahbb,
-          descripcion_ahbb: datos_ahbb.descripcion_ahbb ?? null,
-          temarioTexto_ahbb: datos_ahbb.temarioTexto_ahbb ?? null,
-          fechaInicio_ahbb,
-          fechaFin_ahbb,
-          fechaDuracion_ahbb: fechaFin_ahbb,
-          horasDefinidas_ahbb: Number(datos_ahbb.horasDefinidas_ahbb),
-          diasDefinidos_ahbb: Number(datos_ahbb.diasDefinidos_ahbb),
-          topeEstudiantes_ahbb: Number(datos_ahbb.topeEstudiantes_ahbb ?? 5),
-          isPublished_ahbb: Boolean(datos_ahbb.isPublished_ahbb),
-          id_curso_curso_ahbb: datos_ahbb.id_curso_curso_ahbb ?? null,
-          horarios: {
-            create: (datos_ahbb.horarios_ahbb ?? []).map((horario_ahbb) => ({
-              diaSemana_ahbb: horario_ahbb.diaSemana_ahbb.toUpperCase(),
-              horaInicio_ahbb: horario_ahbb.horaInicio_ahbb,
-              horaFin_ahbb: horario_ahbb.horaFin_ahbb,
-            })),
+        return tx_ahbb.td_curso_ahbb.update({
+          where: { id_curso_ahbb },
+          data: {
+            nombre_ahbb: datos_ahbb.nombre_ahbb,
+            tematica_ahbb: datos_ahbb.tematica_ahbb,
+            descripcion_ahbb: datos_ahbb.descripcion_ahbb ?? null,
+            temarioTexto_ahbb: datos_ahbb.temarioTexto_ahbb ?? null,
+            fechaInicio_ahbb,
+            fechaFin_ahbb,
+            fechaDuracion_ahbb: fechaFin_ahbb,
+            horasDefinidas_ahbb: Number(datos_ahbb.horasDefinidas_ahbb),
+            diasDefinidos_ahbb: Number(datos_ahbb.diasDefinidos_ahbb),
+            topeEstudiantes_ahbb: Number(datos_ahbb.topeEstudiantes_ahbb ?? 5),
+            isPublished_ahbb: Boolean(datos_ahbb.isPublished_ahbb),
+            id_curso_curso_ahbb: datos_ahbb.id_curso_curso_ahbb ?? null,
+            horarios: {
+              create: (datos_ahbb.horarios_ahbb ?? []).map((horario_ahbb) => ({
+                diaSemana_ahbb: horario_ahbb.diaSemana_ahbb.toUpperCase(),
+                horaInicio_ahbb: horario_ahbb.horaInicio_ahbb,
+                horaFin_ahbb: horario_ahbb.horaFin_ahbb,
+              })),
+            },
           },
-        },
-        include: {
-          profesor: {
-            select: { nombre_ahbb: true, apellido_ahbb: true },
+          include: {
+            profesor: {
+              select: { nombre_ahbb: true, apellido_ahbb: true },
+            },
+            horarios: true,
+            prelacion: {
+              select: { id_curso_ahbb: true, nombre_ahbb: true },
+            },
+            inscripciones: true,
           },
-          horarios: true,
-          prelacion: {
-            select: { id_curso_ahbb: true, nombre_ahbb: true },
-          },
-          inscripciones: true,
-        },
-      });
-    });
+        });
+      },
+    );
 
     return this.mapearCurso_ahbb(cursoActualizado_ahbb);
   }
@@ -214,7 +231,10 @@ export class CursosService {
     };
   }
 
-  async validarSolapamientoProfesor_ahbb(id_profesor_ahbb: number, horariosNuevos_ahbb: any[]) {
+  async validarSolapamientoProfesor_ahbb(
+    id_profesor_ahbb: number,
+    horariosNuevos_ahbb: any[],
+  ) {
     const cursos_ahbb = await this.prisma_ahbb.td_curso_ahbb.findMany({
       where: { id_usuario_curso_ahbb: id_profesor_ahbb },
       include: { horarios: true },
@@ -274,9 +294,10 @@ export class CursosService {
       fechaFin: curso_ahbb.fechaFin_ahbb,
       fechaCreacion: curso_ahbb.creadoEn_ahbb,
       estudiantesInscritos: curso_ahbb.inscripciones?.length ?? 0,
-      dias: curso_ahbb.horarios?.map((horario_ahbb: any) =>
-        horario_ahbb.diaSemana_ahbb.toLowerCase(),
-      ) ?? [],
+      dias:
+        curso_ahbb.horarios?.map((horario_ahbb: any) =>
+          horario_ahbb.diaSemana_ahbb.toLowerCase(),
+        ) ?? [],
       horaInicio: curso_ahbb.horarios?.[0]?.horaInicio_ahbb ?? null,
       horaFin: curso_ahbb.horarios?.[0]?.horaFin_ahbb ?? null,
       horarios: curso_ahbb.horarios ?? [],

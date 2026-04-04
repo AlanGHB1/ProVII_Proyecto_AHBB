@@ -120,7 +120,9 @@ let InscripcionesService_ahbb = class InscripcionesService_ahbb {
             where: { id_inscripcion_ahbb },
             data: {
                 estatus_ahbb: datos_ahbb.estatus_ahbb,
-                notaFinal_ahbb: datos_ahbb.notaFinal_ahbb !== undefined ? String(datos_ahbb.notaFinal_ahbb) : undefined,
+                notaFinal_ahbb: datos_ahbb.notaFinal_ahbb !== undefined
+                    ? String(datos_ahbb.notaFinal_ahbb)
+                    : undefined,
                 observaciones_ahbb: datos_ahbb.observaciones_ahbb,
             },
         });
@@ -140,7 +142,8 @@ let InscripcionesService_ahbb = class InscripcionesService_ahbb {
         for (const inscripcion_ahbb of inscripcionesActivas_ahbb) {
             for (const horarioActual_ahbb of inscripcion_ahbb.curso.horarios) {
                 for (const horarioNuevo_ahbb of horariosCursoNuevo_ahbb) {
-                    const mismoDia_ahbb = horarioActual_ahbb.diaSemana_ahbb === horarioNuevo_ahbb.diaSemana_ahbb;
+                    const mismoDia_ahbb = horarioActual_ahbb.diaSemana_ahbb ===
+                        horarioNuevo_ahbb.diaSemana_ahbb;
                     if (mismoDia_ahbb &&
                         this.cursosService_ahbb.hayCruceHoras_ahbb(horarioActual_ahbb.horaInicio_ahbb, horarioActual_ahbb.horaFin_ahbb, horarioNuevo_ahbb.horaInicio_ahbb, horarioNuevo_ahbb.horaFin_ahbb)) {
                         throw new common_1.BadRequestException(`El alumno ya posee otro curso en ${horarioActual_ahbb.diaSemana_ahbb} ${horarioActual_ahbb.horaInicio_ahbb}-${horarioActual_ahbb.horaFin_ahbb}.`);

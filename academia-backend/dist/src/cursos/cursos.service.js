@@ -112,11 +112,13 @@ let CursosService = class CursosService {
         }
         const fechaInicio_ahbb = datos_ahbb.fechaInicio_ahbb
             ? new Date(datos_ahbb.fechaInicio_ahbb)
-            : cursoExistente_ahbb.fechaInicio_ahbb ?? new Date();
+            : (cursoExistente_ahbb.fechaInicio_ahbb ?? new Date());
         const fechaFin_ahbb = datos_ahbb.fechaFin_ahbb
             ? new Date(datos_ahbb.fechaFin_ahbb)
             : new Date(fechaInicio_ahbb.getTime() +
-                Number(datos_ahbb.diasDefinidos_ahbb ?? cursoExistente_ahbb.diasDefinidos_ahbb ?? 1) *
+                Number(datos_ahbb.diasDefinidos_ahbb ??
+                    cursoExistente_ahbb.diasDefinidos_ahbb ??
+                    1) *
                     24 *
                     60 *
                     60 *

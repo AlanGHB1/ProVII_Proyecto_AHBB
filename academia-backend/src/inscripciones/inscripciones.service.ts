@@ -52,7 +52,9 @@ export class InscripcionesService_ahbb {
 
       const capacidad_ahbb = Number(curso_ahbb.topeEstudiantes_ahbb ?? 5);
       if (totalActivos_ahbb >= capacidad_ahbb) {
-        throw new BadRequestException('El curso alcanzó el tope máximo de 5 alumnos.');
+        throw new BadRequestException(
+          'El curso alcanzó el tope máximo de 5 alumnos.',
+        );
       }
 
       const intentosPrevios_ahbb = await tx_ahbb.td_inscripcion_ahbb.count({
@@ -138,30 +140,37 @@ export class InscripcionesService_ahbb {
       data: {
         estatus_ahbb: datos_ahbb.estatus_ahbb,
         notaFinal_ahbb:
-          datos_ahbb.notaFinal_ahbb !== undefined ? String(datos_ahbb.notaFinal_ahbb) : undefined,
+          datos_ahbb.notaFinal_ahbb !== undefined
+            ? String(datos_ahbb.notaFinal_ahbb)
+            : undefined,
         observaciones_ahbb: datos_ahbb.observaciones_ahbb,
       },
     });
   }
 
-  async validarSolapamiento_ahbb(id_usuario_ahbb: number, horariosCursoNuevo_ahbb: any[]) {
-    const inscripcionesActivas_ahbb = await this.prisma_ahbb.td_inscripcion_ahbb.findMany({
-      where: {
-        id_usuario_inscripcion_ahbb: id_usuario_ahbb,
-        estatus_ahbb: { in: ['INSCRITO', 'OYENTE'] },
-      },
-      include: {
-        curso: {
-          include: { horarios: true },
+  async validarSolapamiento_ahbb(
+    id_usuario_ahbb: number,
+    horariosCursoNuevo_ahbb: any[],
+  ) {
+    const inscripcionesActivas_ahbb =
+      await this.prisma_ahbb.td_inscripcion_ahbb.findMany({
+        where: {
+          id_usuario_inscripcion_ahbb: id_usuario_ahbb,
+          estatus_ahbb: { in: ['INSCRITO', 'OYENTE'] },
         },
-      },
-    });
+        include: {
+          curso: {
+            include: { horarios: true },
+          },
+        },
+      });
 
     for (const inscripcion_ahbb of inscripcionesActivas_ahbb) {
       for (const horarioActual_ahbb of inscripcion_ahbb.curso.horarios) {
         for (const horarioNuevo_ahbb of horariosCursoNuevo_ahbb) {
           const mismoDia_ahbb =
-            horarioActual_ahbb.diaSemana_ahbb === horarioNuevo_ahbb.diaSemana_ahbb;
+            horarioActual_ahbb.diaSemana_ahbb ===
+            horarioNuevo_ahbb.diaSemana_ahbb;
 
           if (
             mismoDia_ahbb &&
@@ -181,7 +190,10 @@ export class InscripcionesService_ahbb {
     }
   }
 
-  async validarPrelacion_ahbb(id_usuario_ahbb: number, id_curso_prelacion_ahbb?: number | null) {
+  async validarPrelacion_ahbb(
+    id_usuario_ahbb: number,
+    id_curso_prelacion_ahbb?: number | null,
+  ) {
     if (!id_curso_prelacion_ahbb) {
       return;
     }
@@ -202,13 +214,14 @@ export class InscripcionesService_ahbb {
   }
 
   async validarReingreso_ahbb(id_usuario_ahbb: number, id_curso_ahbb: number) {
-    const inscripcionesPrevias_ahbb = await this.prisma_ahbb.td_inscripcion_ahbb.findMany({
-      where: {
-        id_usuario_inscripcion_ahbb: id_usuario_ahbb,
-        id_curso_inscripcion_ahbb: id_curso_ahbb,
-      },
-      orderBy: { creadoEn_ahbb: 'desc' },
-    });
+    const inscripcionesPrevias_ahbb =
+      await this.prisma_ahbb.td_inscripcion_ahbb.findMany({
+        where: {
+          id_usuario_inscripcion_ahbb: id_usuario_ahbb,
+          id_curso_inscripcion_ahbb: id_curso_ahbb,
+        },
+        orderBy: { creadoEn_ahbb: 'desc' },
+      });
 
     const tieneAprobado_ahbb = inscripcionesPrevias_ahbb.some(
       (inscripcion_ahbb) => inscripcion_ahbb.estatus_ahbb === 'APROBADO',
@@ -217,11 +230,14 @@ export class InscripcionesService_ahbb {
       throw new BadRequestException('El alumno ya aprobó este curso.');
     }
 
-    const tieneActivo_ahbb = inscripcionesPrevias_ahbb.some((inscripcion_ahbb) =>
-      ['INSCRITO', 'OYENTE'].includes(String(inscripcion_ahbb.estatus_ahbb)),
+    const tieneActivo_ahbb = inscripcionesPrevias_ahbb.some(
+      (inscripcion_ahbb) =>
+        ['INSCRITO', 'OYENTE'].includes(String(inscripcion_ahbb.estatus_ahbb)),
     );
     if (tieneActivo_ahbb) {
-      throw new BadRequestException('El alumno ya tiene una inscripción activa en este curso.');
+      throw new BadRequestException(
+        'El alumno ya tiene una inscripción activa en este curso.',
+      );
     }
 
     const ultima_ahbb = inscripcionesPrevias_ahbb[0];

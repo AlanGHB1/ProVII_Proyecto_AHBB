@@ -63,7 +63,8 @@ let AuthService = class AuthService {
             });
         }
         const contrasenaValida_ahbb = await bcrypt.compare(contrasena_ahbb, usuario_ahbb.contrasena_ahbb);
-        if (!contrasenaValida_ahbb && contrasena_ahbb !== usuario_ahbb.contrasena_ahbb) {
+        if (!contrasenaValida_ahbb &&
+            contrasena_ahbb !== usuario_ahbb.contrasena_ahbb) {
             throw new common_1.UnauthorizedException({
                 exito: false,
                 mensaje: 'Correo o contraseña incorrectos.',
@@ -98,9 +99,13 @@ let AuthService = class AuthService {
                 mensaje: 'Ya existe un usuario con ese correo electrónico.',
             });
         }
-        const contrasenaBase_ahbb = datos_ahbb.contrasena_ahbb ?? datos_ahbb.contrasena ?? this.usuariosService_ahbb.generarContrasenaTemporal_ahbb();
+        const contrasenaBase_ahbb = datos_ahbb.contrasena_ahbb ??
+            datos_ahbb.contrasena ??
+            this.usuariosService_ahbb.generarContrasenaTemporal_ahbb();
         const contrasenaEncriptada_ahbb = await bcrypt.hash(contrasenaBase_ahbb, 10);
-        const cedulaGenerada_ahbb = datos_ahbb.cedula_ahbb ?? datos_ahbb.cedula ?? `V-${Math.floor(Math.random() * 100000000)}`;
+        const cedulaGenerada_ahbb = datos_ahbb.cedula_ahbb ??
+            datos_ahbb.cedula ??
+            `V-${Math.floor(Math.random() * 100000000)}`;
         const rol_ahbb = String(datos_ahbb.rol_ahbb ?? datos_ahbb.rol ?? 'ALUMNO').toUpperCase();
         const nuevoUsuario_ahbb = await this.usuariosService_ahbb.crearUsuario_ahbb({
             cedula: cedulaGenerada_ahbb,
@@ -127,7 +132,8 @@ let AuthService = class AuthService {
             throw new common_1.UnauthorizedException('Usuario no encontrado.');
         }
         const contrasenaValida_ahbb = await bcrypt.compare(contrasenaActual_ahbb, usuario_ahbb.contrasena_ahbb);
-        if (!contrasenaValida_ahbb && contrasenaActual_ahbb !== usuario_ahbb.contrasena_ahbb) {
+        if (!contrasenaValida_ahbb &&
+            contrasenaActual_ahbb !== usuario_ahbb.contrasena_ahbb) {
             throw new common_1.UnauthorizedException('La contraseña actual no coincide.');
         }
         const hashNueva_ahbb = await bcrypt.hash(contrasenaNueva_ahbb, 10);

@@ -28,7 +28,9 @@ export class CursosController {
   }
 
   @Get(':id_curso_ahbb')
-  async obtenerCursoPorId_ahbb(@Param('id_curso_ahbb', ParseIntPipe) id_curso_ahbb: number) {
+  async obtenerCursoPorId_ahbb(
+    @Param('id_curso_ahbb', ParseIntPipe) id_curso_ahbb: number,
+  ) {
     return this.cursosService_ahbb.obtenerPorId_ahbb(id_curso_ahbb);
   }
 
@@ -70,7 +72,9 @@ export class CursosController {
   @UseGuards(JwtAuthGuard_ahbb, RolesGuard_ahbb)
   @RolesDecorator_ahbb('ADMIN', 'PROFESOR')
   @Delete(':id_curso_ahbb')
-  async eliminarCurso_ahbb(@Param('id_curso_ahbb', ParseIntPipe) id_curso_ahbb: number) {
+  async eliminarCurso_ahbb(
+    @Param('id_curso_ahbb', ParseIntPipe) id_curso_ahbb: number,
+  ) {
     return this.cursosService_ahbb.eliminarCurso_ahbb(id_curso_ahbb);
   }
 }

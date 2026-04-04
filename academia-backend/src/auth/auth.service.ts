@@ -15,9 +15,10 @@ export class AuthService {
   ) {}
 
   async iniciarSesion_ahbb(correo_ahbb: string, contrasena_ahbb: string) {
-    const usuario_ahbb = await this.usuariosService_ahbb.encontrarPorCorreo_ahbb(
-      correo_ahbb.toLowerCase(),
-    );
+    const usuario_ahbb =
+      await this.usuariosService_ahbb.encontrarPorCorreo_ahbb(
+        correo_ahbb.toLowerCase(),
+      );
 
     if (!usuario_ahbb) {
       throw new UnauthorizedException({
@@ -31,7 +32,10 @@ export class AuthService {
       usuario_ahbb.contrasena_ahbb,
     );
 
-    if (!contrasenaValida_ahbb && contrasena_ahbb !== usuario_ahbb.contrasena_ahbb) {
+    if (
+      !contrasenaValida_ahbb &&
+      contrasena_ahbb !== usuario_ahbb.contrasena_ahbb
+    ) {
       throw new UnauthorizedException({
         exito: false,
         mensaje: 'Correo o contraseña incorrectos.',
@@ -77,24 +81,35 @@ export class AuthService {
     }
 
     const contrasenaBase_ahbb =
-      datos_ahbb.contrasena_ahbb ?? datos_ahbb.contrasena ?? this.usuariosService_ahbb.generarContrasenaTemporal_ahbb();
-    const contrasenaEncriptada_ahbb = await bcrypt.hash(contrasenaBase_ahbb, 10);
+      datos_ahbb.contrasena_ahbb ??
+      datos_ahbb.contrasena ??
+      this.usuariosService_ahbb.generarContrasenaTemporal_ahbb();
+    const contrasenaEncriptada_ahbb = await bcrypt.hash(
+      contrasenaBase_ahbb,
+      10,
+    );
     const cedulaGenerada_ahbb =
-      datos_ahbb.cedula_ahbb ?? datos_ahbb.cedula ?? `V-${Math.floor(Math.random() * 100000000)}`;
-    const rol_ahbb = String(datos_ahbb.rol_ahbb ?? datos_ahbb.rol ?? 'ALUMNO').toUpperCase();
+      datos_ahbb.cedula_ahbb ??
+      datos_ahbb.cedula ??
+      `V-${Math.floor(Math.random() * 100000000)}`;
+    const rol_ahbb = String(
+      datos_ahbb.rol_ahbb ?? datos_ahbb.rol ?? 'ALUMNO',
+    ).toUpperCase();
 
-    const nuevoUsuario_ahbb = await this.usuariosService_ahbb.crearUsuario_ahbb({
-      cedula: cedulaGenerada_ahbb,
-      nombre: datos_ahbb.nombre_ahbb ?? datos_ahbb.nombre,
-      apellido: datos_ahbb.apellido_ahbb ?? datos_ahbb.apellido,
-      correo: datos_ahbb.correo_ahbb ?? datos_ahbb.correo,
-      contrasena: contrasenaEncriptada_ahbb,
-      rol: rol_ahbb,
-      estadoCuenta: rol_ahbb === 'ALUMNO' ? 'PENDIENTE_APROBACION' : 'ACTIVO',
-      requiereCambioContrasena: rol_ahbb !== 'ALUMNO',
-      referenciaPagoMovil:
-        datos_ahbb.referenciaPagoMovil_ahbb ?? datos_ahbb.referenciaPagoMovil,
-    });
+    const nuevoUsuario_ahbb = await this.usuariosService_ahbb.crearUsuario_ahbb(
+      {
+        cedula: cedulaGenerada_ahbb,
+        nombre: datos_ahbb.nombre_ahbb ?? datos_ahbb.nombre,
+        apellido: datos_ahbb.apellido_ahbb ?? datos_ahbb.apellido,
+        correo: datos_ahbb.correo_ahbb ?? datos_ahbb.correo,
+        contrasena: contrasenaEncriptada_ahbb,
+        rol: rol_ahbb,
+        estadoCuenta: rol_ahbb === 'ALUMNO' ? 'PENDIENTE_APROBACION' : 'ACTIVO',
+        requiereCambioContrasena: rol_ahbb !== 'ALUMNO',
+        referenciaPagoMovil:
+          datos_ahbb.referenciaPagoMovil_ahbb ?? datos_ahbb.referenciaPagoMovil,
+      },
+    );
 
     return {
       exito: true,
@@ -111,7 +126,8 @@ export class AuthService {
     contrasenaActual_ahbb: string,
     contrasenaNueva_ahbb: string,
   ) {
-    const usuario_ahbb = await this.usuariosService_ahbb.obtenerUsuarioPorId_ahbb(id_usuario_ahbb);
+    const usuario_ahbb =
+      await this.usuariosService_ahbb.obtenerUsuarioPorId_ahbb(id_usuario_ahbb);
 
     if (!usuario_ahbb) {
       throw new UnauthorizedException('Usuario no encontrado.');
@@ -122,12 +138,18 @@ export class AuthService {
       usuario_ahbb.contrasena_ahbb,
     );
 
-    if (!contrasenaValida_ahbb && contrasenaActual_ahbb !== usuario_ahbb.contrasena_ahbb) {
+    if (
+      !contrasenaValida_ahbb &&
+      contrasenaActual_ahbb !== usuario_ahbb.contrasena_ahbb
+    ) {
       throw new UnauthorizedException('La contraseña actual no coincide.');
     }
 
     const hashNueva_ahbb = await bcrypt.hash(contrasenaNueva_ahbb, 10);
-    await this.usuariosService_ahbb.actualizarContrasena_ahbb(id_usuario_ahbb, hashNueva_ahbb);
+    await this.usuariosService_ahbb.actualizarContrasena_ahbb(
+      id_usuario_ahbb,
+      hashNueva_ahbb,
+    );
 
     return { exito: true, mensaje: 'Contraseña actualizada correctamente.' };
   }

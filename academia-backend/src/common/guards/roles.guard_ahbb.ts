@@ -12,10 +12,9 @@ export class RolesGuard_ahbb implements CanActivate {
   constructor(private readonly reflector_ahbb: Reflector) {}
 
   canActivate(context_ahbb: ExecutionContext): boolean {
-    const rolesPermitidos_ahbb = this.reflector_ahbb.getAllAndOverride<string[]>(
-      ROLES_META_AHBB,
-      [context_ahbb.getHandler(), context_ahbb.getClass()],
-    );
+    const rolesPermitidos_ahbb = this.reflector_ahbb.getAllAndOverride<
+      string[]
+    >(ROLES_META_AHBB, [context_ahbb.getHandler(), context_ahbb.getClass()]);
 
     if (!rolesPermitidos_ahbb?.length) {
       return true;

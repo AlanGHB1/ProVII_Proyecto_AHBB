@@ -115,6 +115,18 @@ export declare class UsuariosService {
         firmaDigital: any;
         creadoEn: any;
     }[]>;
+    importarProfesoresDesdeExcel_ahbb(bufferArchivo: Buffer): Promise<{
+        id: any;
+        cedula: any;
+        nombre: any;
+        apellido: any;
+        correo: any;
+        rol: string;
+        estadoCuenta: any;
+        requiereCambioContrasena: any;
+        firmaDigital: any;
+        creadoEn: any;
+    }[]>;
     aprobarAlumno_ahbb(id_usuario_ahbb: number, id_aprobador_ahbb: number, referenciaPagoMovil_ahbb: string, contrasenaTemporalHash_ahbb: string): Promise<{
         id: any;
         cedula: any;

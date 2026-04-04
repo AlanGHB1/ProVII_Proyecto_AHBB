@@ -17,7 +17,9 @@ import { RolesDecorator_ahbb } from '../common/decorators/roles.decorator_ahbb';
 
 @Controller('inscripciones')
 export class InscripcionesController_ahbb {
-  constructor(private readonly inscripcionesService_ahbb: InscripcionesService_ahbb) {}
+  constructor(
+    private readonly inscripcionesService_ahbb: InscripcionesService_ahbb,
+  ) {}
 
   @UseGuards(JwtAuthGuard_ahbb, RolesGuard_ahbb)
   @RolesDecorator_ahbb('ADMIN', 'PROFESOR')
@@ -39,13 +41,17 @@ export class InscripcionesController_ahbb {
   async obtenerHistorialAlumno_ahbb(
     @Param('id_usuario_ahbb', ParseIntPipe) id_usuario_ahbb: number,
   ) {
-    return this.inscripcionesService_ahbb.obtenerHistorialAlumno_ahbb(id_usuario_ahbb);
+    return this.inscripcionesService_ahbb.obtenerHistorialAlumno_ahbb(
+      id_usuario_ahbb,
+    );
   }
 
   @UseGuards(JwtAuthGuard_ahbb, RolesGuard_ahbb)
   @RolesDecorator_ahbb('ADMIN', 'PROFESOR')
   @Get('curso/:id_curso_ahbb')
-  async obtenerPorCurso_ahbb(@Param('id_curso_ahbb', ParseIntPipe) id_curso_ahbb: number) {
+  async obtenerPorCurso_ahbb(
+    @Param('id_curso_ahbb', ParseIntPipe) id_curso_ahbb: number,
+  ) {
     return this.inscripcionesService_ahbb.obtenerPorCurso_ahbb(id_curso_ahbb);
   }
 

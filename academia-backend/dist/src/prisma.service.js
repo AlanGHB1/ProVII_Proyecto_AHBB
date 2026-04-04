@@ -15,7 +15,9 @@ const index_js_1 = require("./generated/prisma_ahbb/index.js");
 const adapter_pg_1 = require("@prisma/adapter-pg");
 let PrismaService = class PrismaService extends index_js_1.PrismaClient {
     constructor() {
-        super({ adapter: new adapter_pg_1.PrismaPg({ connectionString: process.env.DATABASE_URL }) });
+        super({
+            adapter: new adapter_pg_1.PrismaPg({ connectionString: process.env.DATABASE_URL }),
+        });
     }
     async onModuleInit() {
         await this.$connect();
