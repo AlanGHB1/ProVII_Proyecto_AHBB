@@ -31,6 +31,11 @@ model td_usuario_ahbb {
   inscripciones             td_inscripcion_ahbb[]
   auditoriasAprobadas_ahbb  td_auditoria_aprobacion_ahbb[] @relation("AprobadorAuditoria")
   auditoriasUsuario_ahbb    td_auditoria_aprobacion_ahbb[] @relation("UsuarioAuditado")
+
+  // Relaciones Tienda (E-Commerce)
+  carrito_ahbb              td_carrito_ahbb[]
+  facturas_ahbb             td_factura_ahbb[]
+  favoritos_ahbb            td_favorito_ahbb[]
 }
 
 model td_curso_ahbb {
@@ -118,4 +123,78 @@ model td_auditoria_aprobacion_ahbb {
 
   usuarioAuditado_ahbb         td_usuario_ahbb @relation("UsuarioAuditado", fields: [id_usuario_auditado_ahbb], references: [id_usuario_ahbb])
   aprobador_ahbb               td_usuario_ahbb @relation("AprobadorAuditoria", fields: [id_aprobador_ahbb], references: [id_usuario_ahbb])
+}
+
+// ══════════════════════════════════════════════════════════════
+// MÓDULO TIENDA (E-COMMERCE) — ACADEMIA H&B
+// ══════════════════════════════════════════════════════════════
+
+model td_producto_ahbb {
+  id_producto_ahbb       Int      @id @default(autoincrement())
+  nombre_ahbb            String   @db.VarChar(150)
+  descripcion_ahbb       String?  @db.Text
+  precio_ahbb            Decimal  @db.Decimal(10, 2)
+  stock_ahbb             Int      @default(0)
+  categoria_ahbb         String   @db.VarChar(50)
+  imagen_ahbb            String?  @db.Text
+  estado_producto_ahbb   String   @default("activo") @db.VarChar(20)
+  creadoEn_ahbb          DateTime? @default(now()) @db.Timestamp(6)
+  actualizadoEn_ahbb     DateTime? @default(now()) @db.Timestamp(6)
+
+  // Relaciones
+  itemsCarrito_ahbb      td_carrito_ahbb[]
+  detallesFactura_ahbb   td_detalle_factura_ahbb[]
+  favoritos_ahbb         td_favorito_ahbb[]
+}
+
+model td_carrito_ahbb {
+  id_carrito_ahbb          Int      @id @default(autoincrement())
+  cantidad_ahbb            Int      @default(1)
+  fechaAgregado_ahbb       DateTime? @default(now()) @db.Timestamp(6)
+  id_usuario_carrito_ahbb  Int
+  id_producto_carrito_ahbb Int
+
+  // Relaciones
+  usuario_ahbb   td_usuario_ahbb  @relation(fields: [id_usuario_carrito_ahbb], references: [id_usuario_ahbb], onDelete: Cascade)
+  producto_ahbb  td_producto_ahbb @relation(fields: [id_producto_carrito_ahbb], references: [id_producto_ahbb], onDelete: Cascade)
+
+  @@unique([id_usuario_carrito_ahbb, id_producto_carrito_ahbb])
+}
+
+model td_factura_ahbb {
+  id_factura_ahbb           Int      @id @default(autoincrement())
+  nroReferenciaPago_ahbb    String   @db.VarChar(50)
+  fechaFactura_ahbb         DateTime? @default(now()) @db.Timestamp(6)
+  total_ahbb                Decimal  @db.Decimal(10, 2)
+  estadoFactura_ahbb        String   @default("pendiente") @db.VarChar(20)
+  id_usuario_factura_ahbb   Int
+
+  // Relaciones
+  usuario_ahbb   td_usuario_ahbb          @relation(fields: [id_usuario_factura_ahbb], references: [id_usuario_ahbb], onDelete: Cascade)
+  detalles_ahbb  td_detalle_factura_ahbb[]
+}
+
+model td_detalle_factura_ahbb {
+  id_detalle_factura_ahbb     Int     @id @default(autoincrement())
+  cantidad_ahbb               Int
+  precioUnitario_ahbb         Decimal @db.Decimal(10, 2)
+  id_factura_detalle_ahbb     Int
+  id_producto_detalle_ahbb    Int
+
+  // Relaciones
+  factura_ahbb   td_factura_ahbb   @relation(fields: [id_factura_detalle_ahbb], references: [id_factura_ahbb], onDelete: Cascade)
+  producto_ahbb  td_producto_ahbb  @relation(fields: [id_producto_detalle_ahbb], references: [id_producto_ahbb])
+}
+
+model td_favorito_ahbb {
+  id_favorito_ahbb           Int      @id @default(autoincrement())
+  fechaAgregado_ahbb         DateTime? @default(now()) @db.Timestamp(6)
+  id_usuario_favorito_ahbb   Int
+  id_producto_favorito_ahbb  Int
+
+  // Relaciones
+  usuario_ahbb   td_usuario_ahbb  @relation(fields: [id_usuario_favorito_ahbb], references: [id_usuario_ahbb], onDelete: Cascade)
+  producto_ahbb  td_producto_ahbb @relation(fields: [id_producto_favorito_ahbb], references: [id_producto_ahbb], onDelete: Cascade)
+
+  @@unique([id_usuario_favorito_ahbb, id_producto_favorito_ahbb])
 }

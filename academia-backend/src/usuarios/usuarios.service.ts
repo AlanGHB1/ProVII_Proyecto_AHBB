@@ -253,9 +253,9 @@ export class UsuariosService {
       throw new BadRequestException('El archivo Excel está vacío');
     }
 
-    const usuariosAImportar = [];
+    const usuariosAImportar: any[] = [];
     // Recolectar contraseñas temporalmente para enviarlas en el correo
-    const correosYClaves = [];
+    const correosYClaves: { correo: string; nombre: string; claveBase: string }[] = [];
 
     for (const fila of jsonData as any[]) {
       const cedula = String(fila['Cedula'] ?? fila['Cédula'] ?? fila['cedula'] ?? '').trim();

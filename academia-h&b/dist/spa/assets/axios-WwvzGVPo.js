@@ -1,0 +1,1 @@
+import{t as e}from"./axios-CsV6CqcG.js";import{a as t}from"./index-BCW_lC7U.js";var n=e.create({baseURL:`https://api.example.com`}),r=t(({app:t})=>{t.config.globalProperties.$axios=e,t.config.globalProperties.$api=n});export{n as api,r as default};
