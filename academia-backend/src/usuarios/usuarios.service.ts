@@ -253,9 +253,9 @@ export class UsuariosService {
       throw new BadRequestException('El archivo Excel está vacío');
     }
 
-    const usuariosAImportar = [];
+    const usuariosAImportar: any[] = [];
     // Recolectar contraseñas temporalmente para enviarlas en el correo
-    const correosYClaves = [];
+    const correosYClaves: any[] = [];
 
     for (const fila of jsonData as any[]) {
       const cedula = String(fila['Cedula'] ?? fila['Cédula'] ?? fila['cedula'] ?? '').trim();
@@ -332,6 +332,32 @@ export class UsuariosService {
     return usuariosCreados_ahbb.map((usuario_ahbb) =>
       this.mapearUsuarioPublico_ahbb(usuario_ahbb),
     );
+  }
+
+  async exportarProfesoresExcel_ahbb(): Promise<Buffer> {
+    const profesores = await this.obtenerTodos_ahbb('profesor');
+    
+    // Mapeamos solo lo relevante para exportar
+    const datosExcel = profesores.map(p => ({
+      Cedula: p.cedula,
+      Nombre: p.nombre,
+      Apellido: p.apellido,
+      Correo: p.correo,
+      Estado: p.estadoCuenta,
+      FechaRegistro: p.creadoEn ? new Date(p.creadoEn).toLocaleDateString() : 'Desconocido',
+    }));
+
+    if (datosExcel.length === 0) {
+      // Creamos una fila dummy si no hay nada
+      datosExcel.push({ Cedula: 'Sin datos', Nombre: '', Apellido: '', Correo: '', Estado: '', FechaRegistro: '' });
+    }
+
+    const worksheet = xlsx.utils.json_to_sheet(datosExcel);
+    const workbook = xlsx.utils.book_new();
+    xlsx.utils.book_append_sheet(workbook, worksheet, 'Profesores');
+
+    const buffer = xlsx.write(workbook, { type: 'buffer', bookType: 'xlsx' });
+    return buffer as Buffer;
   }
 
   async aprobarAlumno_ahbb(

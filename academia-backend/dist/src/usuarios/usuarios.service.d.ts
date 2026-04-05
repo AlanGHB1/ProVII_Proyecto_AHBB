@@ -127,6 +127,7 @@ export declare class UsuariosService {
         firmaDigital: any;
         creadoEn: any;
     }[]>;
+    exportarProfesoresExcel_ahbb(): Promise<Buffer>;
     aprobarAlumno_ahbb(id_usuario_ahbb: number, id_aprobador_ahbb: number, referenciaPagoMovil_ahbb: string, contrasenaTemporalHash_ahbb: string): Promise<{
         id: any;
         cedula: any;

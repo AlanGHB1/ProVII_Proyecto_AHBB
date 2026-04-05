@@ -13,7 +13,9 @@ import {
   UseInterceptors,
   UploadedFile,
   BadRequestException,
+  Res,
 } from '@nestjs/common';
+import type { Response } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { UsuariosService } from './usuarios.service';
 import { JwtAuthGuard_ahbb } from '../common/guards/jwt-auth.guard_ahbb';
@@ -78,6 +80,19 @@ export class UsuariosController {
       throw new BadRequestException('No se ha proporcionado ningún archivo');
     }
     return this.usuariosService_ahbb.importarProfesoresDesdeExcel_ahbb(file.buffer);
+  }
+
+  @UseGuards(JwtAuthGuard_ahbb, RolesGuard_ahbb)
+  @RolesDecorator_ahbb('ADMIN')
+  @Get('carga-masiva/exportar-profesores')
+  async exportarProfesoresExcel_ahbb(@Res() res: Response) {
+    const buffer = await this.usuariosService_ahbb.exportarProfesoresExcel_ahbb();
+    res.set({
+      'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      'Content-Disposition': 'attachment; filename=Listado_Profesores.xlsx',
+      'Content-Length': buffer.length,
+    });
+    res.send(buffer);
   }
 
   @UseGuards(JwtAuthGuard_ahbb, RolesGuard_ahbb)

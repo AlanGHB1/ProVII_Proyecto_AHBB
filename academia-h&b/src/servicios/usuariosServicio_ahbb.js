@@ -51,3 +51,31 @@ export const guardarFirmaDigitalUsuario_ahbb = async (id_ahbb, imagenBase64_ahbb
   );
   return respuesta_ahbb.data;
 };
+
+export const procesarCargaMasivaExcel_ahbb = async (archivoExcel_ahbb) => {
+  const formData = new FormData();
+  formData.append('file', archivoExcel_ahbb);
+  
+  const respuesta_ahbb = await apiCliente_ahbb.post('/usuarios/carga-masiva/profesores-excel', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return respuesta_ahbb.data;
+};
+
+export const exportarProfesoresExcel_ahbb = async () => {
+  const respuesta_ahbb = await apiCliente_ahbb.get('/usuarios/carga-masiva/exportar-profesores', {
+    responseType: 'blob', // Necesario para descargar archivos binarios (Excel)
+  });
+  
+  // Lógica de descarga nativa en el navegador
+  const url = window.URL.createObjectURL(new Blob([respuesta_ahbb.data]));
+  const link = document.createElement('a');
+  link.href = url;
+  link.setAttribute('download', 'Listado_Profesores.xlsx');
+  document.body.appendChild(link);
+  link.click();
+  link.parentNode.removeChild(link);
+  return true;
+};

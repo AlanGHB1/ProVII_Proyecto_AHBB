@@ -1,3 +1,4 @@
+import type { Response } from 'express';
 import { UsuariosService } from './usuarios.service';
 import { CargaMasivaUsuariosDto_ahbb } from './dto/carga-masiva-usuarios.dto_ahbb';
 import { AprobarAlumnoDto_ahbb } from './dto/aprobar-alumno.dto_ahbb';
@@ -61,6 +62,7 @@ export declare class UsuariosController {
         firmaDigital: any;
         creadoEn: any;
     }[]>;
+    exportarProfesoresExcel_ahbb(res: Response): Promise<void>;
     aprobarAlumno_ahbb(datos_ahbb: AprobarAlumnoDto_ahbb, request_ahbb: RequestConUsuario_ahbb): Promise<{
         exito: boolean;
         usuario: {

@@ -81,6 +81,15 @@ let UsuariosController = class UsuariosController {
         }
         return this.usuariosService_ahbb.importarProfesoresDesdeExcel_ahbb(file.buffer);
     }
+    async exportarProfesoresExcel_ahbb(res) {
+        const buffer = await this.usuariosService_ahbb.exportarProfesoresExcel_ahbb();
+        res.set({
+            'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'Content-Disposition': 'attachment; filename=Listado_Profesores.xlsx',
+            'Content-Length': buffer.length,
+        });
+        res.send(buffer);
+    }
     async aprobarAlumno_ahbb(datos_ahbb, request_ahbb) {
         const contrasenaTemporalPlano_ahbb = this.usuariosService_ahbb.generarContrasenaTemporal_ahbb();
         const hashTemporal_ahbb = await bcrypt.hash(contrasenaTemporalPlano_ahbb, 10);
@@ -152,6 +161,15 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UsuariosController.prototype, "importarProfesoresExcel_ahbb", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_ahbb_1.JwtAuthGuard_ahbb, roles_guard_ahbb_1.RolesGuard_ahbb),
+    (0, roles_decorator_ahbb_1.RolesDecorator_ahbb)('ADMIN'),
+    (0, common_1.Get)('carga-masiva/exportar-profesores'),
+    __param(0, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UsuariosController.prototype, "exportarProfesoresExcel_ahbb", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_ahbb_1.JwtAuthGuard_ahbb, roles_guard_ahbb_1.RolesGuard_ahbb),
     (0, roles_decorator_ahbb_1.RolesDecorator_ahbb)('ADMIN'),
