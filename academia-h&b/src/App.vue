@@ -1,6 +1,6 @@
 <!-- Componente raíz de la aplicación con layout condicional y menú dinámico por rol -->
 <script setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useAutenticacionStore_ahbb } from './stores/autenticacionStore_ahbb';
 import { useCursosStore_ahbb } from './stores/cursosStore_ahbb';
@@ -63,6 +63,27 @@ const cerrarSesion_ahbb = () => {
   authStore_ahbb.cerrarSesion_ahbb();
   void router_ahbb.push({ name: 'login' });
 };
+
+/**
+ * Propiedad para decidir si mostrar el Dialog obligatorio de cambio
+ */
+const mostrarAlertaCambioClave_ahbb = computed(() => {
+  return layoutActual_ahbb.value === 'sistema' && 
+         authStore_ahbb.usuarioActivo_ahbb?.requiereCambioContrasena && 
+         route_ahbb.name !== 'perfil';
+});
+
+const irAlPerfil_ahbb = () => {
+  router_ahbb.push({ name: 'perfil' });
+};
+
+/**
+ * Control del menú lateral
+ */
+const menuLateralAbierto_ahbb = ref(false);
+const alternarMenuLateral_ahbb = () => {
+  menuLateralAbierto_ahbb.value = !menuLateralAbierto_ahbb.value;
+};
 </script>
 
 <template>
@@ -83,7 +104,7 @@ const cerrarSesion_ahbb = () => {
     <!-- Header -->
     <q-header elevated class="bg-primary text-white">
       <q-toolbar>
-        <q-btn dense flat round icon="menu" class="lt-md" />
+        <q-btn dense flat round icon="menu" @click="alternarMenuLateral_ahbb" />
         <q-toolbar-title class="text-weight-bold" style="font-family: 'Outfit', 'Inter', sans-serif">
           🎓 Academia <span style="color: #f59e0b">H&B</span>
         </q-toolbar-title>
@@ -129,6 +150,7 @@ const cerrarSesion_ahbb = () => {
 
     <!-- Drawer / Sidebar dinámico por rol -->
     <q-drawer
+      v-model="menuLateralAbierto_ahbb"
       show-if-above
       :width="250"
       :breakpoint="768"
@@ -213,6 +235,23 @@ const cerrarSesion_ahbb = () => {
         <router-view />
       </q-page>
     </q-page-container>
+
+    <!-- Modal Modal Obligatorio Cambio Clave -->
+    <q-dialog v-model="mostrarAlertaCambioClave_ahbb" persistent>
+      <q-card style="width: 500px; max-width: 80vw;">
+        <q-card-section class="row items-center bg-warning text-white">
+          <q-avatar icon="security" color="white" text-color="warning" />
+          <span class="q-ml-sm text-subtitle1 text-bold">Acción de Seguridad Requerida</span>
+        </q-card-section>
+        <q-card-section class="q-pt-md">
+          Has ingresado utilizando una contraseña temporal de validación de identidad. Por políticas de seguridad institucional, debes establecer una contraseña definitiva y privada para poder navegar por el sistema.
+        </q-card-section>
+        <q-card-actions align="right">
+          <q-btn unelevated label="Establecer Clave Nueva Ahora" color="primary" text-color="white" @click="irAlPerfil_ahbb" />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+
   </q-layout>
 </template>
 

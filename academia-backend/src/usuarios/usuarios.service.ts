@@ -172,12 +172,12 @@ export class UsuariosService {
 
     if (correosDuplicados_ahbb.size) {
       errores_ahbb.push(
-        `Correos duplicados en lote: ${Array.from(correosDuplicados_ahbb).join(', ')}`,
+        `Existen correos repetidos DENTRO del propio archivo Excel: ${Array.from(correosDuplicados_ahbb).join(', ')}`,
       );
     }
     if (cedulasDuplicadas_ahbb.size) {
       errores_ahbb.push(
-        `Cédulas duplicadas en lote: ${Array.from(cedulasDuplicadas_ahbb).join(', ')}`,
+        `Existen cédulas repetidas DENTRO del propio archivo Excel: ${Array.from(cedulasDuplicadas_ahbb).join(', ')}`,
       );
     }
 
@@ -194,9 +194,12 @@ export class UsuariosService {
         });
 
       usuariosExistentes_ahbb.forEach((usuario_ahbb) => {
-        errores_ahbb.push(
-          `Usuario ya registrado: ${usuario_ahbb.correo_ahbb} / ${usuario_ahbb.cedula_ahbb}.`,
-        );
+        if (correosVistos_ahbb.has(usuario_ahbb.correo_ahbb)) {
+           errores_ahbb.push(`El correo "${usuario_ahbb.correo_ahbb}" ya se encuentra registrado en otra cuenta del sistema.`);
+        }
+        if (cedulasVistas_ahbb.has(usuario_ahbb.cedula_ahbb)) {
+           errores_ahbb.push(`La cédula "${usuario_ahbb.cedula_ahbb}" ya le pertenece a otro usuario existente.`);
+        }
       });
     }
 
@@ -307,13 +310,12 @@ export class UsuariosService {
       ),
     );
 
-    // Configuración de nodemailer temporal (Ethereal Email o imprimir en consola en dev)
+    // Configuración de nodemailer para Producción (Gmail)
     const transporter = nodemailer.createTransport({
-      host: 'smtp.ethereal.email',
-      port: 587,
+      service: 'gmail',
       auth: {
-          user: process.env.MAIL_USER || 'test@ethereal.email',
-          pass: process.env.MAIL_PASS || 'temporaldummy'
+          user: process.env.MAIL_USER,
+          pass: process.env.MAIL_PASS
       }
     });
 

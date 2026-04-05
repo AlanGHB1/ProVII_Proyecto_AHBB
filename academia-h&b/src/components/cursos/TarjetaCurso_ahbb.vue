@@ -45,7 +45,7 @@ const formatearDias_ahbb = (dias) => {
     </q-card-section>
     <q-separator />
     <q-card-actions>
-      <q-btn flat dense color="primary" label="Ver detalle" :to="`/cursos/${curso_ahbb.id}`" />
+      <q-btn unelevated dense color="primary" text-color="white" label="Ver detalle" :to="`/cursos/${curso_ahbb.id}`" class="full-width" />
     </q-card-actions>
   </q-card>
 </template>

@@ -8,6 +8,9 @@ const dibujando_ahbb = ref(false);
 const contexto_ahbb = ref(null);
 const tuvoTrazo_ahbb = ref(false);
 
+// Tracker de puntos para estabilizador de trazo por Bezier
+const puntosTrazo_ahbb = ref([]);
+
 const estilosCanvas_ahbb = computed(() => ({
   width: '100%',
   height: '260px',
@@ -31,21 +34,46 @@ const iniciarTrazo_ahbb = (evento_ahbb) => {
   evento_ahbb.preventDefault();
   dibujando_ahbb.value = true;
   tuvoTrazo_ahbb.value = true;
-  const { x, y } = obtenerPosicion_ahbb(evento_ahbb);
+  const pos_ahbb = obtenerPosicion_ahbb(evento_ahbb);
+  puntosTrazo_ahbb.value = [pos_ahbb];
+
   contexto_ahbb.value.beginPath();
-  contexto_ahbb.value.moveTo(x, y);
+  contexto_ahbb.value.moveTo(pos_ahbb.x, pos_ahbb.y);
 };
 
 const moverTrazo_ahbb = (evento_ahbb) => {
   if (!dibujando_ahbb.value) return;
   evento_ahbb.preventDefault();
-  const { x, y } = obtenerPosicion_ahbb(evento_ahbb);
-  contexto_ahbb.value.lineTo(x, y);
-  contexto_ahbb.value.stroke();
+  const pos_ahbb = obtenerPosicion_ahbb(evento_ahbb);
+  puntosTrazo_ahbb.value.push(pos_ahbb);
+
+  const historico_ahbb = puntosTrazo_ahbb.value;
+  const numPuntos_ahbb = historico_ahbb.length;
+
+  if (numPuntos_ahbb > 2) {
+    const ultimo_ahbb = historico_ahbb[numPuntos_ahbb - 1];
+    const penultimo_ahbb = historico_ahbb[numPuntos_ahbb - 2];
+    
+    // Punto medio estabilizador
+    const cuadMediaX = (ultimo_ahbb.x + penultimo_ahbb.x) / 2;
+    const cuadMediaY = (ultimo_ahbb.y + penultimo_ahbb.y) / 2;
+    
+    contexto_ahbb.value.quadraticCurveTo(penultimo_ahbb.x, penultimo_ahbb.y, cuadMediaX, cuadMediaY);
+    contexto_ahbb.value.stroke();
+    
+    contexto_ahbb.value.beginPath();
+    contexto_ahbb.value.moveTo(cuadMediaX, cuadMediaY);
+  }
 };
 
 const finalizarTrazo_ahbb = () => {
+  if (dibujando_ahbb.value && puntosTrazo_ahbb.value.length > 0) {
+    const objUltimo_ahbb = puntosTrazo_ahbb.value[puntosTrazo_ahbb.value.length - 1];
+    contexto_ahbb.value.lineTo(objUltimo_ahbb.x, objUltimo_ahbb.y);
+    contexto_ahbb.value.stroke();
+  }
   dibujando_ahbb.value = false;
+  puntosTrazo_ahbb.value = [];
 };
 
 const limpiarFirma_ahbb = () => {
@@ -107,7 +135,7 @@ onBeforeUnmount(() => {
     />
 
     <q-card-actions align="right" class="q-px-none q-pt-md">
-      <q-btn flat color="grey-7" icon="ink_eraser" label="Limpiar" @click="limpiarFirma_ahbb" />
+      <q-btn unelevated color="primary" text-color="white" icon="ink_eraser" label="Limpiar" @click="limpiarFirma_ahbb" />
       <q-btn
         color="primary"
         unelevated

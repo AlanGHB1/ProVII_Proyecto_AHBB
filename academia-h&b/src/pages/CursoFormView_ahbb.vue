@@ -51,7 +51,7 @@ const manejarCancelar_ahbb = () => {
       <div class="text-h4 text-weight-bold text-primary">
         {{ esEdicion_ahbb ? 'Editar Curso' : 'Nuevo Curso' }}
       </div>
-      <q-btn label="Volver a Cursos" icon="arrow_back" outline color="grey-7" @click="manejarCancelar_ahbb" />
+      <q-btn label="Volver a Cursos" icon="arrow_back" unelevated color="primary" text-color="white" @click="manejarCancelar_ahbb" />
     </div>
 
     <FormularioCurso_ahbb

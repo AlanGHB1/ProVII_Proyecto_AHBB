@@ -170,10 +170,10 @@ let UsuariosService = class UsuariosService {
             cedulasVistas_ahbb.add(cedula_ahbb);
         });
         if (correosDuplicados_ahbb.size) {
-            errores_ahbb.push(`Correos duplicados en lote: ${Array.from(correosDuplicados_ahbb).join(', ')}`);
+            errores_ahbb.push(`Existen correos repetidos DENTRO del propio archivo Excel: ${Array.from(correosDuplicados_ahbb).join(', ')}`);
         }
         if (cedulasDuplicadas_ahbb.size) {
-            errores_ahbb.push(`Cédulas duplicadas en lote: ${Array.from(cedulasDuplicadas_ahbb).join(', ')}`);
+            errores_ahbb.push(`Existen cédulas repetidas DENTRO del propio archivo Excel: ${Array.from(cedulasDuplicadas_ahbb).join(', ')}`);
         }
         if (correosVistos_ahbb.size || cedulasVistas_ahbb.size) {
             const usuariosExistentes_ahbb = await this.prisma_ahbb.td_usuario_ahbb.findMany({
@@ -186,7 +186,12 @@ let UsuariosService = class UsuariosService {
                 select: { correo_ahbb: true, cedula_ahbb: true },
             });
             usuariosExistentes_ahbb.forEach((usuario_ahbb) => {
-                errores_ahbb.push(`Usuario ya registrado: ${usuario_ahbb.correo_ahbb} / ${usuario_ahbb.cedula_ahbb}.`);
+                if (correosVistos_ahbb.has(usuario_ahbb.correo_ahbb)) {
+                    errores_ahbb.push(`El correo "${usuario_ahbb.correo_ahbb}" ya se encuentra registrado en otra cuenta del sistema.`);
+                }
+                if (cedulasVistas_ahbb.has(usuario_ahbb.cedula_ahbb)) {
+                    errores_ahbb.push(`La cédula "${usuario_ahbb.cedula_ahbb}" ya le pertenece a otro usuario existente.`);
+                }
             });
         }
         return {
@@ -269,11 +274,10 @@ let UsuariosService = class UsuariosService {
             },
         })));
         const transporter = nodemailer.createTransport({
-            host: 'smtp.ethereal.email',
-            port: 587,
+            service: 'gmail',
             auth: {
-                user: process.env.MAIL_USER || 'test@ethereal.email',
-                pass: process.env.MAIL_PASS || 'temporaldummy'
+                user: process.env.MAIL_USER,
+                pass: process.env.MAIL_PASS
             }
         });
         correosYClaves.forEach((data) => {

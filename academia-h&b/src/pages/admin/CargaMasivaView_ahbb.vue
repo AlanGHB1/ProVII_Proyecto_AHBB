@@ -33,22 +33,27 @@ const ejecutarCargaMasiva = async () => {
     reporteFinal.value = { exito: true, cantidad: respuesta.length };
     $q.notify({ type: 'positive', message: `¡Éxito! Se guardaron ${respuesta.length} profesores correctamente.` });
   } catch (error) {
-    // Extraer array de validación devuelto por NestJS si fue customizado, o cadena default
-    let mensajeError = 'Error procesando el archivo, verifica el formato.';
-    if (error.response?.data?.message) {
-      const msg = error.response.data.message;
-      if (Array.isArray(msg.errores_ahbb)) {
-        mensajeError = msg.errores_ahbb.join(', ');
-      } else if (Array.isArray(msg)) {
-        mensajeError = msg.join(', ');
-      } else {
-        mensajeError = typeof msg === 'string' ? msg : JSON.stringify(msg);
+    // Extraer array de validación devuelto por NestJS
+    let mensajesError = ['Error procesando el archivo, verifica el formato.'];
+    
+    if (error.response?.data) {
+      const data = error.response.data;
+      if (Array.isArray(data.errores_ahbb)) {
+        mensajesError = data.errores_ahbb;
+      } else if (data.message) {
+        if (Array.isArray(data.message.errores_ahbb)) {
+          mensajesError = data.message.errores_ahbb;
+        } else if (Array.isArray(data.message)) {
+          mensajesError = data.message;
+        } else {
+          mensajesError = [typeof data.message === 'string' ? data.message : JSON.stringify(data.message)];
+        }
       }
     }
 
     reporteFinal.value = { 
       exito: false, 
-      mensaje: mensajeError
+      mensajes: mensajesError
     };
     $q.notify({ type: 'negative', message: 'Fallo al procesar el archivo.' });
   } finally {
@@ -92,7 +97,7 @@ const descargarAExcel = async () => {
           @click="descargarAExcel" 
           class="q-mr-md" 
         />
-        <q-btn flat color="accent" icon="local_library" label="Ver Tutorial y Formato" @click="showTutorial = true" />
+        <q-btn unelevated color="primary" text-color="white" icon="local_library" label="Ver Tutorial y Formato" @click="showTutorial = true" />
       </div>
     </div>
 
@@ -147,7 +152,7 @@ const descargarAExcel = async () => {
 
         <q-stepper-navigation>
           <q-btn @click="validarArchivoYContinuar" color="primary" label="Procesar y Cargar BD" />
-          <q-btn flat @click="step = 1" color="primary" label="Regresar" class="q-ml-sm" />
+          <q-btn unelevated @click="step = 1" color="primary" text-color="white" label="Regresar" class="q-ml-sm" />
         </q-stepper-navigation>
       </q-step>
 
@@ -174,8 +179,11 @@ const descargarAExcel = async () => {
             <template v-slot:avatar>
               <q-icon name="error" size="xl" color="red-8" />
             </template>
-            <b>¡Formato Inválido o Conflicto Detectado!</b> <br>
-            {{ reporteFinal.mensaje }}
+            <b>¡Hemos detectado errores o conflictos!</b> <br>
+            Se detuvo el proceso por las siguientes causas:
+            <ul class="q-pl-lg q-mt-sm" style="margin-bottom: 0;">
+              <li v-for="(errorMsg, index) in reporteFinal.mensajes" :key="index">{{ errorMsg }}</li>
+            </ul>
           </q-banner>
         </div>
 
@@ -236,7 +244,7 @@ const descargarAExcel = async () => {
         </q-card-section>
         
         <q-card-actions align="right">
-          <q-btn flat label="¡Comprendido!" color="primary" v-close-popup />
+          <q-btn unelevated label="¡Comprendido!" color="primary" text-color="white" v-close-popup />
         </q-card-actions>
       </q-card>
     </q-dialog>

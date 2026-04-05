@@ -93,3 +93,11 @@ export const recuperarSesion_ahbb = async () => {
     return null;
   }
 };
+
+export const cambiarContrasenaUsuario_ahbb = async (contrasenaActual_ahbb, contrasenaNueva_ahbb) => {
+  const respuesta_ahbb = await apiCliente_ahbb.post('/auth/cambiar-contrasena', {
+    contrasenaActual_ahbb,
+    contrasenaNueva_ahbb,
+  });
+  return respuesta_ahbb;
+};

@@ -58,8 +58,8 @@ const estadisticas_ahbb = [
       <q-card-section>
         <div class="text-h6 text-weight-bold q-mb-md">Accesos Rapidos</div>
         <div class="q-gutter-sm">
-          <q-btn outline color="primary" icon="list" label="Ver Cursos" to="/cursos" />
-          <q-btn v-if="!authStore_ahbb.esAlumno_ahbb" outline color="primary" icon="add" label="Crear Curso" to="/cursos/nuevo" />
+          <q-btn unelevated color="primary" text-color="white" icon="list" label="Ver Cursos" to="/cursos" />
+          <q-btn v-if="!authStore_ahbb.esAlumno_ahbb" unelevated color="primary" text-color="white" icon="add" label="Crear Curso" to="/cursos/nuevo" />
         </div>
       </q-card-section>
     </q-card>

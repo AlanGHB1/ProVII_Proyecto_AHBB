@@ -27,7 +27,7 @@ onMounted(() => {
   <div>
     <div class="row items-center justify-between q-mb-lg">
       <div class="text-h4 text-weight-bold text-primary">Detalle del Curso</div>
-      <q-btn label="Volver a Cursos" icon="arrow_back" outline color="grey-7" to="/cursos" />
+      <q-btn label="Volver a Cursos" icon="arrow_back" unelevated color="primary" text-color="white" to="/cursos" />
     </div>
     <DetalleCurso_ahbb v-if="curso_ahbb" :curso_ahbb="curso_ahbb" />
   </div>
