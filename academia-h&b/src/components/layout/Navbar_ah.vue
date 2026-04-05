@@ -1,6 +1,7 @@
 <!-- Barra de navegación principal -->
 <script setup>
 import { useAutenticacionStore_ahbb } from '../../stores/autenticacionStore_ahbb';
+import BadgeCarrito_ahbb from '../tienda/BadgeCarrito_ahbb.vue';
 
 const authStore_ahbb = useAutenticacionStore_ahbb();
 </script>
@@ -24,6 +25,13 @@ const authStore_ahbb = useAutenticacionStore_ahbb();
           Inicio
         </router-link>
         <router-link
+          to="/tienda"
+          class="navbar-enlace_ah"
+          active-class="enlace-activo_ah"
+        >
+          Nuestros Productos
+        </router-link>
+        <router-link
           v-if="authStore_ahbb.estaAutenticado_ahbb"
           to="/dashboard"
           class="navbar-enlace_ah"
@@ -39,6 +47,10 @@ const authStore_ahbb = useAutenticacionStore_ahbb();
         >
           Iniciar Sesión
         </router-link>
+        
+        <div v-if="authStore_ahbb.estaAutenticado_ahbb" class="q-ml-sm row items-center">
+          <BadgeCarrito_ahbb />
+        </div>
       </div>
     </div>
   </nav>

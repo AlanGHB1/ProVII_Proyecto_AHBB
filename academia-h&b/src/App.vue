@@ -9,6 +9,7 @@ import { obtenerMenuPorRol_ahbb } from './constantes/menuSistema_ahbb';
 // Componentes de layout landing
 import Navbar_ah from './components/layout/Navbar_ah.vue';
 import Footer_ah from './components/layout/Footer_ah.vue';
+import BadgeCarrito_ahbb from './components/tienda/BadgeCarrito_ahbb.vue';
 
 const route_ahbb = useRoute();
 const router_ahbb = useRouter();
@@ -110,6 +111,7 @@ const alternarMenuLateral_ahbb = () => {
         </q-toolbar-title>
         <q-space />
         <div class="row items-center q-gutter-sm">
+          <BadgeCarrito_ahbb v-if="authStore_ahbb.estaAutenticado_ahbb" />
           <q-badge
             :color="colorRol_ahbb"
             :label="etiquetaRol_ahbb"

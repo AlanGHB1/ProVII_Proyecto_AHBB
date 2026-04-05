@@ -200,6 +200,51 @@ exports.Prisma.Td_auditoria_aprobacion_ahbbScalarFieldEnum = {
   creadoEn_ahbb: 'creadoEn_ahbb'
 };
 
+exports.Prisma.Td_producto_ahbbScalarFieldEnum = {
+  id_producto_ahbb: 'id_producto_ahbb',
+  nombre_ahbb: 'nombre_ahbb',
+  descripcion_ahbb: 'descripcion_ahbb',
+  precio_ahbb: 'precio_ahbb',
+  stock_ahbb: 'stock_ahbb',
+  categoria_ahbb: 'categoria_ahbb',
+  imagen_ahbb: 'imagen_ahbb',
+  estado_producto_ahbb: 'estado_producto_ahbb',
+  creadoEn_ahbb: 'creadoEn_ahbb',
+  actualizadoEn_ahbb: 'actualizadoEn_ahbb'
+};
+
+exports.Prisma.Td_carrito_ahbbScalarFieldEnum = {
+  id_carrito_ahbb: 'id_carrito_ahbb',
+  cantidad_ahbb: 'cantidad_ahbb',
+  fechaAgregado_ahbb: 'fechaAgregado_ahbb',
+  id_usuario_carrito_ahbb: 'id_usuario_carrito_ahbb',
+  id_producto_carrito_ahbb: 'id_producto_carrito_ahbb'
+};
+
+exports.Prisma.Td_factura_ahbbScalarFieldEnum = {
+  id_factura_ahbb: 'id_factura_ahbb',
+  nroReferenciaPago_ahbb: 'nroReferenciaPago_ahbb',
+  fechaFactura_ahbb: 'fechaFactura_ahbb',
+  total_ahbb: 'total_ahbb',
+  estadoFactura_ahbb: 'estadoFactura_ahbb',
+  id_usuario_factura_ahbb: 'id_usuario_factura_ahbb'
+};
+
+exports.Prisma.Td_detalle_factura_ahbbScalarFieldEnum = {
+  id_detalle_factura_ahbb: 'id_detalle_factura_ahbb',
+  cantidad_ahbb: 'cantidad_ahbb',
+  precioUnitario_ahbb: 'precioUnitario_ahbb',
+  id_factura_detalle_ahbb: 'id_factura_detalle_ahbb',
+  id_producto_detalle_ahbb: 'id_producto_detalle_ahbb'
+};
+
+exports.Prisma.Td_favorito_ahbbScalarFieldEnum = {
+  id_favorito_ahbb: 'id_favorito_ahbb',
+  fechaAgregado_ahbb: 'fechaAgregado_ahbb',
+  id_usuario_favorito_ahbb: 'id_usuario_favorito_ahbb',
+  id_producto_favorito_ahbb: 'id_producto_favorito_ahbb'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -223,7 +268,12 @@ exports.Prisma.ModelName = {
   td_inscripcion_ahbb: 'td_inscripcion_ahbb',
   td_certificado_ahbb: 'td_certificado_ahbb',
   td_configuracionglobal_ahbb: 'td_configuracionglobal_ahbb',
-  td_auditoria_aprobacion_ahbb: 'td_auditoria_aprobacion_ahbb'
+  td_auditoria_aprobacion_ahbb: 'td_auditoria_aprobacion_ahbb',
+  td_producto_ahbb: 'td_producto_ahbb',
+  td_carrito_ahbb: 'td_carrito_ahbb',
+  td_factura_ahbb: 'td_factura_ahbb',
+  td_detalle_factura_ahbb: 'td_detalle_factura_ahbb',
+  td_favorito_ahbb: 'td_favorito_ahbb'
 };
 
 /**

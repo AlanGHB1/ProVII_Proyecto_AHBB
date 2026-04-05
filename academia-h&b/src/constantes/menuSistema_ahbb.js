@@ -15,6 +15,8 @@ const MENU_ADMINISTRADOR_AHBB = [
   { icono: 'how_to_reg', etiqueta: 'Inscripciones', ruta: '/inscripciones' },
   { icono: 'workspace_premium', etiqueta: 'Certificados', ruta: '/certificados', encabezado: 'Certificación', separador: true },
   { icono: 'image', etiqueta: 'Plantillas', ruta: '/plantillas-certificados' },
+  { icono: 'store', etiqueta: 'Tienda Oficial', ruta: '/tienda', encabezado: 'E-Commerce', separador: true },
+  { icono: 'inventory', etiqueta: 'Gestión de Productos', ruta: '/admin/tienda' },
   { icono: 'settings', etiqueta: 'Configuración', ruta: '/admin/configuracion', encabezado: 'Sistema', separador: true },
 ];
 
@@ -28,6 +30,7 @@ const MENU_PROFESOR_AHBB = [
   { icono: 'workspace_premium', etiqueta: 'Certificados', ruta: '/certificados', encabezado: 'Certificación', separador: true },
   { icono: 'draw', etiqueta: 'Mi Firma Digital', ruta: '/profesor/firma-digital' },
   { icono: 'image', etiqueta: 'Plantilla Certificado', ruta: '/plantillas-certificados' },
+  { icono: 'store', etiqueta: 'Tienda Oficial', ruta: '/tienda', encabezado: 'E-Commerce', separador: true },
 ];
 
 /** Menú del Alumno */
@@ -38,6 +41,7 @@ const MENU_ALUMNO_AHBB = [
   { icono: 'assignment', etiqueta: 'Mis Inscripciones', ruta: '/alumno/mis-inscripciones' },
   { icono: 'history_edu', etiqueta: 'Historial Académico', ruta: '/alumno/historial' },
   { icono: 'workspace_premium', etiqueta: 'Mis Certificados', ruta: '/alumno/mis-certificados', encabezado: 'Certificación', separador: true },
+  { icono: 'store', etiqueta: 'Tienda Oficial', ruta: '/tienda', encabezado: 'E-Commerce', separador: true },
 ];
 
 /**

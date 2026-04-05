@@ -48,6 +48,31 @@ export type td_configuracionglobal_ahbb = $Result.DefaultSelection<Prisma.$td_co
  * 
  */
 export type td_auditoria_aprobacion_ahbb = $Result.DefaultSelection<Prisma.$td_auditoria_aprobacion_ahbbPayload>
+/**
+ * Model td_producto_ahbb
+ * 
+ */
+export type td_producto_ahbb = $Result.DefaultSelection<Prisma.$td_producto_ahbbPayload>
+/**
+ * Model td_carrito_ahbb
+ * 
+ */
+export type td_carrito_ahbb = $Result.DefaultSelection<Prisma.$td_carrito_ahbbPayload>
+/**
+ * Model td_factura_ahbb
+ * 
+ */
+export type td_factura_ahbb = $Result.DefaultSelection<Prisma.$td_factura_ahbbPayload>
+/**
+ * Model td_detalle_factura_ahbb
+ * 
+ */
+export type td_detalle_factura_ahbb = $Result.DefaultSelection<Prisma.$td_detalle_factura_ahbbPayload>
+/**
+ * Model td_favorito_ahbb
+ * 
+ */
+export type td_favorito_ahbb = $Result.DefaultSelection<Prisma.$td_favorito_ahbbPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -239,6 +264,56 @@ export class PrismaClient<
     * ```
     */
   get td_auditoria_aprobacion_ahbb(): Prisma.td_auditoria_aprobacion_ahbbDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.td_producto_ahbb`: Exposes CRUD operations for the **td_producto_ahbb** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Td_producto_ahbbs
+    * const td_producto_ahbbs = await prisma.td_producto_ahbb.findMany()
+    * ```
+    */
+  get td_producto_ahbb(): Prisma.td_producto_ahbbDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.td_carrito_ahbb`: Exposes CRUD operations for the **td_carrito_ahbb** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Td_carrito_ahbbs
+    * const td_carrito_ahbbs = await prisma.td_carrito_ahbb.findMany()
+    * ```
+    */
+  get td_carrito_ahbb(): Prisma.td_carrito_ahbbDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.td_factura_ahbb`: Exposes CRUD operations for the **td_factura_ahbb** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Td_factura_ahbbs
+    * const td_factura_ahbbs = await prisma.td_factura_ahbb.findMany()
+    * ```
+    */
+  get td_factura_ahbb(): Prisma.td_factura_ahbbDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.td_detalle_factura_ahbb`: Exposes CRUD operations for the **td_detalle_factura_ahbb** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Td_detalle_factura_ahbbs
+    * const td_detalle_factura_ahbbs = await prisma.td_detalle_factura_ahbb.findMany()
+    * ```
+    */
+  get td_detalle_factura_ahbb(): Prisma.td_detalle_factura_ahbbDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.td_favorito_ahbb`: Exposes CRUD operations for the **td_favorito_ahbb** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Td_favorito_ahbbs
+    * const td_favorito_ahbbs = await prisma.td_favorito_ahbb.findMany()
+    * ```
+    */
+  get td_favorito_ahbb(): Prisma.td_favorito_ahbbDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -679,7 +754,12 @@ export namespace Prisma {
     td_inscripcion_ahbb: 'td_inscripcion_ahbb',
     td_certificado_ahbb: 'td_certificado_ahbb',
     td_configuracionglobal_ahbb: 'td_configuracionglobal_ahbb',
-    td_auditoria_aprobacion_ahbb: 'td_auditoria_aprobacion_ahbb'
+    td_auditoria_aprobacion_ahbb: 'td_auditoria_aprobacion_ahbb',
+    td_producto_ahbb: 'td_producto_ahbb',
+    td_carrito_ahbb: 'td_carrito_ahbb',
+    td_factura_ahbb: 'td_factura_ahbb',
+    td_detalle_factura_ahbb: 'td_detalle_factura_ahbb',
+    td_favorito_ahbb: 'td_favorito_ahbb'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -695,7 +775,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "td_usuario_ahbb" | "td_curso_ahbb" | "td_horario_ahbb" | "td_inscripcion_ahbb" | "td_certificado_ahbb" | "td_configuracionglobal_ahbb" | "td_auditoria_aprobacion_ahbb"
+      modelProps: "td_usuario_ahbb" | "td_curso_ahbb" | "td_horario_ahbb" | "td_inscripcion_ahbb" | "td_certificado_ahbb" | "td_configuracionglobal_ahbb" | "td_auditoria_aprobacion_ahbb" | "td_producto_ahbb" | "td_carrito_ahbb" | "td_factura_ahbb" | "td_detalle_factura_ahbb" | "td_favorito_ahbb"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1217,6 +1297,376 @@ export namespace Prisma {
           }
         }
       }
+      td_producto_ahbb: {
+        payload: Prisma.$td_producto_ahbbPayload<ExtArgs>
+        fields: Prisma.td_producto_ahbbFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.td_producto_ahbbFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_producto_ahbbPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.td_producto_ahbbFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_producto_ahbbPayload>
+          }
+          findFirst: {
+            args: Prisma.td_producto_ahbbFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_producto_ahbbPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.td_producto_ahbbFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_producto_ahbbPayload>
+          }
+          findMany: {
+            args: Prisma.td_producto_ahbbFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_producto_ahbbPayload>[]
+          }
+          create: {
+            args: Prisma.td_producto_ahbbCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_producto_ahbbPayload>
+          }
+          createMany: {
+            args: Prisma.td_producto_ahbbCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.td_producto_ahbbCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_producto_ahbbPayload>[]
+          }
+          delete: {
+            args: Prisma.td_producto_ahbbDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_producto_ahbbPayload>
+          }
+          update: {
+            args: Prisma.td_producto_ahbbUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_producto_ahbbPayload>
+          }
+          deleteMany: {
+            args: Prisma.td_producto_ahbbDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.td_producto_ahbbUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.td_producto_ahbbUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_producto_ahbbPayload>[]
+          }
+          upsert: {
+            args: Prisma.td_producto_ahbbUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_producto_ahbbPayload>
+          }
+          aggregate: {
+            args: Prisma.Td_producto_ahbbAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTd_producto_ahbb>
+          }
+          groupBy: {
+            args: Prisma.td_producto_ahbbGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Td_producto_ahbbGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.td_producto_ahbbCountArgs<ExtArgs>
+            result: $Utils.Optional<Td_producto_ahbbCountAggregateOutputType> | number
+          }
+        }
+      }
+      td_carrito_ahbb: {
+        payload: Prisma.$td_carrito_ahbbPayload<ExtArgs>
+        fields: Prisma.td_carrito_ahbbFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.td_carrito_ahbbFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_carrito_ahbbPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.td_carrito_ahbbFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_carrito_ahbbPayload>
+          }
+          findFirst: {
+            args: Prisma.td_carrito_ahbbFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_carrito_ahbbPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.td_carrito_ahbbFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_carrito_ahbbPayload>
+          }
+          findMany: {
+            args: Prisma.td_carrito_ahbbFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_carrito_ahbbPayload>[]
+          }
+          create: {
+            args: Prisma.td_carrito_ahbbCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_carrito_ahbbPayload>
+          }
+          createMany: {
+            args: Prisma.td_carrito_ahbbCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.td_carrito_ahbbCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_carrito_ahbbPayload>[]
+          }
+          delete: {
+            args: Prisma.td_carrito_ahbbDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_carrito_ahbbPayload>
+          }
+          update: {
+            args: Prisma.td_carrito_ahbbUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_carrito_ahbbPayload>
+          }
+          deleteMany: {
+            args: Prisma.td_carrito_ahbbDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.td_carrito_ahbbUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.td_carrito_ahbbUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_carrito_ahbbPayload>[]
+          }
+          upsert: {
+            args: Prisma.td_carrito_ahbbUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_carrito_ahbbPayload>
+          }
+          aggregate: {
+            args: Prisma.Td_carrito_ahbbAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTd_carrito_ahbb>
+          }
+          groupBy: {
+            args: Prisma.td_carrito_ahbbGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Td_carrito_ahbbGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.td_carrito_ahbbCountArgs<ExtArgs>
+            result: $Utils.Optional<Td_carrito_ahbbCountAggregateOutputType> | number
+          }
+        }
+      }
+      td_factura_ahbb: {
+        payload: Prisma.$td_factura_ahbbPayload<ExtArgs>
+        fields: Prisma.td_factura_ahbbFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.td_factura_ahbbFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_factura_ahbbPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.td_factura_ahbbFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_factura_ahbbPayload>
+          }
+          findFirst: {
+            args: Prisma.td_factura_ahbbFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_factura_ahbbPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.td_factura_ahbbFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_factura_ahbbPayload>
+          }
+          findMany: {
+            args: Prisma.td_factura_ahbbFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_factura_ahbbPayload>[]
+          }
+          create: {
+            args: Prisma.td_factura_ahbbCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_factura_ahbbPayload>
+          }
+          createMany: {
+            args: Prisma.td_factura_ahbbCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.td_factura_ahbbCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_factura_ahbbPayload>[]
+          }
+          delete: {
+            args: Prisma.td_factura_ahbbDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_factura_ahbbPayload>
+          }
+          update: {
+            args: Prisma.td_factura_ahbbUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_factura_ahbbPayload>
+          }
+          deleteMany: {
+            args: Prisma.td_factura_ahbbDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.td_factura_ahbbUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.td_factura_ahbbUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_factura_ahbbPayload>[]
+          }
+          upsert: {
+            args: Prisma.td_factura_ahbbUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_factura_ahbbPayload>
+          }
+          aggregate: {
+            args: Prisma.Td_factura_ahbbAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTd_factura_ahbb>
+          }
+          groupBy: {
+            args: Prisma.td_factura_ahbbGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Td_factura_ahbbGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.td_factura_ahbbCountArgs<ExtArgs>
+            result: $Utils.Optional<Td_factura_ahbbCountAggregateOutputType> | number
+          }
+        }
+      }
+      td_detalle_factura_ahbb: {
+        payload: Prisma.$td_detalle_factura_ahbbPayload<ExtArgs>
+        fields: Prisma.td_detalle_factura_ahbbFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.td_detalle_factura_ahbbFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_detalle_factura_ahbbPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.td_detalle_factura_ahbbFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_detalle_factura_ahbbPayload>
+          }
+          findFirst: {
+            args: Prisma.td_detalle_factura_ahbbFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_detalle_factura_ahbbPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.td_detalle_factura_ahbbFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_detalle_factura_ahbbPayload>
+          }
+          findMany: {
+            args: Prisma.td_detalle_factura_ahbbFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_detalle_factura_ahbbPayload>[]
+          }
+          create: {
+            args: Prisma.td_detalle_factura_ahbbCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_detalle_factura_ahbbPayload>
+          }
+          createMany: {
+            args: Prisma.td_detalle_factura_ahbbCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.td_detalle_factura_ahbbCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_detalle_factura_ahbbPayload>[]
+          }
+          delete: {
+            args: Prisma.td_detalle_factura_ahbbDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_detalle_factura_ahbbPayload>
+          }
+          update: {
+            args: Prisma.td_detalle_factura_ahbbUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_detalle_factura_ahbbPayload>
+          }
+          deleteMany: {
+            args: Prisma.td_detalle_factura_ahbbDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.td_detalle_factura_ahbbUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.td_detalle_factura_ahbbUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_detalle_factura_ahbbPayload>[]
+          }
+          upsert: {
+            args: Prisma.td_detalle_factura_ahbbUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_detalle_factura_ahbbPayload>
+          }
+          aggregate: {
+            args: Prisma.Td_detalle_factura_ahbbAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTd_detalle_factura_ahbb>
+          }
+          groupBy: {
+            args: Prisma.td_detalle_factura_ahbbGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Td_detalle_factura_ahbbGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.td_detalle_factura_ahbbCountArgs<ExtArgs>
+            result: $Utils.Optional<Td_detalle_factura_ahbbCountAggregateOutputType> | number
+          }
+        }
+      }
+      td_favorito_ahbb: {
+        payload: Prisma.$td_favorito_ahbbPayload<ExtArgs>
+        fields: Prisma.td_favorito_ahbbFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.td_favorito_ahbbFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_favorito_ahbbPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.td_favorito_ahbbFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_favorito_ahbbPayload>
+          }
+          findFirst: {
+            args: Prisma.td_favorito_ahbbFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_favorito_ahbbPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.td_favorito_ahbbFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_favorito_ahbbPayload>
+          }
+          findMany: {
+            args: Prisma.td_favorito_ahbbFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_favorito_ahbbPayload>[]
+          }
+          create: {
+            args: Prisma.td_favorito_ahbbCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_favorito_ahbbPayload>
+          }
+          createMany: {
+            args: Prisma.td_favorito_ahbbCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.td_favorito_ahbbCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_favorito_ahbbPayload>[]
+          }
+          delete: {
+            args: Prisma.td_favorito_ahbbDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_favorito_ahbbPayload>
+          }
+          update: {
+            args: Prisma.td_favorito_ahbbUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_favorito_ahbbPayload>
+          }
+          deleteMany: {
+            args: Prisma.td_favorito_ahbbDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.td_favorito_ahbbUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.td_favorito_ahbbUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_favorito_ahbbPayload>[]
+          }
+          upsert: {
+            args: Prisma.td_favorito_ahbbUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_favorito_ahbbPayload>
+          }
+          aggregate: {
+            args: Prisma.Td_favorito_ahbbAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTd_favorito_ahbb>
+          }
+          groupBy: {
+            args: Prisma.td_favorito_ahbbGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Td_favorito_ahbbGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.td_favorito_ahbbCountArgs<ExtArgs>
+            result: $Utils.Optional<Td_favorito_ahbbCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1332,6 +1782,11 @@ export namespace Prisma {
     td_certificado_ahbb?: td_certificado_ahbbOmit
     td_configuracionglobal_ahbb?: td_configuracionglobal_ahbbOmit
     td_auditoria_aprobacion_ahbb?: td_auditoria_aprobacion_ahbbOmit
+    td_producto_ahbb?: td_producto_ahbbOmit
+    td_carrito_ahbb?: td_carrito_ahbbOmit
+    td_factura_ahbb?: td_factura_ahbbOmit
+    td_detalle_factura_ahbb?: td_detalle_factura_ahbbOmit
+    td_favorito_ahbb?: td_favorito_ahbbOmit
   }
 
   /* Types for Logging */
@@ -1416,6 +1871,9 @@ export namespace Prisma {
     inscripciones: number
     auditoriasAprobadas_ahbb: number
     auditoriasUsuario_ahbb: number
+    carrito_ahbb: number
+    facturas_ahbb: number
+    favoritos_ahbb: number
   }
 
   export type Td_usuario_ahbbCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1423,6 +1881,9 @@ export namespace Prisma {
     inscripciones?: boolean | Td_usuario_ahbbCountOutputTypeCountInscripcionesArgs
     auditoriasAprobadas_ahbb?: boolean | Td_usuario_ahbbCountOutputTypeCountAuditoriasAprobadas_ahbbArgs
     auditoriasUsuario_ahbb?: boolean | Td_usuario_ahbbCountOutputTypeCountAuditoriasUsuario_ahbbArgs
+    carrito_ahbb?: boolean | Td_usuario_ahbbCountOutputTypeCountCarrito_ahbbArgs
+    facturas_ahbb?: boolean | Td_usuario_ahbbCountOutputTypeCountFacturas_ahbbArgs
+    favoritos_ahbb?: boolean | Td_usuario_ahbbCountOutputTypeCountFavoritos_ahbbArgs
   }
 
   // Custom InputTypes
@@ -1462,6 +1923,27 @@ export namespace Prisma {
    */
   export type Td_usuario_ahbbCountOutputTypeCountAuditoriasUsuario_ahbbArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: td_auditoria_aprobacion_ahbbWhereInput
+  }
+
+  /**
+   * Td_usuario_ahbbCountOutputType without action
+   */
+  export type Td_usuario_ahbbCountOutputTypeCountCarrito_ahbbArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: td_carrito_ahbbWhereInput
+  }
+
+  /**
+   * Td_usuario_ahbbCountOutputType without action
+   */
+  export type Td_usuario_ahbbCountOutputTypeCountFacturas_ahbbArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: td_factura_ahbbWhereInput
+  }
+
+  /**
+   * Td_usuario_ahbbCountOutputType without action
+   */
+  export type Td_usuario_ahbbCountOutputTypeCountFavoritos_ahbbArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: td_favorito_ahbbWhereInput
   }
 
 
@@ -1511,6 +1993,86 @@ export namespace Prisma {
    */
   export type Td_curso_ahbbCountOutputTypeCountInscripcionesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: td_inscripcion_ahbbWhereInput
+  }
+
+
+  /**
+   * Count Type Td_producto_ahbbCountOutputType
+   */
+
+  export type Td_producto_ahbbCountOutputType = {
+    itemsCarrito_ahbb: number
+    detallesFactura_ahbb: number
+    favoritos_ahbb: number
+  }
+
+  export type Td_producto_ahbbCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    itemsCarrito_ahbb?: boolean | Td_producto_ahbbCountOutputTypeCountItemsCarrito_ahbbArgs
+    detallesFactura_ahbb?: boolean | Td_producto_ahbbCountOutputTypeCountDetallesFactura_ahbbArgs
+    favoritos_ahbb?: boolean | Td_producto_ahbbCountOutputTypeCountFavoritos_ahbbArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * Td_producto_ahbbCountOutputType without action
+   */
+  export type Td_producto_ahbbCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Td_producto_ahbbCountOutputType
+     */
+    select?: Td_producto_ahbbCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * Td_producto_ahbbCountOutputType without action
+   */
+  export type Td_producto_ahbbCountOutputTypeCountItemsCarrito_ahbbArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: td_carrito_ahbbWhereInput
+  }
+
+  /**
+   * Td_producto_ahbbCountOutputType without action
+   */
+  export type Td_producto_ahbbCountOutputTypeCountDetallesFactura_ahbbArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: td_detalle_factura_ahbbWhereInput
+  }
+
+  /**
+   * Td_producto_ahbbCountOutputType without action
+   */
+  export type Td_producto_ahbbCountOutputTypeCountFavoritos_ahbbArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: td_favorito_ahbbWhereInput
+  }
+
+
+  /**
+   * Count Type Td_factura_ahbbCountOutputType
+   */
+
+  export type Td_factura_ahbbCountOutputType = {
+    detalles_ahbb: number
+  }
+
+  export type Td_factura_ahbbCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    detalles_ahbb?: boolean | Td_factura_ahbbCountOutputTypeCountDetalles_ahbbArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * Td_factura_ahbbCountOutputType without action
+   */
+  export type Td_factura_ahbbCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Td_factura_ahbbCountOutputType
+     */
+    select?: Td_factura_ahbbCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * Td_factura_ahbbCountOutputType without action
+   */
+  export type Td_factura_ahbbCountOutputTypeCountDetalles_ahbbArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: td_detalle_factura_ahbbWhereInput
   }
 
 
@@ -1796,6 +2358,9 @@ export namespace Prisma {
     inscripciones?: boolean | td_usuario_ahbb$inscripcionesArgs<ExtArgs>
     auditoriasAprobadas_ahbb?: boolean | td_usuario_ahbb$auditoriasAprobadas_ahbbArgs<ExtArgs>
     auditoriasUsuario_ahbb?: boolean | td_usuario_ahbb$auditoriasUsuario_ahbbArgs<ExtArgs>
+    carrito_ahbb?: boolean | td_usuario_ahbb$carrito_ahbbArgs<ExtArgs>
+    facturas_ahbb?: boolean | td_usuario_ahbb$facturas_ahbbArgs<ExtArgs>
+    favoritos_ahbb?: boolean | td_usuario_ahbb$favoritos_ahbbArgs<ExtArgs>
     _count?: boolean | Td_usuario_ahbbCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["td_usuario_ahbb"]>
 
@@ -1856,6 +2421,9 @@ export namespace Prisma {
     inscripciones?: boolean | td_usuario_ahbb$inscripcionesArgs<ExtArgs>
     auditoriasAprobadas_ahbb?: boolean | td_usuario_ahbb$auditoriasAprobadas_ahbbArgs<ExtArgs>
     auditoriasUsuario_ahbb?: boolean | td_usuario_ahbb$auditoriasUsuario_ahbbArgs<ExtArgs>
+    carrito_ahbb?: boolean | td_usuario_ahbb$carrito_ahbbArgs<ExtArgs>
+    facturas_ahbb?: boolean | td_usuario_ahbb$facturas_ahbbArgs<ExtArgs>
+    favoritos_ahbb?: boolean | td_usuario_ahbb$favoritos_ahbbArgs<ExtArgs>
     _count?: boolean | Td_usuario_ahbbCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type td_usuario_ahbbIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1868,6 +2436,9 @@ export namespace Prisma {
       inscripciones: Prisma.$td_inscripcion_ahbbPayload<ExtArgs>[]
       auditoriasAprobadas_ahbb: Prisma.$td_auditoria_aprobacion_ahbbPayload<ExtArgs>[]
       auditoriasUsuario_ahbb: Prisma.$td_auditoria_aprobacion_ahbbPayload<ExtArgs>[]
+      carrito_ahbb: Prisma.$td_carrito_ahbbPayload<ExtArgs>[]
+      facturas_ahbb: Prisma.$td_factura_ahbbPayload<ExtArgs>[]
+      favoritos_ahbb: Prisma.$td_favorito_ahbbPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id_usuario_ahbb: number
@@ -2282,6 +2853,9 @@ export namespace Prisma {
     inscripciones<T extends td_usuario_ahbb$inscripcionesArgs<ExtArgs> = {}>(args?: Subset<T, td_usuario_ahbb$inscripcionesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_inscripcion_ahbbPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     auditoriasAprobadas_ahbb<T extends td_usuario_ahbb$auditoriasAprobadas_ahbbArgs<ExtArgs> = {}>(args?: Subset<T, td_usuario_ahbb$auditoriasAprobadas_ahbbArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_auditoria_aprobacion_ahbbPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     auditoriasUsuario_ahbb<T extends td_usuario_ahbb$auditoriasUsuario_ahbbArgs<ExtArgs> = {}>(args?: Subset<T, td_usuario_ahbb$auditoriasUsuario_ahbbArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_auditoria_aprobacion_ahbbPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    carrito_ahbb<T extends td_usuario_ahbb$carrito_ahbbArgs<ExtArgs> = {}>(args?: Subset<T, td_usuario_ahbb$carrito_ahbbArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_carrito_ahbbPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    facturas_ahbb<T extends td_usuario_ahbb$facturas_ahbbArgs<ExtArgs> = {}>(args?: Subset<T, td_usuario_ahbb$facturas_ahbbArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_factura_ahbbPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    favoritos_ahbb<T extends td_usuario_ahbb$favoritos_ahbbArgs<ExtArgs> = {}>(args?: Subset<T, td_usuario_ahbb$favoritos_ahbbArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_favorito_ahbbPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2811,6 +3385,78 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Td_auditoria_aprobacion_ahbbScalarFieldEnum | Td_auditoria_aprobacion_ahbbScalarFieldEnum[]
+  }
+
+  /**
+   * td_usuario_ahbb.carrito_ahbb
+   */
+  export type td_usuario_ahbb$carrito_ahbbArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_carrito_ahbb
+     */
+    select?: td_carrito_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_carrito_ahbb
+     */
+    omit?: td_carrito_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_carrito_ahbbInclude<ExtArgs> | null
+    where?: td_carrito_ahbbWhereInput
+    orderBy?: td_carrito_ahbbOrderByWithRelationInput | td_carrito_ahbbOrderByWithRelationInput[]
+    cursor?: td_carrito_ahbbWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Td_carrito_ahbbScalarFieldEnum | Td_carrito_ahbbScalarFieldEnum[]
+  }
+
+  /**
+   * td_usuario_ahbb.facturas_ahbb
+   */
+  export type td_usuario_ahbb$facturas_ahbbArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_factura_ahbb
+     */
+    select?: td_factura_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_factura_ahbb
+     */
+    omit?: td_factura_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_factura_ahbbInclude<ExtArgs> | null
+    where?: td_factura_ahbbWhereInput
+    orderBy?: td_factura_ahbbOrderByWithRelationInput | td_factura_ahbbOrderByWithRelationInput[]
+    cursor?: td_factura_ahbbWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Td_factura_ahbbScalarFieldEnum | Td_factura_ahbbScalarFieldEnum[]
+  }
+
+  /**
+   * td_usuario_ahbb.favoritos_ahbb
+   */
+  export type td_usuario_ahbb$favoritos_ahbbArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_favorito_ahbb
+     */
+    select?: td_favorito_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_favorito_ahbb
+     */
+    omit?: td_favorito_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_favorito_ahbbInclude<ExtArgs> | null
+    where?: td_favorito_ahbbWhereInput
+    orderBy?: td_favorito_ahbbOrderByWithRelationInput | td_favorito_ahbbOrderByWithRelationInput[]
+    cursor?: td_favorito_ahbbWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Td_favorito_ahbbScalarFieldEnum | Td_favorito_ahbbScalarFieldEnum[]
   }
 
   /**
@@ -9751,6 +10397,5730 @@ export namespace Prisma {
 
 
   /**
+   * Model td_producto_ahbb
+   */
+
+  export type AggregateTd_producto_ahbb = {
+    _count: Td_producto_ahbbCountAggregateOutputType | null
+    _avg: Td_producto_ahbbAvgAggregateOutputType | null
+    _sum: Td_producto_ahbbSumAggregateOutputType | null
+    _min: Td_producto_ahbbMinAggregateOutputType | null
+    _max: Td_producto_ahbbMaxAggregateOutputType | null
+  }
+
+  export type Td_producto_ahbbAvgAggregateOutputType = {
+    id_producto_ahbb: number | null
+    precio_ahbb: Decimal | null
+    stock_ahbb: number | null
+  }
+
+  export type Td_producto_ahbbSumAggregateOutputType = {
+    id_producto_ahbb: number | null
+    precio_ahbb: Decimal | null
+    stock_ahbb: number | null
+  }
+
+  export type Td_producto_ahbbMinAggregateOutputType = {
+    id_producto_ahbb: number | null
+    nombre_ahbb: string | null
+    descripcion_ahbb: string | null
+    precio_ahbb: Decimal | null
+    stock_ahbb: number | null
+    categoria_ahbb: string | null
+    imagen_ahbb: string | null
+    estado_producto_ahbb: string | null
+    creadoEn_ahbb: Date | null
+    actualizadoEn_ahbb: Date | null
+  }
+
+  export type Td_producto_ahbbMaxAggregateOutputType = {
+    id_producto_ahbb: number | null
+    nombre_ahbb: string | null
+    descripcion_ahbb: string | null
+    precio_ahbb: Decimal | null
+    stock_ahbb: number | null
+    categoria_ahbb: string | null
+    imagen_ahbb: string | null
+    estado_producto_ahbb: string | null
+    creadoEn_ahbb: Date | null
+    actualizadoEn_ahbb: Date | null
+  }
+
+  export type Td_producto_ahbbCountAggregateOutputType = {
+    id_producto_ahbb: number
+    nombre_ahbb: number
+    descripcion_ahbb: number
+    precio_ahbb: number
+    stock_ahbb: number
+    categoria_ahbb: number
+    imagen_ahbb: number
+    estado_producto_ahbb: number
+    creadoEn_ahbb: number
+    actualizadoEn_ahbb: number
+    _all: number
+  }
+
+
+  export type Td_producto_ahbbAvgAggregateInputType = {
+    id_producto_ahbb?: true
+    precio_ahbb?: true
+    stock_ahbb?: true
+  }
+
+  export type Td_producto_ahbbSumAggregateInputType = {
+    id_producto_ahbb?: true
+    precio_ahbb?: true
+    stock_ahbb?: true
+  }
+
+  export type Td_producto_ahbbMinAggregateInputType = {
+    id_producto_ahbb?: true
+    nombre_ahbb?: true
+    descripcion_ahbb?: true
+    precio_ahbb?: true
+    stock_ahbb?: true
+    categoria_ahbb?: true
+    imagen_ahbb?: true
+    estado_producto_ahbb?: true
+    creadoEn_ahbb?: true
+    actualizadoEn_ahbb?: true
+  }
+
+  export type Td_producto_ahbbMaxAggregateInputType = {
+    id_producto_ahbb?: true
+    nombre_ahbb?: true
+    descripcion_ahbb?: true
+    precio_ahbb?: true
+    stock_ahbb?: true
+    categoria_ahbb?: true
+    imagen_ahbb?: true
+    estado_producto_ahbb?: true
+    creadoEn_ahbb?: true
+    actualizadoEn_ahbb?: true
+  }
+
+  export type Td_producto_ahbbCountAggregateInputType = {
+    id_producto_ahbb?: true
+    nombre_ahbb?: true
+    descripcion_ahbb?: true
+    precio_ahbb?: true
+    stock_ahbb?: true
+    categoria_ahbb?: true
+    imagen_ahbb?: true
+    estado_producto_ahbb?: true
+    creadoEn_ahbb?: true
+    actualizadoEn_ahbb?: true
+    _all?: true
+  }
+
+  export type Td_producto_ahbbAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which td_producto_ahbb to aggregate.
+     */
+    where?: td_producto_ahbbWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of td_producto_ahbbs to fetch.
+     */
+    orderBy?: td_producto_ahbbOrderByWithRelationInput | td_producto_ahbbOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: td_producto_ahbbWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` td_producto_ahbbs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` td_producto_ahbbs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned td_producto_ahbbs
+    **/
+    _count?: true | Td_producto_ahbbCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Td_producto_ahbbAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Td_producto_ahbbSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Td_producto_ahbbMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Td_producto_ahbbMaxAggregateInputType
+  }
+
+  export type GetTd_producto_ahbbAggregateType<T extends Td_producto_ahbbAggregateArgs> = {
+        [P in keyof T & keyof AggregateTd_producto_ahbb]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTd_producto_ahbb[P]>
+      : GetScalarType<T[P], AggregateTd_producto_ahbb[P]>
+  }
+
+
+
+
+  export type td_producto_ahbbGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: td_producto_ahbbWhereInput
+    orderBy?: td_producto_ahbbOrderByWithAggregationInput | td_producto_ahbbOrderByWithAggregationInput[]
+    by: Td_producto_ahbbScalarFieldEnum[] | Td_producto_ahbbScalarFieldEnum
+    having?: td_producto_ahbbScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Td_producto_ahbbCountAggregateInputType | true
+    _avg?: Td_producto_ahbbAvgAggregateInputType
+    _sum?: Td_producto_ahbbSumAggregateInputType
+    _min?: Td_producto_ahbbMinAggregateInputType
+    _max?: Td_producto_ahbbMaxAggregateInputType
+  }
+
+  export type Td_producto_ahbbGroupByOutputType = {
+    id_producto_ahbb: number
+    nombre_ahbb: string
+    descripcion_ahbb: string | null
+    precio_ahbb: Decimal
+    stock_ahbb: number
+    categoria_ahbb: string
+    imagen_ahbb: string | null
+    estado_producto_ahbb: string
+    creadoEn_ahbb: Date | null
+    actualizadoEn_ahbb: Date | null
+    _count: Td_producto_ahbbCountAggregateOutputType | null
+    _avg: Td_producto_ahbbAvgAggregateOutputType | null
+    _sum: Td_producto_ahbbSumAggregateOutputType | null
+    _min: Td_producto_ahbbMinAggregateOutputType | null
+    _max: Td_producto_ahbbMaxAggregateOutputType | null
+  }
+
+  type GetTd_producto_ahbbGroupByPayload<T extends td_producto_ahbbGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Td_producto_ahbbGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Td_producto_ahbbGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Td_producto_ahbbGroupByOutputType[P]>
+            : GetScalarType<T[P], Td_producto_ahbbGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type td_producto_ahbbSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id_producto_ahbb?: boolean
+    nombre_ahbb?: boolean
+    descripcion_ahbb?: boolean
+    precio_ahbb?: boolean
+    stock_ahbb?: boolean
+    categoria_ahbb?: boolean
+    imagen_ahbb?: boolean
+    estado_producto_ahbb?: boolean
+    creadoEn_ahbb?: boolean
+    actualizadoEn_ahbb?: boolean
+    itemsCarrito_ahbb?: boolean | td_producto_ahbb$itemsCarrito_ahbbArgs<ExtArgs>
+    detallesFactura_ahbb?: boolean | td_producto_ahbb$detallesFactura_ahbbArgs<ExtArgs>
+    favoritos_ahbb?: boolean | td_producto_ahbb$favoritos_ahbbArgs<ExtArgs>
+    _count?: boolean | Td_producto_ahbbCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["td_producto_ahbb"]>
+
+  export type td_producto_ahbbSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id_producto_ahbb?: boolean
+    nombre_ahbb?: boolean
+    descripcion_ahbb?: boolean
+    precio_ahbb?: boolean
+    stock_ahbb?: boolean
+    categoria_ahbb?: boolean
+    imagen_ahbb?: boolean
+    estado_producto_ahbb?: boolean
+    creadoEn_ahbb?: boolean
+    actualizadoEn_ahbb?: boolean
+  }, ExtArgs["result"]["td_producto_ahbb"]>
+
+  export type td_producto_ahbbSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id_producto_ahbb?: boolean
+    nombre_ahbb?: boolean
+    descripcion_ahbb?: boolean
+    precio_ahbb?: boolean
+    stock_ahbb?: boolean
+    categoria_ahbb?: boolean
+    imagen_ahbb?: boolean
+    estado_producto_ahbb?: boolean
+    creadoEn_ahbb?: boolean
+    actualizadoEn_ahbb?: boolean
+  }, ExtArgs["result"]["td_producto_ahbb"]>
+
+  export type td_producto_ahbbSelectScalar = {
+    id_producto_ahbb?: boolean
+    nombre_ahbb?: boolean
+    descripcion_ahbb?: boolean
+    precio_ahbb?: boolean
+    stock_ahbb?: boolean
+    categoria_ahbb?: boolean
+    imagen_ahbb?: boolean
+    estado_producto_ahbb?: boolean
+    creadoEn_ahbb?: boolean
+    actualizadoEn_ahbb?: boolean
+  }
+
+  export type td_producto_ahbbOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_producto_ahbb" | "nombre_ahbb" | "descripcion_ahbb" | "precio_ahbb" | "stock_ahbb" | "categoria_ahbb" | "imagen_ahbb" | "estado_producto_ahbb" | "creadoEn_ahbb" | "actualizadoEn_ahbb", ExtArgs["result"]["td_producto_ahbb"]>
+  export type td_producto_ahbbInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    itemsCarrito_ahbb?: boolean | td_producto_ahbb$itemsCarrito_ahbbArgs<ExtArgs>
+    detallesFactura_ahbb?: boolean | td_producto_ahbb$detallesFactura_ahbbArgs<ExtArgs>
+    favoritos_ahbb?: boolean | td_producto_ahbb$favoritos_ahbbArgs<ExtArgs>
+    _count?: boolean | Td_producto_ahbbCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type td_producto_ahbbIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type td_producto_ahbbIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $td_producto_ahbbPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "td_producto_ahbb"
+    objects: {
+      itemsCarrito_ahbb: Prisma.$td_carrito_ahbbPayload<ExtArgs>[]
+      detallesFactura_ahbb: Prisma.$td_detalle_factura_ahbbPayload<ExtArgs>[]
+      favoritos_ahbb: Prisma.$td_favorito_ahbbPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id_producto_ahbb: number
+      nombre_ahbb: string
+      descripcion_ahbb: string | null
+      precio_ahbb: Prisma.Decimal
+      stock_ahbb: number
+      categoria_ahbb: string
+      imagen_ahbb: string | null
+      estado_producto_ahbb: string
+      creadoEn_ahbb: Date | null
+      actualizadoEn_ahbb: Date | null
+    }, ExtArgs["result"]["td_producto_ahbb"]>
+    composites: {}
+  }
+
+  type td_producto_ahbbGetPayload<S extends boolean | null | undefined | td_producto_ahbbDefaultArgs> = $Result.GetResult<Prisma.$td_producto_ahbbPayload, S>
+
+  type td_producto_ahbbCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<td_producto_ahbbFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Td_producto_ahbbCountAggregateInputType | true
+    }
+
+  export interface td_producto_ahbbDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['td_producto_ahbb'], meta: { name: 'td_producto_ahbb' } }
+    /**
+     * Find zero or one Td_producto_ahbb that matches the filter.
+     * @param {td_producto_ahbbFindUniqueArgs} args - Arguments to find a Td_producto_ahbb
+     * @example
+     * // Get one Td_producto_ahbb
+     * const td_producto_ahbb = await prisma.td_producto_ahbb.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends td_producto_ahbbFindUniqueArgs>(args: SelectSubset<T, td_producto_ahbbFindUniqueArgs<ExtArgs>>): Prisma__td_producto_ahbbClient<$Result.GetResult<Prisma.$td_producto_ahbbPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Td_producto_ahbb that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {td_producto_ahbbFindUniqueOrThrowArgs} args - Arguments to find a Td_producto_ahbb
+     * @example
+     * // Get one Td_producto_ahbb
+     * const td_producto_ahbb = await prisma.td_producto_ahbb.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends td_producto_ahbbFindUniqueOrThrowArgs>(args: SelectSubset<T, td_producto_ahbbFindUniqueOrThrowArgs<ExtArgs>>): Prisma__td_producto_ahbbClient<$Result.GetResult<Prisma.$td_producto_ahbbPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Td_producto_ahbb that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_producto_ahbbFindFirstArgs} args - Arguments to find a Td_producto_ahbb
+     * @example
+     * // Get one Td_producto_ahbb
+     * const td_producto_ahbb = await prisma.td_producto_ahbb.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends td_producto_ahbbFindFirstArgs>(args?: SelectSubset<T, td_producto_ahbbFindFirstArgs<ExtArgs>>): Prisma__td_producto_ahbbClient<$Result.GetResult<Prisma.$td_producto_ahbbPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Td_producto_ahbb that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_producto_ahbbFindFirstOrThrowArgs} args - Arguments to find a Td_producto_ahbb
+     * @example
+     * // Get one Td_producto_ahbb
+     * const td_producto_ahbb = await prisma.td_producto_ahbb.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends td_producto_ahbbFindFirstOrThrowArgs>(args?: SelectSubset<T, td_producto_ahbbFindFirstOrThrowArgs<ExtArgs>>): Prisma__td_producto_ahbbClient<$Result.GetResult<Prisma.$td_producto_ahbbPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Td_producto_ahbbs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_producto_ahbbFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Td_producto_ahbbs
+     * const td_producto_ahbbs = await prisma.td_producto_ahbb.findMany()
+     * 
+     * // Get first 10 Td_producto_ahbbs
+     * const td_producto_ahbbs = await prisma.td_producto_ahbb.findMany({ take: 10 })
+     * 
+     * // Only select the `id_producto_ahbb`
+     * const td_producto_ahbbWithId_producto_ahbbOnly = await prisma.td_producto_ahbb.findMany({ select: { id_producto_ahbb: true } })
+     * 
+     */
+    findMany<T extends td_producto_ahbbFindManyArgs>(args?: SelectSubset<T, td_producto_ahbbFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_producto_ahbbPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Td_producto_ahbb.
+     * @param {td_producto_ahbbCreateArgs} args - Arguments to create a Td_producto_ahbb.
+     * @example
+     * // Create one Td_producto_ahbb
+     * const Td_producto_ahbb = await prisma.td_producto_ahbb.create({
+     *   data: {
+     *     // ... data to create a Td_producto_ahbb
+     *   }
+     * })
+     * 
+     */
+    create<T extends td_producto_ahbbCreateArgs>(args: SelectSubset<T, td_producto_ahbbCreateArgs<ExtArgs>>): Prisma__td_producto_ahbbClient<$Result.GetResult<Prisma.$td_producto_ahbbPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Td_producto_ahbbs.
+     * @param {td_producto_ahbbCreateManyArgs} args - Arguments to create many Td_producto_ahbbs.
+     * @example
+     * // Create many Td_producto_ahbbs
+     * const td_producto_ahbb = await prisma.td_producto_ahbb.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends td_producto_ahbbCreateManyArgs>(args?: SelectSubset<T, td_producto_ahbbCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Td_producto_ahbbs and returns the data saved in the database.
+     * @param {td_producto_ahbbCreateManyAndReturnArgs} args - Arguments to create many Td_producto_ahbbs.
+     * @example
+     * // Create many Td_producto_ahbbs
+     * const td_producto_ahbb = await prisma.td_producto_ahbb.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Td_producto_ahbbs and only return the `id_producto_ahbb`
+     * const td_producto_ahbbWithId_producto_ahbbOnly = await prisma.td_producto_ahbb.createManyAndReturn({
+     *   select: { id_producto_ahbb: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends td_producto_ahbbCreateManyAndReturnArgs>(args?: SelectSubset<T, td_producto_ahbbCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_producto_ahbbPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Td_producto_ahbb.
+     * @param {td_producto_ahbbDeleteArgs} args - Arguments to delete one Td_producto_ahbb.
+     * @example
+     * // Delete one Td_producto_ahbb
+     * const Td_producto_ahbb = await prisma.td_producto_ahbb.delete({
+     *   where: {
+     *     // ... filter to delete one Td_producto_ahbb
+     *   }
+     * })
+     * 
+     */
+    delete<T extends td_producto_ahbbDeleteArgs>(args: SelectSubset<T, td_producto_ahbbDeleteArgs<ExtArgs>>): Prisma__td_producto_ahbbClient<$Result.GetResult<Prisma.$td_producto_ahbbPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Td_producto_ahbb.
+     * @param {td_producto_ahbbUpdateArgs} args - Arguments to update one Td_producto_ahbb.
+     * @example
+     * // Update one Td_producto_ahbb
+     * const td_producto_ahbb = await prisma.td_producto_ahbb.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends td_producto_ahbbUpdateArgs>(args: SelectSubset<T, td_producto_ahbbUpdateArgs<ExtArgs>>): Prisma__td_producto_ahbbClient<$Result.GetResult<Prisma.$td_producto_ahbbPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Td_producto_ahbbs.
+     * @param {td_producto_ahbbDeleteManyArgs} args - Arguments to filter Td_producto_ahbbs to delete.
+     * @example
+     * // Delete a few Td_producto_ahbbs
+     * const { count } = await prisma.td_producto_ahbb.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends td_producto_ahbbDeleteManyArgs>(args?: SelectSubset<T, td_producto_ahbbDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Td_producto_ahbbs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_producto_ahbbUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Td_producto_ahbbs
+     * const td_producto_ahbb = await prisma.td_producto_ahbb.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends td_producto_ahbbUpdateManyArgs>(args: SelectSubset<T, td_producto_ahbbUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Td_producto_ahbbs and returns the data updated in the database.
+     * @param {td_producto_ahbbUpdateManyAndReturnArgs} args - Arguments to update many Td_producto_ahbbs.
+     * @example
+     * // Update many Td_producto_ahbbs
+     * const td_producto_ahbb = await prisma.td_producto_ahbb.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Td_producto_ahbbs and only return the `id_producto_ahbb`
+     * const td_producto_ahbbWithId_producto_ahbbOnly = await prisma.td_producto_ahbb.updateManyAndReturn({
+     *   select: { id_producto_ahbb: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends td_producto_ahbbUpdateManyAndReturnArgs>(args: SelectSubset<T, td_producto_ahbbUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_producto_ahbbPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Td_producto_ahbb.
+     * @param {td_producto_ahbbUpsertArgs} args - Arguments to update or create a Td_producto_ahbb.
+     * @example
+     * // Update or create a Td_producto_ahbb
+     * const td_producto_ahbb = await prisma.td_producto_ahbb.upsert({
+     *   create: {
+     *     // ... data to create a Td_producto_ahbb
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Td_producto_ahbb we want to update
+     *   }
+     * })
+     */
+    upsert<T extends td_producto_ahbbUpsertArgs>(args: SelectSubset<T, td_producto_ahbbUpsertArgs<ExtArgs>>): Prisma__td_producto_ahbbClient<$Result.GetResult<Prisma.$td_producto_ahbbPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Td_producto_ahbbs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_producto_ahbbCountArgs} args - Arguments to filter Td_producto_ahbbs to count.
+     * @example
+     * // Count the number of Td_producto_ahbbs
+     * const count = await prisma.td_producto_ahbb.count({
+     *   where: {
+     *     // ... the filter for the Td_producto_ahbbs we want to count
+     *   }
+     * })
+    **/
+    count<T extends td_producto_ahbbCountArgs>(
+      args?: Subset<T, td_producto_ahbbCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Td_producto_ahbbCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Td_producto_ahbb.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Td_producto_ahbbAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Td_producto_ahbbAggregateArgs>(args: Subset<T, Td_producto_ahbbAggregateArgs>): Prisma.PrismaPromise<GetTd_producto_ahbbAggregateType<T>>
+
+    /**
+     * Group by Td_producto_ahbb.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_producto_ahbbGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends td_producto_ahbbGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: td_producto_ahbbGroupByArgs['orderBy'] }
+        : { orderBy?: td_producto_ahbbGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, td_producto_ahbbGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTd_producto_ahbbGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the td_producto_ahbb model
+   */
+  readonly fields: td_producto_ahbbFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for td_producto_ahbb.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__td_producto_ahbbClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    itemsCarrito_ahbb<T extends td_producto_ahbb$itemsCarrito_ahbbArgs<ExtArgs> = {}>(args?: Subset<T, td_producto_ahbb$itemsCarrito_ahbbArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_carrito_ahbbPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    detallesFactura_ahbb<T extends td_producto_ahbb$detallesFactura_ahbbArgs<ExtArgs> = {}>(args?: Subset<T, td_producto_ahbb$detallesFactura_ahbbArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_detalle_factura_ahbbPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    favoritos_ahbb<T extends td_producto_ahbb$favoritos_ahbbArgs<ExtArgs> = {}>(args?: Subset<T, td_producto_ahbb$favoritos_ahbbArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_favorito_ahbbPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the td_producto_ahbb model
+   */
+  interface td_producto_ahbbFieldRefs {
+    readonly id_producto_ahbb: FieldRef<"td_producto_ahbb", 'Int'>
+    readonly nombre_ahbb: FieldRef<"td_producto_ahbb", 'String'>
+    readonly descripcion_ahbb: FieldRef<"td_producto_ahbb", 'String'>
+    readonly precio_ahbb: FieldRef<"td_producto_ahbb", 'Decimal'>
+    readonly stock_ahbb: FieldRef<"td_producto_ahbb", 'Int'>
+    readonly categoria_ahbb: FieldRef<"td_producto_ahbb", 'String'>
+    readonly imagen_ahbb: FieldRef<"td_producto_ahbb", 'String'>
+    readonly estado_producto_ahbb: FieldRef<"td_producto_ahbb", 'String'>
+    readonly creadoEn_ahbb: FieldRef<"td_producto_ahbb", 'DateTime'>
+    readonly actualizadoEn_ahbb: FieldRef<"td_producto_ahbb", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * td_producto_ahbb findUnique
+   */
+  export type td_producto_ahbbFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_producto_ahbb
+     */
+    select?: td_producto_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_producto_ahbb
+     */
+    omit?: td_producto_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_producto_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter, which td_producto_ahbb to fetch.
+     */
+    where: td_producto_ahbbWhereUniqueInput
+  }
+
+  /**
+   * td_producto_ahbb findUniqueOrThrow
+   */
+  export type td_producto_ahbbFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_producto_ahbb
+     */
+    select?: td_producto_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_producto_ahbb
+     */
+    omit?: td_producto_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_producto_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter, which td_producto_ahbb to fetch.
+     */
+    where: td_producto_ahbbWhereUniqueInput
+  }
+
+  /**
+   * td_producto_ahbb findFirst
+   */
+  export type td_producto_ahbbFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_producto_ahbb
+     */
+    select?: td_producto_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_producto_ahbb
+     */
+    omit?: td_producto_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_producto_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter, which td_producto_ahbb to fetch.
+     */
+    where?: td_producto_ahbbWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of td_producto_ahbbs to fetch.
+     */
+    orderBy?: td_producto_ahbbOrderByWithRelationInput | td_producto_ahbbOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for td_producto_ahbbs.
+     */
+    cursor?: td_producto_ahbbWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` td_producto_ahbbs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` td_producto_ahbbs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of td_producto_ahbbs.
+     */
+    distinct?: Td_producto_ahbbScalarFieldEnum | Td_producto_ahbbScalarFieldEnum[]
+  }
+
+  /**
+   * td_producto_ahbb findFirstOrThrow
+   */
+  export type td_producto_ahbbFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_producto_ahbb
+     */
+    select?: td_producto_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_producto_ahbb
+     */
+    omit?: td_producto_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_producto_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter, which td_producto_ahbb to fetch.
+     */
+    where?: td_producto_ahbbWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of td_producto_ahbbs to fetch.
+     */
+    orderBy?: td_producto_ahbbOrderByWithRelationInput | td_producto_ahbbOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for td_producto_ahbbs.
+     */
+    cursor?: td_producto_ahbbWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` td_producto_ahbbs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` td_producto_ahbbs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of td_producto_ahbbs.
+     */
+    distinct?: Td_producto_ahbbScalarFieldEnum | Td_producto_ahbbScalarFieldEnum[]
+  }
+
+  /**
+   * td_producto_ahbb findMany
+   */
+  export type td_producto_ahbbFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_producto_ahbb
+     */
+    select?: td_producto_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_producto_ahbb
+     */
+    omit?: td_producto_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_producto_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter, which td_producto_ahbbs to fetch.
+     */
+    where?: td_producto_ahbbWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of td_producto_ahbbs to fetch.
+     */
+    orderBy?: td_producto_ahbbOrderByWithRelationInput | td_producto_ahbbOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing td_producto_ahbbs.
+     */
+    cursor?: td_producto_ahbbWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` td_producto_ahbbs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` td_producto_ahbbs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of td_producto_ahbbs.
+     */
+    distinct?: Td_producto_ahbbScalarFieldEnum | Td_producto_ahbbScalarFieldEnum[]
+  }
+
+  /**
+   * td_producto_ahbb create
+   */
+  export type td_producto_ahbbCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_producto_ahbb
+     */
+    select?: td_producto_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_producto_ahbb
+     */
+    omit?: td_producto_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_producto_ahbbInclude<ExtArgs> | null
+    /**
+     * The data needed to create a td_producto_ahbb.
+     */
+    data: XOR<td_producto_ahbbCreateInput, td_producto_ahbbUncheckedCreateInput>
+  }
+
+  /**
+   * td_producto_ahbb createMany
+   */
+  export type td_producto_ahbbCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many td_producto_ahbbs.
+     */
+    data: td_producto_ahbbCreateManyInput | td_producto_ahbbCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * td_producto_ahbb createManyAndReturn
+   */
+  export type td_producto_ahbbCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_producto_ahbb
+     */
+    select?: td_producto_ahbbSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_producto_ahbb
+     */
+    omit?: td_producto_ahbbOmit<ExtArgs> | null
+    /**
+     * The data used to create many td_producto_ahbbs.
+     */
+    data: td_producto_ahbbCreateManyInput | td_producto_ahbbCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * td_producto_ahbb update
+   */
+  export type td_producto_ahbbUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_producto_ahbb
+     */
+    select?: td_producto_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_producto_ahbb
+     */
+    omit?: td_producto_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_producto_ahbbInclude<ExtArgs> | null
+    /**
+     * The data needed to update a td_producto_ahbb.
+     */
+    data: XOR<td_producto_ahbbUpdateInput, td_producto_ahbbUncheckedUpdateInput>
+    /**
+     * Choose, which td_producto_ahbb to update.
+     */
+    where: td_producto_ahbbWhereUniqueInput
+  }
+
+  /**
+   * td_producto_ahbb updateMany
+   */
+  export type td_producto_ahbbUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update td_producto_ahbbs.
+     */
+    data: XOR<td_producto_ahbbUpdateManyMutationInput, td_producto_ahbbUncheckedUpdateManyInput>
+    /**
+     * Filter which td_producto_ahbbs to update
+     */
+    where?: td_producto_ahbbWhereInput
+    /**
+     * Limit how many td_producto_ahbbs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * td_producto_ahbb updateManyAndReturn
+   */
+  export type td_producto_ahbbUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_producto_ahbb
+     */
+    select?: td_producto_ahbbSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_producto_ahbb
+     */
+    omit?: td_producto_ahbbOmit<ExtArgs> | null
+    /**
+     * The data used to update td_producto_ahbbs.
+     */
+    data: XOR<td_producto_ahbbUpdateManyMutationInput, td_producto_ahbbUncheckedUpdateManyInput>
+    /**
+     * Filter which td_producto_ahbbs to update
+     */
+    where?: td_producto_ahbbWhereInput
+    /**
+     * Limit how many td_producto_ahbbs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * td_producto_ahbb upsert
+   */
+  export type td_producto_ahbbUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_producto_ahbb
+     */
+    select?: td_producto_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_producto_ahbb
+     */
+    omit?: td_producto_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_producto_ahbbInclude<ExtArgs> | null
+    /**
+     * The filter to search for the td_producto_ahbb to update in case it exists.
+     */
+    where: td_producto_ahbbWhereUniqueInput
+    /**
+     * In case the td_producto_ahbb found by the `where` argument doesn't exist, create a new td_producto_ahbb with this data.
+     */
+    create: XOR<td_producto_ahbbCreateInput, td_producto_ahbbUncheckedCreateInput>
+    /**
+     * In case the td_producto_ahbb was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<td_producto_ahbbUpdateInput, td_producto_ahbbUncheckedUpdateInput>
+  }
+
+  /**
+   * td_producto_ahbb delete
+   */
+  export type td_producto_ahbbDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_producto_ahbb
+     */
+    select?: td_producto_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_producto_ahbb
+     */
+    omit?: td_producto_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_producto_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter which td_producto_ahbb to delete.
+     */
+    where: td_producto_ahbbWhereUniqueInput
+  }
+
+  /**
+   * td_producto_ahbb deleteMany
+   */
+  export type td_producto_ahbbDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which td_producto_ahbbs to delete
+     */
+    where?: td_producto_ahbbWhereInput
+    /**
+     * Limit how many td_producto_ahbbs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * td_producto_ahbb.itemsCarrito_ahbb
+   */
+  export type td_producto_ahbb$itemsCarrito_ahbbArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_carrito_ahbb
+     */
+    select?: td_carrito_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_carrito_ahbb
+     */
+    omit?: td_carrito_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_carrito_ahbbInclude<ExtArgs> | null
+    where?: td_carrito_ahbbWhereInput
+    orderBy?: td_carrito_ahbbOrderByWithRelationInput | td_carrito_ahbbOrderByWithRelationInput[]
+    cursor?: td_carrito_ahbbWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Td_carrito_ahbbScalarFieldEnum | Td_carrito_ahbbScalarFieldEnum[]
+  }
+
+  /**
+   * td_producto_ahbb.detallesFactura_ahbb
+   */
+  export type td_producto_ahbb$detallesFactura_ahbbArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_detalle_factura_ahbb
+     */
+    select?: td_detalle_factura_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_detalle_factura_ahbb
+     */
+    omit?: td_detalle_factura_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_detalle_factura_ahbbInclude<ExtArgs> | null
+    where?: td_detalle_factura_ahbbWhereInput
+    orderBy?: td_detalle_factura_ahbbOrderByWithRelationInput | td_detalle_factura_ahbbOrderByWithRelationInput[]
+    cursor?: td_detalle_factura_ahbbWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Td_detalle_factura_ahbbScalarFieldEnum | Td_detalle_factura_ahbbScalarFieldEnum[]
+  }
+
+  /**
+   * td_producto_ahbb.favoritos_ahbb
+   */
+  export type td_producto_ahbb$favoritos_ahbbArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_favorito_ahbb
+     */
+    select?: td_favorito_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_favorito_ahbb
+     */
+    omit?: td_favorito_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_favorito_ahbbInclude<ExtArgs> | null
+    where?: td_favorito_ahbbWhereInput
+    orderBy?: td_favorito_ahbbOrderByWithRelationInput | td_favorito_ahbbOrderByWithRelationInput[]
+    cursor?: td_favorito_ahbbWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Td_favorito_ahbbScalarFieldEnum | Td_favorito_ahbbScalarFieldEnum[]
+  }
+
+  /**
+   * td_producto_ahbb without action
+   */
+  export type td_producto_ahbbDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_producto_ahbb
+     */
+    select?: td_producto_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_producto_ahbb
+     */
+    omit?: td_producto_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_producto_ahbbInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model td_carrito_ahbb
+   */
+
+  export type AggregateTd_carrito_ahbb = {
+    _count: Td_carrito_ahbbCountAggregateOutputType | null
+    _avg: Td_carrito_ahbbAvgAggregateOutputType | null
+    _sum: Td_carrito_ahbbSumAggregateOutputType | null
+    _min: Td_carrito_ahbbMinAggregateOutputType | null
+    _max: Td_carrito_ahbbMaxAggregateOutputType | null
+  }
+
+  export type Td_carrito_ahbbAvgAggregateOutputType = {
+    id_carrito_ahbb: number | null
+    cantidad_ahbb: number | null
+    id_usuario_carrito_ahbb: number | null
+    id_producto_carrito_ahbb: number | null
+  }
+
+  export type Td_carrito_ahbbSumAggregateOutputType = {
+    id_carrito_ahbb: number | null
+    cantidad_ahbb: number | null
+    id_usuario_carrito_ahbb: number | null
+    id_producto_carrito_ahbb: number | null
+  }
+
+  export type Td_carrito_ahbbMinAggregateOutputType = {
+    id_carrito_ahbb: number | null
+    cantidad_ahbb: number | null
+    fechaAgregado_ahbb: Date | null
+    id_usuario_carrito_ahbb: number | null
+    id_producto_carrito_ahbb: number | null
+  }
+
+  export type Td_carrito_ahbbMaxAggregateOutputType = {
+    id_carrito_ahbb: number | null
+    cantidad_ahbb: number | null
+    fechaAgregado_ahbb: Date | null
+    id_usuario_carrito_ahbb: number | null
+    id_producto_carrito_ahbb: number | null
+  }
+
+  export type Td_carrito_ahbbCountAggregateOutputType = {
+    id_carrito_ahbb: number
+    cantidad_ahbb: number
+    fechaAgregado_ahbb: number
+    id_usuario_carrito_ahbb: number
+    id_producto_carrito_ahbb: number
+    _all: number
+  }
+
+
+  export type Td_carrito_ahbbAvgAggregateInputType = {
+    id_carrito_ahbb?: true
+    cantidad_ahbb?: true
+    id_usuario_carrito_ahbb?: true
+    id_producto_carrito_ahbb?: true
+  }
+
+  export type Td_carrito_ahbbSumAggregateInputType = {
+    id_carrito_ahbb?: true
+    cantidad_ahbb?: true
+    id_usuario_carrito_ahbb?: true
+    id_producto_carrito_ahbb?: true
+  }
+
+  export type Td_carrito_ahbbMinAggregateInputType = {
+    id_carrito_ahbb?: true
+    cantidad_ahbb?: true
+    fechaAgregado_ahbb?: true
+    id_usuario_carrito_ahbb?: true
+    id_producto_carrito_ahbb?: true
+  }
+
+  export type Td_carrito_ahbbMaxAggregateInputType = {
+    id_carrito_ahbb?: true
+    cantidad_ahbb?: true
+    fechaAgregado_ahbb?: true
+    id_usuario_carrito_ahbb?: true
+    id_producto_carrito_ahbb?: true
+  }
+
+  export type Td_carrito_ahbbCountAggregateInputType = {
+    id_carrito_ahbb?: true
+    cantidad_ahbb?: true
+    fechaAgregado_ahbb?: true
+    id_usuario_carrito_ahbb?: true
+    id_producto_carrito_ahbb?: true
+    _all?: true
+  }
+
+  export type Td_carrito_ahbbAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which td_carrito_ahbb to aggregate.
+     */
+    where?: td_carrito_ahbbWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of td_carrito_ahbbs to fetch.
+     */
+    orderBy?: td_carrito_ahbbOrderByWithRelationInput | td_carrito_ahbbOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: td_carrito_ahbbWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` td_carrito_ahbbs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` td_carrito_ahbbs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned td_carrito_ahbbs
+    **/
+    _count?: true | Td_carrito_ahbbCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Td_carrito_ahbbAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Td_carrito_ahbbSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Td_carrito_ahbbMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Td_carrito_ahbbMaxAggregateInputType
+  }
+
+  export type GetTd_carrito_ahbbAggregateType<T extends Td_carrito_ahbbAggregateArgs> = {
+        [P in keyof T & keyof AggregateTd_carrito_ahbb]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTd_carrito_ahbb[P]>
+      : GetScalarType<T[P], AggregateTd_carrito_ahbb[P]>
+  }
+
+
+
+
+  export type td_carrito_ahbbGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: td_carrito_ahbbWhereInput
+    orderBy?: td_carrito_ahbbOrderByWithAggregationInput | td_carrito_ahbbOrderByWithAggregationInput[]
+    by: Td_carrito_ahbbScalarFieldEnum[] | Td_carrito_ahbbScalarFieldEnum
+    having?: td_carrito_ahbbScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Td_carrito_ahbbCountAggregateInputType | true
+    _avg?: Td_carrito_ahbbAvgAggregateInputType
+    _sum?: Td_carrito_ahbbSumAggregateInputType
+    _min?: Td_carrito_ahbbMinAggregateInputType
+    _max?: Td_carrito_ahbbMaxAggregateInputType
+  }
+
+  export type Td_carrito_ahbbGroupByOutputType = {
+    id_carrito_ahbb: number
+    cantidad_ahbb: number
+    fechaAgregado_ahbb: Date | null
+    id_usuario_carrito_ahbb: number
+    id_producto_carrito_ahbb: number
+    _count: Td_carrito_ahbbCountAggregateOutputType | null
+    _avg: Td_carrito_ahbbAvgAggregateOutputType | null
+    _sum: Td_carrito_ahbbSumAggregateOutputType | null
+    _min: Td_carrito_ahbbMinAggregateOutputType | null
+    _max: Td_carrito_ahbbMaxAggregateOutputType | null
+  }
+
+  type GetTd_carrito_ahbbGroupByPayload<T extends td_carrito_ahbbGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Td_carrito_ahbbGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Td_carrito_ahbbGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Td_carrito_ahbbGroupByOutputType[P]>
+            : GetScalarType<T[P], Td_carrito_ahbbGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type td_carrito_ahbbSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id_carrito_ahbb?: boolean
+    cantidad_ahbb?: boolean
+    fechaAgregado_ahbb?: boolean
+    id_usuario_carrito_ahbb?: boolean
+    id_producto_carrito_ahbb?: boolean
+    usuario_ahbb?: boolean | td_usuario_ahbbDefaultArgs<ExtArgs>
+    producto_ahbb?: boolean | td_producto_ahbbDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["td_carrito_ahbb"]>
+
+  export type td_carrito_ahbbSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id_carrito_ahbb?: boolean
+    cantidad_ahbb?: boolean
+    fechaAgregado_ahbb?: boolean
+    id_usuario_carrito_ahbb?: boolean
+    id_producto_carrito_ahbb?: boolean
+    usuario_ahbb?: boolean | td_usuario_ahbbDefaultArgs<ExtArgs>
+    producto_ahbb?: boolean | td_producto_ahbbDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["td_carrito_ahbb"]>
+
+  export type td_carrito_ahbbSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id_carrito_ahbb?: boolean
+    cantidad_ahbb?: boolean
+    fechaAgregado_ahbb?: boolean
+    id_usuario_carrito_ahbb?: boolean
+    id_producto_carrito_ahbb?: boolean
+    usuario_ahbb?: boolean | td_usuario_ahbbDefaultArgs<ExtArgs>
+    producto_ahbb?: boolean | td_producto_ahbbDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["td_carrito_ahbb"]>
+
+  export type td_carrito_ahbbSelectScalar = {
+    id_carrito_ahbb?: boolean
+    cantidad_ahbb?: boolean
+    fechaAgregado_ahbb?: boolean
+    id_usuario_carrito_ahbb?: boolean
+    id_producto_carrito_ahbb?: boolean
+  }
+
+  export type td_carrito_ahbbOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_carrito_ahbb" | "cantidad_ahbb" | "fechaAgregado_ahbb" | "id_usuario_carrito_ahbb" | "id_producto_carrito_ahbb", ExtArgs["result"]["td_carrito_ahbb"]>
+  export type td_carrito_ahbbInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usuario_ahbb?: boolean | td_usuario_ahbbDefaultArgs<ExtArgs>
+    producto_ahbb?: boolean | td_producto_ahbbDefaultArgs<ExtArgs>
+  }
+  export type td_carrito_ahbbIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usuario_ahbb?: boolean | td_usuario_ahbbDefaultArgs<ExtArgs>
+    producto_ahbb?: boolean | td_producto_ahbbDefaultArgs<ExtArgs>
+  }
+  export type td_carrito_ahbbIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usuario_ahbb?: boolean | td_usuario_ahbbDefaultArgs<ExtArgs>
+    producto_ahbb?: boolean | td_producto_ahbbDefaultArgs<ExtArgs>
+  }
+
+  export type $td_carrito_ahbbPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "td_carrito_ahbb"
+    objects: {
+      usuario_ahbb: Prisma.$td_usuario_ahbbPayload<ExtArgs>
+      producto_ahbb: Prisma.$td_producto_ahbbPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id_carrito_ahbb: number
+      cantidad_ahbb: number
+      fechaAgregado_ahbb: Date | null
+      id_usuario_carrito_ahbb: number
+      id_producto_carrito_ahbb: number
+    }, ExtArgs["result"]["td_carrito_ahbb"]>
+    composites: {}
+  }
+
+  type td_carrito_ahbbGetPayload<S extends boolean | null | undefined | td_carrito_ahbbDefaultArgs> = $Result.GetResult<Prisma.$td_carrito_ahbbPayload, S>
+
+  type td_carrito_ahbbCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<td_carrito_ahbbFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Td_carrito_ahbbCountAggregateInputType | true
+    }
+
+  export interface td_carrito_ahbbDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['td_carrito_ahbb'], meta: { name: 'td_carrito_ahbb' } }
+    /**
+     * Find zero or one Td_carrito_ahbb that matches the filter.
+     * @param {td_carrito_ahbbFindUniqueArgs} args - Arguments to find a Td_carrito_ahbb
+     * @example
+     * // Get one Td_carrito_ahbb
+     * const td_carrito_ahbb = await prisma.td_carrito_ahbb.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends td_carrito_ahbbFindUniqueArgs>(args: SelectSubset<T, td_carrito_ahbbFindUniqueArgs<ExtArgs>>): Prisma__td_carrito_ahbbClient<$Result.GetResult<Prisma.$td_carrito_ahbbPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Td_carrito_ahbb that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {td_carrito_ahbbFindUniqueOrThrowArgs} args - Arguments to find a Td_carrito_ahbb
+     * @example
+     * // Get one Td_carrito_ahbb
+     * const td_carrito_ahbb = await prisma.td_carrito_ahbb.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends td_carrito_ahbbFindUniqueOrThrowArgs>(args: SelectSubset<T, td_carrito_ahbbFindUniqueOrThrowArgs<ExtArgs>>): Prisma__td_carrito_ahbbClient<$Result.GetResult<Prisma.$td_carrito_ahbbPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Td_carrito_ahbb that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_carrito_ahbbFindFirstArgs} args - Arguments to find a Td_carrito_ahbb
+     * @example
+     * // Get one Td_carrito_ahbb
+     * const td_carrito_ahbb = await prisma.td_carrito_ahbb.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends td_carrito_ahbbFindFirstArgs>(args?: SelectSubset<T, td_carrito_ahbbFindFirstArgs<ExtArgs>>): Prisma__td_carrito_ahbbClient<$Result.GetResult<Prisma.$td_carrito_ahbbPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Td_carrito_ahbb that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_carrito_ahbbFindFirstOrThrowArgs} args - Arguments to find a Td_carrito_ahbb
+     * @example
+     * // Get one Td_carrito_ahbb
+     * const td_carrito_ahbb = await prisma.td_carrito_ahbb.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends td_carrito_ahbbFindFirstOrThrowArgs>(args?: SelectSubset<T, td_carrito_ahbbFindFirstOrThrowArgs<ExtArgs>>): Prisma__td_carrito_ahbbClient<$Result.GetResult<Prisma.$td_carrito_ahbbPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Td_carrito_ahbbs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_carrito_ahbbFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Td_carrito_ahbbs
+     * const td_carrito_ahbbs = await prisma.td_carrito_ahbb.findMany()
+     * 
+     * // Get first 10 Td_carrito_ahbbs
+     * const td_carrito_ahbbs = await prisma.td_carrito_ahbb.findMany({ take: 10 })
+     * 
+     * // Only select the `id_carrito_ahbb`
+     * const td_carrito_ahbbWithId_carrito_ahbbOnly = await prisma.td_carrito_ahbb.findMany({ select: { id_carrito_ahbb: true } })
+     * 
+     */
+    findMany<T extends td_carrito_ahbbFindManyArgs>(args?: SelectSubset<T, td_carrito_ahbbFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_carrito_ahbbPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Td_carrito_ahbb.
+     * @param {td_carrito_ahbbCreateArgs} args - Arguments to create a Td_carrito_ahbb.
+     * @example
+     * // Create one Td_carrito_ahbb
+     * const Td_carrito_ahbb = await prisma.td_carrito_ahbb.create({
+     *   data: {
+     *     // ... data to create a Td_carrito_ahbb
+     *   }
+     * })
+     * 
+     */
+    create<T extends td_carrito_ahbbCreateArgs>(args: SelectSubset<T, td_carrito_ahbbCreateArgs<ExtArgs>>): Prisma__td_carrito_ahbbClient<$Result.GetResult<Prisma.$td_carrito_ahbbPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Td_carrito_ahbbs.
+     * @param {td_carrito_ahbbCreateManyArgs} args - Arguments to create many Td_carrito_ahbbs.
+     * @example
+     * // Create many Td_carrito_ahbbs
+     * const td_carrito_ahbb = await prisma.td_carrito_ahbb.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends td_carrito_ahbbCreateManyArgs>(args?: SelectSubset<T, td_carrito_ahbbCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Td_carrito_ahbbs and returns the data saved in the database.
+     * @param {td_carrito_ahbbCreateManyAndReturnArgs} args - Arguments to create many Td_carrito_ahbbs.
+     * @example
+     * // Create many Td_carrito_ahbbs
+     * const td_carrito_ahbb = await prisma.td_carrito_ahbb.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Td_carrito_ahbbs and only return the `id_carrito_ahbb`
+     * const td_carrito_ahbbWithId_carrito_ahbbOnly = await prisma.td_carrito_ahbb.createManyAndReturn({
+     *   select: { id_carrito_ahbb: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends td_carrito_ahbbCreateManyAndReturnArgs>(args?: SelectSubset<T, td_carrito_ahbbCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_carrito_ahbbPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Td_carrito_ahbb.
+     * @param {td_carrito_ahbbDeleteArgs} args - Arguments to delete one Td_carrito_ahbb.
+     * @example
+     * // Delete one Td_carrito_ahbb
+     * const Td_carrito_ahbb = await prisma.td_carrito_ahbb.delete({
+     *   where: {
+     *     // ... filter to delete one Td_carrito_ahbb
+     *   }
+     * })
+     * 
+     */
+    delete<T extends td_carrito_ahbbDeleteArgs>(args: SelectSubset<T, td_carrito_ahbbDeleteArgs<ExtArgs>>): Prisma__td_carrito_ahbbClient<$Result.GetResult<Prisma.$td_carrito_ahbbPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Td_carrito_ahbb.
+     * @param {td_carrito_ahbbUpdateArgs} args - Arguments to update one Td_carrito_ahbb.
+     * @example
+     * // Update one Td_carrito_ahbb
+     * const td_carrito_ahbb = await prisma.td_carrito_ahbb.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends td_carrito_ahbbUpdateArgs>(args: SelectSubset<T, td_carrito_ahbbUpdateArgs<ExtArgs>>): Prisma__td_carrito_ahbbClient<$Result.GetResult<Prisma.$td_carrito_ahbbPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Td_carrito_ahbbs.
+     * @param {td_carrito_ahbbDeleteManyArgs} args - Arguments to filter Td_carrito_ahbbs to delete.
+     * @example
+     * // Delete a few Td_carrito_ahbbs
+     * const { count } = await prisma.td_carrito_ahbb.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends td_carrito_ahbbDeleteManyArgs>(args?: SelectSubset<T, td_carrito_ahbbDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Td_carrito_ahbbs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_carrito_ahbbUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Td_carrito_ahbbs
+     * const td_carrito_ahbb = await prisma.td_carrito_ahbb.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends td_carrito_ahbbUpdateManyArgs>(args: SelectSubset<T, td_carrito_ahbbUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Td_carrito_ahbbs and returns the data updated in the database.
+     * @param {td_carrito_ahbbUpdateManyAndReturnArgs} args - Arguments to update many Td_carrito_ahbbs.
+     * @example
+     * // Update many Td_carrito_ahbbs
+     * const td_carrito_ahbb = await prisma.td_carrito_ahbb.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Td_carrito_ahbbs and only return the `id_carrito_ahbb`
+     * const td_carrito_ahbbWithId_carrito_ahbbOnly = await prisma.td_carrito_ahbb.updateManyAndReturn({
+     *   select: { id_carrito_ahbb: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends td_carrito_ahbbUpdateManyAndReturnArgs>(args: SelectSubset<T, td_carrito_ahbbUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_carrito_ahbbPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Td_carrito_ahbb.
+     * @param {td_carrito_ahbbUpsertArgs} args - Arguments to update or create a Td_carrito_ahbb.
+     * @example
+     * // Update or create a Td_carrito_ahbb
+     * const td_carrito_ahbb = await prisma.td_carrito_ahbb.upsert({
+     *   create: {
+     *     // ... data to create a Td_carrito_ahbb
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Td_carrito_ahbb we want to update
+     *   }
+     * })
+     */
+    upsert<T extends td_carrito_ahbbUpsertArgs>(args: SelectSubset<T, td_carrito_ahbbUpsertArgs<ExtArgs>>): Prisma__td_carrito_ahbbClient<$Result.GetResult<Prisma.$td_carrito_ahbbPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Td_carrito_ahbbs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_carrito_ahbbCountArgs} args - Arguments to filter Td_carrito_ahbbs to count.
+     * @example
+     * // Count the number of Td_carrito_ahbbs
+     * const count = await prisma.td_carrito_ahbb.count({
+     *   where: {
+     *     // ... the filter for the Td_carrito_ahbbs we want to count
+     *   }
+     * })
+    **/
+    count<T extends td_carrito_ahbbCountArgs>(
+      args?: Subset<T, td_carrito_ahbbCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Td_carrito_ahbbCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Td_carrito_ahbb.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Td_carrito_ahbbAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Td_carrito_ahbbAggregateArgs>(args: Subset<T, Td_carrito_ahbbAggregateArgs>): Prisma.PrismaPromise<GetTd_carrito_ahbbAggregateType<T>>
+
+    /**
+     * Group by Td_carrito_ahbb.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_carrito_ahbbGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends td_carrito_ahbbGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: td_carrito_ahbbGroupByArgs['orderBy'] }
+        : { orderBy?: td_carrito_ahbbGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, td_carrito_ahbbGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTd_carrito_ahbbGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the td_carrito_ahbb model
+   */
+  readonly fields: td_carrito_ahbbFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for td_carrito_ahbb.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__td_carrito_ahbbClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    usuario_ahbb<T extends td_usuario_ahbbDefaultArgs<ExtArgs> = {}>(args?: Subset<T, td_usuario_ahbbDefaultArgs<ExtArgs>>): Prisma__td_usuario_ahbbClient<$Result.GetResult<Prisma.$td_usuario_ahbbPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    producto_ahbb<T extends td_producto_ahbbDefaultArgs<ExtArgs> = {}>(args?: Subset<T, td_producto_ahbbDefaultArgs<ExtArgs>>): Prisma__td_producto_ahbbClient<$Result.GetResult<Prisma.$td_producto_ahbbPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the td_carrito_ahbb model
+   */
+  interface td_carrito_ahbbFieldRefs {
+    readonly id_carrito_ahbb: FieldRef<"td_carrito_ahbb", 'Int'>
+    readonly cantidad_ahbb: FieldRef<"td_carrito_ahbb", 'Int'>
+    readonly fechaAgregado_ahbb: FieldRef<"td_carrito_ahbb", 'DateTime'>
+    readonly id_usuario_carrito_ahbb: FieldRef<"td_carrito_ahbb", 'Int'>
+    readonly id_producto_carrito_ahbb: FieldRef<"td_carrito_ahbb", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * td_carrito_ahbb findUnique
+   */
+  export type td_carrito_ahbbFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_carrito_ahbb
+     */
+    select?: td_carrito_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_carrito_ahbb
+     */
+    omit?: td_carrito_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_carrito_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter, which td_carrito_ahbb to fetch.
+     */
+    where: td_carrito_ahbbWhereUniqueInput
+  }
+
+  /**
+   * td_carrito_ahbb findUniqueOrThrow
+   */
+  export type td_carrito_ahbbFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_carrito_ahbb
+     */
+    select?: td_carrito_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_carrito_ahbb
+     */
+    omit?: td_carrito_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_carrito_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter, which td_carrito_ahbb to fetch.
+     */
+    where: td_carrito_ahbbWhereUniqueInput
+  }
+
+  /**
+   * td_carrito_ahbb findFirst
+   */
+  export type td_carrito_ahbbFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_carrito_ahbb
+     */
+    select?: td_carrito_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_carrito_ahbb
+     */
+    omit?: td_carrito_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_carrito_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter, which td_carrito_ahbb to fetch.
+     */
+    where?: td_carrito_ahbbWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of td_carrito_ahbbs to fetch.
+     */
+    orderBy?: td_carrito_ahbbOrderByWithRelationInput | td_carrito_ahbbOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for td_carrito_ahbbs.
+     */
+    cursor?: td_carrito_ahbbWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` td_carrito_ahbbs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` td_carrito_ahbbs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of td_carrito_ahbbs.
+     */
+    distinct?: Td_carrito_ahbbScalarFieldEnum | Td_carrito_ahbbScalarFieldEnum[]
+  }
+
+  /**
+   * td_carrito_ahbb findFirstOrThrow
+   */
+  export type td_carrito_ahbbFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_carrito_ahbb
+     */
+    select?: td_carrito_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_carrito_ahbb
+     */
+    omit?: td_carrito_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_carrito_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter, which td_carrito_ahbb to fetch.
+     */
+    where?: td_carrito_ahbbWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of td_carrito_ahbbs to fetch.
+     */
+    orderBy?: td_carrito_ahbbOrderByWithRelationInput | td_carrito_ahbbOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for td_carrito_ahbbs.
+     */
+    cursor?: td_carrito_ahbbWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` td_carrito_ahbbs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` td_carrito_ahbbs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of td_carrito_ahbbs.
+     */
+    distinct?: Td_carrito_ahbbScalarFieldEnum | Td_carrito_ahbbScalarFieldEnum[]
+  }
+
+  /**
+   * td_carrito_ahbb findMany
+   */
+  export type td_carrito_ahbbFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_carrito_ahbb
+     */
+    select?: td_carrito_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_carrito_ahbb
+     */
+    omit?: td_carrito_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_carrito_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter, which td_carrito_ahbbs to fetch.
+     */
+    where?: td_carrito_ahbbWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of td_carrito_ahbbs to fetch.
+     */
+    orderBy?: td_carrito_ahbbOrderByWithRelationInput | td_carrito_ahbbOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing td_carrito_ahbbs.
+     */
+    cursor?: td_carrito_ahbbWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` td_carrito_ahbbs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` td_carrito_ahbbs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of td_carrito_ahbbs.
+     */
+    distinct?: Td_carrito_ahbbScalarFieldEnum | Td_carrito_ahbbScalarFieldEnum[]
+  }
+
+  /**
+   * td_carrito_ahbb create
+   */
+  export type td_carrito_ahbbCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_carrito_ahbb
+     */
+    select?: td_carrito_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_carrito_ahbb
+     */
+    omit?: td_carrito_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_carrito_ahbbInclude<ExtArgs> | null
+    /**
+     * The data needed to create a td_carrito_ahbb.
+     */
+    data: XOR<td_carrito_ahbbCreateInput, td_carrito_ahbbUncheckedCreateInput>
+  }
+
+  /**
+   * td_carrito_ahbb createMany
+   */
+  export type td_carrito_ahbbCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many td_carrito_ahbbs.
+     */
+    data: td_carrito_ahbbCreateManyInput | td_carrito_ahbbCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * td_carrito_ahbb createManyAndReturn
+   */
+  export type td_carrito_ahbbCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_carrito_ahbb
+     */
+    select?: td_carrito_ahbbSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_carrito_ahbb
+     */
+    omit?: td_carrito_ahbbOmit<ExtArgs> | null
+    /**
+     * The data used to create many td_carrito_ahbbs.
+     */
+    data: td_carrito_ahbbCreateManyInput | td_carrito_ahbbCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_carrito_ahbbIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * td_carrito_ahbb update
+   */
+  export type td_carrito_ahbbUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_carrito_ahbb
+     */
+    select?: td_carrito_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_carrito_ahbb
+     */
+    omit?: td_carrito_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_carrito_ahbbInclude<ExtArgs> | null
+    /**
+     * The data needed to update a td_carrito_ahbb.
+     */
+    data: XOR<td_carrito_ahbbUpdateInput, td_carrito_ahbbUncheckedUpdateInput>
+    /**
+     * Choose, which td_carrito_ahbb to update.
+     */
+    where: td_carrito_ahbbWhereUniqueInput
+  }
+
+  /**
+   * td_carrito_ahbb updateMany
+   */
+  export type td_carrito_ahbbUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update td_carrito_ahbbs.
+     */
+    data: XOR<td_carrito_ahbbUpdateManyMutationInput, td_carrito_ahbbUncheckedUpdateManyInput>
+    /**
+     * Filter which td_carrito_ahbbs to update
+     */
+    where?: td_carrito_ahbbWhereInput
+    /**
+     * Limit how many td_carrito_ahbbs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * td_carrito_ahbb updateManyAndReturn
+   */
+  export type td_carrito_ahbbUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_carrito_ahbb
+     */
+    select?: td_carrito_ahbbSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_carrito_ahbb
+     */
+    omit?: td_carrito_ahbbOmit<ExtArgs> | null
+    /**
+     * The data used to update td_carrito_ahbbs.
+     */
+    data: XOR<td_carrito_ahbbUpdateManyMutationInput, td_carrito_ahbbUncheckedUpdateManyInput>
+    /**
+     * Filter which td_carrito_ahbbs to update
+     */
+    where?: td_carrito_ahbbWhereInput
+    /**
+     * Limit how many td_carrito_ahbbs to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_carrito_ahbbIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * td_carrito_ahbb upsert
+   */
+  export type td_carrito_ahbbUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_carrito_ahbb
+     */
+    select?: td_carrito_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_carrito_ahbb
+     */
+    omit?: td_carrito_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_carrito_ahbbInclude<ExtArgs> | null
+    /**
+     * The filter to search for the td_carrito_ahbb to update in case it exists.
+     */
+    where: td_carrito_ahbbWhereUniqueInput
+    /**
+     * In case the td_carrito_ahbb found by the `where` argument doesn't exist, create a new td_carrito_ahbb with this data.
+     */
+    create: XOR<td_carrito_ahbbCreateInput, td_carrito_ahbbUncheckedCreateInput>
+    /**
+     * In case the td_carrito_ahbb was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<td_carrito_ahbbUpdateInput, td_carrito_ahbbUncheckedUpdateInput>
+  }
+
+  /**
+   * td_carrito_ahbb delete
+   */
+  export type td_carrito_ahbbDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_carrito_ahbb
+     */
+    select?: td_carrito_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_carrito_ahbb
+     */
+    omit?: td_carrito_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_carrito_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter which td_carrito_ahbb to delete.
+     */
+    where: td_carrito_ahbbWhereUniqueInput
+  }
+
+  /**
+   * td_carrito_ahbb deleteMany
+   */
+  export type td_carrito_ahbbDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which td_carrito_ahbbs to delete
+     */
+    where?: td_carrito_ahbbWhereInput
+    /**
+     * Limit how many td_carrito_ahbbs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * td_carrito_ahbb without action
+   */
+  export type td_carrito_ahbbDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_carrito_ahbb
+     */
+    select?: td_carrito_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_carrito_ahbb
+     */
+    omit?: td_carrito_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_carrito_ahbbInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model td_factura_ahbb
+   */
+
+  export type AggregateTd_factura_ahbb = {
+    _count: Td_factura_ahbbCountAggregateOutputType | null
+    _avg: Td_factura_ahbbAvgAggregateOutputType | null
+    _sum: Td_factura_ahbbSumAggregateOutputType | null
+    _min: Td_factura_ahbbMinAggregateOutputType | null
+    _max: Td_factura_ahbbMaxAggregateOutputType | null
+  }
+
+  export type Td_factura_ahbbAvgAggregateOutputType = {
+    id_factura_ahbb: number | null
+    total_ahbb: Decimal | null
+    id_usuario_factura_ahbb: number | null
+  }
+
+  export type Td_factura_ahbbSumAggregateOutputType = {
+    id_factura_ahbb: number | null
+    total_ahbb: Decimal | null
+    id_usuario_factura_ahbb: number | null
+  }
+
+  export type Td_factura_ahbbMinAggregateOutputType = {
+    id_factura_ahbb: number | null
+    nroReferenciaPago_ahbb: string | null
+    fechaFactura_ahbb: Date | null
+    total_ahbb: Decimal | null
+    estadoFactura_ahbb: string | null
+    id_usuario_factura_ahbb: number | null
+  }
+
+  export type Td_factura_ahbbMaxAggregateOutputType = {
+    id_factura_ahbb: number | null
+    nroReferenciaPago_ahbb: string | null
+    fechaFactura_ahbb: Date | null
+    total_ahbb: Decimal | null
+    estadoFactura_ahbb: string | null
+    id_usuario_factura_ahbb: number | null
+  }
+
+  export type Td_factura_ahbbCountAggregateOutputType = {
+    id_factura_ahbb: number
+    nroReferenciaPago_ahbb: number
+    fechaFactura_ahbb: number
+    total_ahbb: number
+    estadoFactura_ahbb: number
+    id_usuario_factura_ahbb: number
+    _all: number
+  }
+
+
+  export type Td_factura_ahbbAvgAggregateInputType = {
+    id_factura_ahbb?: true
+    total_ahbb?: true
+    id_usuario_factura_ahbb?: true
+  }
+
+  export type Td_factura_ahbbSumAggregateInputType = {
+    id_factura_ahbb?: true
+    total_ahbb?: true
+    id_usuario_factura_ahbb?: true
+  }
+
+  export type Td_factura_ahbbMinAggregateInputType = {
+    id_factura_ahbb?: true
+    nroReferenciaPago_ahbb?: true
+    fechaFactura_ahbb?: true
+    total_ahbb?: true
+    estadoFactura_ahbb?: true
+    id_usuario_factura_ahbb?: true
+  }
+
+  export type Td_factura_ahbbMaxAggregateInputType = {
+    id_factura_ahbb?: true
+    nroReferenciaPago_ahbb?: true
+    fechaFactura_ahbb?: true
+    total_ahbb?: true
+    estadoFactura_ahbb?: true
+    id_usuario_factura_ahbb?: true
+  }
+
+  export type Td_factura_ahbbCountAggregateInputType = {
+    id_factura_ahbb?: true
+    nroReferenciaPago_ahbb?: true
+    fechaFactura_ahbb?: true
+    total_ahbb?: true
+    estadoFactura_ahbb?: true
+    id_usuario_factura_ahbb?: true
+    _all?: true
+  }
+
+  export type Td_factura_ahbbAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which td_factura_ahbb to aggregate.
+     */
+    where?: td_factura_ahbbWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of td_factura_ahbbs to fetch.
+     */
+    orderBy?: td_factura_ahbbOrderByWithRelationInput | td_factura_ahbbOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: td_factura_ahbbWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` td_factura_ahbbs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` td_factura_ahbbs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned td_factura_ahbbs
+    **/
+    _count?: true | Td_factura_ahbbCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Td_factura_ahbbAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Td_factura_ahbbSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Td_factura_ahbbMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Td_factura_ahbbMaxAggregateInputType
+  }
+
+  export type GetTd_factura_ahbbAggregateType<T extends Td_factura_ahbbAggregateArgs> = {
+        [P in keyof T & keyof AggregateTd_factura_ahbb]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTd_factura_ahbb[P]>
+      : GetScalarType<T[P], AggregateTd_factura_ahbb[P]>
+  }
+
+
+
+
+  export type td_factura_ahbbGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: td_factura_ahbbWhereInput
+    orderBy?: td_factura_ahbbOrderByWithAggregationInput | td_factura_ahbbOrderByWithAggregationInput[]
+    by: Td_factura_ahbbScalarFieldEnum[] | Td_factura_ahbbScalarFieldEnum
+    having?: td_factura_ahbbScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Td_factura_ahbbCountAggregateInputType | true
+    _avg?: Td_factura_ahbbAvgAggregateInputType
+    _sum?: Td_factura_ahbbSumAggregateInputType
+    _min?: Td_factura_ahbbMinAggregateInputType
+    _max?: Td_factura_ahbbMaxAggregateInputType
+  }
+
+  export type Td_factura_ahbbGroupByOutputType = {
+    id_factura_ahbb: number
+    nroReferenciaPago_ahbb: string
+    fechaFactura_ahbb: Date | null
+    total_ahbb: Decimal
+    estadoFactura_ahbb: string
+    id_usuario_factura_ahbb: number
+    _count: Td_factura_ahbbCountAggregateOutputType | null
+    _avg: Td_factura_ahbbAvgAggregateOutputType | null
+    _sum: Td_factura_ahbbSumAggregateOutputType | null
+    _min: Td_factura_ahbbMinAggregateOutputType | null
+    _max: Td_factura_ahbbMaxAggregateOutputType | null
+  }
+
+  type GetTd_factura_ahbbGroupByPayload<T extends td_factura_ahbbGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Td_factura_ahbbGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Td_factura_ahbbGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Td_factura_ahbbGroupByOutputType[P]>
+            : GetScalarType<T[P], Td_factura_ahbbGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type td_factura_ahbbSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id_factura_ahbb?: boolean
+    nroReferenciaPago_ahbb?: boolean
+    fechaFactura_ahbb?: boolean
+    total_ahbb?: boolean
+    estadoFactura_ahbb?: boolean
+    id_usuario_factura_ahbb?: boolean
+    usuario_ahbb?: boolean | td_usuario_ahbbDefaultArgs<ExtArgs>
+    detalles_ahbb?: boolean | td_factura_ahbb$detalles_ahbbArgs<ExtArgs>
+    _count?: boolean | Td_factura_ahbbCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["td_factura_ahbb"]>
+
+  export type td_factura_ahbbSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id_factura_ahbb?: boolean
+    nroReferenciaPago_ahbb?: boolean
+    fechaFactura_ahbb?: boolean
+    total_ahbb?: boolean
+    estadoFactura_ahbb?: boolean
+    id_usuario_factura_ahbb?: boolean
+    usuario_ahbb?: boolean | td_usuario_ahbbDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["td_factura_ahbb"]>
+
+  export type td_factura_ahbbSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id_factura_ahbb?: boolean
+    nroReferenciaPago_ahbb?: boolean
+    fechaFactura_ahbb?: boolean
+    total_ahbb?: boolean
+    estadoFactura_ahbb?: boolean
+    id_usuario_factura_ahbb?: boolean
+    usuario_ahbb?: boolean | td_usuario_ahbbDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["td_factura_ahbb"]>
+
+  export type td_factura_ahbbSelectScalar = {
+    id_factura_ahbb?: boolean
+    nroReferenciaPago_ahbb?: boolean
+    fechaFactura_ahbb?: boolean
+    total_ahbb?: boolean
+    estadoFactura_ahbb?: boolean
+    id_usuario_factura_ahbb?: boolean
+  }
+
+  export type td_factura_ahbbOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_factura_ahbb" | "nroReferenciaPago_ahbb" | "fechaFactura_ahbb" | "total_ahbb" | "estadoFactura_ahbb" | "id_usuario_factura_ahbb", ExtArgs["result"]["td_factura_ahbb"]>
+  export type td_factura_ahbbInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usuario_ahbb?: boolean | td_usuario_ahbbDefaultArgs<ExtArgs>
+    detalles_ahbb?: boolean | td_factura_ahbb$detalles_ahbbArgs<ExtArgs>
+    _count?: boolean | Td_factura_ahbbCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type td_factura_ahbbIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usuario_ahbb?: boolean | td_usuario_ahbbDefaultArgs<ExtArgs>
+  }
+  export type td_factura_ahbbIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usuario_ahbb?: boolean | td_usuario_ahbbDefaultArgs<ExtArgs>
+  }
+
+  export type $td_factura_ahbbPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "td_factura_ahbb"
+    objects: {
+      usuario_ahbb: Prisma.$td_usuario_ahbbPayload<ExtArgs>
+      detalles_ahbb: Prisma.$td_detalle_factura_ahbbPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id_factura_ahbb: number
+      nroReferenciaPago_ahbb: string
+      fechaFactura_ahbb: Date | null
+      total_ahbb: Prisma.Decimal
+      estadoFactura_ahbb: string
+      id_usuario_factura_ahbb: number
+    }, ExtArgs["result"]["td_factura_ahbb"]>
+    composites: {}
+  }
+
+  type td_factura_ahbbGetPayload<S extends boolean | null | undefined | td_factura_ahbbDefaultArgs> = $Result.GetResult<Prisma.$td_factura_ahbbPayload, S>
+
+  type td_factura_ahbbCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<td_factura_ahbbFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Td_factura_ahbbCountAggregateInputType | true
+    }
+
+  export interface td_factura_ahbbDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['td_factura_ahbb'], meta: { name: 'td_factura_ahbb' } }
+    /**
+     * Find zero or one Td_factura_ahbb that matches the filter.
+     * @param {td_factura_ahbbFindUniqueArgs} args - Arguments to find a Td_factura_ahbb
+     * @example
+     * // Get one Td_factura_ahbb
+     * const td_factura_ahbb = await prisma.td_factura_ahbb.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends td_factura_ahbbFindUniqueArgs>(args: SelectSubset<T, td_factura_ahbbFindUniqueArgs<ExtArgs>>): Prisma__td_factura_ahbbClient<$Result.GetResult<Prisma.$td_factura_ahbbPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Td_factura_ahbb that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {td_factura_ahbbFindUniqueOrThrowArgs} args - Arguments to find a Td_factura_ahbb
+     * @example
+     * // Get one Td_factura_ahbb
+     * const td_factura_ahbb = await prisma.td_factura_ahbb.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends td_factura_ahbbFindUniqueOrThrowArgs>(args: SelectSubset<T, td_factura_ahbbFindUniqueOrThrowArgs<ExtArgs>>): Prisma__td_factura_ahbbClient<$Result.GetResult<Prisma.$td_factura_ahbbPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Td_factura_ahbb that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_factura_ahbbFindFirstArgs} args - Arguments to find a Td_factura_ahbb
+     * @example
+     * // Get one Td_factura_ahbb
+     * const td_factura_ahbb = await prisma.td_factura_ahbb.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends td_factura_ahbbFindFirstArgs>(args?: SelectSubset<T, td_factura_ahbbFindFirstArgs<ExtArgs>>): Prisma__td_factura_ahbbClient<$Result.GetResult<Prisma.$td_factura_ahbbPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Td_factura_ahbb that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_factura_ahbbFindFirstOrThrowArgs} args - Arguments to find a Td_factura_ahbb
+     * @example
+     * // Get one Td_factura_ahbb
+     * const td_factura_ahbb = await prisma.td_factura_ahbb.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends td_factura_ahbbFindFirstOrThrowArgs>(args?: SelectSubset<T, td_factura_ahbbFindFirstOrThrowArgs<ExtArgs>>): Prisma__td_factura_ahbbClient<$Result.GetResult<Prisma.$td_factura_ahbbPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Td_factura_ahbbs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_factura_ahbbFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Td_factura_ahbbs
+     * const td_factura_ahbbs = await prisma.td_factura_ahbb.findMany()
+     * 
+     * // Get first 10 Td_factura_ahbbs
+     * const td_factura_ahbbs = await prisma.td_factura_ahbb.findMany({ take: 10 })
+     * 
+     * // Only select the `id_factura_ahbb`
+     * const td_factura_ahbbWithId_factura_ahbbOnly = await prisma.td_factura_ahbb.findMany({ select: { id_factura_ahbb: true } })
+     * 
+     */
+    findMany<T extends td_factura_ahbbFindManyArgs>(args?: SelectSubset<T, td_factura_ahbbFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_factura_ahbbPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Td_factura_ahbb.
+     * @param {td_factura_ahbbCreateArgs} args - Arguments to create a Td_factura_ahbb.
+     * @example
+     * // Create one Td_factura_ahbb
+     * const Td_factura_ahbb = await prisma.td_factura_ahbb.create({
+     *   data: {
+     *     // ... data to create a Td_factura_ahbb
+     *   }
+     * })
+     * 
+     */
+    create<T extends td_factura_ahbbCreateArgs>(args: SelectSubset<T, td_factura_ahbbCreateArgs<ExtArgs>>): Prisma__td_factura_ahbbClient<$Result.GetResult<Prisma.$td_factura_ahbbPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Td_factura_ahbbs.
+     * @param {td_factura_ahbbCreateManyArgs} args - Arguments to create many Td_factura_ahbbs.
+     * @example
+     * // Create many Td_factura_ahbbs
+     * const td_factura_ahbb = await prisma.td_factura_ahbb.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends td_factura_ahbbCreateManyArgs>(args?: SelectSubset<T, td_factura_ahbbCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Td_factura_ahbbs and returns the data saved in the database.
+     * @param {td_factura_ahbbCreateManyAndReturnArgs} args - Arguments to create many Td_factura_ahbbs.
+     * @example
+     * // Create many Td_factura_ahbbs
+     * const td_factura_ahbb = await prisma.td_factura_ahbb.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Td_factura_ahbbs and only return the `id_factura_ahbb`
+     * const td_factura_ahbbWithId_factura_ahbbOnly = await prisma.td_factura_ahbb.createManyAndReturn({
+     *   select: { id_factura_ahbb: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends td_factura_ahbbCreateManyAndReturnArgs>(args?: SelectSubset<T, td_factura_ahbbCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_factura_ahbbPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Td_factura_ahbb.
+     * @param {td_factura_ahbbDeleteArgs} args - Arguments to delete one Td_factura_ahbb.
+     * @example
+     * // Delete one Td_factura_ahbb
+     * const Td_factura_ahbb = await prisma.td_factura_ahbb.delete({
+     *   where: {
+     *     // ... filter to delete one Td_factura_ahbb
+     *   }
+     * })
+     * 
+     */
+    delete<T extends td_factura_ahbbDeleteArgs>(args: SelectSubset<T, td_factura_ahbbDeleteArgs<ExtArgs>>): Prisma__td_factura_ahbbClient<$Result.GetResult<Prisma.$td_factura_ahbbPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Td_factura_ahbb.
+     * @param {td_factura_ahbbUpdateArgs} args - Arguments to update one Td_factura_ahbb.
+     * @example
+     * // Update one Td_factura_ahbb
+     * const td_factura_ahbb = await prisma.td_factura_ahbb.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends td_factura_ahbbUpdateArgs>(args: SelectSubset<T, td_factura_ahbbUpdateArgs<ExtArgs>>): Prisma__td_factura_ahbbClient<$Result.GetResult<Prisma.$td_factura_ahbbPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Td_factura_ahbbs.
+     * @param {td_factura_ahbbDeleteManyArgs} args - Arguments to filter Td_factura_ahbbs to delete.
+     * @example
+     * // Delete a few Td_factura_ahbbs
+     * const { count } = await prisma.td_factura_ahbb.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends td_factura_ahbbDeleteManyArgs>(args?: SelectSubset<T, td_factura_ahbbDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Td_factura_ahbbs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_factura_ahbbUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Td_factura_ahbbs
+     * const td_factura_ahbb = await prisma.td_factura_ahbb.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends td_factura_ahbbUpdateManyArgs>(args: SelectSubset<T, td_factura_ahbbUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Td_factura_ahbbs and returns the data updated in the database.
+     * @param {td_factura_ahbbUpdateManyAndReturnArgs} args - Arguments to update many Td_factura_ahbbs.
+     * @example
+     * // Update many Td_factura_ahbbs
+     * const td_factura_ahbb = await prisma.td_factura_ahbb.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Td_factura_ahbbs and only return the `id_factura_ahbb`
+     * const td_factura_ahbbWithId_factura_ahbbOnly = await prisma.td_factura_ahbb.updateManyAndReturn({
+     *   select: { id_factura_ahbb: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends td_factura_ahbbUpdateManyAndReturnArgs>(args: SelectSubset<T, td_factura_ahbbUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_factura_ahbbPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Td_factura_ahbb.
+     * @param {td_factura_ahbbUpsertArgs} args - Arguments to update or create a Td_factura_ahbb.
+     * @example
+     * // Update or create a Td_factura_ahbb
+     * const td_factura_ahbb = await prisma.td_factura_ahbb.upsert({
+     *   create: {
+     *     // ... data to create a Td_factura_ahbb
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Td_factura_ahbb we want to update
+     *   }
+     * })
+     */
+    upsert<T extends td_factura_ahbbUpsertArgs>(args: SelectSubset<T, td_factura_ahbbUpsertArgs<ExtArgs>>): Prisma__td_factura_ahbbClient<$Result.GetResult<Prisma.$td_factura_ahbbPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Td_factura_ahbbs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_factura_ahbbCountArgs} args - Arguments to filter Td_factura_ahbbs to count.
+     * @example
+     * // Count the number of Td_factura_ahbbs
+     * const count = await prisma.td_factura_ahbb.count({
+     *   where: {
+     *     // ... the filter for the Td_factura_ahbbs we want to count
+     *   }
+     * })
+    **/
+    count<T extends td_factura_ahbbCountArgs>(
+      args?: Subset<T, td_factura_ahbbCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Td_factura_ahbbCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Td_factura_ahbb.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Td_factura_ahbbAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Td_factura_ahbbAggregateArgs>(args: Subset<T, Td_factura_ahbbAggregateArgs>): Prisma.PrismaPromise<GetTd_factura_ahbbAggregateType<T>>
+
+    /**
+     * Group by Td_factura_ahbb.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_factura_ahbbGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends td_factura_ahbbGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: td_factura_ahbbGroupByArgs['orderBy'] }
+        : { orderBy?: td_factura_ahbbGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, td_factura_ahbbGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTd_factura_ahbbGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the td_factura_ahbb model
+   */
+  readonly fields: td_factura_ahbbFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for td_factura_ahbb.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__td_factura_ahbbClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    usuario_ahbb<T extends td_usuario_ahbbDefaultArgs<ExtArgs> = {}>(args?: Subset<T, td_usuario_ahbbDefaultArgs<ExtArgs>>): Prisma__td_usuario_ahbbClient<$Result.GetResult<Prisma.$td_usuario_ahbbPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    detalles_ahbb<T extends td_factura_ahbb$detalles_ahbbArgs<ExtArgs> = {}>(args?: Subset<T, td_factura_ahbb$detalles_ahbbArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_detalle_factura_ahbbPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the td_factura_ahbb model
+   */
+  interface td_factura_ahbbFieldRefs {
+    readonly id_factura_ahbb: FieldRef<"td_factura_ahbb", 'Int'>
+    readonly nroReferenciaPago_ahbb: FieldRef<"td_factura_ahbb", 'String'>
+    readonly fechaFactura_ahbb: FieldRef<"td_factura_ahbb", 'DateTime'>
+    readonly total_ahbb: FieldRef<"td_factura_ahbb", 'Decimal'>
+    readonly estadoFactura_ahbb: FieldRef<"td_factura_ahbb", 'String'>
+    readonly id_usuario_factura_ahbb: FieldRef<"td_factura_ahbb", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * td_factura_ahbb findUnique
+   */
+  export type td_factura_ahbbFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_factura_ahbb
+     */
+    select?: td_factura_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_factura_ahbb
+     */
+    omit?: td_factura_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_factura_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter, which td_factura_ahbb to fetch.
+     */
+    where: td_factura_ahbbWhereUniqueInput
+  }
+
+  /**
+   * td_factura_ahbb findUniqueOrThrow
+   */
+  export type td_factura_ahbbFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_factura_ahbb
+     */
+    select?: td_factura_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_factura_ahbb
+     */
+    omit?: td_factura_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_factura_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter, which td_factura_ahbb to fetch.
+     */
+    where: td_factura_ahbbWhereUniqueInput
+  }
+
+  /**
+   * td_factura_ahbb findFirst
+   */
+  export type td_factura_ahbbFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_factura_ahbb
+     */
+    select?: td_factura_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_factura_ahbb
+     */
+    omit?: td_factura_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_factura_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter, which td_factura_ahbb to fetch.
+     */
+    where?: td_factura_ahbbWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of td_factura_ahbbs to fetch.
+     */
+    orderBy?: td_factura_ahbbOrderByWithRelationInput | td_factura_ahbbOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for td_factura_ahbbs.
+     */
+    cursor?: td_factura_ahbbWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` td_factura_ahbbs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` td_factura_ahbbs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of td_factura_ahbbs.
+     */
+    distinct?: Td_factura_ahbbScalarFieldEnum | Td_factura_ahbbScalarFieldEnum[]
+  }
+
+  /**
+   * td_factura_ahbb findFirstOrThrow
+   */
+  export type td_factura_ahbbFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_factura_ahbb
+     */
+    select?: td_factura_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_factura_ahbb
+     */
+    omit?: td_factura_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_factura_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter, which td_factura_ahbb to fetch.
+     */
+    where?: td_factura_ahbbWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of td_factura_ahbbs to fetch.
+     */
+    orderBy?: td_factura_ahbbOrderByWithRelationInput | td_factura_ahbbOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for td_factura_ahbbs.
+     */
+    cursor?: td_factura_ahbbWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` td_factura_ahbbs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` td_factura_ahbbs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of td_factura_ahbbs.
+     */
+    distinct?: Td_factura_ahbbScalarFieldEnum | Td_factura_ahbbScalarFieldEnum[]
+  }
+
+  /**
+   * td_factura_ahbb findMany
+   */
+  export type td_factura_ahbbFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_factura_ahbb
+     */
+    select?: td_factura_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_factura_ahbb
+     */
+    omit?: td_factura_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_factura_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter, which td_factura_ahbbs to fetch.
+     */
+    where?: td_factura_ahbbWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of td_factura_ahbbs to fetch.
+     */
+    orderBy?: td_factura_ahbbOrderByWithRelationInput | td_factura_ahbbOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing td_factura_ahbbs.
+     */
+    cursor?: td_factura_ahbbWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` td_factura_ahbbs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` td_factura_ahbbs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of td_factura_ahbbs.
+     */
+    distinct?: Td_factura_ahbbScalarFieldEnum | Td_factura_ahbbScalarFieldEnum[]
+  }
+
+  /**
+   * td_factura_ahbb create
+   */
+  export type td_factura_ahbbCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_factura_ahbb
+     */
+    select?: td_factura_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_factura_ahbb
+     */
+    omit?: td_factura_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_factura_ahbbInclude<ExtArgs> | null
+    /**
+     * The data needed to create a td_factura_ahbb.
+     */
+    data: XOR<td_factura_ahbbCreateInput, td_factura_ahbbUncheckedCreateInput>
+  }
+
+  /**
+   * td_factura_ahbb createMany
+   */
+  export type td_factura_ahbbCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many td_factura_ahbbs.
+     */
+    data: td_factura_ahbbCreateManyInput | td_factura_ahbbCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * td_factura_ahbb createManyAndReturn
+   */
+  export type td_factura_ahbbCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_factura_ahbb
+     */
+    select?: td_factura_ahbbSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_factura_ahbb
+     */
+    omit?: td_factura_ahbbOmit<ExtArgs> | null
+    /**
+     * The data used to create many td_factura_ahbbs.
+     */
+    data: td_factura_ahbbCreateManyInput | td_factura_ahbbCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_factura_ahbbIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * td_factura_ahbb update
+   */
+  export type td_factura_ahbbUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_factura_ahbb
+     */
+    select?: td_factura_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_factura_ahbb
+     */
+    omit?: td_factura_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_factura_ahbbInclude<ExtArgs> | null
+    /**
+     * The data needed to update a td_factura_ahbb.
+     */
+    data: XOR<td_factura_ahbbUpdateInput, td_factura_ahbbUncheckedUpdateInput>
+    /**
+     * Choose, which td_factura_ahbb to update.
+     */
+    where: td_factura_ahbbWhereUniqueInput
+  }
+
+  /**
+   * td_factura_ahbb updateMany
+   */
+  export type td_factura_ahbbUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update td_factura_ahbbs.
+     */
+    data: XOR<td_factura_ahbbUpdateManyMutationInput, td_factura_ahbbUncheckedUpdateManyInput>
+    /**
+     * Filter which td_factura_ahbbs to update
+     */
+    where?: td_factura_ahbbWhereInput
+    /**
+     * Limit how many td_factura_ahbbs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * td_factura_ahbb updateManyAndReturn
+   */
+  export type td_factura_ahbbUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_factura_ahbb
+     */
+    select?: td_factura_ahbbSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_factura_ahbb
+     */
+    omit?: td_factura_ahbbOmit<ExtArgs> | null
+    /**
+     * The data used to update td_factura_ahbbs.
+     */
+    data: XOR<td_factura_ahbbUpdateManyMutationInput, td_factura_ahbbUncheckedUpdateManyInput>
+    /**
+     * Filter which td_factura_ahbbs to update
+     */
+    where?: td_factura_ahbbWhereInput
+    /**
+     * Limit how many td_factura_ahbbs to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_factura_ahbbIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * td_factura_ahbb upsert
+   */
+  export type td_factura_ahbbUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_factura_ahbb
+     */
+    select?: td_factura_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_factura_ahbb
+     */
+    omit?: td_factura_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_factura_ahbbInclude<ExtArgs> | null
+    /**
+     * The filter to search for the td_factura_ahbb to update in case it exists.
+     */
+    where: td_factura_ahbbWhereUniqueInput
+    /**
+     * In case the td_factura_ahbb found by the `where` argument doesn't exist, create a new td_factura_ahbb with this data.
+     */
+    create: XOR<td_factura_ahbbCreateInput, td_factura_ahbbUncheckedCreateInput>
+    /**
+     * In case the td_factura_ahbb was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<td_factura_ahbbUpdateInput, td_factura_ahbbUncheckedUpdateInput>
+  }
+
+  /**
+   * td_factura_ahbb delete
+   */
+  export type td_factura_ahbbDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_factura_ahbb
+     */
+    select?: td_factura_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_factura_ahbb
+     */
+    omit?: td_factura_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_factura_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter which td_factura_ahbb to delete.
+     */
+    where: td_factura_ahbbWhereUniqueInput
+  }
+
+  /**
+   * td_factura_ahbb deleteMany
+   */
+  export type td_factura_ahbbDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which td_factura_ahbbs to delete
+     */
+    where?: td_factura_ahbbWhereInput
+    /**
+     * Limit how many td_factura_ahbbs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * td_factura_ahbb.detalles_ahbb
+   */
+  export type td_factura_ahbb$detalles_ahbbArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_detalle_factura_ahbb
+     */
+    select?: td_detalle_factura_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_detalle_factura_ahbb
+     */
+    omit?: td_detalle_factura_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_detalle_factura_ahbbInclude<ExtArgs> | null
+    where?: td_detalle_factura_ahbbWhereInput
+    orderBy?: td_detalle_factura_ahbbOrderByWithRelationInput | td_detalle_factura_ahbbOrderByWithRelationInput[]
+    cursor?: td_detalle_factura_ahbbWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Td_detalle_factura_ahbbScalarFieldEnum | Td_detalle_factura_ahbbScalarFieldEnum[]
+  }
+
+  /**
+   * td_factura_ahbb without action
+   */
+  export type td_factura_ahbbDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_factura_ahbb
+     */
+    select?: td_factura_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_factura_ahbb
+     */
+    omit?: td_factura_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_factura_ahbbInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model td_detalle_factura_ahbb
+   */
+
+  export type AggregateTd_detalle_factura_ahbb = {
+    _count: Td_detalle_factura_ahbbCountAggregateOutputType | null
+    _avg: Td_detalle_factura_ahbbAvgAggregateOutputType | null
+    _sum: Td_detalle_factura_ahbbSumAggregateOutputType | null
+    _min: Td_detalle_factura_ahbbMinAggregateOutputType | null
+    _max: Td_detalle_factura_ahbbMaxAggregateOutputType | null
+  }
+
+  export type Td_detalle_factura_ahbbAvgAggregateOutputType = {
+    id_detalle_factura_ahbb: number | null
+    cantidad_ahbb: number | null
+    precioUnitario_ahbb: Decimal | null
+    id_factura_detalle_ahbb: number | null
+    id_producto_detalle_ahbb: number | null
+  }
+
+  export type Td_detalle_factura_ahbbSumAggregateOutputType = {
+    id_detalle_factura_ahbb: number | null
+    cantidad_ahbb: number | null
+    precioUnitario_ahbb: Decimal | null
+    id_factura_detalle_ahbb: number | null
+    id_producto_detalle_ahbb: number | null
+  }
+
+  export type Td_detalle_factura_ahbbMinAggregateOutputType = {
+    id_detalle_factura_ahbb: number | null
+    cantidad_ahbb: number | null
+    precioUnitario_ahbb: Decimal | null
+    id_factura_detalle_ahbb: number | null
+    id_producto_detalle_ahbb: number | null
+  }
+
+  export type Td_detalle_factura_ahbbMaxAggregateOutputType = {
+    id_detalle_factura_ahbb: number | null
+    cantidad_ahbb: number | null
+    precioUnitario_ahbb: Decimal | null
+    id_factura_detalle_ahbb: number | null
+    id_producto_detalle_ahbb: number | null
+  }
+
+  export type Td_detalle_factura_ahbbCountAggregateOutputType = {
+    id_detalle_factura_ahbb: number
+    cantidad_ahbb: number
+    precioUnitario_ahbb: number
+    id_factura_detalle_ahbb: number
+    id_producto_detalle_ahbb: number
+    _all: number
+  }
+
+
+  export type Td_detalle_factura_ahbbAvgAggregateInputType = {
+    id_detalle_factura_ahbb?: true
+    cantidad_ahbb?: true
+    precioUnitario_ahbb?: true
+    id_factura_detalle_ahbb?: true
+    id_producto_detalle_ahbb?: true
+  }
+
+  export type Td_detalle_factura_ahbbSumAggregateInputType = {
+    id_detalle_factura_ahbb?: true
+    cantidad_ahbb?: true
+    precioUnitario_ahbb?: true
+    id_factura_detalle_ahbb?: true
+    id_producto_detalle_ahbb?: true
+  }
+
+  export type Td_detalle_factura_ahbbMinAggregateInputType = {
+    id_detalle_factura_ahbb?: true
+    cantidad_ahbb?: true
+    precioUnitario_ahbb?: true
+    id_factura_detalle_ahbb?: true
+    id_producto_detalle_ahbb?: true
+  }
+
+  export type Td_detalle_factura_ahbbMaxAggregateInputType = {
+    id_detalle_factura_ahbb?: true
+    cantidad_ahbb?: true
+    precioUnitario_ahbb?: true
+    id_factura_detalle_ahbb?: true
+    id_producto_detalle_ahbb?: true
+  }
+
+  export type Td_detalle_factura_ahbbCountAggregateInputType = {
+    id_detalle_factura_ahbb?: true
+    cantidad_ahbb?: true
+    precioUnitario_ahbb?: true
+    id_factura_detalle_ahbb?: true
+    id_producto_detalle_ahbb?: true
+    _all?: true
+  }
+
+  export type Td_detalle_factura_ahbbAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which td_detalle_factura_ahbb to aggregate.
+     */
+    where?: td_detalle_factura_ahbbWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of td_detalle_factura_ahbbs to fetch.
+     */
+    orderBy?: td_detalle_factura_ahbbOrderByWithRelationInput | td_detalle_factura_ahbbOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: td_detalle_factura_ahbbWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` td_detalle_factura_ahbbs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` td_detalle_factura_ahbbs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned td_detalle_factura_ahbbs
+    **/
+    _count?: true | Td_detalle_factura_ahbbCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Td_detalle_factura_ahbbAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Td_detalle_factura_ahbbSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Td_detalle_factura_ahbbMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Td_detalle_factura_ahbbMaxAggregateInputType
+  }
+
+  export type GetTd_detalle_factura_ahbbAggregateType<T extends Td_detalle_factura_ahbbAggregateArgs> = {
+        [P in keyof T & keyof AggregateTd_detalle_factura_ahbb]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTd_detalle_factura_ahbb[P]>
+      : GetScalarType<T[P], AggregateTd_detalle_factura_ahbb[P]>
+  }
+
+
+
+
+  export type td_detalle_factura_ahbbGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: td_detalle_factura_ahbbWhereInput
+    orderBy?: td_detalle_factura_ahbbOrderByWithAggregationInput | td_detalle_factura_ahbbOrderByWithAggregationInput[]
+    by: Td_detalle_factura_ahbbScalarFieldEnum[] | Td_detalle_factura_ahbbScalarFieldEnum
+    having?: td_detalle_factura_ahbbScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Td_detalle_factura_ahbbCountAggregateInputType | true
+    _avg?: Td_detalle_factura_ahbbAvgAggregateInputType
+    _sum?: Td_detalle_factura_ahbbSumAggregateInputType
+    _min?: Td_detalle_factura_ahbbMinAggregateInputType
+    _max?: Td_detalle_factura_ahbbMaxAggregateInputType
+  }
+
+  export type Td_detalle_factura_ahbbGroupByOutputType = {
+    id_detalle_factura_ahbb: number
+    cantidad_ahbb: number
+    precioUnitario_ahbb: Decimal
+    id_factura_detalle_ahbb: number
+    id_producto_detalle_ahbb: number
+    _count: Td_detalle_factura_ahbbCountAggregateOutputType | null
+    _avg: Td_detalle_factura_ahbbAvgAggregateOutputType | null
+    _sum: Td_detalle_factura_ahbbSumAggregateOutputType | null
+    _min: Td_detalle_factura_ahbbMinAggregateOutputType | null
+    _max: Td_detalle_factura_ahbbMaxAggregateOutputType | null
+  }
+
+  type GetTd_detalle_factura_ahbbGroupByPayload<T extends td_detalle_factura_ahbbGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Td_detalle_factura_ahbbGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Td_detalle_factura_ahbbGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Td_detalle_factura_ahbbGroupByOutputType[P]>
+            : GetScalarType<T[P], Td_detalle_factura_ahbbGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type td_detalle_factura_ahbbSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id_detalle_factura_ahbb?: boolean
+    cantidad_ahbb?: boolean
+    precioUnitario_ahbb?: boolean
+    id_factura_detalle_ahbb?: boolean
+    id_producto_detalle_ahbb?: boolean
+    factura_ahbb?: boolean | td_factura_ahbbDefaultArgs<ExtArgs>
+    producto_ahbb?: boolean | td_producto_ahbbDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["td_detalle_factura_ahbb"]>
+
+  export type td_detalle_factura_ahbbSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id_detalle_factura_ahbb?: boolean
+    cantidad_ahbb?: boolean
+    precioUnitario_ahbb?: boolean
+    id_factura_detalle_ahbb?: boolean
+    id_producto_detalle_ahbb?: boolean
+    factura_ahbb?: boolean | td_factura_ahbbDefaultArgs<ExtArgs>
+    producto_ahbb?: boolean | td_producto_ahbbDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["td_detalle_factura_ahbb"]>
+
+  export type td_detalle_factura_ahbbSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id_detalle_factura_ahbb?: boolean
+    cantidad_ahbb?: boolean
+    precioUnitario_ahbb?: boolean
+    id_factura_detalle_ahbb?: boolean
+    id_producto_detalle_ahbb?: boolean
+    factura_ahbb?: boolean | td_factura_ahbbDefaultArgs<ExtArgs>
+    producto_ahbb?: boolean | td_producto_ahbbDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["td_detalle_factura_ahbb"]>
+
+  export type td_detalle_factura_ahbbSelectScalar = {
+    id_detalle_factura_ahbb?: boolean
+    cantidad_ahbb?: boolean
+    precioUnitario_ahbb?: boolean
+    id_factura_detalle_ahbb?: boolean
+    id_producto_detalle_ahbb?: boolean
+  }
+
+  export type td_detalle_factura_ahbbOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_detalle_factura_ahbb" | "cantidad_ahbb" | "precioUnitario_ahbb" | "id_factura_detalle_ahbb" | "id_producto_detalle_ahbb", ExtArgs["result"]["td_detalle_factura_ahbb"]>
+  export type td_detalle_factura_ahbbInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    factura_ahbb?: boolean | td_factura_ahbbDefaultArgs<ExtArgs>
+    producto_ahbb?: boolean | td_producto_ahbbDefaultArgs<ExtArgs>
+  }
+  export type td_detalle_factura_ahbbIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    factura_ahbb?: boolean | td_factura_ahbbDefaultArgs<ExtArgs>
+    producto_ahbb?: boolean | td_producto_ahbbDefaultArgs<ExtArgs>
+  }
+  export type td_detalle_factura_ahbbIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    factura_ahbb?: boolean | td_factura_ahbbDefaultArgs<ExtArgs>
+    producto_ahbb?: boolean | td_producto_ahbbDefaultArgs<ExtArgs>
+  }
+
+  export type $td_detalle_factura_ahbbPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "td_detalle_factura_ahbb"
+    objects: {
+      factura_ahbb: Prisma.$td_factura_ahbbPayload<ExtArgs>
+      producto_ahbb: Prisma.$td_producto_ahbbPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id_detalle_factura_ahbb: number
+      cantidad_ahbb: number
+      precioUnitario_ahbb: Prisma.Decimal
+      id_factura_detalle_ahbb: number
+      id_producto_detalle_ahbb: number
+    }, ExtArgs["result"]["td_detalle_factura_ahbb"]>
+    composites: {}
+  }
+
+  type td_detalle_factura_ahbbGetPayload<S extends boolean | null | undefined | td_detalle_factura_ahbbDefaultArgs> = $Result.GetResult<Prisma.$td_detalle_factura_ahbbPayload, S>
+
+  type td_detalle_factura_ahbbCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<td_detalle_factura_ahbbFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Td_detalle_factura_ahbbCountAggregateInputType | true
+    }
+
+  export interface td_detalle_factura_ahbbDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['td_detalle_factura_ahbb'], meta: { name: 'td_detalle_factura_ahbb' } }
+    /**
+     * Find zero or one Td_detalle_factura_ahbb that matches the filter.
+     * @param {td_detalle_factura_ahbbFindUniqueArgs} args - Arguments to find a Td_detalle_factura_ahbb
+     * @example
+     * // Get one Td_detalle_factura_ahbb
+     * const td_detalle_factura_ahbb = await prisma.td_detalle_factura_ahbb.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends td_detalle_factura_ahbbFindUniqueArgs>(args: SelectSubset<T, td_detalle_factura_ahbbFindUniqueArgs<ExtArgs>>): Prisma__td_detalle_factura_ahbbClient<$Result.GetResult<Prisma.$td_detalle_factura_ahbbPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Td_detalle_factura_ahbb that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {td_detalle_factura_ahbbFindUniqueOrThrowArgs} args - Arguments to find a Td_detalle_factura_ahbb
+     * @example
+     * // Get one Td_detalle_factura_ahbb
+     * const td_detalle_factura_ahbb = await prisma.td_detalle_factura_ahbb.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends td_detalle_factura_ahbbFindUniqueOrThrowArgs>(args: SelectSubset<T, td_detalle_factura_ahbbFindUniqueOrThrowArgs<ExtArgs>>): Prisma__td_detalle_factura_ahbbClient<$Result.GetResult<Prisma.$td_detalle_factura_ahbbPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Td_detalle_factura_ahbb that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_detalle_factura_ahbbFindFirstArgs} args - Arguments to find a Td_detalle_factura_ahbb
+     * @example
+     * // Get one Td_detalle_factura_ahbb
+     * const td_detalle_factura_ahbb = await prisma.td_detalle_factura_ahbb.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends td_detalle_factura_ahbbFindFirstArgs>(args?: SelectSubset<T, td_detalle_factura_ahbbFindFirstArgs<ExtArgs>>): Prisma__td_detalle_factura_ahbbClient<$Result.GetResult<Prisma.$td_detalle_factura_ahbbPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Td_detalle_factura_ahbb that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_detalle_factura_ahbbFindFirstOrThrowArgs} args - Arguments to find a Td_detalle_factura_ahbb
+     * @example
+     * // Get one Td_detalle_factura_ahbb
+     * const td_detalle_factura_ahbb = await prisma.td_detalle_factura_ahbb.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends td_detalle_factura_ahbbFindFirstOrThrowArgs>(args?: SelectSubset<T, td_detalle_factura_ahbbFindFirstOrThrowArgs<ExtArgs>>): Prisma__td_detalle_factura_ahbbClient<$Result.GetResult<Prisma.$td_detalle_factura_ahbbPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Td_detalle_factura_ahbbs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_detalle_factura_ahbbFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Td_detalle_factura_ahbbs
+     * const td_detalle_factura_ahbbs = await prisma.td_detalle_factura_ahbb.findMany()
+     * 
+     * // Get first 10 Td_detalle_factura_ahbbs
+     * const td_detalle_factura_ahbbs = await prisma.td_detalle_factura_ahbb.findMany({ take: 10 })
+     * 
+     * // Only select the `id_detalle_factura_ahbb`
+     * const td_detalle_factura_ahbbWithId_detalle_factura_ahbbOnly = await prisma.td_detalle_factura_ahbb.findMany({ select: { id_detalle_factura_ahbb: true } })
+     * 
+     */
+    findMany<T extends td_detalle_factura_ahbbFindManyArgs>(args?: SelectSubset<T, td_detalle_factura_ahbbFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_detalle_factura_ahbbPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Td_detalle_factura_ahbb.
+     * @param {td_detalle_factura_ahbbCreateArgs} args - Arguments to create a Td_detalle_factura_ahbb.
+     * @example
+     * // Create one Td_detalle_factura_ahbb
+     * const Td_detalle_factura_ahbb = await prisma.td_detalle_factura_ahbb.create({
+     *   data: {
+     *     // ... data to create a Td_detalle_factura_ahbb
+     *   }
+     * })
+     * 
+     */
+    create<T extends td_detalle_factura_ahbbCreateArgs>(args: SelectSubset<T, td_detalle_factura_ahbbCreateArgs<ExtArgs>>): Prisma__td_detalle_factura_ahbbClient<$Result.GetResult<Prisma.$td_detalle_factura_ahbbPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Td_detalle_factura_ahbbs.
+     * @param {td_detalle_factura_ahbbCreateManyArgs} args - Arguments to create many Td_detalle_factura_ahbbs.
+     * @example
+     * // Create many Td_detalle_factura_ahbbs
+     * const td_detalle_factura_ahbb = await prisma.td_detalle_factura_ahbb.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends td_detalle_factura_ahbbCreateManyArgs>(args?: SelectSubset<T, td_detalle_factura_ahbbCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Td_detalle_factura_ahbbs and returns the data saved in the database.
+     * @param {td_detalle_factura_ahbbCreateManyAndReturnArgs} args - Arguments to create many Td_detalle_factura_ahbbs.
+     * @example
+     * // Create many Td_detalle_factura_ahbbs
+     * const td_detalle_factura_ahbb = await prisma.td_detalle_factura_ahbb.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Td_detalle_factura_ahbbs and only return the `id_detalle_factura_ahbb`
+     * const td_detalle_factura_ahbbWithId_detalle_factura_ahbbOnly = await prisma.td_detalle_factura_ahbb.createManyAndReturn({
+     *   select: { id_detalle_factura_ahbb: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends td_detalle_factura_ahbbCreateManyAndReturnArgs>(args?: SelectSubset<T, td_detalle_factura_ahbbCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_detalle_factura_ahbbPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Td_detalle_factura_ahbb.
+     * @param {td_detalle_factura_ahbbDeleteArgs} args - Arguments to delete one Td_detalle_factura_ahbb.
+     * @example
+     * // Delete one Td_detalle_factura_ahbb
+     * const Td_detalle_factura_ahbb = await prisma.td_detalle_factura_ahbb.delete({
+     *   where: {
+     *     // ... filter to delete one Td_detalle_factura_ahbb
+     *   }
+     * })
+     * 
+     */
+    delete<T extends td_detalle_factura_ahbbDeleteArgs>(args: SelectSubset<T, td_detalle_factura_ahbbDeleteArgs<ExtArgs>>): Prisma__td_detalle_factura_ahbbClient<$Result.GetResult<Prisma.$td_detalle_factura_ahbbPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Td_detalle_factura_ahbb.
+     * @param {td_detalle_factura_ahbbUpdateArgs} args - Arguments to update one Td_detalle_factura_ahbb.
+     * @example
+     * // Update one Td_detalle_factura_ahbb
+     * const td_detalle_factura_ahbb = await prisma.td_detalle_factura_ahbb.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends td_detalle_factura_ahbbUpdateArgs>(args: SelectSubset<T, td_detalle_factura_ahbbUpdateArgs<ExtArgs>>): Prisma__td_detalle_factura_ahbbClient<$Result.GetResult<Prisma.$td_detalle_factura_ahbbPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Td_detalle_factura_ahbbs.
+     * @param {td_detalle_factura_ahbbDeleteManyArgs} args - Arguments to filter Td_detalle_factura_ahbbs to delete.
+     * @example
+     * // Delete a few Td_detalle_factura_ahbbs
+     * const { count } = await prisma.td_detalle_factura_ahbb.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends td_detalle_factura_ahbbDeleteManyArgs>(args?: SelectSubset<T, td_detalle_factura_ahbbDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Td_detalle_factura_ahbbs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_detalle_factura_ahbbUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Td_detalle_factura_ahbbs
+     * const td_detalle_factura_ahbb = await prisma.td_detalle_factura_ahbb.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends td_detalle_factura_ahbbUpdateManyArgs>(args: SelectSubset<T, td_detalle_factura_ahbbUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Td_detalle_factura_ahbbs and returns the data updated in the database.
+     * @param {td_detalle_factura_ahbbUpdateManyAndReturnArgs} args - Arguments to update many Td_detalle_factura_ahbbs.
+     * @example
+     * // Update many Td_detalle_factura_ahbbs
+     * const td_detalle_factura_ahbb = await prisma.td_detalle_factura_ahbb.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Td_detalle_factura_ahbbs and only return the `id_detalle_factura_ahbb`
+     * const td_detalle_factura_ahbbWithId_detalle_factura_ahbbOnly = await prisma.td_detalle_factura_ahbb.updateManyAndReturn({
+     *   select: { id_detalle_factura_ahbb: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends td_detalle_factura_ahbbUpdateManyAndReturnArgs>(args: SelectSubset<T, td_detalle_factura_ahbbUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_detalle_factura_ahbbPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Td_detalle_factura_ahbb.
+     * @param {td_detalle_factura_ahbbUpsertArgs} args - Arguments to update or create a Td_detalle_factura_ahbb.
+     * @example
+     * // Update or create a Td_detalle_factura_ahbb
+     * const td_detalle_factura_ahbb = await prisma.td_detalle_factura_ahbb.upsert({
+     *   create: {
+     *     // ... data to create a Td_detalle_factura_ahbb
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Td_detalle_factura_ahbb we want to update
+     *   }
+     * })
+     */
+    upsert<T extends td_detalle_factura_ahbbUpsertArgs>(args: SelectSubset<T, td_detalle_factura_ahbbUpsertArgs<ExtArgs>>): Prisma__td_detalle_factura_ahbbClient<$Result.GetResult<Prisma.$td_detalle_factura_ahbbPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Td_detalle_factura_ahbbs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_detalle_factura_ahbbCountArgs} args - Arguments to filter Td_detalle_factura_ahbbs to count.
+     * @example
+     * // Count the number of Td_detalle_factura_ahbbs
+     * const count = await prisma.td_detalle_factura_ahbb.count({
+     *   where: {
+     *     // ... the filter for the Td_detalle_factura_ahbbs we want to count
+     *   }
+     * })
+    **/
+    count<T extends td_detalle_factura_ahbbCountArgs>(
+      args?: Subset<T, td_detalle_factura_ahbbCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Td_detalle_factura_ahbbCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Td_detalle_factura_ahbb.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Td_detalle_factura_ahbbAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Td_detalle_factura_ahbbAggregateArgs>(args: Subset<T, Td_detalle_factura_ahbbAggregateArgs>): Prisma.PrismaPromise<GetTd_detalle_factura_ahbbAggregateType<T>>
+
+    /**
+     * Group by Td_detalle_factura_ahbb.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_detalle_factura_ahbbGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends td_detalle_factura_ahbbGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: td_detalle_factura_ahbbGroupByArgs['orderBy'] }
+        : { orderBy?: td_detalle_factura_ahbbGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, td_detalle_factura_ahbbGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTd_detalle_factura_ahbbGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the td_detalle_factura_ahbb model
+   */
+  readonly fields: td_detalle_factura_ahbbFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for td_detalle_factura_ahbb.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__td_detalle_factura_ahbbClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    factura_ahbb<T extends td_factura_ahbbDefaultArgs<ExtArgs> = {}>(args?: Subset<T, td_factura_ahbbDefaultArgs<ExtArgs>>): Prisma__td_factura_ahbbClient<$Result.GetResult<Prisma.$td_factura_ahbbPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    producto_ahbb<T extends td_producto_ahbbDefaultArgs<ExtArgs> = {}>(args?: Subset<T, td_producto_ahbbDefaultArgs<ExtArgs>>): Prisma__td_producto_ahbbClient<$Result.GetResult<Prisma.$td_producto_ahbbPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the td_detalle_factura_ahbb model
+   */
+  interface td_detalle_factura_ahbbFieldRefs {
+    readonly id_detalle_factura_ahbb: FieldRef<"td_detalle_factura_ahbb", 'Int'>
+    readonly cantidad_ahbb: FieldRef<"td_detalle_factura_ahbb", 'Int'>
+    readonly precioUnitario_ahbb: FieldRef<"td_detalle_factura_ahbb", 'Decimal'>
+    readonly id_factura_detalle_ahbb: FieldRef<"td_detalle_factura_ahbb", 'Int'>
+    readonly id_producto_detalle_ahbb: FieldRef<"td_detalle_factura_ahbb", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * td_detalle_factura_ahbb findUnique
+   */
+  export type td_detalle_factura_ahbbFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_detalle_factura_ahbb
+     */
+    select?: td_detalle_factura_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_detalle_factura_ahbb
+     */
+    omit?: td_detalle_factura_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_detalle_factura_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter, which td_detalle_factura_ahbb to fetch.
+     */
+    where: td_detalle_factura_ahbbWhereUniqueInput
+  }
+
+  /**
+   * td_detalle_factura_ahbb findUniqueOrThrow
+   */
+  export type td_detalle_factura_ahbbFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_detalle_factura_ahbb
+     */
+    select?: td_detalle_factura_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_detalle_factura_ahbb
+     */
+    omit?: td_detalle_factura_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_detalle_factura_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter, which td_detalle_factura_ahbb to fetch.
+     */
+    where: td_detalle_factura_ahbbWhereUniqueInput
+  }
+
+  /**
+   * td_detalle_factura_ahbb findFirst
+   */
+  export type td_detalle_factura_ahbbFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_detalle_factura_ahbb
+     */
+    select?: td_detalle_factura_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_detalle_factura_ahbb
+     */
+    omit?: td_detalle_factura_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_detalle_factura_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter, which td_detalle_factura_ahbb to fetch.
+     */
+    where?: td_detalle_factura_ahbbWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of td_detalle_factura_ahbbs to fetch.
+     */
+    orderBy?: td_detalle_factura_ahbbOrderByWithRelationInput | td_detalle_factura_ahbbOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for td_detalle_factura_ahbbs.
+     */
+    cursor?: td_detalle_factura_ahbbWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` td_detalle_factura_ahbbs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` td_detalle_factura_ahbbs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of td_detalle_factura_ahbbs.
+     */
+    distinct?: Td_detalle_factura_ahbbScalarFieldEnum | Td_detalle_factura_ahbbScalarFieldEnum[]
+  }
+
+  /**
+   * td_detalle_factura_ahbb findFirstOrThrow
+   */
+  export type td_detalle_factura_ahbbFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_detalle_factura_ahbb
+     */
+    select?: td_detalle_factura_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_detalle_factura_ahbb
+     */
+    omit?: td_detalle_factura_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_detalle_factura_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter, which td_detalle_factura_ahbb to fetch.
+     */
+    where?: td_detalle_factura_ahbbWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of td_detalle_factura_ahbbs to fetch.
+     */
+    orderBy?: td_detalle_factura_ahbbOrderByWithRelationInput | td_detalle_factura_ahbbOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for td_detalle_factura_ahbbs.
+     */
+    cursor?: td_detalle_factura_ahbbWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` td_detalle_factura_ahbbs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` td_detalle_factura_ahbbs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of td_detalle_factura_ahbbs.
+     */
+    distinct?: Td_detalle_factura_ahbbScalarFieldEnum | Td_detalle_factura_ahbbScalarFieldEnum[]
+  }
+
+  /**
+   * td_detalle_factura_ahbb findMany
+   */
+  export type td_detalle_factura_ahbbFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_detalle_factura_ahbb
+     */
+    select?: td_detalle_factura_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_detalle_factura_ahbb
+     */
+    omit?: td_detalle_factura_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_detalle_factura_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter, which td_detalle_factura_ahbbs to fetch.
+     */
+    where?: td_detalle_factura_ahbbWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of td_detalle_factura_ahbbs to fetch.
+     */
+    orderBy?: td_detalle_factura_ahbbOrderByWithRelationInput | td_detalle_factura_ahbbOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing td_detalle_factura_ahbbs.
+     */
+    cursor?: td_detalle_factura_ahbbWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` td_detalle_factura_ahbbs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` td_detalle_factura_ahbbs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of td_detalle_factura_ahbbs.
+     */
+    distinct?: Td_detalle_factura_ahbbScalarFieldEnum | Td_detalle_factura_ahbbScalarFieldEnum[]
+  }
+
+  /**
+   * td_detalle_factura_ahbb create
+   */
+  export type td_detalle_factura_ahbbCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_detalle_factura_ahbb
+     */
+    select?: td_detalle_factura_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_detalle_factura_ahbb
+     */
+    omit?: td_detalle_factura_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_detalle_factura_ahbbInclude<ExtArgs> | null
+    /**
+     * The data needed to create a td_detalle_factura_ahbb.
+     */
+    data: XOR<td_detalle_factura_ahbbCreateInput, td_detalle_factura_ahbbUncheckedCreateInput>
+  }
+
+  /**
+   * td_detalle_factura_ahbb createMany
+   */
+  export type td_detalle_factura_ahbbCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many td_detalle_factura_ahbbs.
+     */
+    data: td_detalle_factura_ahbbCreateManyInput | td_detalle_factura_ahbbCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * td_detalle_factura_ahbb createManyAndReturn
+   */
+  export type td_detalle_factura_ahbbCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_detalle_factura_ahbb
+     */
+    select?: td_detalle_factura_ahbbSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_detalle_factura_ahbb
+     */
+    omit?: td_detalle_factura_ahbbOmit<ExtArgs> | null
+    /**
+     * The data used to create many td_detalle_factura_ahbbs.
+     */
+    data: td_detalle_factura_ahbbCreateManyInput | td_detalle_factura_ahbbCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_detalle_factura_ahbbIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * td_detalle_factura_ahbb update
+   */
+  export type td_detalle_factura_ahbbUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_detalle_factura_ahbb
+     */
+    select?: td_detalle_factura_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_detalle_factura_ahbb
+     */
+    omit?: td_detalle_factura_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_detalle_factura_ahbbInclude<ExtArgs> | null
+    /**
+     * The data needed to update a td_detalle_factura_ahbb.
+     */
+    data: XOR<td_detalle_factura_ahbbUpdateInput, td_detalle_factura_ahbbUncheckedUpdateInput>
+    /**
+     * Choose, which td_detalle_factura_ahbb to update.
+     */
+    where: td_detalle_factura_ahbbWhereUniqueInput
+  }
+
+  /**
+   * td_detalle_factura_ahbb updateMany
+   */
+  export type td_detalle_factura_ahbbUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update td_detalle_factura_ahbbs.
+     */
+    data: XOR<td_detalle_factura_ahbbUpdateManyMutationInput, td_detalle_factura_ahbbUncheckedUpdateManyInput>
+    /**
+     * Filter which td_detalle_factura_ahbbs to update
+     */
+    where?: td_detalle_factura_ahbbWhereInput
+    /**
+     * Limit how many td_detalle_factura_ahbbs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * td_detalle_factura_ahbb updateManyAndReturn
+   */
+  export type td_detalle_factura_ahbbUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_detalle_factura_ahbb
+     */
+    select?: td_detalle_factura_ahbbSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_detalle_factura_ahbb
+     */
+    omit?: td_detalle_factura_ahbbOmit<ExtArgs> | null
+    /**
+     * The data used to update td_detalle_factura_ahbbs.
+     */
+    data: XOR<td_detalle_factura_ahbbUpdateManyMutationInput, td_detalle_factura_ahbbUncheckedUpdateManyInput>
+    /**
+     * Filter which td_detalle_factura_ahbbs to update
+     */
+    where?: td_detalle_factura_ahbbWhereInput
+    /**
+     * Limit how many td_detalle_factura_ahbbs to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_detalle_factura_ahbbIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * td_detalle_factura_ahbb upsert
+   */
+  export type td_detalle_factura_ahbbUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_detalle_factura_ahbb
+     */
+    select?: td_detalle_factura_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_detalle_factura_ahbb
+     */
+    omit?: td_detalle_factura_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_detalle_factura_ahbbInclude<ExtArgs> | null
+    /**
+     * The filter to search for the td_detalle_factura_ahbb to update in case it exists.
+     */
+    where: td_detalle_factura_ahbbWhereUniqueInput
+    /**
+     * In case the td_detalle_factura_ahbb found by the `where` argument doesn't exist, create a new td_detalle_factura_ahbb with this data.
+     */
+    create: XOR<td_detalle_factura_ahbbCreateInput, td_detalle_factura_ahbbUncheckedCreateInput>
+    /**
+     * In case the td_detalle_factura_ahbb was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<td_detalle_factura_ahbbUpdateInput, td_detalle_factura_ahbbUncheckedUpdateInput>
+  }
+
+  /**
+   * td_detalle_factura_ahbb delete
+   */
+  export type td_detalle_factura_ahbbDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_detalle_factura_ahbb
+     */
+    select?: td_detalle_factura_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_detalle_factura_ahbb
+     */
+    omit?: td_detalle_factura_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_detalle_factura_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter which td_detalle_factura_ahbb to delete.
+     */
+    where: td_detalle_factura_ahbbWhereUniqueInput
+  }
+
+  /**
+   * td_detalle_factura_ahbb deleteMany
+   */
+  export type td_detalle_factura_ahbbDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which td_detalle_factura_ahbbs to delete
+     */
+    where?: td_detalle_factura_ahbbWhereInput
+    /**
+     * Limit how many td_detalle_factura_ahbbs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * td_detalle_factura_ahbb without action
+   */
+  export type td_detalle_factura_ahbbDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_detalle_factura_ahbb
+     */
+    select?: td_detalle_factura_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_detalle_factura_ahbb
+     */
+    omit?: td_detalle_factura_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_detalle_factura_ahbbInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model td_favorito_ahbb
+   */
+
+  export type AggregateTd_favorito_ahbb = {
+    _count: Td_favorito_ahbbCountAggregateOutputType | null
+    _avg: Td_favorito_ahbbAvgAggregateOutputType | null
+    _sum: Td_favorito_ahbbSumAggregateOutputType | null
+    _min: Td_favorito_ahbbMinAggregateOutputType | null
+    _max: Td_favorito_ahbbMaxAggregateOutputType | null
+  }
+
+  export type Td_favorito_ahbbAvgAggregateOutputType = {
+    id_favorito_ahbb: number | null
+    id_usuario_favorito_ahbb: number | null
+    id_producto_favorito_ahbb: number | null
+  }
+
+  export type Td_favorito_ahbbSumAggregateOutputType = {
+    id_favorito_ahbb: number | null
+    id_usuario_favorito_ahbb: number | null
+    id_producto_favorito_ahbb: number | null
+  }
+
+  export type Td_favorito_ahbbMinAggregateOutputType = {
+    id_favorito_ahbb: number | null
+    fechaAgregado_ahbb: Date | null
+    id_usuario_favorito_ahbb: number | null
+    id_producto_favorito_ahbb: number | null
+  }
+
+  export type Td_favorito_ahbbMaxAggregateOutputType = {
+    id_favorito_ahbb: number | null
+    fechaAgregado_ahbb: Date | null
+    id_usuario_favorito_ahbb: number | null
+    id_producto_favorito_ahbb: number | null
+  }
+
+  export type Td_favorito_ahbbCountAggregateOutputType = {
+    id_favorito_ahbb: number
+    fechaAgregado_ahbb: number
+    id_usuario_favorito_ahbb: number
+    id_producto_favorito_ahbb: number
+    _all: number
+  }
+
+
+  export type Td_favorito_ahbbAvgAggregateInputType = {
+    id_favorito_ahbb?: true
+    id_usuario_favorito_ahbb?: true
+    id_producto_favorito_ahbb?: true
+  }
+
+  export type Td_favorito_ahbbSumAggregateInputType = {
+    id_favorito_ahbb?: true
+    id_usuario_favorito_ahbb?: true
+    id_producto_favorito_ahbb?: true
+  }
+
+  export type Td_favorito_ahbbMinAggregateInputType = {
+    id_favorito_ahbb?: true
+    fechaAgregado_ahbb?: true
+    id_usuario_favorito_ahbb?: true
+    id_producto_favorito_ahbb?: true
+  }
+
+  export type Td_favorito_ahbbMaxAggregateInputType = {
+    id_favorito_ahbb?: true
+    fechaAgregado_ahbb?: true
+    id_usuario_favorito_ahbb?: true
+    id_producto_favorito_ahbb?: true
+  }
+
+  export type Td_favorito_ahbbCountAggregateInputType = {
+    id_favorito_ahbb?: true
+    fechaAgregado_ahbb?: true
+    id_usuario_favorito_ahbb?: true
+    id_producto_favorito_ahbb?: true
+    _all?: true
+  }
+
+  export type Td_favorito_ahbbAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which td_favorito_ahbb to aggregate.
+     */
+    where?: td_favorito_ahbbWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of td_favorito_ahbbs to fetch.
+     */
+    orderBy?: td_favorito_ahbbOrderByWithRelationInput | td_favorito_ahbbOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: td_favorito_ahbbWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` td_favorito_ahbbs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` td_favorito_ahbbs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned td_favorito_ahbbs
+    **/
+    _count?: true | Td_favorito_ahbbCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Td_favorito_ahbbAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Td_favorito_ahbbSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Td_favorito_ahbbMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Td_favorito_ahbbMaxAggregateInputType
+  }
+
+  export type GetTd_favorito_ahbbAggregateType<T extends Td_favorito_ahbbAggregateArgs> = {
+        [P in keyof T & keyof AggregateTd_favorito_ahbb]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTd_favorito_ahbb[P]>
+      : GetScalarType<T[P], AggregateTd_favorito_ahbb[P]>
+  }
+
+
+
+
+  export type td_favorito_ahbbGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: td_favorito_ahbbWhereInput
+    orderBy?: td_favorito_ahbbOrderByWithAggregationInput | td_favorito_ahbbOrderByWithAggregationInput[]
+    by: Td_favorito_ahbbScalarFieldEnum[] | Td_favorito_ahbbScalarFieldEnum
+    having?: td_favorito_ahbbScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Td_favorito_ahbbCountAggregateInputType | true
+    _avg?: Td_favorito_ahbbAvgAggregateInputType
+    _sum?: Td_favorito_ahbbSumAggregateInputType
+    _min?: Td_favorito_ahbbMinAggregateInputType
+    _max?: Td_favorito_ahbbMaxAggregateInputType
+  }
+
+  export type Td_favorito_ahbbGroupByOutputType = {
+    id_favorito_ahbb: number
+    fechaAgregado_ahbb: Date | null
+    id_usuario_favorito_ahbb: number
+    id_producto_favorito_ahbb: number
+    _count: Td_favorito_ahbbCountAggregateOutputType | null
+    _avg: Td_favorito_ahbbAvgAggregateOutputType | null
+    _sum: Td_favorito_ahbbSumAggregateOutputType | null
+    _min: Td_favorito_ahbbMinAggregateOutputType | null
+    _max: Td_favorito_ahbbMaxAggregateOutputType | null
+  }
+
+  type GetTd_favorito_ahbbGroupByPayload<T extends td_favorito_ahbbGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Td_favorito_ahbbGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Td_favorito_ahbbGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Td_favorito_ahbbGroupByOutputType[P]>
+            : GetScalarType<T[P], Td_favorito_ahbbGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type td_favorito_ahbbSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id_favorito_ahbb?: boolean
+    fechaAgregado_ahbb?: boolean
+    id_usuario_favorito_ahbb?: boolean
+    id_producto_favorito_ahbb?: boolean
+    usuario_ahbb?: boolean | td_usuario_ahbbDefaultArgs<ExtArgs>
+    producto_ahbb?: boolean | td_producto_ahbbDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["td_favorito_ahbb"]>
+
+  export type td_favorito_ahbbSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id_favorito_ahbb?: boolean
+    fechaAgregado_ahbb?: boolean
+    id_usuario_favorito_ahbb?: boolean
+    id_producto_favorito_ahbb?: boolean
+    usuario_ahbb?: boolean | td_usuario_ahbbDefaultArgs<ExtArgs>
+    producto_ahbb?: boolean | td_producto_ahbbDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["td_favorito_ahbb"]>
+
+  export type td_favorito_ahbbSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id_favorito_ahbb?: boolean
+    fechaAgregado_ahbb?: boolean
+    id_usuario_favorito_ahbb?: boolean
+    id_producto_favorito_ahbb?: boolean
+    usuario_ahbb?: boolean | td_usuario_ahbbDefaultArgs<ExtArgs>
+    producto_ahbb?: boolean | td_producto_ahbbDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["td_favorito_ahbb"]>
+
+  export type td_favorito_ahbbSelectScalar = {
+    id_favorito_ahbb?: boolean
+    fechaAgregado_ahbb?: boolean
+    id_usuario_favorito_ahbb?: boolean
+    id_producto_favorito_ahbb?: boolean
+  }
+
+  export type td_favorito_ahbbOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_favorito_ahbb" | "fechaAgregado_ahbb" | "id_usuario_favorito_ahbb" | "id_producto_favorito_ahbb", ExtArgs["result"]["td_favorito_ahbb"]>
+  export type td_favorito_ahbbInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usuario_ahbb?: boolean | td_usuario_ahbbDefaultArgs<ExtArgs>
+    producto_ahbb?: boolean | td_producto_ahbbDefaultArgs<ExtArgs>
+  }
+  export type td_favorito_ahbbIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usuario_ahbb?: boolean | td_usuario_ahbbDefaultArgs<ExtArgs>
+    producto_ahbb?: boolean | td_producto_ahbbDefaultArgs<ExtArgs>
+  }
+  export type td_favorito_ahbbIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usuario_ahbb?: boolean | td_usuario_ahbbDefaultArgs<ExtArgs>
+    producto_ahbb?: boolean | td_producto_ahbbDefaultArgs<ExtArgs>
+  }
+
+  export type $td_favorito_ahbbPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "td_favorito_ahbb"
+    objects: {
+      usuario_ahbb: Prisma.$td_usuario_ahbbPayload<ExtArgs>
+      producto_ahbb: Prisma.$td_producto_ahbbPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id_favorito_ahbb: number
+      fechaAgregado_ahbb: Date | null
+      id_usuario_favorito_ahbb: number
+      id_producto_favorito_ahbb: number
+    }, ExtArgs["result"]["td_favorito_ahbb"]>
+    composites: {}
+  }
+
+  type td_favorito_ahbbGetPayload<S extends boolean | null | undefined | td_favorito_ahbbDefaultArgs> = $Result.GetResult<Prisma.$td_favorito_ahbbPayload, S>
+
+  type td_favorito_ahbbCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<td_favorito_ahbbFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Td_favorito_ahbbCountAggregateInputType | true
+    }
+
+  export interface td_favorito_ahbbDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['td_favorito_ahbb'], meta: { name: 'td_favorito_ahbb' } }
+    /**
+     * Find zero or one Td_favorito_ahbb that matches the filter.
+     * @param {td_favorito_ahbbFindUniqueArgs} args - Arguments to find a Td_favorito_ahbb
+     * @example
+     * // Get one Td_favorito_ahbb
+     * const td_favorito_ahbb = await prisma.td_favorito_ahbb.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends td_favorito_ahbbFindUniqueArgs>(args: SelectSubset<T, td_favorito_ahbbFindUniqueArgs<ExtArgs>>): Prisma__td_favorito_ahbbClient<$Result.GetResult<Prisma.$td_favorito_ahbbPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Td_favorito_ahbb that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {td_favorito_ahbbFindUniqueOrThrowArgs} args - Arguments to find a Td_favorito_ahbb
+     * @example
+     * // Get one Td_favorito_ahbb
+     * const td_favorito_ahbb = await prisma.td_favorito_ahbb.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends td_favorito_ahbbFindUniqueOrThrowArgs>(args: SelectSubset<T, td_favorito_ahbbFindUniqueOrThrowArgs<ExtArgs>>): Prisma__td_favorito_ahbbClient<$Result.GetResult<Prisma.$td_favorito_ahbbPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Td_favorito_ahbb that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_favorito_ahbbFindFirstArgs} args - Arguments to find a Td_favorito_ahbb
+     * @example
+     * // Get one Td_favorito_ahbb
+     * const td_favorito_ahbb = await prisma.td_favorito_ahbb.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends td_favorito_ahbbFindFirstArgs>(args?: SelectSubset<T, td_favorito_ahbbFindFirstArgs<ExtArgs>>): Prisma__td_favorito_ahbbClient<$Result.GetResult<Prisma.$td_favorito_ahbbPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Td_favorito_ahbb that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_favorito_ahbbFindFirstOrThrowArgs} args - Arguments to find a Td_favorito_ahbb
+     * @example
+     * // Get one Td_favorito_ahbb
+     * const td_favorito_ahbb = await prisma.td_favorito_ahbb.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends td_favorito_ahbbFindFirstOrThrowArgs>(args?: SelectSubset<T, td_favorito_ahbbFindFirstOrThrowArgs<ExtArgs>>): Prisma__td_favorito_ahbbClient<$Result.GetResult<Prisma.$td_favorito_ahbbPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Td_favorito_ahbbs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_favorito_ahbbFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Td_favorito_ahbbs
+     * const td_favorito_ahbbs = await prisma.td_favorito_ahbb.findMany()
+     * 
+     * // Get first 10 Td_favorito_ahbbs
+     * const td_favorito_ahbbs = await prisma.td_favorito_ahbb.findMany({ take: 10 })
+     * 
+     * // Only select the `id_favorito_ahbb`
+     * const td_favorito_ahbbWithId_favorito_ahbbOnly = await prisma.td_favorito_ahbb.findMany({ select: { id_favorito_ahbb: true } })
+     * 
+     */
+    findMany<T extends td_favorito_ahbbFindManyArgs>(args?: SelectSubset<T, td_favorito_ahbbFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_favorito_ahbbPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Td_favorito_ahbb.
+     * @param {td_favorito_ahbbCreateArgs} args - Arguments to create a Td_favorito_ahbb.
+     * @example
+     * // Create one Td_favorito_ahbb
+     * const Td_favorito_ahbb = await prisma.td_favorito_ahbb.create({
+     *   data: {
+     *     // ... data to create a Td_favorito_ahbb
+     *   }
+     * })
+     * 
+     */
+    create<T extends td_favorito_ahbbCreateArgs>(args: SelectSubset<T, td_favorito_ahbbCreateArgs<ExtArgs>>): Prisma__td_favorito_ahbbClient<$Result.GetResult<Prisma.$td_favorito_ahbbPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Td_favorito_ahbbs.
+     * @param {td_favorito_ahbbCreateManyArgs} args - Arguments to create many Td_favorito_ahbbs.
+     * @example
+     * // Create many Td_favorito_ahbbs
+     * const td_favorito_ahbb = await prisma.td_favorito_ahbb.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends td_favorito_ahbbCreateManyArgs>(args?: SelectSubset<T, td_favorito_ahbbCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Td_favorito_ahbbs and returns the data saved in the database.
+     * @param {td_favorito_ahbbCreateManyAndReturnArgs} args - Arguments to create many Td_favorito_ahbbs.
+     * @example
+     * // Create many Td_favorito_ahbbs
+     * const td_favorito_ahbb = await prisma.td_favorito_ahbb.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Td_favorito_ahbbs and only return the `id_favorito_ahbb`
+     * const td_favorito_ahbbWithId_favorito_ahbbOnly = await prisma.td_favorito_ahbb.createManyAndReturn({
+     *   select: { id_favorito_ahbb: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends td_favorito_ahbbCreateManyAndReturnArgs>(args?: SelectSubset<T, td_favorito_ahbbCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_favorito_ahbbPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Td_favorito_ahbb.
+     * @param {td_favorito_ahbbDeleteArgs} args - Arguments to delete one Td_favorito_ahbb.
+     * @example
+     * // Delete one Td_favorito_ahbb
+     * const Td_favorito_ahbb = await prisma.td_favorito_ahbb.delete({
+     *   where: {
+     *     // ... filter to delete one Td_favorito_ahbb
+     *   }
+     * })
+     * 
+     */
+    delete<T extends td_favorito_ahbbDeleteArgs>(args: SelectSubset<T, td_favorito_ahbbDeleteArgs<ExtArgs>>): Prisma__td_favorito_ahbbClient<$Result.GetResult<Prisma.$td_favorito_ahbbPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Td_favorito_ahbb.
+     * @param {td_favorito_ahbbUpdateArgs} args - Arguments to update one Td_favorito_ahbb.
+     * @example
+     * // Update one Td_favorito_ahbb
+     * const td_favorito_ahbb = await prisma.td_favorito_ahbb.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends td_favorito_ahbbUpdateArgs>(args: SelectSubset<T, td_favorito_ahbbUpdateArgs<ExtArgs>>): Prisma__td_favorito_ahbbClient<$Result.GetResult<Prisma.$td_favorito_ahbbPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Td_favorito_ahbbs.
+     * @param {td_favorito_ahbbDeleteManyArgs} args - Arguments to filter Td_favorito_ahbbs to delete.
+     * @example
+     * // Delete a few Td_favorito_ahbbs
+     * const { count } = await prisma.td_favorito_ahbb.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends td_favorito_ahbbDeleteManyArgs>(args?: SelectSubset<T, td_favorito_ahbbDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Td_favorito_ahbbs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_favorito_ahbbUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Td_favorito_ahbbs
+     * const td_favorito_ahbb = await prisma.td_favorito_ahbb.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends td_favorito_ahbbUpdateManyArgs>(args: SelectSubset<T, td_favorito_ahbbUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Td_favorito_ahbbs and returns the data updated in the database.
+     * @param {td_favorito_ahbbUpdateManyAndReturnArgs} args - Arguments to update many Td_favorito_ahbbs.
+     * @example
+     * // Update many Td_favorito_ahbbs
+     * const td_favorito_ahbb = await prisma.td_favorito_ahbb.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Td_favorito_ahbbs and only return the `id_favorito_ahbb`
+     * const td_favorito_ahbbWithId_favorito_ahbbOnly = await prisma.td_favorito_ahbb.updateManyAndReturn({
+     *   select: { id_favorito_ahbb: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends td_favorito_ahbbUpdateManyAndReturnArgs>(args: SelectSubset<T, td_favorito_ahbbUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_favorito_ahbbPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Td_favorito_ahbb.
+     * @param {td_favorito_ahbbUpsertArgs} args - Arguments to update or create a Td_favorito_ahbb.
+     * @example
+     * // Update or create a Td_favorito_ahbb
+     * const td_favorito_ahbb = await prisma.td_favorito_ahbb.upsert({
+     *   create: {
+     *     // ... data to create a Td_favorito_ahbb
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Td_favorito_ahbb we want to update
+     *   }
+     * })
+     */
+    upsert<T extends td_favorito_ahbbUpsertArgs>(args: SelectSubset<T, td_favorito_ahbbUpsertArgs<ExtArgs>>): Prisma__td_favorito_ahbbClient<$Result.GetResult<Prisma.$td_favorito_ahbbPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Td_favorito_ahbbs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_favorito_ahbbCountArgs} args - Arguments to filter Td_favorito_ahbbs to count.
+     * @example
+     * // Count the number of Td_favorito_ahbbs
+     * const count = await prisma.td_favorito_ahbb.count({
+     *   where: {
+     *     // ... the filter for the Td_favorito_ahbbs we want to count
+     *   }
+     * })
+    **/
+    count<T extends td_favorito_ahbbCountArgs>(
+      args?: Subset<T, td_favorito_ahbbCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Td_favorito_ahbbCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Td_favorito_ahbb.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Td_favorito_ahbbAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Td_favorito_ahbbAggregateArgs>(args: Subset<T, Td_favorito_ahbbAggregateArgs>): Prisma.PrismaPromise<GetTd_favorito_ahbbAggregateType<T>>
+
+    /**
+     * Group by Td_favorito_ahbb.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_favorito_ahbbGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends td_favorito_ahbbGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: td_favorito_ahbbGroupByArgs['orderBy'] }
+        : { orderBy?: td_favorito_ahbbGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, td_favorito_ahbbGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTd_favorito_ahbbGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the td_favorito_ahbb model
+   */
+  readonly fields: td_favorito_ahbbFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for td_favorito_ahbb.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__td_favorito_ahbbClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    usuario_ahbb<T extends td_usuario_ahbbDefaultArgs<ExtArgs> = {}>(args?: Subset<T, td_usuario_ahbbDefaultArgs<ExtArgs>>): Prisma__td_usuario_ahbbClient<$Result.GetResult<Prisma.$td_usuario_ahbbPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    producto_ahbb<T extends td_producto_ahbbDefaultArgs<ExtArgs> = {}>(args?: Subset<T, td_producto_ahbbDefaultArgs<ExtArgs>>): Prisma__td_producto_ahbbClient<$Result.GetResult<Prisma.$td_producto_ahbbPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the td_favorito_ahbb model
+   */
+  interface td_favorito_ahbbFieldRefs {
+    readonly id_favorito_ahbb: FieldRef<"td_favorito_ahbb", 'Int'>
+    readonly fechaAgregado_ahbb: FieldRef<"td_favorito_ahbb", 'DateTime'>
+    readonly id_usuario_favorito_ahbb: FieldRef<"td_favorito_ahbb", 'Int'>
+    readonly id_producto_favorito_ahbb: FieldRef<"td_favorito_ahbb", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * td_favorito_ahbb findUnique
+   */
+  export type td_favorito_ahbbFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_favorito_ahbb
+     */
+    select?: td_favorito_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_favorito_ahbb
+     */
+    omit?: td_favorito_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_favorito_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter, which td_favorito_ahbb to fetch.
+     */
+    where: td_favorito_ahbbWhereUniqueInput
+  }
+
+  /**
+   * td_favorito_ahbb findUniqueOrThrow
+   */
+  export type td_favorito_ahbbFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_favorito_ahbb
+     */
+    select?: td_favorito_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_favorito_ahbb
+     */
+    omit?: td_favorito_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_favorito_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter, which td_favorito_ahbb to fetch.
+     */
+    where: td_favorito_ahbbWhereUniqueInput
+  }
+
+  /**
+   * td_favorito_ahbb findFirst
+   */
+  export type td_favorito_ahbbFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_favorito_ahbb
+     */
+    select?: td_favorito_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_favorito_ahbb
+     */
+    omit?: td_favorito_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_favorito_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter, which td_favorito_ahbb to fetch.
+     */
+    where?: td_favorito_ahbbWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of td_favorito_ahbbs to fetch.
+     */
+    orderBy?: td_favorito_ahbbOrderByWithRelationInput | td_favorito_ahbbOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for td_favorito_ahbbs.
+     */
+    cursor?: td_favorito_ahbbWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` td_favorito_ahbbs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` td_favorito_ahbbs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of td_favorito_ahbbs.
+     */
+    distinct?: Td_favorito_ahbbScalarFieldEnum | Td_favorito_ahbbScalarFieldEnum[]
+  }
+
+  /**
+   * td_favorito_ahbb findFirstOrThrow
+   */
+  export type td_favorito_ahbbFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_favorito_ahbb
+     */
+    select?: td_favorito_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_favorito_ahbb
+     */
+    omit?: td_favorito_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_favorito_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter, which td_favorito_ahbb to fetch.
+     */
+    where?: td_favorito_ahbbWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of td_favorito_ahbbs to fetch.
+     */
+    orderBy?: td_favorito_ahbbOrderByWithRelationInput | td_favorito_ahbbOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for td_favorito_ahbbs.
+     */
+    cursor?: td_favorito_ahbbWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` td_favorito_ahbbs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` td_favorito_ahbbs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of td_favorito_ahbbs.
+     */
+    distinct?: Td_favorito_ahbbScalarFieldEnum | Td_favorito_ahbbScalarFieldEnum[]
+  }
+
+  /**
+   * td_favorito_ahbb findMany
+   */
+  export type td_favorito_ahbbFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_favorito_ahbb
+     */
+    select?: td_favorito_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_favorito_ahbb
+     */
+    omit?: td_favorito_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_favorito_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter, which td_favorito_ahbbs to fetch.
+     */
+    where?: td_favorito_ahbbWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of td_favorito_ahbbs to fetch.
+     */
+    orderBy?: td_favorito_ahbbOrderByWithRelationInput | td_favorito_ahbbOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing td_favorito_ahbbs.
+     */
+    cursor?: td_favorito_ahbbWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` td_favorito_ahbbs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` td_favorito_ahbbs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of td_favorito_ahbbs.
+     */
+    distinct?: Td_favorito_ahbbScalarFieldEnum | Td_favorito_ahbbScalarFieldEnum[]
+  }
+
+  /**
+   * td_favorito_ahbb create
+   */
+  export type td_favorito_ahbbCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_favorito_ahbb
+     */
+    select?: td_favorito_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_favorito_ahbb
+     */
+    omit?: td_favorito_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_favorito_ahbbInclude<ExtArgs> | null
+    /**
+     * The data needed to create a td_favorito_ahbb.
+     */
+    data: XOR<td_favorito_ahbbCreateInput, td_favorito_ahbbUncheckedCreateInput>
+  }
+
+  /**
+   * td_favorito_ahbb createMany
+   */
+  export type td_favorito_ahbbCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many td_favorito_ahbbs.
+     */
+    data: td_favorito_ahbbCreateManyInput | td_favorito_ahbbCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * td_favorito_ahbb createManyAndReturn
+   */
+  export type td_favorito_ahbbCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_favorito_ahbb
+     */
+    select?: td_favorito_ahbbSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_favorito_ahbb
+     */
+    omit?: td_favorito_ahbbOmit<ExtArgs> | null
+    /**
+     * The data used to create many td_favorito_ahbbs.
+     */
+    data: td_favorito_ahbbCreateManyInput | td_favorito_ahbbCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_favorito_ahbbIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * td_favorito_ahbb update
+   */
+  export type td_favorito_ahbbUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_favorito_ahbb
+     */
+    select?: td_favorito_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_favorito_ahbb
+     */
+    omit?: td_favorito_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_favorito_ahbbInclude<ExtArgs> | null
+    /**
+     * The data needed to update a td_favorito_ahbb.
+     */
+    data: XOR<td_favorito_ahbbUpdateInput, td_favorito_ahbbUncheckedUpdateInput>
+    /**
+     * Choose, which td_favorito_ahbb to update.
+     */
+    where: td_favorito_ahbbWhereUniqueInput
+  }
+
+  /**
+   * td_favorito_ahbb updateMany
+   */
+  export type td_favorito_ahbbUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update td_favorito_ahbbs.
+     */
+    data: XOR<td_favorito_ahbbUpdateManyMutationInput, td_favorito_ahbbUncheckedUpdateManyInput>
+    /**
+     * Filter which td_favorito_ahbbs to update
+     */
+    where?: td_favorito_ahbbWhereInput
+    /**
+     * Limit how many td_favorito_ahbbs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * td_favorito_ahbb updateManyAndReturn
+   */
+  export type td_favorito_ahbbUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_favorito_ahbb
+     */
+    select?: td_favorito_ahbbSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_favorito_ahbb
+     */
+    omit?: td_favorito_ahbbOmit<ExtArgs> | null
+    /**
+     * The data used to update td_favorito_ahbbs.
+     */
+    data: XOR<td_favorito_ahbbUpdateManyMutationInput, td_favorito_ahbbUncheckedUpdateManyInput>
+    /**
+     * Filter which td_favorito_ahbbs to update
+     */
+    where?: td_favorito_ahbbWhereInput
+    /**
+     * Limit how many td_favorito_ahbbs to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_favorito_ahbbIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * td_favorito_ahbb upsert
+   */
+  export type td_favorito_ahbbUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_favorito_ahbb
+     */
+    select?: td_favorito_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_favorito_ahbb
+     */
+    omit?: td_favorito_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_favorito_ahbbInclude<ExtArgs> | null
+    /**
+     * The filter to search for the td_favorito_ahbb to update in case it exists.
+     */
+    where: td_favorito_ahbbWhereUniqueInput
+    /**
+     * In case the td_favorito_ahbb found by the `where` argument doesn't exist, create a new td_favorito_ahbb with this data.
+     */
+    create: XOR<td_favorito_ahbbCreateInput, td_favorito_ahbbUncheckedCreateInput>
+    /**
+     * In case the td_favorito_ahbb was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<td_favorito_ahbbUpdateInput, td_favorito_ahbbUncheckedUpdateInput>
+  }
+
+  /**
+   * td_favorito_ahbb delete
+   */
+  export type td_favorito_ahbbDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_favorito_ahbb
+     */
+    select?: td_favorito_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_favorito_ahbb
+     */
+    omit?: td_favorito_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_favorito_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter which td_favorito_ahbb to delete.
+     */
+    where: td_favorito_ahbbWhereUniqueInput
+  }
+
+  /**
+   * td_favorito_ahbb deleteMany
+   */
+  export type td_favorito_ahbbDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which td_favorito_ahbbs to delete
+     */
+    where?: td_favorito_ahbbWhereInput
+    /**
+     * Limit how many td_favorito_ahbbs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * td_favorito_ahbb without action
+   */
+  export type td_favorito_ahbbDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_favorito_ahbb
+     */
+    select?: td_favorito_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_favorito_ahbb
+     */
+    omit?: td_favorito_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_favorito_ahbbInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -9863,6 +16233,66 @@ export namespace Prisma {
   };
 
   export type Td_auditoria_aprobacion_ahbbScalarFieldEnum = (typeof Td_auditoria_aprobacion_ahbbScalarFieldEnum)[keyof typeof Td_auditoria_aprobacion_ahbbScalarFieldEnum]
+
+
+  export const Td_producto_ahbbScalarFieldEnum: {
+    id_producto_ahbb: 'id_producto_ahbb',
+    nombre_ahbb: 'nombre_ahbb',
+    descripcion_ahbb: 'descripcion_ahbb',
+    precio_ahbb: 'precio_ahbb',
+    stock_ahbb: 'stock_ahbb',
+    categoria_ahbb: 'categoria_ahbb',
+    imagen_ahbb: 'imagen_ahbb',
+    estado_producto_ahbb: 'estado_producto_ahbb',
+    creadoEn_ahbb: 'creadoEn_ahbb',
+    actualizadoEn_ahbb: 'actualizadoEn_ahbb'
+  };
+
+  export type Td_producto_ahbbScalarFieldEnum = (typeof Td_producto_ahbbScalarFieldEnum)[keyof typeof Td_producto_ahbbScalarFieldEnum]
+
+
+  export const Td_carrito_ahbbScalarFieldEnum: {
+    id_carrito_ahbb: 'id_carrito_ahbb',
+    cantidad_ahbb: 'cantidad_ahbb',
+    fechaAgregado_ahbb: 'fechaAgregado_ahbb',
+    id_usuario_carrito_ahbb: 'id_usuario_carrito_ahbb',
+    id_producto_carrito_ahbb: 'id_producto_carrito_ahbb'
+  };
+
+  export type Td_carrito_ahbbScalarFieldEnum = (typeof Td_carrito_ahbbScalarFieldEnum)[keyof typeof Td_carrito_ahbbScalarFieldEnum]
+
+
+  export const Td_factura_ahbbScalarFieldEnum: {
+    id_factura_ahbb: 'id_factura_ahbb',
+    nroReferenciaPago_ahbb: 'nroReferenciaPago_ahbb',
+    fechaFactura_ahbb: 'fechaFactura_ahbb',
+    total_ahbb: 'total_ahbb',
+    estadoFactura_ahbb: 'estadoFactura_ahbb',
+    id_usuario_factura_ahbb: 'id_usuario_factura_ahbb'
+  };
+
+  export type Td_factura_ahbbScalarFieldEnum = (typeof Td_factura_ahbbScalarFieldEnum)[keyof typeof Td_factura_ahbbScalarFieldEnum]
+
+
+  export const Td_detalle_factura_ahbbScalarFieldEnum: {
+    id_detalle_factura_ahbb: 'id_detalle_factura_ahbb',
+    cantidad_ahbb: 'cantidad_ahbb',
+    precioUnitario_ahbb: 'precioUnitario_ahbb',
+    id_factura_detalle_ahbb: 'id_factura_detalle_ahbb',
+    id_producto_detalle_ahbb: 'id_producto_detalle_ahbb'
+  };
+
+  export type Td_detalle_factura_ahbbScalarFieldEnum = (typeof Td_detalle_factura_ahbbScalarFieldEnum)[keyof typeof Td_detalle_factura_ahbbScalarFieldEnum]
+
+
+  export const Td_favorito_ahbbScalarFieldEnum: {
+    id_favorito_ahbb: 'id_favorito_ahbb',
+    fechaAgregado_ahbb: 'fechaAgregado_ahbb',
+    id_usuario_favorito_ahbb: 'id_usuario_favorito_ahbb',
+    id_producto_favorito_ahbb: 'id_producto_favorito_ahbb'
+  };
+
+  export type Td_favorito_ahbbScalarFieldEnum = (typeof Td_favorito_ahbbScalarFieldEnum)[keyof typeof Td_favorito_ahbbScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -9996,6 +16426,9 @@ export namespace Prisma {
     inscripciones?: Td_inscripcion_ahbbListRelationFilter
     auditoriasAprobadas_ahbb?: Td_auditoria_aprobacion_ahbbListRelationFilter
     auditoriasUsuario_ahbb?: Td_auditoria_aprobacion_ahbbListRelationFilter
+    carrito_ahbb?: Td_carrito_ahbbListRelationFilter
+    facturas_ahbb?: Td_factura_ahbbListRelationFilter
+    favoritos_ahbb?: Td_favorito_ahbbListRelationFilter
   }
 
   export type td_usuario_ahbbOrderByWithRelationInput = {
@@ -10017,6 +16450,9 @@ export namespace Prisma {
     inscripciones?: td_inscripcion_ahbbOrderByRelationAggregateInput
     auditoriasAprobadas_ahbb?: td_auditoria_aprobacion_ahbbOrderByRelationAggregateInput
     auditoriasUsuario_ahbb?: td_auditoria_aprobacion_ahbbOrderByRelationAggregateInput
+    carrito_ahbb?: td_carrito_ahbbOrderByRelationAggregateInput
+    facturas_ahbb?: td_factura_ahbbOrderByRelationAggregateInput
+    favoritos_ahbb?: td_favorito_ahbbOrderByRelationAggregateInput
   }
 
   export type td_usuario_ahbbWhereUniqueInput = Prisma.AtLeast<{
@@ -10041,6 +16477,9 @@ export namespace Prisma {
     inscripciones?: Td_inscripcion_ahbbListRelationFilter
     auditoriasAprobadas_ahbb?: Td_auditoria_aprobacion_ahbbListRelationFilter
     auditoriasUsuario_ahbb?: Td_auditoria_aprobacion_ahbbListRelationFilter
+    carrito_ahbb?: Td_carrito_ahbbListRelationFilter
+    facturas_ahbb?: Td_factura_ahbbListRelationFilter
+    favoritos_ahbb?: Td_favorito_ahbbListRelationFilter
   }, "id_usuario_ahbb" | "cedula_ahbb" | "correo_ahbb">
 
   export type td_usuario_ahbbOrderByWithAggregationInput = {
@@ -10520,6 +16959,336 @@ export namespace Prisma {
     creadoEn_ahbb?: DateTimeWithAggregatesFilter<"td_auditoria_aprobacion_ahbb"> | Date | string
   }
 
+  export type td_producto_ahbbWhereInput = {
+    AND?: td_producto_ahbbWhereInput | td_producto_ahbbWhereInput[]
+    OR?: td_producto_ahbbWhereInput[]
+    NOT?: td_producto_ahbbWhereInput | td_producto_ahbbWhereInput[]
+    id_producto_ahbb?: IntFilter<"td_producto_ahbb"> | number
+    nombre_ahbb?: StringFilter<"td_producto_ahbb"> | string
+    descripcion_ahbb?: StringNullableFilter<"td_producto_ahbb"> | string | null
+    precio_ahbb?: DecimalFilter<"td_producto_ahbb"> | Decimal | DecimalJsLike | number | string
+    stock_ahbb?: IntFilter<"td_producto_ahbb"> | number
+    categoria_ahbb?: StringFilter<"td_producto_ahbb"> | string
+    imagen_ahbb?: StringNullableFilter<"td_producto_ahbb"> | string | null
+    estado_producto_ahbb?: StringFilter<"td_producto_ahbb"> | string
+    creadoEn_ahbb?: DateTimeNullableFilter<"td_producto_ahbb"> | Date | string | null
+    actualizadoEn_ahbb?: DateTimeNullableFilter<"td_producto_ahbb"> | Date | string | null
+    itemsCarrito_ahbb?: Td_carrito_ahbbListRelationFilter
+    detallesFactura_ahbb?: Td_detalle_factura_ahbbListRelationFilter
+    favoritos_ahbb?: Td_favorito_ahbbListRelationFilter
+  }
+
+  export type td_producto_ahbbOrderByWithRelationInput = {
+    id_producto_ahbb?: SortOrder
+    nombre_ahbb?: SortOrder
+    descripcion_ahbb?: SortOrderInput | SortOrder
+    precio_ahbb?: SortOrder
+    stock_ahbb?: SortOrder
+    categoria_ahbb?: SortOrder
+    imagen_ahbb?: SortOrderInput | SortOrder
+    estado_producto_ahbb?: SortOrder
+    creadoEn_ahbb?: SortOrderInput | SortOrder
+    actualizadoEn_ahbb?: SortOrderInput | SortOrder
+    itemsCarrito_ahbb?: td_carrito_ahbbOrderByRelationAggregateInput
+    detallesFactura_ahbb?: td_detalle_factura_ahbbOrderByRelationAggregateInput
+    favoritos_ahbb?: td_favorito_ahbbOrderByRelationAggregateInput
+  }
+
+  export type td_producto_ahbbWhereUniqueInput = Prisma.AtLeast<{
+    id_producto_ahbb?: number
+    AND?: td_producto_ahbbWhereInput | td_producto_ahbbWhereInput[]
+    OR?: td_producto_ahbbWhereInput[]
+    NOT?: td_producto_ahbbWhereInput | td_producto_ahbbWhereInput[]
+    nombre_ahbb?: StringFilter<"td_producto_ahbb"> | string
+    descripcion_ahbb?: StringNullableFilter<"td_producto_ahbb"> | string | null
+    precio_ahbb?: DecimalFilter<"td_producto_ahbb"> | Decimal | DecimalJsLike | number | string
+    stock_ahbb?: IntFilter<"td_producto_ahbb"> | number
+    categoria_ahbb?: StringFilter<"td_producto_ahbb"> | string
+    imagen_ahbb?: StringNullableFilter<"td_producto_ahbb"> | string | null
+    estado_producto_ahbb?: StringFilter<"td_producto_ahbb"> | string
+    creadoEn_ahbb?: DateTimeNullableFilter<"td_producto_ahbb"> | Date | string | null
+    actualizadoEn_ahbb?: DateTimeNullableFilter<"td_producto_ahbb"> | Date | string | null
+    itemsCarrito_ahbb?: Td_carrito_ahbbListRelationFilter
+    detallesFactura_ahbb?: Td_detalle_factura_ahbbListRelationFilter
+    favoritos_ahbb?: Td_favorito_ahbbListRelationFilter
+  }, "id_producto_ahbb">
+
+  export type td_producto_ahbbOrderByWithAggregationInput = {
+    id_producto_ahbb?: SortOrder
+    nombre_ahbb?: SortOrder
+    descripcion_ahbb?: SortOrderInput | SortOrder
+    precio_ahbb?: SortOrder
+    stock_ahbb?: SortOrder
+    categoria_ahbb?: SortOrder
+    imagen_ahbb?: SortOrderInput | SortOrder
+    estado_producto_ahbb?: SortOrder
+    creadoEn_ahbb?: SortOrderInput | SortOrder
+    actualizadoEn_ahbb?: SortOrderInput | SortOrder
+    _count?: td_producto_ahbbCountOrderByAggregateInput
+    _avg?: td_producto_ahbbAvgOrderByAggregateInput
+    _max?: td_producto_ahbbMaxOrderByAggregateInput
+    _min?: td_producto_ahbbMinOrderByAggregateInput
+    _sum?: td_producto_ahbbSumOrderByAggregateInput
+  }
+
+  export type td_producto_ahbbScalarWhereWithAggregatesInput = {
+    AND?: td_producto_ahbbScalarWhereWithAggregatesInput | td_producto_ahbbScalarWhereWithAggregatesInput[]
+    OR?: td_producto_ahbbScalarWhereWithAggregatesInput[]
+    NOT?: td_producto_ahbbScalarWhereWithAggregatesInput | td_producto_ahbbScalarWhereWithAggregatesInput[]
+    id_producto_ahbb?: IntWithAggregatesFilter<"td_producto_ahbb"> | number
+    nombre_ahbb?: StringWithAggregatesFilter<"td_producto_ahbb"> | string
+    descripcion_ahbb?: StringNullableWithAggregatesFilter<"td_producto_ahbb"> | string | null
+    precio_ahbb?: DecimalWithAggregatesFilter<"td_producto_ahbb"> | Decimal | DecimalJsLike | number | string
+    stock_ahbb?: IntWithAggregatesFilter<"td_producto_ahbb"> | number
+    categoria_ahbb?: StringWithAggregatesFilter<"td_producto_ahbb"> | string
+    imagen_ahbb?: StringNullableWithAggregatesFilter<"td_producto_ahbb"> | string | null
+    estado_producto_ahbb?: StringWithAggregatesFilter<"td_producto_ahbb"> | string
+    creadoEn_ahbb?: DateTimeNullableWithAggregatesFilter<"td_producto_ahbb"> | Date | string | null
+    actualizadoEn_ahbb?: DateTimeNullableWithAggregatesFilter<"td_producto_ahbb"> | Date | string | null
+  }
+
+  export type td_carrito_ahbbWhereInput = {
+    AND?: td_carrito_ahbbWhereInput | td_carrito_ahbbWhereInput[]
+    OR?: td_carrito_ahbbWhereInput[]
+    NOT?: td_carrito_ahbbWhereInput | td_carrito_ahbbWhereInput[]
+    id_carrito_ahbb?: IntFilter<"td_carrito_ahbb"> | number
+    cantidad_ahbb?: IntFilter<"td_carrito_ahbb"> | number
+    fechaAgregado_ahbb?: DateTimeNullableFilter<"td_carrito_ahbb"> | Date | string | null
+    id_usuario_carrito_ahbb?: IntFilter<"td_carrito_ahbb"> | number
+    id_producto_carrito_ahbb?: IntFilter<"td_carrito_ahbb"> | number
+    usuario_ahbb?: XOR<Td_usuario_ahbbScalarRelationFilter, td_usuario_ahbbWhereInput>
+    producto_ahbb?: XOR<Td_producto_ahbbScalarRelationFilter, td_producto_ahbbWhereInput>
+  }
+
+  export type td_carrito_ahbbOrderByWithRelationInput = {
+    id_carrito_ahbb?: SortOrder
+    cantidad_ahbb?: SortOrder
+    fechaAgregado_ahbb?: SortOrderInput | SortOrder
+    id_usuario_carrito_ahbb?: SortOrder
+    id_producto_carrito_ahbb?: SortOrder
+    usuario_ahbb?: td_usuario_ahbbOrderByWithRelationInput
+    producto_ahbb?: td_producto_ahbbOrderByWithRelationInput
+  }
+
+  export type td_carrito_ahbbWhereUniqueInput = Prisma.AtLeast<{
+    id_carrito_ahbb?: number
+    id_usuario_carrito_ahbb_id_producto_carrito_ahbb?: td_carrito_ahbbId_usuario_carrito_ahbbId_producto_carrito_ahbbCompoundUniqueInput
+    AND?: td_carrito_ahbbWhereInput | td_carrito_ahbbWhereInput[]
+    OR?: td_carrito_ahbbWhereInput[]
+    NOT?: td_carrito_ahbbWhereInput | td_carrito_ahbbWhereInput[]
+    cantidad_ahbb?: IntFilter<"td_carrito_ahbb"> | number
+    fechaAgregado_ahbb?: DateTimeNullableFilter<"td_carrito_ahbb"> | Date | string | null
+    id_usuario_carrito_ahbb?: IntFilter<"td_carrito_ahbb"> | number
+    id_producto_carrito_ahbb?: IntFilter<"td_carrito_ahbb"> | number
+    usuario_ahbb?: XOR<Td_usuario_ahbbScalarRelationFilter, td_usuario_ahbbWhereInput>
+    producto_ahbb?: XOR<Td_producto_ahbbScalarRelationFilter, td_producto_ahbbWhereInput>
+  }, "id_carrito_ahbb" | "id_usuario_carrito_ahbb_id_producto_carrito_ahbb">
+
+  export type td_carrito_ahbbOrderByWithAggregationInput = {
+    id_carrito_ahbb?: SortOrder
+    cantidad_ahbb?: SortOrder
+    fechaAgregado_ahbb?: SortOrderInput | SortOrder
+    id_usuario_carrito_ahbb?: SortOrder
+    id_producto_carrito_ahbb?: SortOrder
+    _count?: td_carrito_ahbbCountOrderByAggregateInput
+    _avg?: td_carrito_ahbbAvgOrderByAggregateInput
+    _max?: td_carrito_ahbbMaxOrderByAggregateInput
+    _min?: td_carrito_ahbbMinOrderByAggregateInput
+    _sum?: td_carrito_ahbbSumOrderByAggregateInput
+  }
+
+  export type td_carrito_ahbbScalarWhereWithAggregatesInput = {
+    AND?: td_carrito_ahbbScalarWhereWithAggregatesInput | td_carrito_ahbbScalarWhereWithAggregatesInput[]
+    OR?: td_carrito_ahbbScalarWhereWithAggregatesInput[]
+    NOT?: td_carrito_ahbbScalarWhereWithAggregatesInput | td_carrito_ahbbScalarWhereWithAggregatesInput[]
+    id_carrito_ahbb?: IntWithAggregatesFilter<"td_carrito_ahbb"> | number
+    cantidad_ahbb?: IntWithAggregatesFilter<"td_carrito_ahbb"> | number
+    fechaAgregado_ahbb?: DateTimeNullableWithAggregatesFilter<"td_carrito_ahbb"> | Date | string | null
+    id_usuario_carrito_ahbb?: IntWithAggregatesFilter<"td_carrito_ahbb"> | number
+    id_producto_carrito_ahbb?: IntWithAggregatesFilter<"td_carrito_ahbb"> | number
+  }
+
+  export type td_factura_ahbbWhereInput = {
+    AND?: td_factura_ahbbWhereInput | td_factura_ahbbWhereInput[]
+    OR?: td_factura_ahbbWhereInput[]
+    NOT?: td_factura_ahbbWhereInput | td_factura_ahbbWhereInput[]
+    id_factura_ahbb?: IntFilter<"td_factura_ahbb"> | number
+    nroReferenciaPago_ahbb?: StringFilter<"td_factura_ahbb"> | string
+    fechaFactura_ahbb?: DateTimeNullableFilter<"td_factura_ahbb"> | Date | string | null
+    total_ahbb?: DecimalFilter<"td_factura_ahbb"> | Decimal | DecimalJsLike | number | string
+    estadoFactura_ahbb?: StringFilter<"td_factura_ahbb"> | string
+    id_usuario_factura_ahbb?: IntFilter<"td_factura_ahbb"> | number
+    usuario_ahbb?: XOR<Td_usuario_ahbbScalarRelationFilter, td_usuario_ahbbWhereInput>
+    detalles_ahbb?: Td_detalle_factura_ahbbListRelationFilter
+  }
+
+  export type td_factura_ahbbOrderByWithRelationInput = {
+    id_factura_ahbb?: SortOrder
+    nroReferenciaPago_ahbb?: SortOrder
+    fechaFactura_ahbb?: SortOrderInput | SortOrder
+    total_ahbb?: SortOrder
+    estadoFactura_ahbb?: SortOrder
+    id_usuario_factura_ahbb?: SortOrder
+    usuario_ahbb?: td_usuario_ahbbOrderByWithRelationInput
+    detalles_ahbb?: td_detalle_factura_ahbbOrderByRelationAggregateInput
+  }
+
+  export type td_factura_ahbbWhereUniqueInput = Prisma.AtLeast<{
+    id_factura_ahbb?: number
+    AND?: td_factura_ahbbWhereInput | td_factura_ahbbWhereInput[]
+    OR?: td_factura_ahbbWhereInput[]
+    NOT?: td_factura_ahbbWhereInput | td_factura_ahbbWhereInput[]
+    nroReferenciaPago_ahbb?: StringFilter<"td_factura_ahbb"> | string
+    fechaFactura_ahbb?: DateTimeNullableFilter<"td_factura_ahbb"> | Date | string | null
+    total_ahbb?: DecimalFilter<"td_factura_ahbb"> | Decimal | DecimalJsLike | number | string
+    estadoFactura_ahbb?: StringFilter<"td_factura_ahbb"> | string
+    id_usuario_factura_ahbb?: IntFilter<"td_factura_ahbb"> | number
+    usuario_ahbb?: XOR<Td_usuario_ahbbScalarRelationFilter, td_usuario_ahbbWhereInput>
+    detalles_ahbb?: Td_detalle_factura_ahbbListRelationFilter
+  }, "id_factura_ahbb">
+
+  export type td_factura_ahbbOrderByWithAggregationInput = {
+    id_factura_ahbb?: SortOrder
+    nroReferenciaPago_ahbb?: SortOrder
+    fechaFactura_ahbb?: SortOrderInput | SortOrder
+    total_ahbb?: SortOrder
+    estadoFactura_ahbb?: SortOrder
+    id_usuario_factura_ahbb?: SortOrder
+    _count?: td_factura_ahbbCountOrderByAggregateInput
+    _avg?: td_factura_ahbbAvgOrderByAggregateInput
+    _max?: td_factura_ahbbMaxOrderByAggregateInput
+    _min?: td_factura_ahbbMinOrderByAggregateInput
+    _sum?: td_factura_ahbbSumOrderByAggregateInput
+  }
+
+  export type td_factura_ahbbScalarWhereWithAggregatesInput = {
+    AND?: td_factura_ahbbScalarWhereWithAggregatesInput | td_factura_ahbbScalarWhereWithAggregatesInput[]
+    OR?: td_factura_ahbbScalarWhereWithAggregatesInput[]
+    NOT?: td_factura_ahbbScalarWhereWithAggregatesInput | td_factura_ahbbScalarWhereWithAggregatesInput[]
+    id_factura_ahbb?: IntWithAggregatesFilter<"td_factura_ahbb"> | number
+    nroReferenciaPago_ahbb?: StringWithAggregatesFilter<"td_factura_ahbb"> | string
+    fechaFactura_ahbb?: DateTimeNullableWithAggregatesFilter<"td_factura_ahbb"> | Date | string | null
+    total_ahbb?: DecimalWithAggregatesFilter<"td_factura_ahbb"> | Decimal | DecimalJsLike | number | string
+    estadoFactura_ahbb?: StringWithAggregatesFilter<"td_factura_ahbb"> | string
+    id_usuario_factura_ahbb?: IntWithAggregatesFilter<"td_factura_ahbb"> | number
+  }
+
+  export type td_detalle_factura_ahbbWhereInput = {
+    AND?: td_detalle_factura_ahbbWhereInput | td_detalle_factura_ahbbWhereInput[]
+    OR?: td_detalle_factura_ahbbWhereInput[]
+    NOT?: td_detalle_factura_ahbbWhereInput | td_detalle_factura_ahbbWhereInput[]
+    id_detalle_factura_ahbb?: IntFilter<"td_detalle_factura_ahbb"> | number
+    cantidad_ahbb?: IntFilter<"td_detalle_factura_ahbb"> | number
+    precioUnitario_ahbb?: DecimalFilter<"td_detalle_factura_ahbb"> | Decimal | DecimalJsLike | number | string
+    id_factura_detalle_ahbb?: IntFilter<"td_detalle_factura_ahbb"> | number
+    id_producto_detalle_ahbb?: IntFilter<"td_detalle_factura_ahbb"> | number
+    factura_ahbb?: XOR<Td_factura_ahbbScalarRelationFilter, td_factura_ahbbWhereInput>
+    producto_ahbb?: XOR<Td_producto_ahbbScalarRelationFilter, td_producto_ahbbWhereInput>
+  }
+
+  export type td_detalle_factura_ahbbOrderByWithRelationInput = {
+    id_detalle_factura_ahbb?: SortOrder
+    cantidad_ahbb?: SortOrder
+    precioUnitario_ahbb?: SortOrder
+    id_factura_detalle_ahbb?: SortOrder
+    id_producto_detalle_ahbb?: SortOrder
+    factura_ahbb?: td_factura_ahbbOrderByWithRelationInput
+    producto_ahbb?: td_producto_ahbbOrderByWithRelationInput
+  }
+
+  export type td_detalle_factura_ahbbWhereUniqueInput = Prisma.AtLeast<{
+    id_detalle_factura_ahbb?: number
+    AND?: td_detalle_factura_ahbbWhereInput | td_detalle_factura_ahbbWhereInput[]
+    OR?: td_detalle_factura_ahbbWhereInput[]
+    NOT?: td_detalle_factura_ahbbWhereInput | td_detalle_factura_ahbbWhereInput[]
+    cantidad_ahbb?: IntFilter<"td_detalle_factura_ahbb"> | number
+    precioUnitario_ahbb?: DecimalFilter<"td_detalle_factura_ahbb"> | Decimal | DecimalJsLike | number | string
+    id_factura_detalle_ahbb?: IntFilter<"td_detalle_factura_ahbb"> | number
+    id_producto_detalle_ahbb?: IntFilter<"td_detalle_factura_ahbb"> | number
+    factura_ahbb?: XOR<Td_factura_ahbbScalarRelationFilter, td_factura_ahbbWhereInput>
+    producto_ahbb?: XOR<Td_producto_ahbbScalarRelationFilter, td_producto_ahbbWhereInput>
+  }, "id_detalle_factura_ahbb">
+
+  export type td_detalle_factura_ahbbOrderByWithAggregationInput = {
+    id_detalle_factura_ahbb?: SortOrder
+    cantidad_ahbb?: SortOrder
+    precioUnitario_ahbb?: SortOrder
+    id_factura_detalle_ahbb?: SortOrder
+    id_producto_detalle_ahbb?: SortOrder
+    _count?: td_detalle_factura_ahbbCountOrderByAggregateInput
+    _avg?: td_detalle_factura_ahbbAvgOrderByAggregateInput
+    _max?: td_detalle_factura_ahbbMaxOrderByAggregateInput
+    _min?: td_detalle_factura_ahbbMinOrderByAggregateInput
+    _sum?: td_detalle_factura_ahbbSumOrderByAggregateInput
+  }
+
+  export type td_detalle_factura_ahbbScalarWhereWithAggregatesInput = {
+    AND?: td_detalle_factura_ahbbScalarWhereWithAggregatesInput | td_detalle_factura_ahbbScalarWhereWithAggregatesInput[]
+    OR?: td_detalle_factura_ahbbScalarWhereWithAggregatesInput[]
+    NOT?: td_detalle_factura_ahbbScalarWhereWithAggregatesInput | td_detalle_factura_ahbbScalarWhereWithAggregatesInput[]
+    id_detalle_factura_ahbb?: IntWithAggregatesFilter<"td_detalle_factura_ahbb"> | number
+    cantidad_ahbb?: IntWithAggregatesFilter<"td_detalle_factura_ahbb"> | number
+    precioUnitario_ahbb?: DecimalWithAggregatesFilter<"td_detalle_factura_ahbb"> | Decimal | DecimalJsLike | number | string
+    id_factura_detalle_ahbb?: IntWithAggregatesFilter<"td_detalle_factura_ahbb"> | number
+    id_producto_detalle_ahbb?: IntWithAggregatesFilter<"td_detalle_factura_ahbb"> | number
+  }
+
+  export type td_favorito_ahbbWhereInput = {
+    AND?: td_favorito_ahbbWhereInput | td_favorito_ahbbWhereInput[]
+    OR?: td_favorito_ahbbWhereInput[]
+    NOT?: td_favorito_ahbbWhereInput | td_favorito_ahbbWhereInput[]
+    id_favorito_ahbb?: IntFilter<"td_favorito_ahbb"> | number
+    fechaAgregado_ahbb?: DateTimeNullableFilter<"td_favorito_ahbb"> | Date | string | null
+    id_usuario_favorito_ahbb?: IntFilter<"td_favorito_ahbb"> | number
+    id_producto_favorito_ahbb?: IntFilter<"td_favorito_ahbb"> | number
+    usuario_ahbb?: XOR<Td_usuario_ahbbScalarRelationFilter, td_usuario_ahbbWhereInput>
+    producto_ahbb?: XOR<Td_producto_ahbbScalarRelationFilter, td_producto_ahbbWhereInput>
+  }
+
+  export type td_favorito_ahbbOrderByWithRelationInput = {
+    id_favorito_ahbb?: SortOrder
+    fechaAgregado_ahbb?: SortOrderInput | SortOrder
+    id_usuario_favorito_ahbb?: SortOrder
+    id_producto_favorito_ahbb?: SortOrder
+    usuario_ahbb?: td_usuario_ahbbOrderByWithRelationInput
+    producto_ahbb?: td_producto_ahbbOrderByWithRelationInput
+  }
+
+  export type td_favorito_ahbbWhereUniqueInput = Prisma.AtLeast<{
+    id_favorito_ahbb?: number
+    id_usuario_favorito_ahbb_id_producto_favorito_ahbb?: td_favorito_ahbbId_usuario_favorito_ahbbId_producto_favorito_ahbbCompoundUniqueInput
+    AND?: td_favorito_ahbbWhereInput | td_favorito_ahbbWhereInput[]
+    OR?: td_favorito_ahbbWhereInput[]
+    NOT?: td_favorito_ahbbWhereInput | td_favorito_ahbbWhereInput[]
+    fechaAgregado_ahbb?: DateTimeNullableFilter<"td_favorito_ahbb"> | Date | string | null
+    id_usuario_favorito_ahbb?: IntFilter<"td_favorito_ahbb"> | number
+    id_producto_favorito_ahbb?: IntFilter<"td_favorito_ahbb"> | number
+    usuario_ahbb?: XOR<Td_usuario_ahbbScalarRelationFilter, td_usuario_ahbbWhereInput>
+    producto_ahbb?: XOR<Td_producto_ahbbScalarRelationFilter, td_producto_ahbbWhereInput>
+  }, "id_favorito_ahbb" | "id_usuario_favorito_ahbb_id_producto_favorito_ahbb">
+
+  export type td_favorito_ahbbOrderByWithAggregationInput = {
+    id_favorito_ahbb?: SortOrder
+    fechaAgregado_ahbb?: SortOrderInput | SortOrder
+    id_usuario_favorito_ahbb?: SortOrder
+    id_producto_favorito_ahbb?: SortOrder
+    _count?: td_favorito_ahbbCountOrderByAggregateInput
+    _avg?: td_favorito_ahbbAvgOrderByAggregateInput
+    _max?: td_favorito_ahbbMaxOrderByAggregateInput
+    _min?: td_favorito_ahbbMinOrderByAggregateInput
+    _sum?: td_favorito_ahbbSumOrderByAggregateInput
+  }
+
+  export type td_favorito_ahbbScalarWhereWithAggregatesInput = {
+    AND?: td_favorito_ahbbScalarWhereWithAggregatesInput | td_favorito_ahbbScalarWhereWithAggregatesInput[]
+    OR?: td_favorito_ahbbScalarWhereWithAggregatesInput[]
+    NOT?: td_favorito_ahbbScalarWhereWithAggregatesInput | td_favorito_ahbbScalarWhereWithAggregatesInput[]
+    id_favorito_ahbb?: IntWithAggregatesFilter<"td_favorito_ahbb"> | number
+    fechaAgregado_ahbb?: DateTimeNullableWithAggregatesFilter<"td_favorito_ahbb"> | Date | string | null
+    id_usuario_favorito_ahbb?: IntWithAggregatesFilter<"td_favorito_ahbb"> | number
+    id_producto_favorito_ahbb?: IntWithAggregatesFilter<"td_favorito_ahbb"> | number
+  }
+
   export type td_usuario_ahbbCreateInput = {
     cedula_ahbb: string
     nombre_ahbb: string
@@ -10538,6 +17307,9 @@ export namespace Prisma {
     inscripciones?: td_inscripcion_ahbbCreateNestedManyWithoutAlumnoInput
     auditoriasAprobadas_ahbb?: td_auditoria_aprobacion_ahbbCreateNestedManyWithoutAprobador_ahbbInput
     auditoriasUsuario_ahbb?: td_auditoria_aprobacion_ahbbCreateNestedManyWithoutUsuarioAuditado_ahbbInput
+    carrito_ahbb?: td_carrito_ahbbCreateNestedManyWithoutUsuario_ahbbInput
+    facturas_ahbb?: td_factura_ahbbCreateNestedManyWithoutUsuario_ahbbInput
+    favoritos_ahbb?: td_favorito_ahbbCreateNestedManyWithoutUsuario_ahbbInput
   }
 
   export type td_usuario_ahbbUncheckedCreateInput = {
@@ -10559,6 +17331,9 @@ export namespace Prisma {
     inscripciones?: td_inscripcion_ahbbUncheckedCreateNestedManyWithoutAlumnoInput
     auditoriasAprobadas_ahbb?: td_auditoria_aprobacion_ahbbUncheckedCreateNestedManyWithoutAprobador_ahbbInput
     auditoriasUsuario_ahbb?: td_auditoria_aprobacion_ahbbUncheckedCreateNestedManyWithoutUsuarioAuditado_ahbbInput
+    carrito_ahbb?: td_carrito_ahbbUncheckedCreateNestedManyWithoutUsuario_ahbbInput
+    facturas_ahbb?: td_factura_ahbbUncheckedCreateNestedManyWithoutUsuario_ahbbInput
+    favoritos_ahbb?: td_favorito_ahbbUncheckedCreateNestedManyWithoutUsuario_ahbbInput
   }
 
   export type td_usuario_ahbbUpdateInput = {
@@ -10579,6 +17354,9 @@ export namespace Prisma {
     inscripciones?: td_inscripcion_ahbbUpdateManyWithoutAlumnoNestedInput
     auditoriasAprobadas_ahbb?: td_auditoria_aprobacion_ahbbUpdateManyWithoutAprobador_ahbbNestedInput
     auditoriasUsuario_ahbb?: td_auditoria_aprobacion_ahbbUpdateManyWithoutUsuarioAuditado_ahbbNestedInput
+    carrito_ahbb?: td_carrito_ahbbUpdateManyWithoutUsuario_ahbbNestedInput
+    facturas_ahbb?: td_factura_ahbbUpdateManyWithoutUsuario_ahbbNestedInput
+    favoritos_ahbb?: td_favorito_ahbbUpdateManyWithoutUsuario_ahbbNestedInput
   }
 
   export type td_usuario_ahbbUncheckedUpdateInput = {
@@ -10600,6 +17378,9 @@ export namespace Prisma {
     inscripciones?: td_inscripcion_ahbbUncheckedUpdateManyWithoutAlumnoNestedInput
     auditoriasAprobadas_ahbb?: td_auditoria_aprobacion_ahbbUncheckedUpdateManyWithoutAprobador_ahbbNestedInput
     auditoriasUsuario_ahbb?: td_auditoria_aprobacion_ahbbUncheckedUpdateManyWithoutUsuarioAuditado_ahbbNestedInput
+    carrito_ahbb?: td_carrito_ahbbUncheckedUpdateManyWithoutUsuario_ahbbNestedInput
+    facturas_ahbb?: td_factura_ahbbUncheckedUpdateManyWithoutUsuario_ahbbNestedInput
+    favoritos_ahbb?: td_favorito_ahbbUncheckedUpdateManyWithoutUsuario_ahbbNestedInput
   }
 
   export type td_usuario_ahbbCreateManyInput = {
@@ -11083,6 +17864,315 @@ export namespace Prisma {
     creadoEn_ahbb?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type td_producto_ahbbCreateInput = {
+    nombre_ahbb: string
+    descripcion_ahbb?: string | null
+    precio_ahbb: Decimal | DecimalJsLike | number | string
+    stock_ahbb?: number
+    categoria_ahbb: string
+    imagen_ahbb?: string | null
+    estado_producto_ahbb?: string
+    creadoEn_ahbb?: Date | string | null
+    actualizadoEn_ahbb?: Date | string | null
+    itemsCarrito_ahbb?: td_carrito_ahbbCreateNestedManyWithoutProducto_ahbbInput
+    detallesFactura_ahbb?: td_detalle_factura_ahbbCreateNestedManyWithoutProducto_ahbbInput
+    favoritos_ahbb?: td_favorito_ahbbCreateNestedManyWithoutProducto_ahbbInput
+  }
+
+  export type td_producto_ahbbUncheckedCreateInput = {
+    id_producto_ahbb?: number
+    nombre_ahbb: string
+    descripcion_ahbb?: string | null
+    precio_ahbb: Decimal | DecimalJsLike | number | string
+    stock_ahbb?: number
+    categoria_ahbb: string
+    imagen_ahbb?: string | null
+    estado_producto_ahbb?: string
+    creadoEn_ahbb?: Date | string | null
+    actualizadoEn_ahbb?: Date | string | null
+    itemsCarrito_ahbb?: td_carrito_ahbbUncheckedCreateNestedManyWithoutProducto_ahbbInput
+    detallesFactura_ahbb?: td_detalle_factura_ahbbUncheckedCreateNestedManyWithoutProducto_ahbbInput
+    favoritos_ahbb?: td_favorito_ahbbUncheckedCreateNestedManyWithoutProducto_ahbbInput
+  }
+
+  export type td_producto_ahbbUpdateInput = {
+    nombre_ahbb?: StringFieldUpdateOperationsInput | string
+    descripcion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    precio_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    stock_ahbb?: IntFieldUpdateOperationsInput | number
+    categoria_ahbb?: StringFieldUpdateOperationsInput | string
+    imagen_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    estado_producto_ahbb?: StringFieldUpdateOperationsInput | string
+    creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    itemsCarrito_ahbb?: td_carrito_ahbbUpdateManyWithoutProducto_ahbbNestedInput
+    detallesFactura_ahbb?: td_detalle_factura_ahbbUpdateManyWithoutProducto_ahbbNestedInput
+    favoritos_ahbb?: td_favorito_ahbbUpdateManyWithoutProducto_ahbbNestedInput
+  }
+
+  export type td_producto_ahbbUncheckedUpdateInput = {
+    id_producto_ahbb?: IntFieldUpdateOperationsInput | number
+    nombre_ahbb?: StringFieldUpdateOperationsInput | string
+    descripcion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    precio_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    stock_ahbb?: IntFieldUpdateOperationsInput | number
+    categoria_ahbb?: StringFieldUpdateOperationsInput | string
+    imagen_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    estado_producto_ahbb?: StringFieldUpdateOperationsInput | string
+    creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    itemsCarrito_ahbb?: td_carrito_ahbbUncheckedUpdateManyWithoutProducto_ahbbNestedInput
+    detallesFactura_ahbb?: td_detalle_factura_ahbbUncheckedUpdateManyWithoutProducto_ahbbNestedInput
+    favoritos_ahbb?: td_favorito_ahbbUncheckedUpdateManyWithoutProducto_ahbbNestedInput
+  }
+
+  export type td_producto_ahbbCreateManyInput = {
+    id_producto_ahbb?: number
+    nombre_ahbb: string
+    descripcion_ahbb?: string | null
+    precio_ahbb: Decimal | DecimalJsLike | number | string
+    stock_ahbb?: number
+    categoria_ahbb: string
+    imagen_ahbb?: string | null
+    estado_producto_ahbb?: string
+    creadoEn_ahbb?: Date | string | null
+    actualizadoEn_ahbb?: Date | string | null
+  }
+
+  export type td_producto_ahbbUpdateManyMutationInput = {
+    nombre_ahbb?: StringFieldUpdateOperationsInput | string
+    descripcion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    precio_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    stock_ahbb?: IntFieldUpdateOperationsInput | number
+    categoria_ahbb?: StringFieldUpdateOperationsInput | string
+    imagen_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    estado_producto_ahbb?: StringFieldUpdateOperationsInput | string
+    creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type td_producto_ahbbUncheckedUpdateManyInput = {
+    id_producto_ahbb?: IntFieldUpdateOperationsInput | number
+    nombre_ahbb?: StringFieldUpdateOperationsInput | string
+    descripcion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    precio_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    stock_ahbb?: IntFieldUpdateOperationsInput | number
+    categoria_ahbb?: StringFieldUpdateOperationsInput | string
+    imagen_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    estado_producto_ahbb?: StringFieldUpdateOperationsInput | string
+    creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type td_carrito_ahbbCreateInput = {
+    cantidad_ahbb?: number
+    fechaAgregado_ahbb?: Date | string | null
+    usuario_ahbb: td_usuario_ahbbCreateNestedOneWithoutCarrito_ahbbInput
+    producto_ahbb: td_producto_ahbbCreateNestedOneWithoutItemsCarrito_ahbbInput
+  }
+
+  export type td_carrito_ahbbUncheckedCreateInput = {
+    id_carrito_ahbb?: number
+    cantidad_ahbb?: number
+    fechaAgregado_ahbb?: Date | string | null
+    id_usuario_carrito_ahbb: number
+    id_producto_carrito_ahbb: number
+  }
+
+  export type td_carrito_ahbbUpdateInput = {
+    cantidad_ahbb?: IntFieldUpdateOperationsInput | number
+    fechaAgregado_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    usuario_ahbb?: td_usuario_ahbbUpdateOneRequiredWithoutCarrito_ahbbNestedInput
+    producto_ahbb?: td_producto_ahbbUpdateOneRequiredWithoutItemsCarrito_ahbbNestedInput
+  }
+
+  export type td_carrito_ahbbUncheckedUpdateInput = {
+    id_carrito_ahbb?: IntFieldUpdateOperationsInput | number
+    cantidad_ahbb?: IntFieldUpdateOperationsInput | number
+    fechaAgregado_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    id_usuario_carrito_ahbb?: IntFieldUpdateOperationsInput | number
+    id_producto_carrito_ahbb?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type td_carrito_ahbbCreateManyInput = {
+    id_carrito_ahbb?: number
+    cantidad_ahbb?: number
+    fechaAgregado_ahbb?: Date | string | null
+    id_usuario_carrito_ahbb: number
+    id_producto_carrito_ahbb: number
+  }
+
+  export type td_carrito_ahbbUpdateManyMutationInput = {
+    cantidad_ahbb?: IntFieldUpdateOperationsInput | number
+    fechaAgregado_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type td_carrito_ahbbUncheckedUpdateManyInput = {
+    id_carrito_ahbb?: IntFieldUpdateOperationsInput | number
+    cantidad_ahbb?: IntFieldUpdateOperationsInput | number
+    fechaAgregado_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    id_usuario_carrito_ahbb?: IntFieldUpdateOperationsInput | number
+    id_producto_carrito_ahbb?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type td_factura_ahbbCreateInput = {
+    nroReferenciaPago_ahbb: string
+    fechaFactura_ahbb?: Date | string | null
+    total_ahbb: Decimal | DecimalJsLike | number | string
+    estadoFactura_ahbb?: string
+    usuario_ahbb: td_usuario_ahbbCreateNestedOneWithoutFacturas_ahbbInput
+    detalles_ahbb?: td_detalle_factura_ahbbCreateNestedManyWithoutFactura_ahbbInput
+  }
+
+  export type td_factura_ahbbUncheckedCreateInput = {
+    id_factura_ahbb?: number
+    nroReferenciaPago_ahbb: string
+    fechaFactura_ahbb?: Date | string | null
+    total_ahbb: Decimal | DecimalJsLike | number | string
+    estadoFactura_ahbb?: string
+    id_usuario_factura_ahbb: number
+    detalles_ahbb?: td_detalle_factura_ahbbUncheckedCreateNestedManyWithoutFactura_ahbbInput
+  }
+
+  export type td_factura_ahbbUpdateInput = {
+    nroReferenciaPago_ahbb?: StringFieldUpdateOperationsInput | string
+    fechaFactura_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    total_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    estadoFactura_ahbb?: StringFieldUpdateOperationsInput | string
+    usuario_ahbb?: td_usuario_ahbbUpdateOneRequiredWithoutFacturas_ahbbNestedInput
+    detalles_ahbb?: td_detalle_factura_ahbbUpdateManyWithoutFactura_ahbbNestedInput
+  }
+
+  export type td_factura_ahbbUncheckedUpdateInput = {
+    id_factura_ahbb?: IntFieldUpdateOperationsInput | number
+    nroReferenciaPago_ahbb?: StringFieldUpdateOperationsInput | string
+    fechaFactura_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    total_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    estadoFactura_ahbb?: StringFieldUpdateOperationsInput | string
+    id_usuario_factura_ahbb?: IntFieldUpdateOperationsInput | number
+    detalles_ahbb?: td_detalle_factura_ahbbUncheckedUpdateManyWithoutFactura_ahbbNestedInput
+  }
+
+  export type td_factura_ahbbCreateManyInput = {
+    id_factura_ahbb?: number
+    nroReferenciaPago_ahbb: string
+    fechaFactura_ahbb?: Date | string | null
+    total_ahbb: Decimal | DecimalJsLike | number | string
+    estadoFactura_ahbb?: string
+    id_usuario_factura_ahbb: number
+  }
+
+  export type td_factura_ahbbUpdateManyMutationInput = {
+    nroReferenciaPago_ahbb?: StringFieldUpdateOperationsInput | string
+    fechaFactura_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    total_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    estadoFactura_ahbb?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type td_factura_ahbbUncheckedUpdateManyInput = {
+    id_factura_ahbb?: IntFieldUpdateOperationsInput | number
+    nroReferenciaPago_ahbb?: StringFieldUpdateOperationsInput | string
+    fechaFactura_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    total_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    estadoFactura_ahbb?: StringFieldUpdateOperationsInput | string
+    id_usuario_factura_ahbb?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type td_detalle_factura_ahbbCreateInput = {
+    cantidad_ahbb: number
+    precioUnitario_ahbb: Decimal | DecimalJsLike | number | string
+    factura_ahbb: td_factura_ahbbCreateNestedOneWithoutDetalles_ahbbInput
+    producto_ahbb: td_producto_ahbbCreateNestedOneWithoutDetallesFactura_ahbbInput
+  }
+
+  export type td_detalle_factura_ahbbUncheckedCreateInput = {
+    id_detalle_factura_ahbb?: number
+    cantidad_ahbb: number
+    precioUnitario_ahbb: Decimal | DecimalJsLike | number | string
+    id_factura_detalle_ahbb: number
+    id_producto_detalle_ahbb: number
+  }
+
+  export type td_detalle_factura_ahbbUpdateInput = {
+    cantidad_ahbb?: IntFieldUpdateOperationsInput | number
+    precioUnitario_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    factura_ahbb?: td_factura_ahbbUpdateOneRequiredWithoutDetalles_ahbbNestedInput
+    producto_ahbb?: td_producto_ahbbUpdateOneRequiredWithoutDetallesFactura_ahbbNestedInput
+  }
+
+  export type td_detalle_factura_ahbbUncheckedUpdateInput = {
+    id_detalle_factura_ahbb?: IntFieldUpdateOperationsInput | number
+    cantidad_ahbb?: IntFieldUpdateOperationsInput | number
+    precioUnitario_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    id_factura_detalle_ahbb?: IntFieldUpdateOperationsInput | number
+    id_producto_detalle_ahbb?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type td_detalle_factura_ahbbCreateManyInput = {
+    id_detalle_factura_ahbb?: number
+    cantidad_ahbb: number
+    precioUnitario_ahbb: Decimal | DecimalJsLike | number | string
+    id_factura_detalle_ahbb: number
+    id_producto_detalle_ahbb: number
+  }
+
+  export type td_detalle_factura_ahbbUpdateManyMutationInput = {
+    cantidad_ahbb?: IntFieldUpdateOperationsInput | number
+    precioUnitario_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type td_detalle_factura_ahbbUncheckedUpdateManyInput = {
+    id_detalle_factura_ahbb?: IntFieldUpdateOperationsInput | number
+    cantidad_ahbb?: IntFieldUpdateOperationsInput | number
+    precioUnitario_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    id_factura_detalle_ahbb?: IntFieldUpdateOperationsInput | number
+    id_producto_detalle_ahbb?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type td_favorito_ahbbCreateInput = {
+    fechaAgregado_ahbb?: Date | string | null
+    usuario_ahbb: td_usuario_ahbbCreateNestedOneWithoutFavoritos_ahbbInput
+    producto_ahbb: td_producto_ahbbCreateNestedOneWithoutFavoritos_ahbbInput
+  }
+
+  export type td_favorito_ahbbUncheckedCreateInput = {
+    id_favorito_ahbb?: number
+    fechaAgregado_ahbb?: Date | string | null
+    id_usuario_favorito_ahbb: number
+    id_producto_favorito_ahbb: number
+  }
+
+  export type td_favorito_ahbbUpdateInput = {
+    fechaAgregado_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    usuario_ahbb?: td_usuario_ahbbUpdateOneRequiredWithoutFavoritos_ahbbNestedInput
+    producto_ahbb?: td_producto_ahbbUpdateOneRequiredWithoutFavoritos_ahbbNestedInput
+  }
+
+  export type td_favorito_ahbbUncheckedUpdateInput = {
+    id_favorito_ahbb?: IntFieldUpdateOperationsInput | number
+    fechaAgregado_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    id_usuario_favorito_ahbb?: IntFieldUpdateOperationsInput | number
+    id_producto_favorito_ahbb?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type td_favorito_ahbbCreateManyInput = {
+    id_favorito_ahbb?: number
+    fechaAgregado_ahbb?: Date | string | null
+    id_usuario_favorito_ahbb: number
+    id_producto_favorito_ahbb: number
+  }
+
+  export type td_favorito_ahbbUpdateManyMutationInput = {
+    fechaAgregado_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type td_favorito_ahbbUncheckedUpdateManyInput = {
+    id_favorito_ahbb?: IntFieldUpdateOperationsInput | number
+    fechaAgregado_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    id_usuario_favorito_ahbb?: IntFieldUpdateOperationsInput | number
+    id_producto_favorito_ahbb?: IntFieldUpdateOperationsInput | number
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -11169,6 +18259,24 @@ export namespace Prisma {
     none?: td_auditoria_aprobacion_ahbbWhereInput
   }
 
+  export type Td_carrito_ahbbListRelationFilter = {
+    every?: td_carrito_ahbbWhereInput
+    some?: td_carrito_ahbbWhereInput
+    none?: td_carrito_ahbbWhereInput
+  }
+
+  export type Td_factura_ahbbListRelationFilter = {
+    every?: td_factura_ahbbWhereInput
+    some?: td_factura_ahbbWhereInput
+    none?: td_factura_ahbbWhereInput
+  }
+
+  export type Td_favorito_ahbbListRelationFilter = {
+    every?: td_favorito_ahbbWhereInput
+    some?: td_favorito_ahbbWhereInput
+    none?: td_favorito_ahbbWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -11183,6 +18291,18 @@ export namespace Prisma {
   }
 
   export type td_auditoria_aprobacion_ahbbOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type td_carrito_ahbbOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type td_factura_ahbbOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type td_favorito_ahbbOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -11700,6 +18820,264 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type DecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type Td_detalle_factura_ahbbListRelationFilter = {
+    every?: td_detalle_factura_ahbbWhereInput
+    some?: td_detalle_factura_ahbbWhereInput
+    none?: td_detalle_factura_ahbbWhereInput
+  }
+
+  export type td_detalle_factura_ahbbOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type td_producto_ahbbCountOrderByAggregateInput = {
+    id_producto_ahbb?: SortOrder
+    nombre_ahbb?: SortOrder
+    descripcion_ahbb?: SortOrder
+    precio_ahbb?: SortOrder
+    stock_ahbb?: SortOrder
+    categoria_ahbb?: SortOrder
+    imagen_ahbb?: SortOrder
+    estado_producto_ahbb?: SortOrder
+    creadoEn_ahbb?: SortOrder
+    actualizadoEn_ahbb?: SortOrder
+  }
+
+  export type td_producto_ahbbAvgOrderByAggregateInput = {
+    id_producto_ahbb?: SortOrder
+    precio_ahbb?: SortOrder
+    stock_ahbb?: SortOrder
+  }
+
+  export type td_producto_ahbbMaxOrderByAggregateInput = {
+    id_producto_ahbb?: SortOrder
+    nombre_ahbb?: SortOrder
+    descripcion_ahbb?: SortOrder
+    precio_ahbb?: SortOrder
+    stock_ahbb?: SortOrder
+    categoria_ahbb?: SortOrder
+    imagen_ahbb?: SortOrder
+    estado_producto_ahbb?: SortOrder
+    creadoEn_ahbb?: SortOrder
+    actualizadoEn_ahbb?: SortOrder
+  }
+
+  export type td_producto_ahbbMinOrderByAggregateInput = {
+    id_producto_ahbb?: SortOrder
+    nombre_ahbb?: SortOrder
+    descripcion_ahbb?: SortOrder
+    precio_ahbb?: SortOrder
+    stock_ahbb?: SortOrder
+    categoria_ahbb?: SortOrder
+    imagen_ahbb?: SortOrder
+    estado_producto_ahbb?: SortOrder
+    creadoEn_ahbb?: SortOrder
+    actualizadoEn_ahbb?: SortOrder
+  }
+
+  export type td_producto_ahbbSumOrderByAggregateInput = {
+    id_producto_ahbb?: SortOrder
+    precio_ahbb?: SortOrder
+    stock_ahbb?: SortOrder
+  }
+
+  export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
+  export type Td_producto_ahbbScalarRelationFilter = {
+    is?: td_producto_ahbbWhereInput
+    isNot?: td_producto_ahbbWhereInput
+  }
+
+  export type td_carrito_ahbbId_usuario_carrito_ahbbId_producto_carrito_ahbbCompoundUniqueInput = {
+    id_usuario_carrito_ahbb: number
+    id_producto_carrito_ahbb: number
+  }
+
+  export type td_carrito_ahbbCountOrderByAggregateInput = {
+    id_carrito_ahbb?: SortOrder
+    cantidad_ahbb?: SortOrder
+    fechaAgregado_ahbb?: SortOrder
+    id_usuario_carrito_ahbb?: SortOrder
+    id_producto_carrito_ahbb?: SortOrder
+  }
+
+  export type td_carrito_ahbbAvgOrderByAggregateInput = {
+    id_carrito_ahbb?: SortOrder
+    cantidad_ahbb?: SortOrder
+    id_usuario_carrito_ahbb?: SortOrder
+    id_producto_carrito_ahbb?: SortOrder
+  }
+
+  export type td_carrito_ahbbMaxOrderByAggregateInput = {
+    id_carrito_ahbb?: SortOrder
+    cantidad_ahbb?: SortOrder
+    fechaAgregado_ahbb?: SortOrder
+    id_usuario_carrito_ahbb?: SortOrder
+    id_producto_carrito_ahbb?: SortOrder
+  }
+
+  export type td_carrito_ahbbMinOrderByAggregateInput = {
+    id_carrito_ahbb?: SortOrder
+    cantidad_ahbb?: SortOrder
+    fechaAgregado_ahbb?: SortOrder
+    id_usuario_carrito_ahbb?: SortOrder
+    id_producto_carrito_ahbb?: SortOrder
+  }
+
+  export type td_carrito_ahbbSumOrderByAggregateInput = {
+    id_carrito_ahbb?: SortOrder
+    cantidad_ahbb?: SortOrder
+    id_usuario_carrito_ahbb?: SortOrder
+    id_producto_carrito_ahbb?: SortOrder
+  }
+
+  export type td_factura_ahbbCountOrderByAggregateInput = {
+    id_factura_ahbb?: SortOrder
+    nroReferenciaPago_ahbb?: SortOrder
+    fechaFactura_ahbb?: SortOrder
+    total_ahbb?: SortOrder
+    estadoFactura_ahbb?: SortOrder
+    id_usuario_factura_ahbb?: SortOrder
+  }
+
+  export type td_factura_ahbbAvgOrderByAggregateInput = {
+    id_factura_ahbb?: SortOrder
+    total_ahbb?: SortOrder
+    id_usuario_factura_ahbb?: SortOrder
+  }
+
+  export type td_factura_ahbbMaxOrderByAggregateInput = {
+    id_factura_ahbb?: SortOrder
+    nroReferenciaPago_ahbb?: SortOrder
+    fechaFactura_ahbb?: SortOrder
+    total_ahbb?: SortOrder
+    estadoFactura_ahbb?: SortOrder
+    id_usuario_factura_ahbb?: SortOrder
+  }
+
+  export type td_factura_ahbbMinOrderByAggregateInput = {
+    id_factura_ahbb?: SortOrder
+    nroReferenciaPago_ahbb?: SortOrder
+    fechaFactura_ahbb?: SortOrder
+    total_ahbb?: SortOrder
+    estadoFactura_ahbb?: SortOrder
+    id_usuario_factura_ahbb?: SortOrder
+  }
+
+  export type td_factura_ahbbSumOrderByAggregateInput = {
+    id_factura_ahbb?: SortOrder
+    total_ahbb?: SortOrder
+    id_usuario_factura_ahbb?: SortOrder
+  }
+
+  export type Td_factura_ahbbScalarRelationFilter = {
+    is?: td_factura_ahbbWhereInput
+    isNot?: td_factura_ahbbWhereInput
+  }
+
+  export type td_detalle_factura_ahbbCountOrderByAggregateInput = {
+    id_detalle_factura_ahbb?: SortOrder
+    cantidad_ahbb?: SortOrder
+    precioUnitario_ahbb?: SortOrder
+    id_factura_detalle_ahbb?: SortOrder
+    id_producto_detalle_ahbb?: SortOrder
+  }
+
+  export type td_detalle_factura_ahbbAvgOrderByAggregateInput = {
+    id_detalle_factura_ahbb?: SortOrder
+    cantidad_ahbb?: SortOrder
+    precioUnitario_ahbb?: SortOrder
+    id_factura_detalle_ahbb?: SortOrder
+    id_producto_detalle_ahbb?: SortOrder
+  }
+
+  export type td_detalle_factura_ahbbMaxOrderByAggregateInput = {
+    id_detalle_factura_ahbb?: SortOrder
+    cantidad_ahbb?: SortOrder
+    precioUnitario_ahbb?: SortOrder
+    id_factura_detalle_ahbb?: SortOrder
+    id_producto_detalle_ahbb?: SortOrder
+  }
+
+  export type td_detalle_factura_ahbbMinOrderByAggregateInput = {
+    id_detalle_factura_ahbb?: SortOrder
+    cantidad_ahbb?: SortOrder
+    precioUnitario_ahbb?: SortOrder
+    id_factura_detalle_ahbb?: SortOrder
+    id_producto_detalle_ahbb?: SortOrder
+  }
+
+  export type td_detalle_factura_ahbbSumOrderByAggregateInput = {
+    id_detalle_factura_ahbb?: SortOrder
+    cantidad_ahbb?: SortOrder
+    precioUnitario_ahbb?: SortOrder
+    id_factura_detalle_ahbb?: SortOrder
+    id_producto_detalle_ahbb?: SortOrder
+  }
+
+  export type td_favorito_ahbbId_usuario_favorito_ahbbId_producto_favorito_ahbbCompoundUniqueInput = {
+    id_usuario_favorito_ahbb: number
+    id_producto_favorito_ahbb: number
+  }
+
+  export type td_favorito_ahbbCountOrderByAggregateInput = {
+    id_favorito_ahbb?: SortOrder
+    fechaAgregado_ahbb?: SortOrder
+    id_usuario_favorito_ahbb?: SortOrder
+    id_producto_favorito_ahbb?: SortOrder
+  }
+
+  export type td_favorito_ahbbAvgOrderByAggregateInput = {
+    id_favorito_ahbb?: SortOrder
+    id_usuario_favorito_ahbb?: SortOrder
+    id_producto_favorito_ahbb?: SortOrder
+  }
+
+  export type td_favorito_ahbbMaxOrderByAggregateInput = {
+    id_favorito_ahbb?: SortOrder
+    fechaAgregado_ahbb?: SortOrder
+    id_usuario_favorito_ahbb?: SortOrder
+    id_producto_favorito_ahbb?: SortOrder
+  }
+
+  export type td_favorito_ahbbMinOrderByAggregateInput = {
+    id_favorito_ahbb?: SortOrder
+    fechaAgregado_ahbb?: SortOrder
+    id_usuario_favorito_ahbb?: SortOrder
+    id_producto_favorito_ahbb?: SortOrder
+  }
+
+  export type td_favorito_ahbbSumOrderByAggregateInput = {
+    id_favorito_ahbb?: SortOrder
+    id_usuario_favorito_ahbb?: SortOrder
+    id_producto_favorito_ahbb?: SortOrder
+  }
+
   export type td_curso_ahbbCreateNestedManyWithoutProfesorInput = {
     create?: XOR<td_curso_ahbbCreateWithoutProfesorInput, td_curso_ahbbUncheckedCreateWithoutProfesorInput> | td_curso_ahbbCreateWithoutProfesorInput[] | td_curso_ahbbUncheckedCreateWithoutProfesorInput[]
     connectOrCreate?: td_curso_ahbbCreateOrConnectWithoutProfesorInput | td_curso_ahbbCreateOrConnectWithoutProfesorInput[]
@@ -11728,6 +19106,27 @@ export namespace Prisma {
     connect?: td_auditoria_aprobacion_ahbbWhereUniqueInput | td_auditoria_aprobacion_ahbbWhereUniqueInput[]
   }
 
+  export type td_carrito_ahbbCreateNestedManyWithoutUsuario_ahbbInput = {
+    create?: XOR<td_carrito_ahbbCreateWithoutUsuario_ahbbInput, td_carrito_ahbbUncheckedCreateWithoutUsuario_ahbbInput> | td_carrito_ahbbCreateWithoutUsuario_ahbbInput[] | td_carrito_ahbbUncheckedCreateWithoutUsuario_ahbbInput[]
+    connectOrCreate?: td_carrito_ahbbCreateOrConnectWithoutUsuario_ahbbInput | td_carrito_ahbbCreateOrConnectWithoutUsuario_ahbbInput[]
+    createMany?: td_carrito_ahbbCreateManyUsuario_ahbbInputEnvelope
+    connect?: td_carrito_ahbbWhereUniqueInput | td_carrito_ahbbWhereUniqueInput[]
+  }
+
+  export type td_factura_ahbbCreateNestedManyWithoutUsuario_ahbbInput = {
+    create?: XOR<td_factura_ahbbCreateWithoutUsuario_ahbbInput, td_factura_ahbbUncheckedCreateWithoutUsuario_ahbbInput> | td_factura_ahbbCreateWithoutUsuario_ahbbInput[] | td_factura_ahbbUncheckedCreateWithoutUsuario_ahbbInput[]
+    connectOrCreate?: td_factura_ahbbCreateOrConnectWithoutUsuario_ahbbInput | td_factura_ahbbCreateOrConnectWithoutUsuario_ahbbInput[]
+    createMany?: td_factura_ahbbCreateManyUsuario_ahbbInputEnvelope
+    connect?: td_factura_ahbbWhereUniqueInput | td_factura_ahbbWhereUniqueInput[]
+  }
+
+  export type td_favorito_ahbbCreateNestedManyWithoutUsuario_ahbbInput = {
+    create?: XOR<td_favorito_ahbbCreateWithoutUsuario_ahbbInput, td_favorito_ahbbUncheckedCreateWithoutUsuario_ahbbInput> | td_favorito_ahbbCreateWithoutUsuario_ahbbInput[] | td_favorito_ahbbUncheckedCreateWithoutUsuario_ahbbInput[]
+    connectOrCreate?: td_favorito_ahbbCreateOrConnectWithoutUsuario_ahbbInput | td_favorito_ahbbCreateOrConnectWithoutUsuario_ahbbInput[]
+    createMany?: td_favorito_ahbbCreateManyUsuario_ahbbInputEnvelope
+    connect?: td_favorito_ahbbWhereUniqueInput | td_favorito_ahbbWhereUniqueInput[]
+  }
+
   export type td_curso_ahbbUncheckedCreateNestedManyWithoutProfesorInput = {
     create?: XOR<td_curso_ahbbCreateWithoutProfesorInput, td_curso_ahbbUncheckedCreateWithoutProfesorInput> | td_curso_ahbbCreateWithoutProfesorInput[] | td_curso_ahbbUncheckedCreateWithoutProfesorInput[]
     connectOrCreate?: td_curso_ahbbCreateOrConnectWithoutProfesorInput | td_curso_ahbbCreateOrConnectWithoutProfesorInput[]
@@ -11754,6 +19153,27 @@ export namespace Prisma {
     connectOrCreate?: td_auditoria_aprobacion_ahbbCreateOrConnectWithoutUsuarioAuditado_ahbbInput | td_auditoria_aprobacion_ahbbCreateOrConnectWithoutUsuarioAuditado_ahbbInput[]
     createMany?: td_auditoria_aprobacion_ahbbCreateManyUsuarioAuditado_ahbbInputEnvelope
     connect?: td_auditoria_aprobacion_ahbbWhereUniqueInput | td_auditoria_aprobacion_ahbbWhereUniqueInput[]
+  }
+
+  export type td_carrito_ahbbUncheckedCreateNestedManyWithoutUsuario_ahbbInput = {
+    create?: XOR<td_carrito_ahbbCreateWithoutUsuario_ahbbInput, td_carrito_ahbbUncheckedCreateWithoutUsuario_ahbbInput> | td_carrito_ahbbCreateWithoutUsuario_ahbbInput[] | td_carrito_ahbbUncheckedCreateWithoutUsuario_ahbbInput[]
+    connectOrCreate?: td_carrito_ahbbCreateOrConnectWithoutUsuario_ahbbInput | td_carrito_ahbbCreateOrConnectWithoutUsuario_ahbbInput[]
+    createMany?: td_carrito_ahbbCreateManyUsuario_ahbbInputEnvelope
+    connect?: td_carrito_ahbbWhereUniqueInput | td_carrito_ahbbWhereUniqueInput[]
+  }
+
+  export type td_factura_ahbbUncheckedCreateNestedManyWithoutUsuario_ahbbInput = {
+    create?: XOR<td_factura_ahbbCreateWithoutUsuario_ahbbInput, td_factura_ahbbUncheckedCreateWithoutUsuario_ahbbInput> | td_factura_ahbbCreateWithoutUsuario_ahbbInput[] | td_factura_ahbbUncheckedCreateWithoutUsuario_ahbbInput[]
+    connectOrCreate?: td_factura_ahbbCreateOrConnectWithoutUsuario_ahbbInput | td_factura_ahbbCreateOrConnectWithoutUsuario_ahbbInput[]
+    createMany?: td_factura_ahbbCreateManyUsuario_ahbbInputEnvelope
+    connect?: td_factura_ahbbWhereUniqueInput | td_factura_ahbbWhereUniqueInput[]
+  }
+
+  export type td_favorito_ahbbUncheckedCreateNestedManyWithoutUsuario_ahbbInput = {
+    create?: XOR<td_favorito_ahbbCreateWithoutUsuario_ahbbInput, td_favorito_ahbbUncheckedCreateWithoutUsuario_ahbbInput> | td_favorito_ahbbCreateWithoutUsuario_ahbbInput[] | td_favorito_ahbbUncheckedCreateWithoutUsuario_ahbbInput[]
+    connectOrCreate?: td_favorito_ahbbCreateOrConnectWithoutUsuario_ahbbInput | td_favorito_ahbbCreateOrConnectWithoutUsuario_ahbbInput[]
+    createMany?: td_favorito_ahbbCreateManyUsuario_ahbbInputEnvelope
+    connect?: td_favorito_ahbbWhereUniqueInput | td_favorito_ahbbWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -11836,6 +19256,48 @@ export namespace Prisma {
     deleteMany?: td_auditoria_aprobacion_ahbbScalarWhereInput | td_auditoria_aprobacion_ahbbScalarWhereInput[]
   }
 
+  export type td_carrito_ahbbUpdateManyWithoutUsuario_ahbbNestedInput = {
+    create?: XOR<td_carrito_ahbbCreateWithoutUsuario_ahbbInput, td_carrito_ahbbUncheckedCreateWithoutUsuario_ahbbInput> | td_carrito_ahbbCreateWithoutUsuario_ahbbInput[] | td_carrito_ahbbUncheckedCreateWithoutUsuario_ahbbInput[]
+    connectOrCreate?: td_carrito_ahbbCreateOrConnectWithoutUsuario_ahbbInput | td_carrito_ahbbCreateOrConnectWithoutUsuario_ahbbInput[]
+    upsert?: td_carrito_ahbbUpsertWithWhereUniqueWithoutUsuario_ahbbInput | td_carrito_ahbbUpsertWithWhereUniqueWithoutUsuario_ahbbInput[]
+    createMany?: td_carrito_ahbbCreateManyUsuario_ahbbInputEnvelope
+    set?: td_carrito_ahbbWhereUniqueInput | td_carrito_ahbbWhereUniqueInput[]
+    disconnect?: td_carrito_ahbbWhereUniqueInput | td_carrito_ahbbWhereUniqueInput[]
+    delete?: td_carrito_ahbbWhereUniqueInput | td_carrito_ahbbWhereUniqueInput[]
+    connect?: td_carrito_ahbbWhereUniqueInput | td_carrito_ahbbWhereUniqueInput[]
+    update?: td_carrito_ahbbUpdateWithWhereUniqueWithoutUsuario_ahbbInput | td_carrito_ahbbUpdateWithWhereUniqueWithoutUsuario_ahbbInput[]
+    updateMany?: td_carrito_ahbbUpdateManyWithWhereWithoutUsuario_ahbbInput | td_carrito_ahbbUpdateManyWithWhereWithoutUsuario_ahbbInput[]
+    deleteMany?: td_carrito_ahbbScalarWhereInput | td_carrito_ahbbScalarWhereInput[]
+  }
+
+  export type td_factura_ahbbUpdateManyWithoutUsuario_ahbbNestedInput = {
+    create?: XOR<td_factura_ahbbCreateWithoutUsuario_ahbbInput, td_factura_ahbbUncheckedCreateWithoutUsuario_ahbbInput> | td_factura_ahbbCreateWithoutUsuario_ahbbInput[] | td_factura_ahbbUncheckedCreateWithoutUsuario_ahbbInput[]
+    connectOrCreate?: td_factura_ahbbCreateOrConnectWithoutUsuario_ahbbInput | td_factura_ahbbCreateOrConnectWithoutUsuario_ahbbInput[]
+    upsert?: td_factura_ahbbUpsertWithWhereUniqueWithoutUsuario_ahbbInput | td_factura_ahbbUpsertWithWhereUniqueWithoutUsuario_ahbbInput[]
+    createMany?: td_factura_ahbbCreateManyUsuario_ahbbInputEnvelope
+    set?: td_factura_ahbbWhereUniqueInput | td_factura_ahbbWhereUniqueInput[]
+    disconnect?: td_factura_ahbbWhereUniqueInput | td_factura_ahbbWhereUniqueInput[]
+    delete?: td_factura_ahbbWhereUniqueInput | td_factura_ahbbWhereUniqueInput[]
+    connect?: td_factura_ahbbWhereUniqueInput | td_factura_ahbbWhereUniqueInput[]
+    update?: td_factura_ahbbUpdateWithWhereUniqueWithoutUsuario_ahbbInput | td_factura_ahbbUpdateWithWhereUniqueWithoutUsuario_ahbbInput[]
+    updateMany?: td_factura_ahbbUpdateManyWithWhereWithoutUsuario_ahbbInput | td_factura_ahbbUpdateManyWithWhereWithoutUsuario_ahbbInput[]
+    deleteMany?: td_factura_ahbbScalarWhereInput | td_factura_ahbbScalarWhereInput[]
+  }
+
+  export type td_favorito_ahbbUpdateManyWithoutUsuario_ahbbNestedInput = {
+    create?: XOR<td_favorito_ahbbCreateWithoutUsuario_ahbbInput, td_favorito_ahbbUncheckedCreateWithoutUsuario_ahbbInput> | td_favorito_ahbbCreateWithoutUsuario_ahbbInput[] | td_favorito_ahbbUncheckedCreateWithoutUsuario_ahbbInput[]
+    connectOrCreate?: td_favorito_ahbbCreateOrConnectWithoutUsuario_ahbbInput | td_favorito_ahbbCreateOrConnectWithoutUsuario_ahbbInput[]
+    upsert?: td_favorito_ahbbUpsertWithWhereUniqueWithoutUsuario_ahbbInput | td_favorito_ahbbUpsertWithWhereUniqueWithoutUsuario_ahbbInput[]
+    createMany?: td_favorito_ahbbCreateManyUsuario_ahbbInputEnvelope
+    set?: td_favorito_ahbbWhereUniqueInput | td_favorito_ahbbWhereUniqueInput[]
+    disconnect?: td_favorito_ahbbWhereUniqueInput | td_favorito_ahbbWhereUniqueInput[]
+    delete?: td_favorito_ahbbWhereUniqueInput | td_favorito_ahbbWhereUniqueInput[]
+    connect?: td_favorito_ahbbWhereUniqueInput | td_favorito_ahbbWhereUniqueInput[]
+    update?: td_favorito_ahbbUpdateWithWhereUniqueWithoutUsuario_ahbbInput | td_favorito_ahbbUpdateWithWhereUniqueWithoutUsuario_ahbbInput[]
+    updateMany?: td_favorito_ahbbUpdateManyWithWhereWithoutUsuario_ahbbInput | td_favorito_ahbbUpdateManyWithWhereWithoutUsuario_ahbbInput[]
+    deleteMany?: td_favorito_ahbbScalarWhereInput | td_favorito_ahbbScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -11898,6 +19360,48 @@ export namespace Prisma {
     update?: td_auditoria_aprobacion_ahbbUpdateWithWhereUniqueWithoutUsuarioAuditado_ahbbInput | td_auditoria_aprobacion_ahbbUpdateWithWhereUniqueWithoutUsuarioAuditado_ahbbInput[]
     updateMany?: td_auditoria_aprobacion_ahbbUpdateManyWithWhereWithoutUsuarioAuditado_ahbbInput | td_auditoria_aprobacion_ahbbUpdateManyWithWhereWithoutUsuarioAuditado_ahbbInput[]
     deleteMany?: td_auditoria_aprobacion_ahbbScalarWhereInput | td_auditoria_aprobacion_ahbbScalarWhereInput[]
+  }
+
+  export type td_carrito_ahbbUncheckedUpdateManyWithoutUsuario_ahbbNestedInput = {
+    create?: XOR<td_carrito_ahbbCreateWithoutUsuario_ahbbInput, td_carrito_ahbbUncheckedCreateWithoutUsuario_ahbbInput> | td_carrito_ahbbCreateWithoutUsuario_ahbbInput[] | td_carrito_ahbbUncheckedCreateWithoutUsuario_ahbbInput[]
+    connectOrCreate?: td_carrito_ahbbCreateOrConnectWithoutUsuario_ahbbInput | td_carrito_ahbbCreateOrConnectWithoutUsuario_ahbbInput[]
+    upsert?: td_carrito_ahbbUpsertWithWhereUniqueWithoutUsuario_ahbbInput | td_carrito_ahbbUpsertWithWhereUniqueWithoutUsuario_ahbbInput[]
+    createMany?: td_carrito_ahbbCreateManyUsuario_ahbbInputEnvelope
+    set?: td_carrito_ahbbWhereUniqueInput | td_carrito_ahbbWhereUniqueInput[]
+    disconnect?: td_carrito_ahbbWhereUniqueInput | td_carrito_ahbbWhereUniqueInput[]
+    delete?: td_carrito_ahbbWhereUniqueInput | td_carrito_ahbbWhereUniqueInput[]
+    connect?: td_carrito_ahbbWhereUniqueInput | td_carrito_ahbbWhereUniqueInput[]
+    update?: td_carrito_ahbbUpdateWithWhereUniqueWithoutUsuario_ahbbInput | td_carrito_ahbbUpdateWithWhereUniqueWithoutUsuario_ahbbInput[]
+    updateMany?: td_carrito_ahbbUpdateManyWithWhereWithoutUsuario_ahbbInput | td_carrito_ahbbUpdateManyWithWhereWithoutUsuario_ahbbInput[]
+    deleteMany?: td_carrito_ahbbScalarWhereInput | td_carrito_ahbbScalarWhereInput[]
+  }
+
+  export type td_factura_ahbbUncheckedUpdateManyWithoutUsuario_ahbbNestedInput = {
+    create?: XOR<td_factura_ahbbCreateWithoutUsuario_ahbbInput, td_factura_ahbbUncheckedCreateWithoutUsuario_ahbbInput> | td_factura_ahbbCreateWithoutUsuario_ahbbInput[] | td_factura_ahbbUncheckedCreateWithoutUsuario_ahbbInput[]
+    connectOrCreate?: td_factura_ahbbCreateOrConnectWithoutUsuario_ahbbInput | td_factura_ahbbCreateOrConnectWithoutUsuario_ahbbInput[]
+    upsert?: td_factura_ahbbUpsertWithWhereUniqueWithoutUsuario_ahbbInput | td_factura_ahbbUpsertWithWhereUniqueWithoutUsuario_ahbbInput[]
+    createMany?: td_factura_ahbbCreateManyUsuario_ahbbInputEnvelope
+    set?: td_factura_ahbbWhereUniqueInput | td_factura_ahbbWhereUniqueInput[]
+    disconnect?: td_factura_ahbbWhereUniqueInput | td_factura_ahbbWhereUniqueInput[]
+    delete?: td_factura_ahbbWhereUniqueInput | td_factura_ahbbWhereUniqueInput[]
+    connect?: td_factura_ahbbWhereUniqueInput | td_factura_ahbbWhereUniqueInput[]
+    update?: td_factura_ahbbUpdateWithWhereUniqueWithoutUsuario_ahbbInput | td_factura_ahbbUpdateWithWhereUniqueWithoutUsuario_ahbbInput[]
+    updateMany?: td_factura_ahbbUpdateManyWithWhereWithoutUsuario_ahbbInput | td_factura_ahbbUpdateManyWithWhereWithoutUsuario_ahbbInput[]
+    deleteMany?: td_factura_ahbbScalarWhereInput | td_factura_ahbbScalarWhereInput[]
+  }
+
+  export type td_favorito_ahbbUncheckedUpdateManyWithoutUsuario_ahbbNestedInput = {
+    create?: XOR<td_favorito_ahbbCreateWithoutUsuario_ahbbInput, td_favorito_ahbbUncheckedCreateWithoutUsuario_ahbbInput> | td_favorito_ahbbCreateWithoutUsuario_ahbbInput[] | td_favorito_ahbbUncheckedCreateWithoutUsuario_ahbbInput[]
+    connectOrCreate?: td_favorito_ahbbCreateOrConnectWithoutUsuario_ahbbInput | td_favorito_ahbbCreateOrConnectWithoutUsuario_ahbbInput[]
+    upsert?: td_favorito_ahbbUpsertWithWhereUniqueWithoutUsuario_ahbbInput | td_favorito_ahbbUpsertWithWhereUniqueWithoutUsuario_ahbbInput[]
+    createMany?: td_favorito_ahbbCreateManyUsuario_ahbbInputEnvelope
+    set?: td_favorito_ahbbWhereUniqueInput | td_favorito_ahbbWhereUniqueInput[]
+    disconnect?: td_favorito_ahbbWhereUniqueInput | td_favorito_ahbbWhereUniqueInput[]
+    delete?: td_favorito_ahbbWhereUniqueInput | td_favorito_ahbbWhereUniqueInput[]
+    connect?: td_favorito_ahbbWhereUniqueInput | td_favorito_ahbbWhereUniqueInput[]
+    update?: td_favorito_ahbbUpdateWithWhereUniqueWithoutUsuario_ahbbInput | td_favorito_ahbbUpdateWithWhereUniqueWithoutUsuario_ahbbInput[]
+    updateMany?: td_favorito_ahbbUpdateManyWithWhereWithoutUsuario_ahbbInput | td_favorito_ahbbUpdateManyWithWhereWithoutUsuario_ahbbInput[]
+    deleteMany?: td_favorito_ahbbScalarWhereInput | td_favorito_ahbbScalarWhereInput[]
   }
 
   export type td_usuario_ahbbCreateNestedOneWithoutCursosInput = {
@@ -12188,6 +19692,280 @@ export namespace Prisma {
     update?: XOR<XOR<td_usuario_ahbbUpdateToOneWithWhereWithoutAuditoriasAprobadas_ahbbInput, td_usuario_ahbbUpdateWithoutAuditoriasAprobadas_ahbbInput>, td_usuario_ahbbUncheckedUpdateWithoutAuditoriasAprobadas_ahbbInput>
   }
 
+  export type td_carrito_ahbbCreateNestedManyWithoutProducto_ahbbInput = {
+    create?: XOR<td_carrito_ahbbCreateWithoutProducto_ahbbInput, td_carrito_ahbbUncheckedCreateWithoutProducto_ahbbInput> | td_carrito_ahbbCreateWithoutProducto_ahbbInput[] | td_carrito_ahbbUncheckedCreateWithoutProducto_ahbbInput[]
+    connectOrCreate?: td_carrito_ahbbCreateOrConnectWithoutProducto_ahbbInput | td_carrito_ahbbCreateOrConnectWithoutProducto_ahbbInput[]
+    createMany?: td_carrito_ahbbCreateManyProducto_ahbbInputEnvelope
+    connect?: td_carrito_ahbbWhereUniqueInput | td_carrito_ahbbWhereUniqueInput[]
+  }
+
+  export type td_detalle_factura_ahbbCreateNestedManyWithoutProducto_ahbbInput = {
+    create?: XOR<td_detalle_factura_ahbbCreateWithoutProducto_ahbbInput, td_detalle_factura_ahbbUncheckedCreateWithoutProducto_ahbbInput> | td_detalle_factura_ahbbCreateWithoutProducto_ahbbInput[] | td_detalle_factura_ahbbUncheckedCreateWithoutProducto_ahbbInput[]
+    connectOrCreate?: td_detalle_factura_ahbbCreateOrConnectWithoutProducto_ahbbInput | td_detalle_factura_ahbbCreateOrConnectWithoutProducto_ahbbInput[]
+    createMany?: td_detalle_factura_ahbbCreateManyProducto_ahbbInputEnvelope
+    connect?: td_detalle_factura_ahbbWhereUniqueInput | td_detalle_factura_ahbbWhereUniqueInput[]
+  }
+
+  export type td_favorito_ahbbCreateNestedManyWithoutProducto_ahbbInput = {
+    create?: XOR<td_favorito_ahbbCreateWithoutProducto_ahbbInput, td_favorito_ahbbUncheckedCreateWithoutProducto_ahbbInput> | td_favorito_ahbbCreateWithoutProducto_ahbbInput[] | td_favorito_ahbbUncheckedCreateWithoutProducto_ahbbInput[]
+    connectOrCreate?: td_favorito_ahbbCreateOrConnectWithoutProducto_ahbbInput | td_favorito_ahbbCreateOrConnectWithoutProducto_ahbbInput[]
+    createMany?: td_favorito_ahbbCreateManyProducto_ahbbInputEnvelope
+    connect?: td_favorito_ahbbWhereUniqueInput | td_favorito_ahbbWhereUniqueInput[]
+  }
+
+  export type td_carrito_ahbbUncheckedCreateNestedManyWithoutProducto_ahbbInput = {
+    create?: XOR<td_carrito_ahbbCreateWithoutProducto_ahbbInput, td_carrito_ahbbUncheckedCreateWithoutProducto_ahbbInput> | td_carrito_ahbbCreateWithoutProducto_ahbbInput[] | td_carrito_ahbbUncheckedCreateWithoutProducto_ahbbInput[]
+    connectOrCreate?: td_carrito_ahbbCreateOrConnectWithoutProducto_ahbbInput | td_carrito_ahbbCreateOrConnectWithoutProducto_ahbbInput[]
+    createMany?: td_carrito_ahbbCreateManyProducto_ahbbInputEnvelope
+    connect?: td_carrito_ahbbWhereUniqueInput | td_carrito_ahbbWhereUniqueInput[]
+  }
+
+  export type td_detalle_factura_ahbbUncheckedCreateNestedManyWithoutProducto_ahbbInput = {
+    create?: XOR<td_detalle_factura_ahbbCreateWithoutProducto_ahbbInput, td_detalle_factura_ahbbUncheckedCreateWithoutProducto_ahbbInput> | td_detalle_factura_ahbbCreateWithoutProducto_ahbbInput[] | td_detalle_factura_ahbbUncheckedCreateWithoutProducto_ahbbInput[]
+    connectOrCreate?: td_detalle_factura_ahbbCreateOrConnectWithoutProducto_ahbbInput | td_detalle_factura_ahbbCreateOrConnectWithoutProducto_ahbbInput[]
+    createMany?: td_detalle_factura_ahbbCreateManyProducto_ahbbInputEnvelope
+    connect?: td_detalle_factura_ahbbWhereUniqueInput | td_detalle_factura_ahbbWhereUniqueInput[]
+  }
+
+  export type td_favorito_ahbbUncheckedCreateNestedManyWithoutProducto_ahbbInput = {
+    create?: XOR<td_favorito_ahbbCreateWithoutProducto_ahbbInput, td_favorito_ahbbUncheckedCreateWithoutProducto_ahbbInput> | td_favorito_ahbbCreateWithoutProducto_ahbbInput[] | td_favorito_ahbbUncheckedCreateWithoutProducto_ahbbInput[]
+    connectOrCreate?: td_favorito_ahbbCreateOrConnectWithoutProducto_ahbbInput | td_favorito_ahbbCreateOrConnectWithoutProducto_ahbbInput[]
+    createMany?: td_favorito_ahbbCreateManyProducto_ahbbInputEnvelope
+    connect?: td_favorito_ahbbWhereUniqueInput | td_favorito_ahbbWhereUniqueInput[]
+  }
+
+  export type DecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type td_carrito_ahbbUpdateManyWithoutProducto_ahbbNestedInput = {
+    create?: XOR<td_carrito_ahbbCreateWithoutProducto_ahbbInput, td_carrito_ahbbUncheckedCreateWithoutProducto_ahbbInput> | td_carrito_ahbbCreateWithoutProducto_ahbbInput[] | td_carrito_ahbbUncheckedCreateWithoutProducto_ahbbInput[]
+    connectOrCreate?: td_carrito_ahbbCreateOrConnectWithoutProducto_ahbbInput | td_carrito_ahbbCreateOrConnectWithoutProducto_ahbbInput[]
+    upsert?: td_carrito_ahbbUpsertWithWhereUniqueWithoutProducto_ahbbInput | td_carrito_ahbbUpsertWithWhereUniqueWithoutProducto_ahbbInput[]
+    createMany?: td_carrito_ahbbCreateManyProducto_ahbbInputEnvelope
+    set?: td_carrito_ahbbWhereUniqueInput | td_carrito_ahbbWhereUniqueInput[]
+    disconnect?: td_carrito_ahbbWhereUniqueInput | td_carrito_ahbbWhereUniqueInput[]
+    delete?: td_carrito_ahbbWhereUniqueInput | td_carrito_ahbbWhereUniqueInput[]
+    connect?: td_carrito_ahbbWhereUniqueInput | td_carrito_ahbbWhereUniqueInput[]
+    update?: td_carrito_ahbbUpdateWithWhereUniqueWithoutProducto_ahbbInput | td_carrito_ahbbUpdateWithWhereUniqueWithoutProducto_ahbbInput[]
+    updateMany?: td_carrito_ahbbUpdateManyWithWhereWithoutProducto_ahbbInput | td_carrito_ahbbUpdateManyWithWhereWithoutProducto_ahbbInput[]
+    deleteMany?: td_carrito_ahbbScalarWhereInput | td_carrito_ahbbScalarWhereInput[]
+  }
+
+  export type td_detalle_factura_ahbbUpdateManyWithoutProducto_ahbbNestedInput = {
+    create?: XOR<td_detalle_factura_ahbbCreateWithoutProducto_ahbbInput, td_detalle_factura_ahbbUncheckedCreateWithoutProducto_ahbbInput> | td_detalle_factura_ahbbCreateWithoutProducto_ahbbInput[] | td_detalle_factura_ahbbUncheckedCreateWithoutProducto_ahbbInput[]
+    connectOrCreate?: td_detalle_factura_ahbbCreateOrConnectWithoutProducto_ahbbInput | td_detalle_factura_ahbbCreateOrConnectWithoutProducto_ahbbInput[]
+    upsert?: td_detalle_factura_ahbbUpsertWithWhereUniqueWithoutProducto_ahbbInput | td_detalle_factura_ahbbUpsertWithWhereUniqueWithoutProducto_ahbbInput[]
+    createMany?: td_detalle_factura_ahbbCreateManyProducto_ahbbInputEnvelope
+    set?: td_detalle_factura_ahbbWhereUniqueInput | td_detalle_factura_ahbbWhereUniqueInput[]
+    disconnect?: td_detalle_factura_ahbbWhereUniqueInput | td_detalle_factura_ahbbWhereUniqueInput[]
+    delete?: td_detalle_factura_ahbbWhereUniqueInput | td_detalle_factura_ahbbWhereUniqueInput[]
+    connect?: td_detalle_factura_ahbbWhereUniqueInput | td_detalle_factura_ahbbWhereUniqueInput[]
+    update?: td_detalle_factura_ahbbUpdateWithWhereUniqueWithoutProducto_ahbbInput | td_detalle_factura_ahbbUpdateWithWhereUniqueWithoutProducto_ahbbInput[]
+    updateMany?: td_detalle_factura_ahbbUpdateManyWithWhereWithoutProducto_ahbbInput | td_detalle_factura_ahbbUpdateManyWithWhereWithoutProducto_ahbbInput[]
+    deleteMany?: td_detalle_factura_ahbbScalarWhereInput | td_detalle_factura_ahbbScalarWhereInput[]
+  }
+
+  export type td_favorito_ahbbUpdateManyWithoutProducto_ahbbNestedInput = {
+    create?: XOR<td_favorito_ahbbCreateWithoutProducto_ahbbInput, td_favorito_ahbbUncheckedCreateWithoutProducto_ahbbInput> | td_favorito_ahbbCreateWithoutProducto_ahbbInput[] | td_favorito_ahbbUncheckedCreateWithoutProducto_ahbbInput[]
+    connectOrCreate?: td_favorito_ahbbCreateOrConnectWithoutProducto_ahbbInput | td_favorito_ahbbCreateOrConnectWithoutProducto_ahbbInput[]
+    upsert?: td_favorito_ahbbUpsertWithWhereUniqueWithoutProducto_ahbbInput | td_favorito_ahbbUpsertWithWhereUniqueWithoutProducto_ahbbInput[]
+    createMany?: td_favorito_ahbbCreateManyProducto_ahbbInputEnvelope
+    set?: td_favorito_ahbbWhereUniqueInput | td_favorito_ahbbWhereUniqueInput[]
+    disconnect?: td_favorito_ahbbWhereUniqueInput | td_favorito_ahbbWhereUniqueInput[]
+    delete?: td_favorito_ahbbWhereUniqueInput | td_favorito_ahbbWhereUniqueInput[]
+    connect?: td_favorito_ahbbWhereUniqueInput | td_favorito_ahbbWhereUniqueInput[]
+    update?: td_favorito_ahbbUpdateWithWhereUniqueWithoutProducto_ahbbInput | td_favorito_ahbbUpdateWithWhereUniqueWithoutProducto_ahbbInput[]
+    updateMany?: td_favorito_ahbbUpdateManyWithWhereWithoutProducto_ahbbInput | td_favorito_ahbbUpdateManyWithWhereWithoutProducto_ahbbInput[]
+    deleteMany?: td_favorito_ahbbScalarWhereInput | td_favorito_ahbbScalarWhereInput[]
+  }
+
+  export type td_carrito_ahbbUncheckedUpdateManyWithoutProducto_ahbbNestedInput = {
+    create?: XOR<td_carrito_ahbbCreateWithoutProducto_ahbbInput, td_carrito_ahbbUncheckedCreateWithoutProducto_ahbbInput> | td_carrito_ahbbCreateWithoutProducto_ahbbInput[] | td_carrito_ahbbUncheckedCreateWithoutProducto_ahbbInput[]
+    connectOrCreate?: td_carrito_ahbbCreateOrConnectWithoutProducto_ahbbInput | td_carrito_ahbbCreateOrConnectWithoutProducto_ahbbInput[]
+    upsert?: td_carrito_ahbbUpsertWithWhereUniqueWithoutProducto_ahbbInput | td_carrito_ahbbUpsertWithWhereUniqueWithoutProducto_ahbbInput[]
+    createMany?: td_carrito_ahbbCreateManyProducto_ahbbInputEnvelope
+    set?: td_carrito_ahbbWhereUniqueInput | td_carrito_ahbbWhereUniqueInput[]
+    disconnect?: td_carrito_ahbbWhereUniqueInput | td_carrito_ahbbWhereUniqueInput[]
+    delete?: td_carrito_ahbbWhereUniqueInput | td_carrito_ahbbWhereUniqueInput[]
+    connect?: td_carrito_ahbbWhereUniqueInput | td_carrito_ahbbWhereUniqueInput[]
+    update?: td_carrito_ahbbUpdateWithWhereUniqueWithoutProducto_ahbbInput | td_carrito_ahbbUpdateWithWhereUniqueWithoutProducto_ahbbInput[]
+    updateMany?: td_carrito_ahbbUpdateManyWithWhereWithoutProducto_ahbbInput | td_carrito_ahbbUpdateManyWithWhereWithoutProducto_ahbbInput[]
+    deleteMany?: td_carrito_ahbbScalarWhereInput | td_carrito_ahbbScalarWhereInput[]
+  }
+
+  export type td_detalle_factura_ahbbUncheckedUpdateManyWithoutProducto_ahbbNestedInput = {
+    create?: XOR<td_detalle_factura_ahbbCreateWithoutProducto_ahbbInput, td_detalle_factura_ahbbUncheckedCreateWithoutProducto_ahbbInput> | td_detalle_factura_ahbbCreateWithoutProducto_ahbbInput[] | td_detalle_factura_ahbbUncheckedCreateWithoutProducto_ahbbInput[]
+    connectOrCreate?: td_detalle_factura_ahbbCreateOrConnectWithoutProducto_ahbbInput | td_detalle_factura_ahbbCreateOrConnectWithoutProducto_ahbbInput[]
+    upsert?: td_detalle_factura_ahbbUpsertWithWhereUniqueWithoutProducto_ahbbInput | td_detalle_factura_ahbbUpsertWithWhereUniqueWithoutProducto_ahbbInput[]
+    createMany?: td_detalle_factura_ahbbCreateManyProducto_ahbbInputEnvelope
+    set?: td_detalle_factura_ahbbWhereUniqueInput | td_detalle_factura_ahbbWhereUniqueInput[]
+    disconnect?: td_detalle_factura_ahbbWhereUniqueInput | td_detalle_factura_ahbbWhereUniqueInput[]
+    delete?: td_detalle_factura_ahbbWhereUniqueInput | td_detalle_factura_ahbbWhereUniqueInput[]
+    connect?: td_detalle_factura_ahbbWhereUniqueInput | td_detalle_factura_ahbbWhereUniqueInput[]
+    update?: td_detalle_factura_ahbbUpdateWithWhereUniqueWithoutProducto_ahbbInput | td_detalle_factura_ahbbUpdateWithWhereUniqueWithoutProducto_ahbbInput[]
+    updateMany?: td_detalle_factura_ahbbUpdateManyWithWhereWithoutProducto_ahbbInput | td_detalle_factura_ahbbUpdateManyWithWhereWithoutProducto_ahbbInput[]
+    deleteMany?: td_detalle_factura_ahbbScalarWhereInput | td_detalle_factura_ahbbScalarWhereInput[]
+  }
+
+  export type td_favorito_ahbbUncheckedUpdateManyWithoutProducto_ahbbNestedInput = {
+    create?: XOR<td_favorito_ahbbCreateWithoutProducto_ahbbInput, td_favorito_ahbbUncheckedCreateWithoutProducto_ahbbInput> | td_favorito_ahbbCreateWithoutProducto_ahbbInput[] | td_favorito_ahbbUncheckedCreateWithoutProducto_ahbbInput[]
+    connectOrCreate?: td_favorito_ahbbCreateOrConnectWithoutProducto_ahbbInput | td_favorito_ahbbCreateOrConnectWithoutProducto_ahbbInput[]
+    upsert?: td_favorito_ahbbUpsertWithWhereUniqueWithoutProducto_ahbbInput | td_favorito_ahbbUpsertWithWhereUniqueWithoutProducto_ahbbInput[]
+    createMany?: td_favorito_ahbbCreateManyProducto_ahbbInputEnvelope
+    set?: td_favorito_ahbbWhereUniqueInput | td_favorito_ahbbWhereUniqueInput[]
+    disconnect?: td_favorito_ahbbWhereUniqueInput | td_favorito_ahbbWhereUniqueInput[]
+    delete?: td_favorito_ahbbWhereUniqueInput | td_favorito_ahbbWhereUniqueInput[]
+    connect?: td_favorito_ahbbWhereUniqueInput | td_favorito_ahbbWhereUniqueInput[]
+    update?: td_favorito_ahbbUpdateWithWhereUniqueWithoutProducto_ahbbInput | td_favorito_ahbbUpdateWithWhereUniqueWithoutProducto_ahbbInput[]
+    updateMany?: td_favorito_ahbbUpdateManyWithWhereWithoutProducto_ahbbInput | td_favorito_ahbbUpdateManyWithWhereWithoutProducto_ahbbInput[]
+    deleteMany?: td_favorito_ahbbScalarWhereInput | td_favorito_ahbbScalarWhereInput[]
+  }
+
+  export type td_usuario_ahbbCreateNestedOneWithoutCarrito_ahbbInput = {
+    create?: XOR<td_usuario_ahbbCreateWithoutCarrito_ahbbInput, td_usuario_ahbbUncheckedCreateWithoutCarrito_ahbbInput>
+    connectOrCreate?: td_usuario_ahbbCreateOrConnectWithoutCarrito_ahbbInput
+    connect?: td_usuario_ahbbWhereUniqueInput
+  }
+
+  export type td_producto_ahbbCreateNestedOneWithoutItemsCarrito_ahbbInput = {
+    create?: XOR<td_producto_ahbbCreateWithoutItemsCarrito_ahbbInput, td_producto_ahbbUncheckedCreateWithoutItemsCarrito_ahbbInput>
+    connectOrCreate?: td_producto_ahbbCreateOrConnectWithoutItemsCarrito_ahbbInput
+    connect?: td_producto_ahbbWhereUniqueInput
+  }
+
+  export type td_usuario_ahbbUpdateOneRequiredWithoutCarrito_ahbbNestedInput = {
+    create?: XOR<td_usuario_ahbbCreateWithoutCarrito_ahbbInput, td_usuario_ahbbUncheckedCreateWithoutCarrito_ahbbInput>
+    connectOrCreate?: td_usuario_ahbbCreateOrConnectWithoutCarrito_ahbbInput
+    upsert?: td_usuario_ahbbUpsertWithoutCarrito_ahbbInput
+    connect?: td_usuario_ahbbWhereUniqueInput
+    update?: XOR<XOR<td_usuario_ahbbUpdateToOneWithWhereWithoutCarrito_ahbbInput, td_usuario_ahbbUpdateWithoutCarrito_ahbbInput>, td_usuario_ahbbUncheckedUpdateWithoutCarrito_ahbbInput>
+  }
+
+  export type td_producto_ahbbUpdateOneRequiredWithoutItemsCarrito_ahbbNestedInput = {
+    create?: XOR<td_producto_ahbbCreateWithoutItemsCarrito_ahbbInput, td_producto_ahbbUncheckedCreateWithoutItemsCarrito_ahbbInput>
+    connectOrCreate?: td_producto_ahbbCreateOrConnectWithoutItemsCarrito_ahbbInput
+    upsert?: td_producto_ahbbUpsertWithoutItemsCarrito_ahbbInput
+    connect?: td_producto_ahbbWhereUniqueInput
+    update?: XOR<XOR<td_producto_ahbbUpdateToOneWithWhereWithoutItemsCarrito_ahbbInput, td_producto_ahbbUpdateWithoutItemsCarrito_ahbbInput>, td_producto_ahbbUncheckedUpdateWithoutItemsCarrito_ahbbInput>
+  }
+
+  export type td_usuario_ahbbCreateNestedOneWithoutFacturas_ahbbInput = {
+    create?: XOR<td_usuario_ahbbCreateWithoutFacturas_ahbbInput, td_usuario_ahbbUncheckedCreateWithoutFacturas_ahbbInput>
+    connectOrCreate?: td_usuario_ahbbCreateOrConnectWithoutFacturas_ahbbInput
+    connect?: td_usuario_ahbbWhereUniqueInput
+  }
+
+  export type td_detalle_factura_ahbbCreateNestedManyWithoutFactura_ahbbInput = {
+    create?: XOR<td_detalle_factura_ahbbCreateWithoutFactura_ahbbInput, td_detalle_factura_ahbbUncheckedCreateWithoutFactura_ahbbInput> | td_detalle_factura_ahbbCreateWithoutFactura_ahbbInput[] | td_detalle_factura_ahbbUncheckedCreateWithoutFactura_ahbbInput[]
+    connectOrCreate?: td_detalle_factura_ahbbCreateOrConnectWithoutFactura_ahbbInput | td_detalle_factura_ahbbCreateOrConnectWithoutFactura_ahbbInput[]
+    createMany?: td_detalle_factura_ahbbCreateManyFactura_ahbbInputEnvelope
+    connect?: td_detalle_factura_ahbbWhereUniqueInput | td_detalle_factura_ahbbWhereUniqueInput[]
+  }
+
+  export type td_detalle_factura_ahbbUncheckedCreateNestedManyWithoutFactura_ahbbInput = {
+    create?: XOR<td_detalle_factura_ahbbCreateWithoutFactura_ahbbInput, td_detalle_factura_ahbbUncheckedCreateWithoutFactura_ahbbInput> | td_detalle_factura_ahbbCreateWithoutFactura_ahbbInput[] | td_detalle_factura_ahbbUncheckedCreateWithoutFactura_ahbbInput[]
+    connectOrCreate?: td_detalle_factura_ahbbCreateOrConnectWithoutFactura_ahbbInput | td_detalle_factura_ahbbCreateOrConnectWithoutFactura_ahbbInput[]
+    createMany?: td_detalle_factura_ahbbCreateManyFactura_ahbbInputEnvelope
+    connect?: td_detalle_factura_ahbbWhereUniqueInput | td_detalle_factura_ahbbWhereUniqueInput[]
+  }
+
+  export type td_usuario_ahbbUpdateOneRequiredWithoutFacturas_ahbbNestedInput = {
+    create?: XOR<td_usuario_ahbbCreateWithoutFacturas_ahbbInput, td_usuario_ahbbUncheckedCreateWithoutFacturas_ahbbInput>
+    connectOrCreate?: td_usuario_ahbbCreateOrConnectWithoutFacturas_ahbbInput
+    upsert?: td_usuario_ahbbUpsertWithoutFacturas_ahbbInput
+    connect?: td_usuario_ahbbWhereUniqueInput
+    update?: XOR<XOR<td_usuario_ahbbUpdateToOneWithWhereWithoutFacturas_ahbbInput, td_usuario_ahbbUpdateWithoutFacturas_ahbbInput>, td_usuario_ahbbUncheckedUpdateWithoutFacturas_ahbbInput>
+  }
+
+  export type td_detalle_factura_ahbbUpdateManyWithoutFactura_ahbbNestedInput = {
+    create?: XOR<td_detalle_factura_ahbbCreateWithoutFactura_ahbbInput, td_detalle_factura_ahbbUncheckedCreateWithoutFactura_ahbbInput> | td_detalle_factura_ahbbCreateWithoutFactura_ahbbInput[] | td_detalle_factura_ahbbUncheckedCreateWithoutFactura_ahbbInput[]
+    connectOrCreate?: td_detalle_factura_ahbbCreateOrConnectWithoutFactura_ahbbInput | td_detalle_factura_ahbbCreateOrConnectWithoutFactura_ahbbInput[]
+    upsert?: td_detalle_factura_ahbbUpsertWithWhereUniqueWithoutFactura_ahbbInput | td_detalle_factura_ahbbUpsertWithWhereUniqueWithoutFactura_ahbbInput[]
+    createMany?: td_detalle_factura_ahbbCreateManyFactura_ahbbInputEnvelope
+    set?: td_detalle_factura_ahbbWhereUniqueInput | td_detalle_factura_ahbbWhereUniqueInput[]
+    disconnect?: td_detalle_factura_ahbbWhereUniqueInput | td_detalle_factura_ahbbWhereUniqueInput[]
+    delete?: td_detalle_factura_ahbbWhereUniqueInput | td_detalle_factura_ahbbWhereUniqueInput[]
+    connect?: td_detalle_factura_ahbbWhereUniqueInput | td_detalle_factura_ahbbWhereUniqueInput[]
+    update?: td_detalle_factura_ahbbUpdateWithWhereUniqueWithoutFactura_ahbbInput | td_detalle_factura_ahbbUpdateWithWhereUniqueWithoutFactura_ahbbInput[]
+    updateMany?: td_detalle_factura_ahbbUpdateManyWithWhereWithoutFactura_ahbbInput | td_detalle_factura_ahbbUpdateManyWithWhereWithoutFactura_ahbbInput[]
+    deleteMany?: td_detalle_factura_ahbbScalarWhereInput | td_detalle_factura_ahbbScalarWhereInput[]
+  }
+
+  export type td_detalle_factura_ahbbUncheckedUpdateManyWithoutFactura_ahbbNestedInput = {
+    create?: XOR<td_detalle_factura_ahbbCreateWithoutFactura_ahbbInput, td_detalle_factura_ahbbUncheckedCreateWithoutFactura_ahbbInput> | td_detalle_factura_ahbbCreateWithoutFactura_ahbbInput[] | td_detalle_factura_ahbbUncheckedCreateWithoutFactura_ahbbInput[]
+    connectOrCreate?: td_detalle_factura_ahbbCreateOrConnectWithoutFactura_ahbbInput | td_detalle_factura_ahbbCreateOrConnectWithoutFactura_ahbbInput[]
+    upsert?: td_detalle_factura_ahbbUpsertWithWhereUniqueWithoutFactura_ahbbInput | td_detalle_factura_ahbbUpsertWithWhereUniqueWithoutFactura_ahbbInput[]
+    createMany?: td_detalle_factura_ahbbCreateManyFactura_ahbbInputEnvelope
+    set?: td_detalle_factura_ahbbWhereUniqueInput | td_detalle_factura_ahbbWhereUniqueInput[]
+    disconnect?: td_detalle_factura_ahbbWhereUniqueInput | td_detalle_factura_ahbbWhereUniqueInput[]
+    delete?: td_detalle_factura_ahbbWhereUniqueInput | td_detalle_factura_ahbbWhereUniqueInput[]
+    connect?: td_detalle_factura_ahbbWhereUniqueInput | td_detalle_factura_ahbbWhereUniqueInput[]
+    update?: td_detalle_factura_ahbbUpdateWithWhereUniqueWithoutFactura_ahbbInput | td_detalle_factura_ahbbUpdateWithWhereUniqueWithoutFactura_ahbbInput[]
+    updateMany?: td_detalle_factura_ahbbUpdateManyWithWhereWithoutFactura_ahbbInput | td_detalle_factura_ahbbUpdateManyWithWhereWithoutFactura_ahbbInput[]
+    deleteMany?: td_detalle_factura_ahbbScalarWhereInput | td_detalle_factura_ahbbScalarWhereInput[]
+  }
+
+  export type td_factura_ahbbCreateNestedOneWithoutDetalles_ahbbInput = {
+    create?: XOR<td_factura_ahbbCreateWithoutDetalles_ahbbInput, td_factura_ahbbUncheckedCreateWithoutDetalles_ahbbInput>
+    connectOrCreate?: td_factura_ahbbCreateOrConnectWithoutDetalles_ahbbInput
+    connect?: td_factura_ahbbWhereUniqueInput
+  }
+
+  export type td_producto_ahbbCreateNestedOneWithoutDetallesFactura_ahbbInput = {
+    create?: XOR<td_producto_ahbbCreateWithoutDetallesFactura_ahbbInput, td_producto_ahbbUncheckedCreateWithoutDetallesFactura_ahbbInput>
+    connectOrCreate?: td_producto_ahbbCreateOrConnectWithoutDetallesFactura_ahbbInput
+    connect?: td_producto_ahbbWhereUniqueInput
+  }
+
+  export type td_factura_ahbbUpdateOneRequiredWithoutDetalles_ahbbNestedInput = {
+    create?: XOR<td_factura_ahbbCreateWithoutDetalles_ahbbInput, td_factura_ahbbUncheckedCreateWithoutDetalles_ahbbInput>
+    connectOrCreate?: td_factura_ahbbCreateOrConnectWithoutDetalles_ahbbInput
+    upsert?: td_factura_ahbbUpsertWithoutDetalles_ahbbInput
+    connect?: td_factura_ahbbWhereUniqueInput
+    update?: XOR<XOR<td_factura_ahbbUpdateToOneWithWhereWithoutDetalles_ahbbInput, td_factura_ahbbUpdateWithoutDetalles_ahbbInput>, td_factura_ahbbUncheckedUpdateWithoutDetalles_ahbbInput>
+  }
+
+  export type td_producto_ahbbUpdateOneRequiredWithoutDetallesFactura_ahbbNestedInput = {
+    create?: XOR<td_producto_ahbbCreateWithoutDetallesFactura_ahbbInput, td_producto_ahbbUncheckedCreateWithoutDetallesFactura_ahbbInput>
+    connectOrCreate?: td_producto_ahbbCreateOrConnectWithoutDetallesFactura_ahbbInput
+    upsert?: td_producto_ahbbUpsertWithoutDetallesFactura_ahbbInput
+    connect?: td_producto_ahbbWhereUniqueInput
+    update?: XOR<XOR<td_producto_ahbbUpdateToOneWithWhereWithoutDetallesFactura_ahbbInput, td_producto_ahbbUpdateWithoutDetallesFactura_ahbbInput>, td_producto_ahbbUncheckedUpdateWithoutDetallesFactura_ahbbInput>
+  }
+
+  export type td_usuario_ahbbCreateNestedOneWithoutFavoritos_ahbbInput = {
+    create?: XOR<td_usuario_ahbbCreateWithoutFavoritos_ahbbInput, td_usuario_ahbbUncheckedCreateWithoutFavoritos_ahbbInput>
+    connectOrCreate?: td_usuario_ahbbCreateOrConnectWithoutFavoritos_ahbbInput
+    connect?: td_usuario_ahbbWhereUniqueInput
+  }
+
+  export type td_producto_ahbbCreateNestedOneWithoutFavoritos_ahbbInput = {
+    create?: XOR<td_producto_ahbbCreateWithoutFavoritos_ahbbInput, td_producto_ahbbUncheckedCreateWithoutFavoritos_ahbbInput>
+    connectOrCreate?: td_producto_ahbbCreateOrConnectWithoutFavoritos_ahbbInput
+    connect?: td_producto_ahbbWhereUniqueInput
+  }
+
+  export type td_usuario_ahbbUpdateOneRequiredWithoutFavoritos_ahbbNestedInput = {
+    create?: XOR<td_usuario_ahbbCreateWithoutFavoritos_ahbbInput, td_usuario_ahbbUncheckedCreateWithoutFavoritos_ahbbInput>
+    connectOrCreate?: td_usuario_ahbbCreateOrConnectWithoutFavoritos_ahbbInput
+    upsert?: td_usuario_ahbbUpsertWithoutFavoritos_ahbbInput
+    connect?: td_usuario_ahbbWhereUniqueInput
+    update?: XOR<XOR<td_usuario_ahbbUpdateToOneWithWhereWithoutFavoritos_ahbbInput, td_usuario_ahbbUpdateWithoutFavoritos_ahbbInput>, td_usuario_ahbbUncheckedUpdateWithoutFavoritos_ahbbInput>
+  }
+
+  export type td_producto_ahbbUpdateOneRequiredWithoutFavoritos_ahbbNestedInput = {
+    create?: XOR<td_producto_ahbbCreateWithoutFavoritos_ahbbInput, td_producto_ahbbUncheckedCreateWithoutFavoritos_ahbbInput>
+    connectOrCreate?: td_producto_ahbbCreateOrConnectWithoutFavoritos_ahbbInput
+    upsert?: td_producto_ahbbUpsertWithoutFavoritos_ahbbInput
+    connect?: td_producto_ahbbWhereUniqueInput
+    update?: XOR<XOR<td_producto_ahbbUpdateToOneWithWhereWithoutFavoritos_ahbbInput, td_producto_ahbbUpdateWithoutFavoritos_ahbbInput>, td_producto_ahbbUncheckedUpdateWithoutFavoritos_ahbbInput>
+  }
+
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -12429,6 +20207,33 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedDecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
   export type td_curso_ahbbCreateWithoutProfesorInput = {
     nombre_ahbb: string
     tematica_ahbb: string
@@ -12571,6 +20376,77 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type td_carrito_ahbbCreateWithoutUsuario_ahbbInput = {
+    cantidad_ahbb?: number
+    fechaAgregado_ahbb?: Date | string | null
+    producto_ahbb: td_producto_ahbbCreateNestedOneWithoutItemsCarrito_ahbbInput
+  }
+
+  export type td_carrito_ahbbUncheckedCreateWithoutUsuario_ahbbInput = {
+    id_carrito_ahbb?: number
+    cantidad_ahbb?: number
+    fechaAgregado_ahbb?: Date | string | null
+    id_producto_carrito_ahbb: number
+  }
+
+  export type td_carrito_ahbbCreateOrConnectWithoutUsuario_ahbbInput = {
+    where: td_carrito_ahbbWhereUniqueInput
+    create: XOR<td_carrito_ahbbCreateWithoutUsuario_ahbbInput, td_carrito_ahbbUncheckedCreateWithoutUsuario_ahbbInput>
+  }
+
+  export type td_carrito_ahbbCreateManyUsuario_ahbbInputEnvelope = {
+    data: td_carrito_ahbbCreateManyUsuario_ahbbInput | td_carrito_ahbbCreateManyUsuario_ahbbInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type td_factura_ahbbCreateWithoutUsuario_ahbbInput = {
+    nroReferenciaPago_ahbb: string
+    fechaFactura_ahbb?: Date | string | null
+    total_ahbb: Decimal | DecimalJsLike | number | string
+    estadoFactura_ahbb?: string
+    detalles_ahbb?: td_detalle_factura_ahbbCreateNestedManyWithoutFactura_ahbbInput
+  }
+
+  export type td_factura_ahbbUncheckedCreateWithoutUsuario_ahbbInput = {
+    id_factura_ahbb?: number
+    nroReferenciaPago_ahbb: string
+    fechaFactura_ahbb?: Date | string | null
+    total_ahbb: Decimal | DecimalJsLike | number | string
+    estadoFactura_ahbb?: string
+    detalles_ahbb?: td_detalle_factura_ahbbUncheckedCreateNestedManyWithoutFactura_ahbbInput
+  }
+
+  export type td_factura_ahbbCreateOrConnectWithoutUsuario_ahbbInput = {
+    where: td_factura_ahbbWhereUniqueInput
+    create: XOR<td_factura_ahbbCreateWithoutUsuario_ahbbInput, td_factura_ahbbUncheckedCreateWithoutUsuario_ahbbInput>
+  }
+
+  export type td_factura_ahbbCreateManyUsuario_ahbbInputEnvelope = {
+    data: td_factura_ahbbCreateManyUsuario_ahbbInput | td_factura_ahbbCreateManyUsuario_ahbbInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type td_favorito_ahbbCreateWithoutUsuario_ahbbInput = {
+    fechaAgregado_ahbb?: Date | string | null
+    producto_ahbb: td_producto_ahbbCreateNestedOneWithoutFavoritos_ahbbInput
+  }
+
+  export type td_favorito_ahbbUncheckedCreateWithoutUsuario_ahbbInput = {
+    id_favorito_ahbb?: number
+    fechaAgregado_ahbb?: Date | string | null
+    id_producto_favorito_ahbb: number
+  }
+
+  export type td_favorito_ahbbCreateOrConnectWithoutUsuario_ahbbInput = {
+    where: td_favorito_ahbbWhereUniqueInput
+    create: XOR<td_favorito_ahbbCreateWithoutUsuario_ahbbInput, td_favorito_ahbbUncheckedCreateWithoutUsuario_ahbbInput>
+  }
+
+  export type td_favorito_ahbbCreateManyUsuario_ahbbInputEnvelope = {
+    data: td_favorito_ahbbCreateManyUsuario_ahbbInput | td_favorito_ahbbCreateManyUsuario_ahbbInput[]
+    skipDuplicates?: boolean
+  }
+
   export type td_curso_ahbbUpsertWithWhereUniqueWithoutProfesorInput = {
     where: td_curso_ahbbWhereUniqueInput
     update: XOR<td_curso_ahbbUpdateWithoutProfesorInput, td_curso_ahbbUncheckedUpdateWithoutProfesorInput>
@@ -12687,6 +20563,87 @@ export namespace Prisma {
     data: XOR<td_auditoria_aprobacion_ahbbUpdateManyMutationInput, td_auditoria_aprobacion_ahbbUncheckedUpdateManyWithoutUsuarioAuditado_ahbbInput>
   }
 
+  export type td_carrito_ahbbUpsertWithWhereUniqueWithoutUsuario_ahbbInput = {
+    where: td_carrito_ahbbWhereUniqueInput
+    update: XOR<td_carrito_ahbbUpdateWithoutUsuario_ahbbInput, td_carrito_ahbbUncheckedUpdateWithoutUsuario_ahbbInput>
+    create: XOR<td_carrito_ahbbCreateWithoutUsuario_ahbbInput, td_carrito_ahbbUncheckedCreateWithoutUsuario_ahbbInput>
+  }
+
+  export type td_carrito_ahbbUpdateWithWhereUniqueWithoutUsuario_ahbbInput = {
+    where: td_carrito_ahbbWhereUniqueInput
+    data: XOR<td_carrito_ahbbUpdateWithoutUsuario_ahbbInput, td_carrito_ahbbUncheckedUpdateWithoutUsuario_ahbbInput>
+  }
+
+  export type td_carrito_ahbbUpdateManyWithWhereWithoutUsuario_ahbbInput = {
+    where: td_carrito_ahbbScalarWhereInput
+    data: XOR<td_carrito_ahbbUpdateManyMutationInput, td_carrito_ahbbUncheckedUpdateManyWithoutUsuario_ahbbInput>
+  }
+
+  export type td_carrito_ahbbScalarWhereInput = {
+    AND?: td_carrito_ahbbScalarWhereInput | td_carrito_ahbbScalarWhereInput[]
+    OR?: td_carrito_ahbbScalarWhereInput[]
+    NOT?: td_carrito_ahbbScalarWhereInput | td_carrito_ahbbScalarWhereInput[]
+    id_carrito_ahbb?: IntFilter<"td_carrito_ahbb"> | number
+    cantidad_ahbb?: IntFilter<"td_carrito_ahbb"> | number
+    fechaAgregado_ahbb?: DateTimeNullableFilter<"td_carrito_ahbb"> | Date | string | null
+    id_usuario_carrito_ahbb?: IntFilter<"td_carrito_ahbb"> | number
+    id_producto_carrito_ahbb?: IntFilter<"td_carrito_ahbb"> | number
+  }
+
+  export type td_factura_ahbbUpsertWithWhereUniqueWithoutUsuario_ahbbInput = {
+    where: td_factura_ahbbWhereUniqueInput
+    update: XOR<td_factura_ahbbUpdateWithoutUsuario_ahbbInput, td_factura_ahbbUncheckedUpdateWithoutUsuario_ahbbInput>
+    create: XOR<td_factura_ahbbCreateWithoutUsuario_ahbbInput, td_factura_ahbbUncheckedCreateWithoutUsuario_ahbbInput>
+  }
+
+  export type td_factura_ahbbUpdateWithWhereUniqueWithoutUsuario_ahbbInput = {
+    where: td_factura_ahbbWhereUniqueInput
+    data: XOR<td_factura_ahbbUpdateWithoutUsuario_ahbbInput, td_factura_ahbbUncheckedUpdateWithoutUsuario_ahbbInput>
+  }
+
+  export type td_factura_ahbbUpdateManyWithWhereWithoutUsuario_ahbbInput = {
+    where: td_factura_ahbbScalarWhereInput
+    data: XOR<td_factura_ahbbUpdateManyMutationInput, td_factura_ahbbUncheckedUpdateManyWithoutUsuario_ahbbInput>
+  }
+
+  export type td_factura_ahbbScalarWhereInput = {
+    AND?: td_factura_ahbbScalarWhereInput | td_factura_ahbbScalarWhereInput[]
+    OR?: td_factura_ahbbScalarWhereInput[]
+    NOT?: td_factura_ahbbScalarWhereInput | td_factura_ahbbScalarWhereInput[]
+    id_factura_ahbb?: IntFilter<"td_factura_ahbb"> | number
+    nroReferenciaPago_ahbb?: StringFilter<"td_factura_ahbb"> | string
+    fechaFactura_ahbb?: DateTimeNullableFilter<"td_factura_ahbb"> | Date | string | null
+    total_ahbb?: DecimalFilter<"td_factura_ahbb"> | Decimal | DecimalJsLike | number | string
+    estadoFactura_ahbb?: StringFilter<"td_factura_ahbb"> | string
+    id_usuario_factura_ahbb?: IntFilter<"td_factura_ahbb"> | number
+  }
+
+  export type td_favorito_ahbbUpsertWithWhereUniqueWithoutUsuario_ahbbInput = {
+    where: td_favorito_ahbbWhereUniqueInput
+    update: XOR<td_favorito_ahbbUpdateWithoutUsuario_ahbbInput, td_favorito_ahbbUncheckedUpdateWithoutUsuario_ahbbInput>
+    create: XOR<td_favorito_ahbbCreateWithoutUsuario_ahbbInput, td_favorito_ahbbUncheckedCreateWithoutUsuario_ahbbInput>
+  }
+
+  export type td_favorito_ahbbUpdateWithWhereUniqueWithoutUsuario_ahbbInput = {
+    where: td_favorito_ahbbWhereUniqueInput
+    data: XOR<td_favorito_ahbbUpdateWithoutUsuario_ahbbInput, td_favorito_ahbbUncheckedUpdateWithoutUsuario_ahbbInput>
+  }
+
+  export type td_favorito_ahbbUpdateManyWithWhereWithoutUsuario_ahbbInput = {
+    where: td_favorito_ahbbScalarWhereInput
+    data: XOR<td_favorito_ahbbUpdateManyMutationInput, td_favorito_ahbbUncheckedUpdateManyWithoutUsuario_ahbbInput>
+  }
+
+  export type td_favorito_ahbbScalarWhereInput = {
+    AND?: td_favorito_ahbbScalarWhereInput | td_favorito_ahbbScalarWhereInput[]
+    OR?: td_favorito_ahbbScalarWhereInput[]
+    NOT?: td_favorito_ahbbScalarWhereInput | td_favorito_ahbbScalarWhereInput[]
+    id_favorito_ahbb?: IntFilter<"td_favorito_ahbb"> | number
+    fechaAgregado_ahbb?: DateTimeNullableFilter<"td_favorito_ahbb"> | Date | string | null
+    id_usuario_favorito_ahbb?: IntFilter<"td_favorito_ahbb"> | number
+    id_producto_favorito_ahbb?: IntFilter<"td_favorito_ahbb"> | number
+  }
+
   export type td_usuario_ahbbCreateWithoutCursosInput = {
     cedula_ahbb: string
     nombre_ahbb: string
@@ -12704,6 +20661,9 @@ export namespace Prisma {
     inscripciones?: td_inscripcion_ahbbCreateNestedManyWithoutAlumnoInput
     auditoriasAprobadas_ahbb?: td_auditoria_aprobacion_ahbbCreateNestedManyWithoutAprobador_ahbbInput
     auditoriasUsuario_ahbb?: td_auditoria_aprobacion_ahbbCreateNestedManyWithoutUsuarioAuditado_ahbbInput
+    carrito_ahbb?: td_carrito_ahbbCreateNestedManyWithoutUsuario_ahbbInput
+    facturas_ahbb?: td_factura_ahbbCreateNestedManyWithoutUsuario_ahbbInput
+    favoritos_ahbb?: td_favorito_ahbbCreateNestedManyWithoutUsuario_ahbbInput
   }
 
   export type td_usuario_ahbbUncheckedCreateWithoutCursosInput = {
@@ -12724,6 +20684,9 @@ export namespace Prisma {
     inscripciones?: td_inscripcion_ahbbUncheckedCreateNestedManyWithoutAlumnoInput
     auditoriasAprobadas_ahbb?: td_auditoria_aprobacion_ahbbUncheckedCreateNestedManyWithoutAprobador_ahbbInput
     auditoriasUsuario_ahbb?: td_auditoria_aprobacion_ahbbUncheckedCreateNestedManyWithoutUsuarioAuditado_ahbbInput
+    carrito_ahbb?: td_carrito_ahbbUncheckedCreateNestedManyWithoutUsuario_ahbbInput
+    facturas_ahbb?: td_factura_ahbbUncheckedCreateNestedManyWithoutUsuario_ahbbInput
+    favoritos_ahbb?: td_favorito_ahbbUncheckedCreateNestedManyWithoutUsuario_ahbbInput
   }
 
   export type td_usuario_ahbbCreateOrConnectWithoutCursosInput = {
@@ -12920,6 +20883,9 @@ export namespace Prisma {
     inscripciones?: td_inscripcion_ahbbUpdateManyWithoutAlumnoNestedInput
     auditoriasAprobadas_ahbb?: td_auditoria_aprobacion_ahbbUpdateManyWithoutAprobador_ahbbNestedInput
     auditoriasUsuario_ahbb?: td_auditoria_aprobacion_ahbbUpdateManyWithoutUsuarioAuditado_ahbbNestedInput
+    carrito_ahbb?: td_carrito_ahbbUpdateManyWithoutUsuario_ahbbNestedInput
+    facturas_ahbb?: td_factura_ahbbUpdateManyWithoutUsuario_ahbbNestedInput
+    favoritos_ahbb?: td_favorito_ahbbUpdateManyWithoutUsuario_ahbbNestedInput
   }
 
   export type td_usuario_ahbbUncheckedUpdateWithoutCursosInput = {
@@ -12940,6 +20906,9 @@ export namespace Prisma {
     inscripciones?: td_inscripcion_ahbbUncheckedUpdateManyWithoutAlumnoNestedInput
     auditoriasAprobadas_ahbb?: td_auditoria_aprobacion_ahbbUncheckedUpdateManyWithoutAprobador_ahbbNestedInput
     auditoriasUsuario_ahbb?: td_auditoria_aprobacion_ahbbUncheckedUpdateManyWithoutUsuarioAuditado_ahbbNestedInput
+    carrito_ahbb?: td_carrito_ahbbUncheckedUpdateManyWithoutUsuario_ahbbNestedInput
+    facturas_ahbb?: td_factura_ahbbUncheckedUpdateManyWithoutUsuario_ahbbNestedInput
+    favoritos_ahbb?: td_favorito_ahbbUncheckedUpdateManyWithoutUsuario_ahbbNestedInput
   }
 
   export type td_curso_ahbbUpsertWithoutPrelacionesInput = {
@@ -13180,6 +21149,9 @@ export namespace Prisma {
     cursos?: td_curso_ahbbCreateNestedManyWithoutProfesorInput
     auditoriasAprobadas_ahbb?: td_auditoria_aprobacion_ahbbCreateNestedManyWithoutAprobador_ahbbInput
     auditoriasUsuario_ahbb?: td_auditoria_aprobacion_ahbbCreateNestedManyWithoutUsuarioAuditado_ahbbInput
+    carrito_ahbb?: td_carrito_ahbbCreateNestedManyWithoutUsuario_ahbbInput
+    facturas_ahbb?: td_factura_ahbbCreateNestedManyWithoutUsuario_ahbbInput
+    favoritos_ahbb?: td_favorito_ahbbCreateNestedManyWithoutUsuario_ahbbInput
   }
 
   export type td_usuario_ahbbUncheckedCreateWithoutInscripcionesInput = {
@@ -13200,6 +21172,9 @@ export namespace Prisma {
     cursos?: td_curso_ahbbUncheckedCreateNestedManyWithoutProfesorInput
     auditoriasAprobadas_ahbb?: td_auditoria_aprobacion_ahbbUncheckedCreateNestedManyWithoutAprobador_ahbbInput
     auditoriasUsuario_ahbb?: td_auditoria_aprobacion_ahbbUncheckedCreateNestedManyWithoutUsuarioAuditado_ahbbInput
+    carrito_ahbb?: td_carrito_ahbbUncheckedCreateNestedManyWithoutUsuario_ahbbInput
+    facturas_ahbb?: td_factura_ahbbUncheckedCreateNestedManyWithoutUsuario_ahbbInput
+    favoritos_ahbb?: td_favorito_ahbbUncheckedCreateNestedManyWithoutUsuario_ahbbInput
   }
 
   export type td_usuario_ahbbCreateOrConnectWithoutInscripcionesInput = {
@@ -13301,6 +21276,9 @@ export namespace Prisma {
     cursos?: td_curso_ahbbUpdateManyWithoutProfesorNestedInput
     auditoriasAprobadas_ahbb?: td_auditoria_aprobacion_ahbbUpdateManyWithoutAprobador_ahbbNestedInput
     auditoriasUsuario_ahbb?: td_auditoria_aprobacion_ahbbUpdateManyWithoutUsuarioAuditado_ahbbNestedInput
+    carrito_ahbb?: td_carrito_ahbbUpdateManyWithoutUsuario_ahbbNestedInput
+    facturas_ahbb?: td_factura_ahbbUpdateManyWithoutUsuario_ahbbNestedInput
+    favoritos_ahbb?: td_favorito_ahbbUpdateManyWithoutUsuario_ahbbNestedInput
   }
 
   export type td_usuario_ahbbUncheckedUpdateWithoutInscripcionesInput = {
@@ -13321,6 +21299,9 @@ export namespace Prisma {
     cursos?: td_curso_ahbbUncheckedUpdateManyWithoutProfesorNestedInput
     auditoriasAprobadas_ahbb?: td_auditoria_aprobacion_ahbbUncheckedUpdateManyWithoutAprobador_ahbbNestedInput
     auditoriasUsuario_ahbb?: td_auditoria_aprobacion_ahbbUncheckedUpdateManyWithoutUsuarioAuditado_ahbbNestedInput
+    carrito_ahbb?: td_carrito_ahbbUncheckedUpdateManyWithoutUsuario_ahbbNestedInput
+    facturas_ahbb?: td_factura_ahbbUncheckedUpdateManyWithoutUsuario_ahbbNestedInput
+    favoritos_ahbb?: td_favorito_ahbbUncheckedUpdateManyWithoutUsuario_ahbbNestedInput
   }
 
   export type td_curso_ahbbUpsertWithoutInscripcionesInput = {
@@ -13480,6 +21461,9 @@ export namespace Prisma {
     cursos?: td_curso_ahbbCreateNestedManyWithoutProfesorInput
     inscripciones?: td_inscripcion_ahbbCreateNestedManyWithoutAlumnoInput
     auditoriasAprobadas_ahbb?: td_auditoria_aprobacion_ahbbCreateNestedManyWithoutAprobador_ahbbInput
+    carrito_ahbb?: td_carrito_ahbbCreateNestedManyWithoutUsuario_ahbbInput
+    facturas_ahbb?: td_factura_ahbbCreateNestedManyWithoutUsuario_ahbbInput
+    favoritos_ahbb?: td_favorito_ahbbCreateNestedManyWithoutUsuario_ahbbInput
   }
 
   export type td_usuario_ahbbUncheckedCreateWithoutAuditoriasUsuario_ahbbInput = {
@@ -13500,6 +21484,9 @@ export namespace Prisma {
     cursos?: td_curso_ahbbUncheckedCreateNestedManyWithoutProfesorInput
     inscripciones?: td_inscripcion_ahbbUncheckedCreateNestedManyWithoutAlumnoInput
     auditoriasAprobadas_ahbb?: td_auditoria_aprobacion_ahbbUncheckedCreateNestedManyWithoutAprobador_ahbbInput
+    carrito_ahbb?: td_carrito_ahbbUncheckedCreateNestedManyWithoutUsuario_ahbbInput
+    facturas_ahbb?: td_factura_ahbbUncheckedCreateNestedManyWithoutUsuario_ahbbInput
+    favoritos_ahbb?: td_favorito_ahbbUncheckedCreateNestedManyWithoutUsuario_ahbbInput
   }
 
   export type td_usuario_ahbbCreateOrConnectWithoutAuditoriasUsuario_ahbbInput = {
@@ -13524,6 +21511,9 @@ export namespace Prisma {
     cursos?: td_curso_ahbbCreateNestedManyWithoutProfesorInput
     inscripciones?: td_inscripcion_ahbbCreateNestedManyWithoutAlumnoInput
     auditoriasUsuario_ahbb?: td_auditoria_aprobacion_ahbbCreateNestedManyWithoutUsuarioAuditado_ahbbInput
+    carrito_ahbb?: td_carrito_ahbbCreateNestedManyWithoutUsuario_ahbbInput
+    facturas_ahbb?: td_factura_ahbbCreateNestedManyWithoutUsuario_ahbbInput
+    favoritos_ahbb?: td_favorito_ahbbCreateNestedManyWithoutUsuario_ahbbInput
   }
 
   export type td_usuario_ahbbUncheckedCreateWithoutAuditoriasAprobadas_ahbbInput = {
@@ -13544,6 +21534,9 @@ export namespace Prisma {
     cursos?: td_curso_ahbbUncheckedCreateNestedManyWithoutProfesorInput
     inscripciones?: td_inscripcion_ahbbUncheckedCreateNestedManyWithoutAlumnoInput
     auditoriasUsuario_ahbb?: td_auditoria_aprobacion_ahbbUncheckedCreateNestedManyWithoutUsuarioAuditado_ahbbInput
+    carrito_ahbb?: td_carrito_ahbbUncheckedCreateNestedManyWithoutUsuario_ahbbInput
+    facturas_ahbb?: td_factura_ahbbUncheckedCreateNestedManyWithoutUsuario_ahbbInput
+    favoritos_ahbb?: td_favorito_ahbbUncheckedCreateNestedManyWithoutUsuario_ahbbInput
   }
 
   export type td_usuario_ahbbCreateOrConnectWithoutAuditoriasAprobadas_ahbbInput = {
@@ -13579,6 +21572,9 @@ export namespace Prisma {
     cursos?: td_curso_ahbbUpdateManyWithoutProfesorNestedInput
     inscripciones?: td_inscripcion_ahbbUpdateManyWithoutAlumnoNestedInput
     auditoriasAprobadas_ahbb?: td_auditoria_aprobacion_ahbbUpdateManyWithoutAprobador_ahbbNestedInput
+    carrito_ahbb?: td_carrito_ahbbUpdateManyWithoutUsuario_ahbbNestedInput
+    facturas_ahbb?: td_factura_ahbbUpdateManyWithoutUsuario_ahbbNestedInput
+    favoritos_ahbb?: td_favorito_ahbbUpdateManyWithoutUsuario_ahbbNestedInput
   }
 
   export type td_usuario_ahbbUncheckedUpdateWithoutAuditoriasUsuario_ahbbInput = {
@@ -13599,6 +21595,9 @@ export namespace Prisma {
     cursos?: td_curso_ahbbUncheckedUpdateManyWithoutProfesorNestedInput
     inscripciones?: td_inscripcion_ahbbUncheckedUpdateManyWithoutAlumnoNestedInput
     auditoriasAprobadas_ahbb?: td_auditoria_aprobacion_ahbbUncheckedUpdateManyWithoutAprobador_ahbbNestedInput
+    carrito_ahbb?: td_carrito_ahbbUncheckedUpdateManyWithoutUsuario_ahbbNestedInput
+    facturas_ahbb?: td_factura_ahbbUncheckedUpdateManyWithoutUsuario_ahbbNestedInput
+    favoritos_ahbb?: td_favorito_ahbbUncheckedUpdateManyWithoutUsuario_ahbbNestedInput
   }
 
   export type td_usuario_ahbbUpsertWithoutAuditoriasAprobadas_ahbbInput = {
@@ -13629,6 +21628,9 @@ export namespace Prisma {
     cursos?: td_curso_ahbbUpdateManyWithoutProfesorNestedInput
     inscripciones?: td_inscripcion_ahbbUpdateManyWithoutAlumnoNestedInput
     auditoriasUsuario_ahbb?: td_auditoria_aprobacion_ahbbUpdateManyWithoutUsuarioAuditado_ahbbNestedInput
+    carrito_ahbb?: td_carrito_ahbbUpdateManyWithoutUsuario_ahbbNestedInput
+    facturas_ahbb?: td_factura_ahbbUpdateManyWithoutUsuario_ahbbNestedInput
+    favoritos_ahbb?: td_favorito_ahbbUpdateManyWithoutUsuario_ahbbNestedInput
   }
 
   export type td_usuario_ahbbUncheckedUpdateWithoutAuditoriasAprobadas_ahbbInput = {
@@ -13649,6 +21651,764 @@ export namespace Prisma {
     cursos?: td_curso_ahbbUncheckedUpdateManyWithoutProfesorNestedInput
     inscripciones?: td_inscripcion_ahbbUncheckedUpdateManyWithoutAlumnoNestedInput
     auditoriasUsuario_ahbb?: td_auditoria_aprobacion_ahbbUncheckedUpdateManyWithoutUsuarioAuditado_ahbbNestedInput
+    carrito_ahbb?: td_carrito_ahbbUncheckedUpdateManyWithoutUsuario_ahbbNestedInput
+    facturas_ahbb?: td_factura_ahbbUncheckedUpdateManyWithoutUsuario_ahbbNestedInput
+    favoritos_ahbb?: td_favorito_ahbbUncheckedUpdateManyWithoutUsuario_ahbbNestedInput
+  }
+
+  export type td_carrito_ahbbCreateWithoutProducto_ahbbInput = {
+    cantidad_ahbb?: number
+    fechaAgregado_ahbb?: Date | string | null
+    usuario_ahbb: td_usuario_ahbbCreateNestedOneWithoutCarrito_ahbbInput
+  }
+
+  export type td_carrito_ahbbUncheckedCreateWithoutProducto_ahbbInput = {
+    id_carrito_ahbb?: number
+    cantidad_ahbb?: number
+    fechaAgregado_ahbb?: Date | string | null
+    id_usuario_carrito_ahbb: number
+  }
+
+  export type td_carrito_ahbbCreateOrConnectWithoutProducto_ahbbInput = {
+    where: td_carrito_ahbbWhereUniqueInput
+    create: XOR<td_carrito_ahbbCreateWithoutProducto_ahbbInput, td_carrito_ahbbUncheckedCreateWithoutProducto_ahbbInput>
+  }
+
+  export type td_carrito_ahbbCreateManyProducto_ahbbInputEnvelope = {
+    data: td_carrito_ahbbCreateManyProducto_ahbbInput | td_carrito_ahbbCreateManyProducto_ahbbInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type td_detalle_factura_ahbbCreateWithoutProducto_ahbbInput = {
+    cantidad_ahbb: number
+    precioUnitario_ahbb: Decimal | DecimalJsLike | number | string
+    factura_ahbb: td_factura_ahbbCreateNestedOneWithoutDetalles_ahbbInput
+  }
+
+  export type td_detalle_factura_ahbbUncheckedCreateWithoutProducto_ahbbInput = {
+    id_detalle_factura_ahbb?: number
+    cantidad_ahbb: number
+    precioUnitario_ahbb: Decimal | DecimalJsLike | number | string
+    id_factura_detalle_ahbb: number
+  }
+
+  export type td_detalle_factura_ahbbCreateOrConnectWithoutProducto_ahbbInput = {
+    where: td_detalle_factura_ahbbWhereUniqueInput
+    create: XOR<td_detalle_factura_ahbbCreateWithoutProducto_ahbbInput, td_detalle_factura_ahbbUncheckedCreateWithoutProducto_ahbbInput>
+  }
+
+  export type td_detalle_factura_ahbbCreateManyProducto_ahbbInputEnvelope = {
+    data: td_detalle_factura_ahbbCreateManyProducto_ahbbInput | td_detalle_factura_ahbbCreateManyProducto_ahbbInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type td_favorito_ahbbCreateWithoutProducto_ahbbInput = {
+    fechaAgregado_ahbb?: Date | string | null
+    usuario_ahbb: td_usuario_ahbbCreateNestedOneWithoutFavoritos_ahbbInput
+  }
+
+  export type td_favorito_ahbbUncheckedCreateWithoutProducto_ahbbInput = {
+    id_favorito_ahbb?: number
+    fechaAgregado_ahbb?: Date | string | null
+    id_usuario_favorito_ahbb: number
+  }
+
+  export type td_favorito_ahbbCreateOrConnectWithoutProducto_ahbbInput = {
+    where: td_favorito_ahbbWhereUniqueInput
+    create: XOR<td_favorito_ahbbCreateWithoutProducto_ahbbInput, td_favorito_ahbbUncheckedCreateWithoutProducto_ahbbInput>
+  }
+
+  export type td_favorito_ahbbCreateManyProducto_ahbbInputEnvelope = {
+    data: td_favorito_ahbbCreateManyProducto_ahbbInput | td_favorito_ahbbCreateManyProducto_ahbbInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type td_carrito_ahbbUpsertWithWhereUniqueWithoutProducto_ahbbInput = {
+    where: td_carrito_ahbbWhereUniqueInput
+    update: XOR<td_carrito_ahbbUpdateWithoutProducto_ahbbInput, td_carrito_ahbbUncheckedUpdateWithoutProducto_ahbbInput>
+    create: XOR<td_carrito_ahbbCreateWithoutProducto_ahbbInput, td_carrito_ahbbUncheckedCreateWithoutProducto_ahbbInput>
+  }
+
+  export type td_carrito_ahbbUpdateWithWhereUniqueWithoutProducto_ahbbInput = {
+    where: td_carrito_ahbbWhereUniqueInput
+    data: XOR<td_carrito_ahbbUpdateWithoutProducto_ahbbInput, td_carrito_ahbbUncheckedUpdateWithoutProducto_ahbbInput>
+  }
+
+  export type td_carrito_ahbbUpdateManyWithWhereWithoutProducto_ahbbInput = {
+    where: td_carrito_ahbbScalarWhereInput
+    data: XOR<td_carrito_ahbbUpdateManyMutationInput, td_carrito_ahbbUncheckedUpdateManyWithoutProducto_ahbbInput>
+  }
+
+  export type td_detalle_factura_ahbbUpsertWithWhereUniqueWithoutProducto_ahbbInput = {
+    where: td_detalle_factura_ahbbWhereUniqueInput
+    update: XOR<td_detalle_factura_ahbbUpdateWithoutProducto_ahbbInput, td_detalle_factura_ahbbUncheckedUpdateWithoutProducto_ahbbInput>
+    create: XOR<td_detalle_factura_ahbbCreateWithoutProducto_ahbbInput, td_detalle_factura_ahbbUncheckedCreateWithoutProducto_ahbbInput>
+  }
+
+  export type td_detalle_factura_ahbbUpdateWithWhereUniqueWithoutProducto_ahbbInput = {
+    where: td_detalle_factura_ahbbWhereUniqueInput
+    data: XOR<td_detalle_factura_ahbbUpdateWithoutProducto_ahbbInput, td_detalle_factura_ahbbUncheckedUpdateWithoutProducto_ahbbInput>
+  }
+
+  export type td_detalle_factura_ahbbUpdateManyWithWhereWithoutProducto_ahbbInput = {
+    where: td_detalle_factura_ahbbScalarWhereInput
+    data: XOR<td_detalle_factura_ahbbUpdateManyMutationInput, td_detalle_factura_ahbbUncheckedUpdateManyWithoutProducto_ahbbInput>
+  }
+
+  export type td_detalle_factura_ahbbScalarWhereInput = {
+    AND?: td_detalle_factura_ahbbScalarWhereInput | td_detalle_factura_ahbbScalarWhereInput[]
+    OR?: td_detalle_factura_ahbbScalarWhereInput[]
+    NOT?: td_detalle_factura_ahbbScalarWhereInput | td_detalle_factura_ahbbScalarWhereInput[]
+    id_detalle_factura_ahbb?: IntFilter<"td_detalle_factura_ahbb"> | number
+    cantidad_ahbb?: IntFilter<"td_detalle_factura_ahbb"> | number
+    precioUnitario_ahbb?: DecimalFilter<"td_detalle_factura_ahbb"> | Decimal | DecimalJsLike | number | string
+    id_factura_detalle_ahbb?: IntFilter<"td_detalle_factura_ahbb"> | number
+    id_producto_detalle_ahbb?: IntFilter<"td_detalle_factura_ahbb"> | number
+  }
+
+  export type td_favorito_ahbbUpsertWithWhereUniqueWithoutProducto_ahbbInput = {
+    where: td_favorito_ahbbWhereUniqueInput
+    update: XOR<td_favorito_ahbbUpdateWithoutProducto_ahbbInput, td_favorito_ahbbUncheckedUpdateWithoutProducto_ahbbInput>
+    create: XOR<td_favorito_ahbbCreateWithoutProducto_ahbbInput, td_favorito_ahbbUncheckedCreateWithoutProducto_ahbbInput>
+  }
+
+  export type td_favorito_ahbbUpdateWithWhereUniqueWithoutProducto_ahbbInput = {
+    where: td_favorito_ahbbWhereUniqueInput
+    data: XOR<td_favorito_ahbbUpdateWithoutProducto_ahbbInput, td_favorito_ahbbUncheckedUpdateWithoutProducto_ahbbInput>
+  }
+
+  export type td_favorito_ahbbUpdateManyWithWhereWithoutProducto_ahbbInput = {
+    where: td_favorito_ahbbScalarWhereInput
+    data: XOR<td_favorito_ahbbUpdateManyMutationInput, td_favorito_ahbbUncheckedUpdateManyWithoutProducto_ahbbInput>
+  }
+
+  export type td_usuario_ahbbCreateWithoutCarrito_ahbbInput = {
+    cedula_ahbb: string
+    nombre_ahbb: string
+    apellido_ahbb: string
+    correo_ahbb: string
+    contrasena_ahbb: string
+    rol_ahbb?: string | null
+    firmaDigital_ahbb?: string | null
+    estadoCuenta_ahbb?: string
+    requiereCambioContrasena_ahbb?: boolean
+    referenciaPagoMovil_ahbb?: string | null
+    aprobadoPorUsuarioId_ahbb?: number | null
+    creadoEn_ahbb?: Date | string | null
+    actualizadoEn_ahbb?: Date | string | null
+    cursos?: td_curso_ahbbCreateNestedManyWithoutProfesorInput
+    inscripciones?: td_inscripcion_ahbbCreateNestedManyWithoutAlumnoInput
+    auditoriasAprobadas_ahbb?: td_auditoria_aprobacion_ahbbCreateNestedManyWithoutAprobador_ahbbInput
+    auditoriasUsuario_ahbb?: td_auditoria_aprobacion_ahbbCreateNestedManyWithoutUsuarioAuditado_ahbbInput
+    facturas_ahbb?: td_factura_ahbbCreateNestedManyWithoutUsuario_ahbbInput
+    favoritos_ahbb?: td_favorito_ahbbCreateNestedManyWithoutUsuario_ahbbInput
+  }
+
+  export type td_usuario_ahbbUncheckedCreateWithoutCarrito_ahbbInput = {
+    id_usuario_ahbb?: number
+    cedula_ahbb: string
+    nombre_ahbb: string
+    apellido_ahbb: string
+    correo_ahbb: string
+    contrasena_ahbb: string
+    rol_ahbb?: string | null
+    firmaDigital_ahbb?: string | null
+    estadoCuenta_ahbb?: string
+    requiereCambioContrasena_ahbb?: boolean
+    referenciaPagoMovil_ahbb?: string | null
+    aprobadoPorUsuarioId_ahbb?: number | null
+    creadoEn_ahbb?: Date | string | null
+    actualizadoEn_ahbb?: Date | string | null
+    cursos?: td_curso_ahbbUncheckedCreateNestedManyWithoutProfesorInput
+    inscripciones?: td_inscripcion_ahbbUncheckedCreateNestedManyWithoutAlumnoInput
+    auditoriasAprobadas_ahbb?: td_auditoria_aprobacion_ahbbUncheckedCreateNestedManyWithoutAprobador_ahbbInput
+    auditoriasUsuario_ahbb?: td_auditoria_aprobacion_ahbbUncheckedCreateNestedManyWithoutUsuarioAuditado_ahbbInput
+    facturas_ahbb?: td_factura_ahbbUncheckedCreateNestedManyWithoutUsuario_ahbbInput
+    favoritos_ahbb?: td_favorito_ahbbUncheckedCreateNestedManyWithoutUsuario_ahbbInput
+  }
+
+  export type td_usuario_ahbbCreateOrConnectWithoutCarrito_ahbbInput = {
+    where: td_usuario_ahbbWhereUniqueInput
+    create: XOR<td_usuario_ahbbCreateWithoutCarrito_ahbbInput, td_usuario_ahbbUncheckedCreateWithoutCarrito_ahbbInput>
+  }
+
+  export type td_producto_ahbbCreateWithoutItemsCarrito_ahbbInput = {
+    nombre_ahbb: string
+    descripcion_ahbb?: string | null
+    precio_ahbb: Decimal | DecimalJsLike | number | string
+    stock_ahbb?: number
+    categoria_ahbb: string
+    imagen_ahbb?: string | null
+    estado_producto_ahbb?: string
+    creadoEn_ahbb?: Date | string | null
+    actualizadoEn_ahbb?: Date | string | null
+    detallesFactura_ahbb?: td_detalle_factura_ahbbCreateNestedManyWithoutProducto_ahbbInput
+    favoritos_ahbb?: td_favorito_ahbbCreateNestedManyWithoutProducto_ahbbInput
+  }
+
+  export type td_producto_ahbbUncheckedCreateWithoutItemsCarrito_ahbbInput = {
+    id_producto_ahbb?: number
+    nombre_ahbb: string
+    descripcion_ahbb?: string | null
+    precio_ahbb: Decimal | DecimalJsLike | number | string
+    stock_ahbb?: number
+    categoria_ahbb: string
+    imagen_ahbb?: string | null
+    estado_producto_ahbb?: string
+    creadoEn_ahbb?: Date | string | null
+    actualizadoEn_ahbb?: Date | string | null
+    detallesFactura_ahbb?: td_detalle_factura_ahbbUncheckedCreateNestedManyWithoutProducto_ahbbInput
+    favoritos_ahbb?: td_favorito_ahbbUncheckedCreateNestedManyWithoutProducto_ahbbInput
+  }
+
+  export type td_producto_ahbbCreateOrConnectWithoutItemsCarrito_ahbbInput = {
+    where: td_producto_ahbbWhereUniqueInput
+    create: XOR<td_producto_ahbbCreateWithoutItemsCarrito_ahbbInput, td_producto_ahbbUncheckedCreateWithoutItemsCarrito_ahbbInput>
+  }
+
+  export type td_usuario_ahbbUpsertWithoutCarrito_ahbbInput = {
+    update: XOR<td_usuario_ahbbUpdateWithoutCarrito_ahbbInput, td_usuario_ahbbUncheckedUpdateWithoutCarrito_ahbbInput>
+    create: XOR<td_usuario_ahbbCreateWithoutCarrito_ahbbInput, td_usuario_ahbbUncheckedCreateWithoutCarrito_ahbbInput>
+    where?: td_usuario_ahbbWhereInput
+  }
+
+  export type td_usuario_ahbbUpdateToOneWithWhereWithoutCarrito_ahbbInput = {
+    where?: td_usuario_ahbbWhereInput
+    data: XOR<td_usuario_ahbbUpdateWithoutCarrito_ahbbInput, td_usuario_ahbbUncheckedUpdateWithoutCarrito_ahbbInput>
+  }
+
+  export type td_usuario_ahbbUpdateWithoutCarrito_ahbbInput = {
+    cedula_ahbb?: StringFieldUpdateOperationsInput | string
+    nombre_ahbb?: StringFieldUpdateOperationsInput | string
+    apellido_ahbb?: StringFieldUpdateOperationsInput | string
+    correo_ahbb?: StringFieldUpdateOperationsInput | string
+    contrasena_ahbb?: StringFieldUpdateOperationsInput | string
+    rol_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    firmaDigital_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    estadoCuenta_ahbb?: StringFieldUpdateOperationsInput | string
+    requiereCambioContrasena_ahbb?: BoolFieldUpdateOperationsInput | boolean
+    referenciaPagoMovil_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    aprobadoPorUsuarioId_ahbb?: NullableIntFieldUpdateOperationsInput | number | null
+    creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cursos?: td_curso_ahbbUpdateManyWithoutProfesorNestedInput
+    inscripciones?: td_inscripcion_ahbbUpdateManyWithoutAlumnoNestedInput
+    auditoriasAprobadas_ahbb?: td_auditoria_aprobacion_ahbbUpdateManyWithoutAprobador_ahbbNestedInput
+    auditoriasUsuario_ahbb?: td_auditoria_aprobacion_ahbbUpdateManyWithoutUsuarioAuditado_ahbbNestedInput
+    facturas_ahbb?: td_factura_ahbbUpdateManyWithoutUsuario_ahbbNestedInput
+    favoritos_ahbb?: td_favorito_ahbbUpdateManyWithoutUsuario_ahbbNestedInput
+  }
+
+  export type td_usuario_ahbbUncheckedUpdateWithoutCarrito_ahbbInput = {
+    id_usuario_ahbb?: IntFieldUpdateOperationsInput | number
+    cedula_ahbb?: StringFieldUpdateOperationsInput | string
+    nombre_ahbb?: StringFieldUpdateOperationsInput | string
+    apellido_ahbb?: StringFieldUpdateOperationsInput | string
+    correo_ahbb?: StringFieldUpdateOperationsInput | string
+    contrasena_ahbb?: StringFieldUpdateOperationsInput | string
+    rol_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    firmaDigital_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    estadoCuenta_ahbb?: StringFieldUpdateOperationsInput | string
+    requiereCambioContrasena_ahbb?: BoolFieldUpdateOperationsInput | boolean
+    referenciaPagoMovil_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    aprobadoPorUsuarioId_ahbb?: NullableIntFieldUpdateOperationsInput | number | null
+    creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cursos?: td_curso_ahbbUncheckedUpdateManyWithoutProfesorNestedInput
+    inscripciones?: td_inscripcion_ahbbUncheckedUpdateManyWithoutAlumnoNestedInput
+    auditoriasAprobadas_ahbb?: td_auditoria_aprobacion_ahbbUncheckedUpdateManyWithoutAprobador_ahbbNestedInput
+    auditoriasUsuario_ahbb?: td_auditoria_aprobacion_ahbbUncheckedUpdateManyWithoutUsuarioAuditado_ahbbNestedInput
+    facturas_ahbb?: td_factura_ahbbUncheckedUpdateManyWithoutUsuario_ahbbNestedInput
+    favoritos_ahbb?: td_favorito_ahbbUncheckedUpdateManyWithoutUsuario_ahbbNestedInput
+  }
+
+  export type td_producto_ahbbUpsertWithoutItemsCarrito_ahbbInput = {
+    update: XOR<td_producto_ahbbUpdateWithoutItemsCarrito_ahbbInput, td_producto_ahbbUncheckedUpdateWithoutItemsCarrito_ahbbInput>
+    create: XOR<td_producto_ahbbCreateWithoutItemsCarrito_ahbbInput, td_producto_ahbbUncheckedCreateWithoutItemsCarrito_ahbbInput>
+    where?: td_producto_ahbbWhereInput
+  }
+
+  export type td_producto_ahbbUpdateToOneWithWhereWithoutItemsCarrito_ahbbInput = {
+    where?: td_producto_ahbbWhereInput
+    data: XOR<td_producto_ahbbUpdateWithoutItemsCarrito_ahbbInput, td_producto_ahbbUncheckedUpdateWithoutItemsCarrito_ahbbInput>
+  }
+
+  export type td_producto_ahbbUpdateWithoutItemsCarrito_ahbbInput = {
+    nombre_ahbb?: StringFieldUpdateOperationsInput | string
+    descripcion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    precio_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    stock_ahbb?: IntFieldUpdateOperationsInput | number
+    categoria_ahbb?: StringFieldUpdateOperationsInput | string
+    imagen_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    estado_producto_ahbb?: StringFieldUpdateOperationsInput | string
+    creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    detallesFactura_ahbb?: td_detalle_factura_ahbbUpdateManyWithoutProducto_ahbbNestedInput
+    favoritos_ahbb?: td_favorito_ahbbUpdateManyWithoutProducto_ahbbNestedInput
+  }
+
+  export type td_producto_ahbbUncheckedUpdateWithoutItemsCarrito_ahbbInput = {
+    id_producto_ahbb?: IntFieldUpdateOperationsInput | number
+    nombre_ahbb?: StringFieldUpdateOperationsInput | string
+    descripcion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    precio_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    stock_ahbb?: IntFieldUpdateOperationsInput | number
+    categoria_ahbb?: StringFieldUpdateOperationsInput | string
+    imagen_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    estado_producto_ahbb?: StringFieldUpdateOperationsInput | string
+    creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    detallesFactura_ahbb?: td_detalle_factura_ahbbUncheckedUpdateManyWithoutProducto_ahbbNestedInput
+    favoritos_ahbb?: td_favorito_ahbbUncheckedUpdateManyWithoutProducto_ahbbNestedInput
+  }
+
+  export type td_usuario_ahbbCreateWithoutFacturas_ahbbInput = {
+    cedula_ahbb: string
+    nombre_ahbb: string
+    apellido_ahbb: string
+    correo_ahbb: string
+    contrasena_ahbb: string
+    rol_ahbb?: string | null
+    firmaDigital_ahbb?: string | null
+    estadoCuenta_ahbb?: string
+    requiereCambioContrasena_ahbb?: boolean
+    referenciaPagoMovil_ahbb?: string | null
+    aprobadoPorUsuarioId_ahbb?: number | null
+    creadoEn_ahbb?: Date | string | null
+    actualizadoEn_ahbb?: Date | string | null
+    cursos?: td_curso_ahbbCreateNestedManyWithoutProfesorInput
+    inscripciones?: td_inscripcion_ahbbCreateNestedManyWithoutAlumnoInput
+    auditoriasAprobadas_ahbb?: td_auditoria_aprobacion_ahbbCreateNestedManyWithoutAprobador_ahbbInput
+    auditoriasUsuario_ahbb?: td_auditoria_aprobacion_ahbbCreateNestedManyWithoutUsuarioAuditado_ahbbInput
+    carrito_ahbb?: td_carrito_ahbbCreateNestedManyWithoutUsuario_ahbbInput
+    favoritos_ahbb?: td_favorito_ahbbCreateNestedManyWithoutUsuario_ahbbInput
+  }
+
+  export type td_usuario_ahbbUncheckedCreateWithoutFacturas_ahbbInput = {
+    id_usuario_ahbb?: number
+    cedula_ahbb: string
+    nombre_ahbb: string
+    apellido_ahbb: string
+    correo_ahbb: string
+    contrasena_ahbb: string
+    rol_ahbb?: string | null
+    firmaDigital_ahbb?: string | null
+    estadoCuenta_ahbb?: string
+    requiereCambioContrasena_ahbb?: boolean
+    referenciaPagoMovil_ahbb?: string | null
+    aprobadoPorUsuarioId_ahbb?: number | null
+    creadoEn_ahbb?: Date | string | null
+    actualizadoEn_ahbb?: Date | string | null
+    cursos?: td_curso_ahbbUncheckedCreateNestedManyWithoutProfesorInput
+    inscripciones?: td_inscripcion_ahbbUncheckedCreateNestedManyWithoutAlumnoInput
+    auditoriasAprobadas_ahbb?: td_auditoria_aprobacion_ahbbUncheckedCreateNestedManyWithoutAprobador_ahbbInput
+    auditoriasUsuario_ahbb?: td_auditoria_aprobacion_ahbbUncheckedCreateNestedManyWithoutUsuarioAuditado_ahbbInput
+    carrito_ahbb?: td_carrito_ahbbUncheckedCreateNestedManyWithoutUsuario_ahbbInput
+    favoritos_ahbb?: td_favorito_ahbbUncheckedCreateNestedManyWithoutUsuario_ahbbInput
+  }
+
+  export type td_usuario_ahbbCreateOrConnectWithoutFacturas_ahbbInput = {
+    where: td_usuario_ahbbWhereUniqueInput
+    create: XOR<td_usuario_ahbbCreateWithoutFacturas_ahbbInput, td_usuario_ahbbUncheckedCreateWithoutFacturas_ahbbInput>
+  }
+
+  export type td_detalle_factura_ahbbCreateWithoutFactura_ahbbInput = {
+    cantidad_ahbb: number
+    precioUnitario_ahbb: Decimal | DecimalJsLike | number | string
+    producto_ahbb: td_producto_ahbbCreateNestedOneWithoutDetallesFactura_ahbbInput
+  }
+
+  export type td_detalle_factura_ahbbUncheckedCreateWithoutFactura_ahbbInput = {
+    id_detalle_factura_ahbb?: number
+    cantidad_ahbb: number
+    precioUnitario_ahbb: Decimal | DecimalJsLike | number | string
+    id_producto_detalle_ahbb: number
+  }
+
+  export type td_detalle_factura_ahbbCreateOrConnectWithoutFactura_ahbbInput = {
+    where: td_detalle_factura_ahbbWhereUniqueInput
+    create: XOR<td_detalle_factura_ahbbCreateWithoutFactura_ahbbInput, td_detalle_factura_ahbbUncheckedCreateWithoutFactura_ahbbInput>
+  }
+
+  export type td_detalle_factura_ahbbCreateManyFactura_ahbbInputEnvelope = {
+    data: td_detalle_factura_ahbbCreateManyFactura_ahbbInput | td_detalle_factura_ahbbCreateManyFactura_ahbbInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type td_usuario_ahbbUpsertWithoutFacturas_ahbbInput = {
+    update: XOR<td_usuario_ahbbUpdateWithoutFacturas_ahbbInput, td_usuario_ahbbUncheckedUpdateWithoutFacturas_ahbbInput>
+    create: XOR<td_usuario_ahbbCreateWithoutFacturas_ahbbInput, td_usuario_ahbbUncheckedCreateWithoutFacturas_ahbbInput>
+    where?: td_usuario_ahbbWhereInput
+  }
+
+  export type td_usuario_ahbbUpdateToOneWithWhereWithoutFacturas_ahbbInput = {
+    where?: td_usuario_ahbbWhereInput
+    data: XOR<td_usuario_ahbbUpdateWithoutFacturas_ahbbInput, td_usuario_ahbbUncheckedUpdateWithoutFacturas_ahbbInput>
+  }
+
+  export type td_usuario_ahbbUpdateWithoutFacturas_ahbbInput = {
+    cedula_ahbb?: StringFieldUpdateOperationsInput | string
+    nombre_ahbb?: StringFieldUpdateOperationsInput | string
+    apellido_ahbb?: StringFieldUpdateOperationsInput | string
+    correo_ahbb?: StringFieldUpdateOperationsInput | string
+    contrasena_ahbb?: StringFieldUpdateOperationsInput | string
+    rol_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    firmaDigital_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    estadoCuenta_ahbb?: StringFieldUpdateOperationsInput | string
+    requiereCambioContrasena_ahbb?: BoolFieldUpdateOperationsInput | boolean
+    referenciaPagoMovil_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    aprobadoPorUsuarioId_ahbb?: NullableIntFieldUpdateOperationsInput | number | null
+    creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cursos?: td_curso_ahbbUpdateManyWithoutProfesorNestedInput
+    inscripciones?: td_inscripcion_ahbbUpdateManyWithoutAlumnoNestedInput
+    auditoriasAprobadas_ahbb?: td_auditoria_aprobacion_ahbbUpdateManyWithoutAprobador_ahbbNestedInput
+    auditoriasUsuario_ahbb?: td_auditoria_aprobacion_ahbbUpdateManyWithoutUsuarioAuditado_ahbbNestedInput
+    carrito_ahbb?: td_carrito_ahbbUpdateManyWithoutUsuario_ahbbNestedInput
+    favoritos_ahbb?: td_favorito_ahbbUpdateManyWithoutUsuario_ahbbNestedInput
+  }
+
+  export type td_usuario_ahbbUncheckedUpdateWithoutFacturas_ahbbInput = {
+    id_usuario_ahbb?: IntFieldUpdateOperationsInput | number
+    cedula_ahbb?: StringFieldUpdateOperationsInput | string
+    nombre_ahbb?: StringFieldUpdateOperationsInput | string
+    apellido_ahbb?: StringFieldUpdateOperationsInput | string
+    correo_ahbb?: StringFieldUpdateOperationsInput | string
+    contrasena_ahbb?: StringFieldUpdateOperationsInput | string
+    rol_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    firmaDigital_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    estadoCuenta_ahbb?: StringFieldUpdateOperationsInput | string
+    requiereCambioContrasena_ahbb?: BoolFieldUpdateOperationsInput | boolean
+    referenciaPagoMovil_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    aprobadoPorUsuarioId_ahbb?: NullableIntFieldUpdateOperationsInput | number | null
+    creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cursos?: td_curso_ahbbUncheckedUpdateManyWithoutProfesorNestedInput
+    inscripciones?: td_inscripcion_ahbbUncheckedUpdateManyWithoutAlumnoNestedInput
+    auditoriasAprobadas_ahbb?: td_auditoria_aprobacion_ahbbUncheckedUpdateManyWithoutAprobador_ahbbNestedInput
+    auditoriasUsuario_ahbb?: td_auditoria_aprobacion_ahbbUncheckedUpdateManyWithoutUsuarioAuditado_ahbbNestedInput
+    carrito_ahbb?: td_carrito_ahbbUncheckedUpdateManyWithoutUsuario_ahbbNestedInput
+    favoritos_ahbb?: td_favorito_ahbbUncheckedUpdateManyWithoutUsuario_ahbbNestedInput
+  }
+
+  export type td_detalle_factura_ahbbUpsertWithWhereUniqueWithoutFactura_ahbbInput = {
+    where: td_detalle_factura_ahbbWhereUniqueInput
+    update: XOR<td_detalle_factura_ahbbUpdateWithoutFactura_ahbbInput, td_detalle_factura_ahbbUncheckedUpdateWithoutFactura_ahbbInput>
+    create: XOR<td_detalle_factura_ahbbCreateWithoutFactura_ahbbInput, td_detalle_factura_ahbbUncheckedCreateWithoutFactura_ahbbInput>
+  }
+
+  export type td_detalle_factura_ahbbUpdateWithWhereUniqueWithoutFactura_ahbbInput = {
+    where: td_detalle_factura_ahbbWhereUniqueInput
+    data: XOR<td_detalle_factura_ahbbUpdateWithoutFactura_ahbbInput, td_detalle_factura_ahbbUncheckedUpdateWithoutFactura_ahbbInput>
+  }
+
+  export type td_detalle_factura_ahbbUpdateManyWithWhereWithoutFactura_ahbbInput = {
+    where: td_detalle_factura_ahbbScalarWhereInput
+    data: XOR<td_detalle_factura_ahbbUpdateManyMutationInput, td_detalle_factura_ahbbUncheckedUpdateManyWithoutFactura_ahbbInput>
+  }
+
+  export type td_factura_ahbbCreateWithoutDetalles_ahbbInput = {
+    nroReferenciaPago_ahbb: string
+    fechaFactura_ahbb?: Date | string | null
+    total_ahbb: Decimal | DecimalJsLike | number | string
+    estadoFactura_ahbb?: string
+    usuario_ahbb: td_usuario_ahbbCreateNestedOneWithoutFacturas_ahbbInput
+  }
+
+  export type td_factura_ahbbUncheckedCreateWithoutDetalles_ahbbInput = {
+    id_factura_ahbb?: number
+    nroReferenciaPago_ahbb: string
+    fechaFactura_ahbb?: Date | string | null
+    total_ahbb: Decimal | DecimalJsLike | number | string
+    estadoFactura_ahbb?: string
+    id_usuario_factura_ahbb: number
+  }
+
+  export type td_factura_ahbbCreateOrConnectWithoutDetalles_ahbbInput = {
+    where: td_factura_ahbbWhereUniqueInput
+    create: XOR<td_factura_ahbbCreateWithoutDetalles_ahbbInput, td_factura_ahbbUncheckedCreateWithoutDetalles_ahbbInput>
+  }
+
+  export type td_producto_ahbbCreateWithoutDetallesFactura_ahbbInput = {
+    nombre_ahbb: string
+    descripcion_ahbb?: string | null
+    precio_ahbb: Decimal | DecimalJsLike | number | string
+    stock_ahbb?: number
+    categoria_ahbb: string
+    imagen_ahbb?: string | null
+    estado_producto_ahbb?: string
+    creadoEn_ahbb?: Date | string | null
+    actualizadoEn_ahbb?: Date | string | null
+    itemsCarrito_ahbb?: td_carrito_ahbbCreateNestedManyWithoutProducto_ahbbInput
+    favoritos_ahbb?: td_favorito_ahbbCreateNestedManyWithoutProducto_ahbbInput
+  }
+
+  export type td_producto_ahbbUncheckedCreateWithoutDetallesFactura_ahbbInput = {
+    id_producto_ahbb?: number
+    nombre_ahbb: string
+    descripcion_ahbb?: string | null
+    precio_ahbb: Decimal | DecimalJsLike | number | string
+    stock_ahbb?: number
+    categoria_ahbb: string
+    imagen_ahbb?: string | null
+    estado_producto_ahbb?: string
+    creadoEn_ahbb?: Date | string | null
+    actualizadoEn_ahbb?: Date | string | null
+    itemsCarrito_ahbb?: td_carrito_ahbbUncheckedCreateNestedManyWithoutProducto_ahbbInput
+    favoritos_ahbb?: td_favorito_ahbbUncheckedCreateNestedManyWithoutProducto_ahbbInput
+  }
+
+  export type td_producto_ahbbCreateOrConnectWithoutDetallesFactura_ahbbInput = {
+    where: td_producto_ahbbWhereUniqueInput
+    create: XOR<td_producto_ahbbCreateWithoutDetallesFactura_ahbbInput, td_producto_ahbbUncheckedCreateWithoutDetallesFactura_ahbbInput>
+  }
+
+  export type td_factura_ahbbUpsertWithoutDetalles_ahbbInput = {
+    update: XOR<td_factura_ahbbUpdateWithoutDetalles_ahbbInput, td_factura_ahbbUncheckedUpdateWithoutDetalles_ahbbInput>
+    create: XOR<td_factura_ahbbCreateWithoutDetalles_ahbbInput, td_factura_ahbbUncheckedCreateWithoutDetalles_ahbbInput>
+    where?: td_factura_ahbbWhereInput
+  }
+
+  export type td_factura_ahbbUpdateToOneWithWhereWithoutDetalles_ahbbInput = {
+    where?: td_factura_ahbbWhereInput
+    data: XOR<td_factura_ahbbUpdateWithoutDetalles_ahbbInput, td_factura_ahbbUncheckedUpdateWithoutDetalles_ahbbInput>
+  }
+
+  export type td_factura_ahbbUpdateWithoutDetalles_ahbbInput = {
+    nroReferenciaPago_ahbb?: StringFieldUpdateOperationsInput | string
+    fechaFactura_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    total_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    estadoFactura_ahbb?: StringFieldUpdateOperationsInput | string
+    usuario_ahbb?: td_usuario_ahbbUpdateOneRequiredWithoutFacturas_ahbbNestedInput
+  }
+
+  export type td_factura_ahbbUncheckedUpdateWithoutDetalles_ahbbInput = {
+    id_factura_ahbb?: IntFieldUpdateOperationsInput | number
+    nroReferenciaPago_ahbb?: StringFieldUpdateOperationsInput | string
+    fechaFactura_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    total_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    estadoFactura_ahbb?: StringFieldUpdateOperationsInput | string
+    id_usuario_factura_ahbb?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type td_producto_ahbbUpsertWithoutDetallesFactura_ahbbInput = {
+    update: XOR<td_producto_ahbbUpdateWithoutDetallesFactura_ahbbInput, td_producto_ahbbUncheckedUpdateWithoutDetallesFactura_ahbbInput>
+    create: XOR<td_producto_ahbbCreateWithoutDetallesFactura_ahbbInput, td_producto_ahbbUncheckedCreateWithoutDetallesFactura_ahbbInput>
+    where?: td_producto_ahbbWhereInput
+  }
+
+  export type td_producto_ahbbUpdateToOneWithWhereWithoutDetallesFactura_ahbbInput = {
+    where?: td_producto_ahbbWhereInput
+    data: XOR<td_producto_ahbbUpdateWithoutDetallesFactura_ahbbInput, td_producto_ahbbUncheckedUpdateWithoutDetallesFactura_ahbbInput>
+  }
+
+  export type td_producto_ahbbUpdateWithoutDetallesFactura_ahbbInput = {
+    nombre_ahbb?: StringFieldUpdateOperationsInput | string
+    descripcion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    precio_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    stock_ahbb?: IntFieldUpdateOperationsInput | number
+    categoria_ahbb?: StringFieldUpdateOperationsInput | string
+    imagen_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    estado_producto_ahbb?: StringFieldUpdateOperationsInput | string
+    creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    itemsCarrito_ahbb?: td_carrito_ahbbUpdateManyWithoutProducto_ahbbNestedInput
+    favoritos_ahbb?: td_favorito_ahbbUpdateManyWithoutProducto_ahbbNestedInput
+  }
+
+  export type td_producto_ahbbUncheckedUpdateWithoutDetallesFactura_ahbbInput = {
+    id_producto_ahbb?: IntFieldUpdateOperationsInput | number
+    nombre_ahbb?: StringFieldUpdateOperationsInput | string
+    descripcion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    precio_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    stock_ahbb?: IntFieldUpdateOperationsInput | number
+    categoria_ahbb?: StringFieldUpdateOperationsInput | string
+    imagen_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    estado_producto_ahbb?: StringFieldUpdateOperationsInput | string
+    creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    itemsCarrito_ahbb?: td_carrito_ahbbUncheckedUpdateManyWithoutProducto_ahbbNestedInput
+    favoritos_ahbb?: td_favorito_ahbbUncheckedUpdateManyWithoutProducto_ahbbNestedInput
+  }
+
+  export type td_usuario_ahbbCreateWithoutFavoritos_ahbbInput = {
+    cedula_ahbb: string
+    nombre_ahbb: string
+    apellido_ahbb: string
+    correo_ahbb: string
+    contrasena_ahbb: string
+    rol_ahbb?: string | null
+    firmaDigital_ahbb?: string | null
+    estadoCuenta_ahbb?: string
+    requiereCambioContrasena_ahbb?: boolean
+    referenciaPagoMovil_ahbb?: string | null
+    aprobadoPorUsuarioId_ahbb?: number | null
+    creadoEn_ahbb?: Date | string | null
+    actualizadoEn_ahbb?: Date | string | null
+    cursos?: td_curso_ahbbCreateNestedManyWithoutProfesorInput
+    inscripciones?: td_inscripcion_ahbbCreateNestedManyWithoutAlumnoInput
+    auditoriasAprobadas_ahbb?: td_auditoria_aprobacion_ahbbCreateNestedManyWithoutAprobador_ahbbInput
+    auditoriasUsuario_ahbb?: td_auditoria_aprobacion_ahbbCreateNestedManyWithoutUsuarioAuditado_ahbbInput
+    carrito_ahbb?: td_carrito_ahbbCreateNestedManyWithoutUsuario_ahbbInput
+    facturas_ahbb?: td_factura_ahbbCreateNestedManyWithoutUsuario_ahbbInput
+  }
+
+  export type td_usuario_ahbbUncheckedCreateWithoutFavoritos_ahbbInput = {
+    id_usuario_ahbb?: number
+    cedula_ahbb: string
+    nombre_ahbb: string
+    apellido_ahbb: string
+    correo_ahbb: string
+    contrasena_ahbb: string
+    rol_ahbb?: string | null
+    firmaDigital_ahbb?: string | null
+    estadoCuenta_ahbb?: string
+    requiereCambioContrasena_ahbb?: boolean
+    referenciaPagoMovil_ahbb?: string | null
+    aprobadoPorUsuarioId_ahbb?: number | null
+    creadoEn_ahbb?: Date | string | null
+    actualizadoEn_ahbb?: Date | string | null
+    cursos?: td_curso_ahbbUncheckedCreateNestedManyWithoutProfesorInput
+    inscripciones?: td_inscripcion_ahbbUncheckedCreateNestedManyWithoutAlumnoInput
+    auditoriasAprobadas_ahbb?: td_auditoria_aprobacion_ahbbUncheckedCreateNestedManyWithoutAprobador_ahbbInput
+    auditoriasUsuario_ahbb?: td_auditoria_aprobacion_ahbbUncheckedCreateNestedManyWithoutUsuarioAuditado_ahbbInput
+    carrito_ahbb?: td_carrito_ahbbUncheckedCreateNestedManyWithoutUsuario_ahbbInput
+    facturas_ahbb?: td_factura_ahbbUncheckedCreateNestedManyWithoutUsuario_ahbbInput
+  }
+
+  export type td_usuario_ahbbCreateOrConnectWithoutFavoritos_ahbbInput = {
+    where: td_usuario_ahbbWhereUniqueInput
+    create: XOR<td_usuario_ahbbCreateWithoutFavoritos_ahbbInput, td_usuario_ahbbUncheckedCreateWithoutFavoritos_ahbbInput>
+  }
+
+  export type td_producto_ahbbCreateWithoutFavoritos_ahbbInput = {
+    nombre_ahbb: string
+    descripcion_ahbb?: string | null
+    precio_ahbb: Decimal | DecimalJsLike | number | string
+    stock_ahbb?: number
+    categoria_ahbb: string
+    imagen_ahbb?: string | null
+    estado_producto_ahbb?: string
+    creadoEn_ahbb?: Date | string | null
+    actualizadoEn_ahbb?: Date | string | null
+    itemsCarrito_ahbb?: td_carrito_ahbbCreateNestedManyWithoutProducto_ahbbInput
+    detallesFactura_ahbb?: td_detalle_factura_ahbbCreateNestedManyWithoutProducto_ahbbInput
+  }
+
+  export type td_producto_ahbbUncheckedCreateWithoutFavoritos_ahbbInput = {
+    id_producto_ahbb?: number
+    nombre_ahbb: string
+    descripcion_ahbb?: string | null
+    precio_ahbb: Decimal | DecimalJsLike | number | string
+    stock_ahbb?: number
+    categoria_ahbb: string
+    imagen_ahbb?: string | null
+    estado_producto_ahbb?: string
+    creadoEn_ahbb?: Date | string | null
+    actualizadoEn_ahbb?: Date | string | null
+    itemsCarrito_ahbb?: td_carrito_ahbbUncheckedCreateNestedManyWithoutProducto_ahbbInput
+    detallesFactura_ahbb?: td_detalle_factura_ahbbUncheckedCreateNestedManyWithoutProducto_ahbbInput
+  }
+
+  export type td_producto_ahbbCreateOrConnectWithoutFavoritos_ahbbInput = {
+    where: td_producto_ahbbWhereUniqueInput
+    create: XOR<td_producto_ahbbCreateWithoutFavoritos_ahbbInput, td_producto_ahbbUncheckedCreateWithoutFavoritos_ahbbInput>
+  }
+
+  export type td_usuario_ahbbUpsertWithoutFavoritos_ahbbInput = {
+    update: XOR<td_usuario_ahbbUpdateWithoutFavoritos_ahbbInput, td_usuario_ahbbUncheckedUpdateWithoutFavoritos_ahbbInput>
+    create: XOR<td_usuario_ahbbCreateWithoutFavoritos_ahbbInput, td_usuario_ahbbUncheckedCreateWithoutFavoritos_ahbbInput>
+    where?: td_usuario_ahbbWhereInput
+  }
+
+  export type td_usuario_ahbbUpdateToOneWithWhereWithoutFavoritos_ahbbInput = {
+    where?: td_usuario_ahbbWhereInput
+    data: XOR<td_usuario_ahbbUpdateWithoutFavoritos_ahbbInput, td_usuario_ahbbUncheckedUpdateWithoutFavoritos_ahbbInput>
+  }
+
+  export type td_usuario_ahbbUpdateWithoutFavoritos_ahbbInput = {
+    cedula_ahbb?: StringFieldUpdateOperationsInput | string
+    nombre_ahbb?: StringFieldUpdateOperationsInput | string
+    apellido_ahbb?: StringFieldUpdateOperationsInput | string
+    correo_ahbb?: StringFieldUpdateOperationsInput | string
+    contrasena_ahbb?: StringFieldUpdateOperationsInput | string
+    rol_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    firmaDigital_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    estadoCuenta_ahbb?: StringFieldUpdateOperationsInput | string
+    requiereCambioContrasena_ahbb?: BoolFieldUpdateOperationsInput | boolean
+    referenciaPagoMovil_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    aprobadoPorUsuarioId_ahbb?: NullableIntFieldUpdateOperationsInput | number | null
+    creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cursos?: td_curso_ahbbUpdateManyWithoutProfesorNestedInput
+    inscripciones?: td_inscripcion_ahbbUpdateManyWithoutAlumnoNestedInput
+    auditoriasAprobadas_ahbb?: td_auditoria_aprobacion_ahbbUpdateManyWithoutAprobador_ahbbNestedInput
+    auditoriasUsuario_ahbb?: td_auditoria_aprobacion_ahbbUpdateManyWithoutUsuarioAuditado_ahbbNestedInput
+    carrito_ahbb?: td_carrito_ahbbUpdateManyWithoutUsuario_ahbbNestedInput
+    facturas_ahbb?: td_factura_ahbbUpdateManyWithoutUsuario_ahbbNestedInput
+  }
+
+  export type td_usuario_ahbbUncheckedUpdateWithoutFavoritos_ahbbInput = {
+    id_usuario_ahbb?: IntFieldUpdateOperationsInput | number
+    cedula_ahbb?: StringFieldUpdateOperationsInput | string
+    nombre_ahbb?: StringFieldUpdateOperationsInput | string
+    apellido_ahbb?: StringFieldUpdateOperationsInput | string
+    correo_ahbb?: StringFieldUpdateOperationsInput | string
+    contrasena_ahbb?: StringFieldUpdateOperationsInput | string
+    rol_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    firmaDigital_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    estadoCuenta_ahbb?: StringFieldUpdateOperationsInput | string
+    requiereCambioContrasena_ahbb?: BoolFieldUpdateOperationsInput | boolean
+    referenciaPagoMovil_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    aprobadoPorUsuarioId_ahbb?: NullableIntFieldUpdateOperationsInput | number | null
+    creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cursos?: td_curso_ahbbUncheckedUpdateManyWithoutProfesorNestedInput
+    inscripciones?: td_inscripcion_ahbbUncheckedUpdateManyWithoutAlumnoNestedInput
+    auditoriasAprobadas_ahbb?: td_auditoria_aprobacion_ahbbUncheckedUpdateManyWithoutAprobador_ahbbNestedInput
+    auditoriasUsuario_ahbb?: td_auditoria_aprobacion_ahbbUncheckedUpdateManyWithoutUsuarioAuditado_ahbbNestedInput
+    carrito_ahbb?: td_carrito_ahbbUncheckedUpdateManyWithoutUsuario_ahbbNestedInput
+    facturas_ahbb?: td_factura_ahbbUncheckedUpdateManyWithoutUsuario_ahbbNestedInput
+  }
+
+  export type td_producto_ahbbUpsertWithoutFavoritos_ahbbInput = {
+    update: XOR<td_producto_ahbbUpdateWithoutFavoritos_ahbbInput, td_producto_ahbbUncheckedUpdateWithoutFavoritos_ahbbInput>
+    create: XOR<td_producto_ahbbCreateWithoutFavoritos_ahbbInput, td_producto_ahbbUncheckedCreateWithoutFavoritos_ahbbInput>
+    where?: td_producto_ahbbWhereInput
+  }
+
+  export type td_producto_ahbbUpdateToOneWithWhereWithoutFavoritos_ahbbInput = {
+    where?: td_producto_ahbbWhereInput
+    data: XOR<td_producto_ahbbUpdateWithoutFavoritos_ahbbInput, td_producto_ahbbUncheckedUpdateWithoutFavoritos_ahbbInput>
+  }
+
+  export type td_producto_ahbbUpdateWithoutFavoritos_ahbbInput = {
+    nombre_ahbb?: StringFieldUpdateOperationsInput | string
+    descripcion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    precio_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    stock_ahbb?: IntFieldUpdateOperationsInput | number
+    categoria_ahbb?: StringFieldUpdateOperationsInput | string
+    imagen_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    estado_producto_ahbb?: StringFieldUpdateOperationsInput | string
+    creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    itemsCarrito_ahbb?: td_carrito_ahbbUpdateManyWithoutProducto_ahbbNestedInput
+    detallesFactura_ahbb?: td_detalle_factura_ahbbUpdateManyWithoutProducto_ahbbNestedInput
+  }
+
+  export type td_producto_ahbbUncheckedUpdateWithoutFavoritos_ahbbInput = {
+    id_producto_ahbb?: IntFieldUpdateOperationsInput | number
+    nombre_ahbb?: StringFieldUpdateOperationsInput | string
+    descripcion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    precio_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    stock_ahbb?: IntFieldUpdateOperationsInput | number
+    categoria_ahbb?: StringFieldUpdateOperationsInput | string
+    imagen_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    estado_producto_ahbb?: StringFieldUpdateOperationsInput | string
+    creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    itemsCarrito_ahbb?: td_carrito_ahbbUncheckedUpdateManyWithoutProducto_ahbbNestedInput
+    detallesFactura_ahbb?: td_detalle_factura_ahbbUncheckedUpdateManyWithoutProducto_ahbbNestedInput
   }
 
   export type td_curso_ahbbCreateManyProfesorInput = {
@@ -13698,6 +22458,27 @@ export namespace Prisma {
     observacion_ahbb?: string | null
     id_aprobador_ahbb: number
     creadoEn_ahbb?: Date | string
+  }
+
+  export type td_carrito_ahbbCreateManyUsuario_ahbbInput = {
+    id_carrito_ahbb?: number
+    cantidad_ahbb?: number
+    fechaAgregado_ahbb?: Date | string | null
+    id_producto_carrito_ahbb: number
+  }
+
+  export type td_factura_ahbbCreateManyUsuario_ahbbInput = {
+    id_factura_ahbb?: number
+    nroReferenciaPago_ahbb: string
+    fechaFactura_ahbb?: Date | string | null
+    total_ahbb: Decimal | DecimalJsLike | number | string
+    estadoFactura_ahbb?: string
+  }
+
+  export type td_favorito_ahbbCreateManyUsuario_ahbbInput = {
+    id_favorito_ahbb?: number
+    fechaAgregado_ahbb?: Date | string | null
+    id_producto_favorito_ahbb: number
   }
 
   export type td_curso_ahbbUpdateWithoutProfesorInput = {
@@ -13849,6 +22630,68 @@ export namespace Prisma {
     observacion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     id_aprobador_ahbb?: IntFieldUpdateOperationsInput | number
     creadoEn_ahbb?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type td_carrito_ahbbUpdateWithoutUsuario_ahbbInput = {
+    cantidad_ahbb?: IntFieldUpdateOperationsInput | number
+    fechaAgregado_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    producto_ahbb?: td_producto_ahbbUpdateOneRequiredWithoutItemsCarrito_ahbbNestedInput
+  }
+
+  export type td_carrito_ahbbUncheckedUpdateWithoutUsuario_ahbbInput = {
+    id_carrito_ahbb?: IntFieldUpdateOperationsInput | number
+    cantidad_ahbb?: IntFieldUpdateOperationsInput | number
+    fechaAgregado_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    id_producto_carrito_ahbb?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type td_carrito_ahbbUncheckedUpdateManyWithoutUsuario_ahbbInput = {
+    id_carrito_ahbb?: IntFieldUpdateOperationsInput | number
+    cantidad_ahbb?: IntFieldUpdateOperationsInput | number
+    fechaAgregado_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    id_producto_carrito_ahbb?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type td_factura_ahbbUpdateWithoutUsuario_ahbbInput = {
+    nroReferenciaPago_ahbb?: StringFieldUpdateOperationsInput | string
+    fechaFactura_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    total_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    estadoFactura_ahbb?: StringFieldUpdateOperationsInput | string
+    detalles_ahbb?: td_detalle_factura_ahbbUpdateManyWithoutFactura_ahbbNestedInput
+  }
+
+  export type td_factura_ahbbUncheckedUpdateWithoutUsuario_ahbbInput = {
+    id_factura_ahbb?: IntFieldUpdateOperationsInput | number
+    nroReferenciaPago_ahbb?: StringFieldUpdateOperationsInput | string
+    fechaFactura_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    total_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    estadoFactura_ahbb?: StringFieldUpdateOperationsInput | string
+    detalles_ahbb?: td_detalle_factura_ahbbUncheckedUpdateManyWithoutFactura_ahbbNestedInput
+  }
+
+  export type td_factura_ahbbUncheckedUpdateManyWithoutUsuario_ahbbInput = {
+    id_factura_ahbb?: IntFieldUpdateOperationsInput | number
+    nroReferenciaPago_ahbb?: StringFieldUpdateOperationsInput | string
+    fechaFactura_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    total_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    estadoFactura_ahbb?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type td_favorito_ahbbUpdateWithoutUsuario_ahbbInput = {
+    fechaAgregado_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    producto_ahbb?: td_producto_ahbbUpdateOneRequiredWithoutFavoritos_ahbbNestedInput
+  }
+
+  export type td_favorito_ahbbUncheckedUpdateWithoutUsuario_ahbbInput = {
+    id_favorito_ahbb?: IntFieldUpdateOperationsInput | number
+    fechaAgregado_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    id_producto_favorito_ahbb?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type td_favorito_ahbbUncheckedUpdateManyWithoutUsuario_ahbbInput = {
+    id_favorito_ahbb?: IntFieldUpdateOperationsInput | number
+    fechaAgregado_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    id_producto_favorito_ahbb?: IntFieldUpdateOperationsInput | number
   }
 
   export type td_curso_ahbbCreateManyPrelacionInput = {
@@ -14006,6 +22849,110 @@ export namespace Prisma {
     id_usuario_inscripcion_ahbb?: IntFieldUpdateOperationsInput | number
     creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type td_carrito_ahbbCreateManyProducto_ahbbInput = {
+    id_carrito_ahbb?: number
+    cantidad_ahbb?: number
+    fechaAgregado_ahbb?: Date | string | null
+    id_usuario_carrito_ahbb: number
+  }
+
+  export type td_detalle_factura_ahbbCreateManyProducto_ahbbInput = {
+    id_detalle_factura_ahbb?: number
+    cantidad_ahbb: number
+    precioUnitario_ahbb: Decimal | DecimalJsLike | number | string
+    id_factura_detalle_ahbb: number
+  }
+
+  export type td_favorito_ahbbCreateManyProducto_ahbbInput = {
+    id_favorito_ahbb?: number
+    fechaAgregado_ahbb?: Date | string | null
+    id_usuario_favorito_ahbb: number
+  }
+
+  export type td_carrito_ahbbUpdateWithoutProducto_ahbbInput = {
+    cantidad_ahbb?: IntFieldUpdateOperationsInput | number
+    fechaAgregado_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    usuario_ahbb?: td_usuario_ahbbUpdateOneRequiredWithoutCarrito_ahbbNestedInput
+  }
+
+  export type td_carrito_ahbbUncheckedUpdateWithoutProducto_ahbbInput = {
+    id_carrito_ahbb?: IntFieldUpdateOperationsInput | number
+    cantidad_ahbb?: IntFieldUpdateOperationsInput | number
+    fechaAgregado_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    id_usuario_carrito_ahbb?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type td_carrito_ahbbUncheckedUpdateManyWithoutProducto_ahbbInput = {
+    id_carrito_ahbb?: IntFieldUpdateOperationsInput | number
+    cantidad_ahbb?: IntFieldUpdateOperationsInput | number
+    fechaAgregado_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    id_usuario_carrito_ahbb?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type td_detalle_factura_ahbbUpdateWithoutProducto_ahbbInput = {
+    cantidad_ahbb?: IntFieldUpdateOperationsInput | number
+    precioUnitario_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    factura_ahbb?: td_factura_ahbbUpdateOneRequiredWithoutDetalles_ahbbNestedInput
+  }
+
+  export type td_detalle_factura_ahbbUncheckedUpdateWithoutProducto_ahbbInput = {
+    id_detalle_factura_ahbb?: IntFieldUpdateOperationsInput | number
+    cantidad_ahbb?: IntFieldUpdateOperationsInput | number
+    precioUnitario_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    id_factura_detalle_ahbb?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type td_detalle_factura_ahbbUncheckedUpdateManyWithoutProducto_ahbbInput = {
+    id_detalle_factura_ahbb?: IntFieldUpdateOperationsInput | number
+    cantidad_ahbb?: IntFieldUpdateOperationsInput | number
+    precioUnitario_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    id_factura_detalle_ahbb?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type td_favorito_ahbbUpdateWithoutProducto_ahbbInput = {
+    fechaAgregado_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    usuario_ahbb?: td_usuario_ahbbUpdateOneRequiredWithoutFavoritos_ahbbNestedInput
+  }
+
+  export type td_favorito_ahbbUncheckedUpdateWithoutProducto_ahbbInput = {
+    id_favorito_ahbb?: IntFieldUpdateOperationsInput | number
+    fechaAgregado_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    id_usuario_favorito_ahbb?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type td_favorito_ahbbUncheckedUpdateManyWithoutProducto_ahbbInput = {
+    id_favorito_ahbb?: IntFieldUpdateOperationsInput | number
+    fechaAgregado_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    id_usuario_favorito_ahbb?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type td_detalle_factura_ahbbCreateManyFactura_ahbbInput = {
+    id_detalle_factura_ahbb?: number
+    cantidad_ahbb: number
+    precioUnitario_ahbb: Decimal | DecimalJsLike | number | string
+    id_producto_detalle_ahbb: number
+  }
+
+  export type td_detalle_factura_ahbbUpdateWithoutFactura_ahbbInput = {
+    cantidad_ahbb?: IntFieldUpdateOperationsInput | number
+    precioUnitario_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    producto_ahbb?: td_producto_ahbbUpdateOneRequiredWithoutDetallesFactura_ahbbNestedInput
+  }
+
+  export type td_detalle_factura_ahbbUncheckedUpdateWithoutFactura_ahbbInput = {
+    id_detalle_factura_ahbb?: IntFieldUpdateOperationsInput | number
+    cantidad_ahbb?: IntFieldUpdateOperationsInput | number
+    precioUnitario_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    id_producto_detalle_ahbb?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type td_detalle_factura_ahbbUncheckedUpdateManyWithoutFactura_ahbbInput = {
+    id_detalle_factura_ahbb?: IntFieldUpdateOperationsInput | number
+    cantidad_ahbb?: IntFieldUpdateOperationsInput | number
+    precioUnitario_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    id_producto_detalle_ahbb?: IntFieldUpdateOperationsInput | number
   }
 
 

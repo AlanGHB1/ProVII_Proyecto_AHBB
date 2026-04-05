@@ -124,6 +124,12 @@ const routes = [
     component: () => import('pages/admin/ConfiguracionView_ahbb.vue'),
     meta: { publica_ahbb: false, layout_ahbb: 'sistema', rolesPermitidos_ahbb: [ADMIN] },
   },
+  {
+    path: '/admin/tienda',
+    name: 'adminTienda',
+    component: () => import('pages/admin/ProductosAdminView_ahbb.vue'),
+    meta: { publica_ahbb: false, layout_ahbb: 'sistema', rolesPermitidos_ahbb: [ADMIN] },
+  },
 
   // ─── Rutas exclusivas del profesor ─────────────────────
   {
@@ -139,6 +145,38 @@ const routes = [
     meta: { publica_ahbb: false, layout_ahbb: 'sistema', rolesPermitidos_ahbb: [PROF] },
   },
 
+  // ─── Rutas de Tienda Oficial (E-Commerce) ──────────────
+  {
+    path: '/tienda',
+    name: 'tiendaCatalogo',
+    component: () => import('pages/tienda/TiendaView_ahbb.vue'),
+    meta: { publica_ahbb: true, layout_ahbb: 'sistema' }, // Aunque es pública, usa layout sistema si está logueado, sino landing
+  },
+  {
+    path: '/tienda/producto/:id',
+    name: 'tiendaProductoDetalle',
+    component: () => import('pages/tienda/ProductoDetalleView_ahbb.vue'),
+    meta: { publica_ahbb: true, layout_ahbb: 'sistema' },
+  },
+  {
+    path: '/tienda/carrito',
+    name: 'tiendaCarrito',
+    component: () => import('pages/tienda/CarritoView_ahbb.vue'),
+    meta: { publica_ahbb: false, layout_ahbb: 'sistema', rolesPermitidos_ahbb: TODOS },
+  },
+  {
+    path: '/tienda/favoritos',
+    name: 'tiendaFavoritos',
+    component: () => import('pages/tienda/FavoritosView_ahbb.vue'),
+    meta: { publica_ahbb: false, layout_ahbb: 'sistema', rolesPermitidos_ahbb: TODOS },
+  },
+  {
+    path: '/tienda/compras',
+    name: 'tiendaCompras',
+    component: () => import('pages/tienda/MisComprasView_ahbb.vue'),
+    meta: { publica_ahbb: false, layout_ahbb: 'sistema', rolesPermitidos_ahbb: TODOS },
+  },
+  
   // ─── Rutas exclusivas del alumno ──────────────────────
   {
     path: '/alumno/oferta-academica',
