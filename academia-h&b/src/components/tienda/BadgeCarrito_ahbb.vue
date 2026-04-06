@@ -20,7 +20,7 @@ const irAlCarrito = () => {
 </script>
 
 <template>
-  <q-btn flat round icon="shopping_cart" @click="irAlCarrito">
+  <q-btn flat round icon="shopping_cart" color="white" @click="irAlCarrito">
     <q-badge color="red" floating v-if="tiendaStore.totalItemsCarrito_ahbb > 0">
       {{ tiendaStore.totalItemsCarrito_ahbb }}
     </q-badge>

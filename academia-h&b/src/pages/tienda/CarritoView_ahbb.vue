@@ -3,6 +3,7 @@ import { onMounted, ref } from 'vue';
 import { useTiendaStore_ahbb } from '../../stores/tiendaStore_ahbb';
 import { useQuasar } from 'quasar';
 import { useRouter } from 'vue-router';
+import { reglaReferenciaPago_ahbb, validarReferenciaPago_ahbb } from '../../constantes/validacionPago_ahbb';
 
 const tiendaStore = useTiendaStore_ahbb();
 const $q = useQuasar();
@@ -37,8 +38,9 @@ const eliminarItem = async (id) => {
 };
 
 const confirmarCheckout = () => {
-  if (!referenciaPago.value.trim()) {
-    $q.notify({ type: 'warning', message: 'Debe ingresar el número de referencia de pago móvil' });
+  const validacion = validarReferenciaPago_ahbb(referenciaPago.value);
+  if (!validacion.valido) {
+    $q.notify({ type: 'negative', message: validacion.mensaje });
     return;
   }
 
@@ -137,9 +139,15 @@ const confirmarCheckout = () => {
               v-model="referenciaPago"
               filled
               label="Ref. Pago Móvil / Transferencia"
-              hint="Indica el N° de referencia para validar tu pago"
+              hint="Solo dígitos • Mín. 8 • Máx. 20"
               class="q-mb-md"
-            />
+              maxlength="20"
+              inputmode="numeric"
+              :rules="reglaReferenciaPago_ahbb"
+              lazy-rules
+            >
+              <template v-slot:prepend><q-icon name="receipt" /></template>
+            </q-input>
           </q-card-section>
 
           <q-card-actions class="q-pa-md">

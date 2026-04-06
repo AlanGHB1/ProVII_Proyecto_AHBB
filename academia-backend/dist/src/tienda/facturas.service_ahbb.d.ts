@@ -2,7 +2,15 @@ import { PrismaService } from '../prisma.service';
 export declare class FacturasService_ahbb {
     private readonly prisma_ahbb;
     constructor(prisma_ahbb: PrismaService);
+    private readonly IVA_PORCENTAJE_AHBB;
+    private calcularDesglose_ahbb;
     crearFactura_ahbb(id_usuario_ahbb: number, nroReferenciaPago_ahbb: string): Promise<{
+        desglose_ahbb: {
+            subtotal: number;
+            ivaPorcentaje: number;
+            ivaMontoUSD: number;
+            totalConIva: number;
+        };
         usuario_ahbb: {
             nombre_ahbb: string;
             id_usuario_ahbb: number;
@@ -29,7 +37,6 @@ export declare class FacturasService_ahbb {
             id_factura_detalle_ahbb: number;
             id_producto_detalle_ahbb: number;
         })[];
-    } & {
         nroReferenciaPago_ahbb: string;
         fechaFactura_ahbb: Date | null;
         total_ahbb: import("@prisma/client-runtime-utils").Decimal;
@@ -37,7 +44,13 @@ export declare class FacturasService_ahbb {
         id_factura_ahbb: number;
         id_usuario_factura_ahbb: number;
     }>;
-    obtenerHistorial_ahbb(id_usuario_ahbb: number): Promise<({
+    obtenerHistorial_ahbb(id_usuario_ahbb: number): Promise<{
+        desglose_ahbb: {
+            subtotal: number;
+            ivaPorcentaje: number;
+            ivaMontoUSD: number;
+            totalConIva: number;
+        };
         detalles_ahbb: ({
             producto_ahbb: {
                 id_producto_ahbb: number;
@@ -58,15 +71,20 @@ export declare class FacturasService_ahbb {
             id_factura_detalle_ahbb: number;
             id_producto_detalle_ahbb: number;
         })[];
-    } & {
         nroReferenciaPago_ahbb: string;
         fechaFactura_ahbb: Date | null;
         total_ahbb: import("@prisma/client-runtime-utils").Decimal;
         estadoFactura_ahbb: string;
         id_factura_ahbb: number;
         id_usuario_factura_ahbb: number;
-    })[]>;
+    }[]>;
     obtenerPorId_ahbb(id_factura_ahbb: number, id_usuario_ahbb?: number): Promise<{
+        desglose_ahbb: {
+            subtotal: number;
+            ivaPorcentaje: number;
+            ivaMontoUSD: number;
+            totalConIva: number;
+        };
         usuario_ahbb: {
             nombre_ahbb: string;
             id_usuario_ahbb: number;
@@ -93,7 +111,6 @@ export declare class FacturasService_ahbb {
             id_factura_detalle_ahbb: number;
             id_producto_detalle_ahbb: number;
         })[];
-    } & {
         nroReferenciaPago_ahbb: string;
         fechaFactura_ahbb: Date | null;
         total_ahbb: import("@prisma/client-runtime-utils").Decimal;

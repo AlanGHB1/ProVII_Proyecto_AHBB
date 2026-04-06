@@ -40,6 +40,14 @@ export class UsuariosController {
     return this.usuariosService_ahbb.obtenerTodos_ahbb(rol_ahbb);
   }
 
+  // Endpoint para obtener todos los alumnos con estados de suscripción
+  @UseGuards(JwtAuthGuard_ahbb, RolesGuard_ahbb)
+  @RolesDecorator_ahbb('ADMIN')
+  @Get('alumnos-suscripciones')
+  async obtenerAlumnosSuscripciones_ahbb() {
+    return this.usuariosService_ahbb.obtenerAlumnosPendientes_ahbb();
+  }
+
   @UseGuards(JwtAuthGuard_ahbb, RolesGuard_ahbb)
   @RolesDecorator_ahbb('ADMIN', 'PROFESOR', 'ALUMNO')
   @Get(':id_usuario_ahbb')
@@ -114,14 +122,28 @@ export class UsuariosController {
       Number(request_ahbb.usuario_ahbb?.sub),
       datos_ahbb.referenciaPagoMovil_ahbb,
       hashTemporal_ahbb,
+      contrasenaTemporalPlano_ahbb,
     );
 
     return {
       exito: true,
       usuario: usuario_ahbb,
-      contrasenaTemporal_ahbb: contrasenaTemporalPlano_ahbb,
-      mensaje: 'Alumno aprobado y marcado para cambio de clave obligatorio.',
+      mensaje: 'Alumno aprobado. Se enviaron sus credenciales por correo.',
     };
+  }
+
+  // Aprobación masiva de alumnos pendientes
+  @UseGuards(JwtAuthGuard_ahbb, RolesGuard_ahbb)
+  @RolesDecorator_ahbb('ADMIN')
+  @Post('aprobar-alumnos-masivo')
+  async aprobarAlumnosMasivo_ahbb(
+    @Body() datos_ahbb: { ids: number[] },
+    @Req() request_ahbb: RequestConUsuario_ahbb,
+  ) {
+    return this.usuariosService_ahbb.aprobarAlumnosMasivo_ahbb(
+      datos_ahbb.ids,
+      Number(request_ahbb.usuario_ahbb?.sub),
+    );
   }
 
   @UseGuards(JwtAuthGuard_ahbb, RolesGuard_ahbb)

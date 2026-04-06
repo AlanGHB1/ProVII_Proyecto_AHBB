@@ -66,10 +66,8 @@ export const procesarCargaMasivaExcel_ahbb = async (archivoExcel_ahbb) => {
 
 export const exportarProfesoresExcel_ahbb = async () => {
   const respuesta_ahbb = await apiCliente_ahbb.get('/usuarios/carga-masiva/exportar-profesores', {
-    responseType: 'blob', // Necesario para descargar archivos binarios (Excel)
+    responseType: 'blob',
   });
-  
-  // Lógica de descarga nativa en el navegador
   const url = window.URL.createObjectURL(new Blob([respuesta_ahbb.data]));
   const link = document.createElement('a');
   link.href = url;
@@ -79,3 +77,26 @@ export const exportarProfesoresExcel_ahbb = async () => {
   link.parentNode.removeChild(link);
   return true;
 };
+
+// ─── Módulo Inscripciones / Suscripciones de Alumnos ────────────────────────
+
+export const obtenerAlumnosSuscripciones_ahbb = async () => {
+  const respuesta_ahbb = await apiCliente_ahbb.get('/usuarios/alumnos-suscripciones');
+  return respuesta_ahbb.data;
+};
+
+export const aprobarAlumno_ahbb = async (id_usuario_ahbb, referenciaPagoMovil_ahbb) => {
+  const respuesta_ahbb = await apiCliente_ahbb.post('/usuarios/aprobar-alumno', {
+    id_usuario_ahbb,
+    referenciaPagoMovil_ahbb,
+  });
+  return respuesta_ahbb.data;
+};
+
+export const aprobarAlumnosMasivo_ahbb = async (ids_ahbb) => {
+  const respuesta_ahbb = await apiCliente_ahbb.post('/usuarios/aprobar-alumnos-masivo', {
+    ids: ids_ahbb,
+  });
+  return respuesta_ahbb.data;
+};
+

@@ -44,7 +44,14 @@ const toggleFavorito = async (evento) => {
 const agregarAlCarrito = async (evento) => {
   evento.stopPropagation();
   if (!estaLogueado.value) {
-    $q.notify({ type: 'warning', message: 'Debes iniciar sesión para comprar' });
+    $q.dialog({
+      title: '¡Acceso Exclusivo!',
+      message: '¿Quieres acceder a nuestra merch? ¡Conviértete en miembro de la Academia H&B iniciando sesión o registrándote ahora mismo!',
+      ok: { label: 'Iniciar Sesión', color: 'primary', unelevated: true },
+      cancel: { label: 'Cerrar', color: 'grey-7', flat: true },
+    }).onOk(() => {
+      router.push('/login');
+    });
     return;
   }
   if (props.producto.stock_ahbb <= 0) {

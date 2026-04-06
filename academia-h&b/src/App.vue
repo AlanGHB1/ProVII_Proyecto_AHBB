@@ -1,10 +1,11 @@
 <!-- Componente raíz de la aplicación con layout condicional y menú dinámico por rol -->
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useAutenticacionStore_ahbb } from './stores/autenticacionStore_ahbb';
 import { useCursosStore_ahbb } from './stores/cursosStore_ahbb';
 import { obtenerMenuPorRol_ahbb } from './constantes/menuSistema_ahbb';
+import { obtenerAlumnosSuscripciones_ahbb } from './servicios/usuariosServicio_ahbb';
 
 // Componentes de layout landing
 import Navbar_ah from './components/layout/Navbar_ah.vue';
@@ -16,15 +17,19 @@ const router_ahbb = useRouter();
 const authStore_ahbb = useAutenticacionStore_ahbb();
 const cursosStore_ahbb = useCursosStore_ahbb();
 
-// Inicializar stores
-authStore_ahbb.inicializar_ahbb();
+// Inicializar stores (la autenticación se inicializa en onMounted para no bloquear el render)
 cursosStore_ahbb.inicializar_ahbb();
 
 /**
  * Detecta el tipo de layout según la meta de la ruta.
  */
 const layoutActual_ahbb = computed(() => {
-  return route_ahbb.meta.layout_ahbb || 'landing';
+  const defaultLayout_ah = route_ahbb.meta.layout_ahbb || 'landing';
+  // Forzar que la tienda se vea como landing (sin panel) si no hay sesión iniciada
+  if (defaultLayout_ah === 'sistema' && route_ahbb.meta.publica_ahbb && !authStore_ahbb.estaAutenticado_ahbb) {
+    return 'landing';
+  }
+  return defaultLayout_ah;
 });
 
 /**
@@ -62,7 +67,7 @@ const etiquetaRol_ahbb = computed(() => {
  */
 const cerrarSesion_ahbb = () => {
   authStore_ahbb.cerrarSesion_ahbb();
-  void router_ahbb.push({ name: 'login' });
+  void router_ahbb.push({ name: 'inicio' }); // redirigir a la landing page
 };
 
 /**
@@ -85,6 +90,25 @@ const menuLateralAbierto_ahbb = ref(false);
 const alternarMenuLateral_ahbb = () => {
   menuLateralAbierto_ahbb.value = !menuLateralAbierto_ahbb.value;
 };
+
+/**
+ * Contador de alumnos pendientes de aprobación (solo Admin)
+ */
+const alumnosPendientes_ahbb = ref(0);
+const cargarContadorPendientes_ahbb = async () => {
+  if (!authStore_ahbb.esAdministrador_ahbb) return;
+  try {
+    const alumnos = await obtenerAlumnosSuscripciones_ahbb();
+    alumnosPendientes_ahbb.value = alumnos.filter(a => a.estadoCuenta === 'PENDIENTE_APROBACION').length;
+  } catch {
+    alumnosPendientes_ahbb.value = 0;
+  }
+};
+
+onMounted(async () => {
+  await authStore_ahbb.inicializar_ahbb();
+  await cargarContadorPendientes_ahbb();
+});
 </script>
 
 <template>
@@ -203,6 +227,13 @@ const alternarMenuLateral_ahbb = () => {
               <q-icon :name="enlace.icono" />
             </q-item-section>
             <q-item-section>{{ enlace.etiqueta }}</q-item-section>
+            <!-- Badge de notificación para Inscripciones -->
+            <q-item-section
+              side
+              v-if="enlace.ruta === '/inscripciones' && alumnosPendientes_ahbb > 0"
+            >
+              <q-badge color="negative" rounded :label="alumnosPendientes_ahbb" />
+            </q-item-section>
           </q-item>
         </template>
       </q-list>

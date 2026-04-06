@@ -51,6 +51,7 @@ const xlsx = __importStar(require("xlsx"));
 const nodemailer = __importStar(require("nodemailer"));
 const bcrypt = __importStar(require("bcrypt"));
 const prisma_service_1 = require("../prisma.service");
+const validacion_pago_util_ahbb_1 = require("../common/utils/validacion-pago.util_ahbb");
 let UsuariosService = class UsuariosService {
     prisma_ahbb;
     constructor(prisma_ahbb) {
@@ -75,6 +76,9 @@ let UsuariosService = class UsuariosService {
     }
     async crearUsuario_ahbb(datos_ahbb) {
         const rolNormalizado_ahbb = this.normalizarRolInterno_ahbb(datos_ahbb.rol || 'ALUMNO');
+        if (rolNormalizado_ahbb === 'ALUMNO' && datos_ahbb.referenciaPagoMovil) {
+            (0, validacion_pago_util_ahbb_1.validarReferenciaPago_ahbb)(datos_ahbb.referenciaPagoMovil);
+        }
         const nuevoUsuario_ahbb = await this.prisma_ahbb.td_usuario_ahbb.create({
             data: {
                 cedula_ahbb: datos_ahbb.cedula,
@@ -310,7 +314,20 @@ let UsuariosService = class UsuariosService {
         const buffer = xlsx.write(workbook, { type: 'buffer', bookType: 'xlsx' });
         return buffer;
     }
-    async aprobarAlumno_ahbb(id_usuario_ahbb, id_aprobador_ahbb, referenciaPagoMovil_ahbb, contrasenaTemporalHash_ahbb) {
+    async obtenerAlumnosPendientes_ahbb() {
+        const alumnos_ahbb = await this.prisma_ahbb.td_usuario_ahbb.findMany({
+            where: {
+                rol_ahbb: 'ALUMNO',
+                estadoCuenta_ahbb: { in: ['PENDIENTE_APROBACION', 'ACTIVO', 'INACTIVO'] },
+            },
+            orderBy: { creadoEn_ahbb: 'desc' },
+        });
+        return alumnos_ahbb.map((u) => ({
+            ...this.mapearUsuarioPublico_ahbb(u),
+            referenciaPagoMovil: u.referenciaPagoMovil_ahbb,
+        }));
+    }
+    async aprobarAlumno_ahbb(id_usuario_ahbb, id_aprobador_ahbb, referenciaPagoMovil_ahbb, contrasenaTemporalHash_ahbb, contrasenaTemporal_ahbb) {
         const usuario_ahbb = await this.prisma_ahbb.td_usuario_ahbb.findUnique({
             where: { id_usuario_ahbb },
         });
@@ -339,7 +356,59 @@ let UsuariosService = class UsuariosService {
             });
             return actualizado_ahbb;
         });
+        try {
+            const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: { user: process.env.MAIL_USER, pass: process.env.MAIL_PASS },
+            });
+            await transporter.sendMail({
+                from: '"Academia H&B" <no-reply@academiahb.com>',
+                to: usuario_ahbb.correo_ahbb,
+                subject: '¡Tu membresía ha sido aprobada! — Academia H&B',
+                html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <div style="background: #1b2a4a; color: white; padding: 24px; text-align: center; border-radius: 8px 8px 0 0;">
+              <h1 style="margin:0;">🎓 Academia <span style="color: #f59e0b;">H&B</span></h1>
+            </div>
+            <div style="padding: 24px; background: #f8fafc;">
+              <h2>¡Bienvenido/a, ${usuario_ahbb.nombre_ahbb}!</h2>
+              <p>Tu membresía anual ha sido <strong>aprobada</strong> por el equipo de Academia H&B.</p>
+              <p>Ya puedes acceder al sistema con las siguientes credenciales temporales:</p>
+              <div style="background: #e2e8f0; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                <strong>Correo:</strong> ${usuario_ahbb.correo_ahbb}<br/>
+                <strong>Contraseña temporal:</strong> ${contrasenaTemporal_ahbb}
+              </div>
+              <p style="color: #dc2626;"><strong>⚠️ Por seguridad, deberás cambiar tu contraseña al iniciar sesión por primera vez.</strong></p>
+              <a href="http://localhost:9000/login" style="display: inline-block; background: #1b2a4a; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; margin-top: 8px;">Iniciar Sesión</a>
+            </div>
+          </div>
+        `,
+            });
+        }
+        catch (emailError) {
+            console.error('Error al enviar correo de aprobación:', emailError);
+        }
         return this.mapearUsuarioPublico_ahbb(usuarioActualizado_ahbb);
+    }
+    async aprobarAlumnosMasivo_ahbb(ids_ahbb, id_aprobador_ahbb) {
+        const resultados_ahbb = [];
+        for (const id_usuario_ahbb of ids_ahbb) {
+            try {
+                const usuario = await this.prisma_ahbb.td_usuario_ahbb.findUnique({
+                    where: { id_usuario_ahbb },
+                });
+                if (!usuario || usuario.estadoCuenta_ahbb !== 'PENDIENTE_APROBACION')
+                    continue;
+                const contrasenaTemporal = this.generarContrasenaTemporal_ahbb();
+                const hash = await (await import('bcrypt')).hash(contrasenaTemporal, 10);
+                const aprobado = await this.aprobarAlumno_ahbb(id_usuario_ahbb, id_aprobador_ahbb, usuario.referenciaPagoMovil_ahbb ?? 'aprobado-masivo', hash, contrasenaTemporal);
+                resultados_ahbb.push(aprobado);
+            }
+            catch (err) {
+                console.error(`Error al aprobar alumno ID ${id_usuario_ahbb}:`, err);
+            }
+        }
+        return { aprobados: resultados_ahbb.length, detalle: resultados_ahbb };
     }
     async guardarFirmaDigital_ahbb(id_usuario_ahbb, imagenBase64_ahbb) {
         const usuario_ahbb = await this.prisma_ahbb.td_usuario_ahbb.findUnique({

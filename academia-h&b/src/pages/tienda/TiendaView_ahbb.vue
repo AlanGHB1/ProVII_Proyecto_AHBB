@@ -20,7 +20,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <q-page class="q-pa-md">
+  <div class="q-pa-md" style="min-height: 80vh">
     <div class="row align-center justify-between q-mb-lg">
       <div class="text-h4 text-weight-bold text-primary">Tienda de la Academia</div>
       <div>
@@ -90,5 +90,5 @@ onMounted(async () => {
       <div class="text-h6 q-mt-md">No se encontraron productos</div>
       <div class="text-subtitle1">Intenta con otra búsqueda o categoría.</div>
     </div>
-  </q-page>
+  </div>
 </template>

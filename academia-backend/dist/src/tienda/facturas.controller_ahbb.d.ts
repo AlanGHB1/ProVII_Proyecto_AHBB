@@ -6,6 +6,12 @@ export declare class FacturasController_ahbb {
     crearFactura_ahbb(req_ahbb: RequestConUsuario_ahbb, datos_ahbb: {
         nroReferenciaPago: string;
     }): Promise<{
+        desglose_ahbb: {
+            subtotal: number;
+            ivaPorcentaje: number;
+            ivaMontoUSD: number;
+            totalConIva: number;
+        };
         usuario_ahbb: {
             nombre_ahbb: string;
             id_usuario_ahbb: number;
@@ -32,7 +38,6 @@ export declare class FacturasController_ahbb {
             id_factura_detalle_ahbb: number;
             id_producto_detalle_ahbb: number;
         })[];
-    } & {
         nroReferenciaPago_ahbb: string;
         fechaFactura_ahbb: Date | null;
         total_ahbb: import("@prisma/client-runtime-utils").Decimal;
@@ -40,7 +45,13 @@ export declare class FacturasController_ahbb {
         id_factura_ahbb: number;
         id_usuario_factura_ahbb: number;
     }>;
-    obtenerHistorial_ahbb(req_ahbb: RequestConUsuario_ahbb): Promise<({
+    obtenerHistorial_ahbb(req_ahbb: RequestConUsuario_ahbb): Promise<{
+        desglose_ahbb: {
+            subtotal: number;
+            ivaPorcentaje: number;
+            ivaMontoUSD: number;
+            totalConIva: number;
+        };
         detalles_ahbb: ({
             producto_ahbb: {
                 id_producto_ahbb: number;
@@ -61,15 +72,20 @@ export declare class FacturasController_ahbb {
             id_factura_detalle_ahbb: number;
             id_producto_detalle_ahbb: number;
         })[];
-    } & {
         nroReferenciaPago_ahbb: string;
         fechaFactura_ahbb: Date | null;
         total_ahbb: import("@prisma/client-runtime-utils").Decimal;
         estadoFactura_ahbb: string;
         id_factura_ahbb: number;
         id_usuario_factura_ahbb: number;
-    })[]>;
+    }[]>;
     obtenerPorId_ahbb(id_ahbb: number, req_ahbb: RequestConUsuario_ahbb): Promise<{
+        desglose_ahbb: {
+            subtotal: number;
+            ivaPorcentaje: number;
+            ivaMontoUSD: number;
+            totalConIva: number;
+        };
         usuario_ahbb: {
             nombre_ahbb: string;
             id_usuario_ahbb: number;
@@ -96,7 +112,6 @@ export declare class FacturasController_ahbb {
             id_factura_detalle_ahbb: number;
             id_producto_detalle_ahbb: number;
         })[];
-    } & {
         nroReferenciaPago_ahbb: string;
         fechaFactura_ahbb: Date | null;
         total_ahbb: import("@prisma/client-runtime-utils").Decimal;

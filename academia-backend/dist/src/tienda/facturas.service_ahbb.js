@@ -12,12 +12,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FacturasService_ahbb = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma.service");
+const validacion_pago_util_ahbb_1 = require("../common/utils/validacion-pago.util_ahbb");
 let FacturasService_ahbb = class FacturasService_ahbb {
     prisma_ahbb;
     constructor(prisma_ahbb) {
         this.prisma_ahbb = prisma_ahbb;
     }
+    IVA_PORCENTAJE_AHBB = 16;
+    calcularDesglose_ahbb(detalles) {
+        const subtotal = detalles.reduce((acc, d) => acc + Number(d.precioUnitario_ahbb) * d.cantidad_ahbb, 0);
+        const iva = subtotal * (this.IVA_PORCENTAJE_AHBB / 100);
+        const total = subtotal + iva;
+        return {
+            subtotal: +subtotal.toFixed(2),
+            ivaPorcentaje: this.IVA_PORCENTAJE_AHBB,
+            ivaMontoUSD: +iva.toFixed(2),
+            totalConIva: +total.toFixed(2),
+        };
+    }
     async crearFactura_ahbb(id_usuario_ahbb, nroReferenciaPago_ahbb) {
+        (0, validacion_pago_util_ahbb_1.validarReferenciaPago_ahbb)(nroReferenciaPago_ahbb);
         const itemsCarrito_ahbb = await this.prisma_ahbb.td_carrito_ahbb.findMany({
             where: { id_usuario_carrito_ahbb: id_usuario_ahbb },
             include: { producto_ahbb: true },
@@ -39,7 +53,7 @@ let FacturasService_ahbb = class FacturasService_ahbb {
                     id_usuario_factura_ahbb: id_usuario_ahbb,
                     nroReferenciaPago_ahbb,
                     total_ahbb,
-                    estadoFactura_ahbb: 'pendiente',
+                    estadoFactura_ahbb: 'pagada',
                 },
             });
             for (const item_ahbb of itemsCarrito_ahbb) {
@@ -64,13 +78,17 @@ let FacturasService_ahbb = class FacturasService_ahbb {
         return this.obtenerPorId_ahbb(factura_ahbb.id_factura_ahbb, id_usuario_ahbb);
     }
     async obtenerHistorial_ahbb(id_usuario_ahbb) {
-        return this.prisma_ahbb.td_factura_ahbb.findMany({
+        const facturas = await this.prisma_ahbb.td_factura_ahbb.findMany({
             where: { id_usuario_factura_ahbb: id_usuario_ahbb },
             include: {
                 detalles_ahbb: { include: { producto_ahbb: true } },
             },
             orderBy: { fechaFactura_ahbb: 'desc' },
         });
+        return facturas.map(f => ({
+            ...f,
+            desglose_ahbb: this.calcularDesglose_ahbb(f.detalles_ahbb),
+        }));
     }
     async obtenerPorId_ahbb(id_factura_ahbb, id_usuario_ahbb) {
         const where_ahbb = { id_factura_ahbb };
@@ -94,7 +112,10 @@ let FacturasService_ahbb = class FacturasService_ahbb {
         if (!factura_ahbb) {
             throw new common_1.NotFoundException('Factura no encontrada.');
         }
-        return factura_ahbb;
+        return {
+            ...factura_ahbb,
+            desglose_ahbb: this.calcularDesglose_ahbb(factura_ahbb.detalles_ahbb),
+        };
     }
     async obtenerTodas_ahbb() {
         return this.prisma_ahbb.td_factura_ahbb.findMany({

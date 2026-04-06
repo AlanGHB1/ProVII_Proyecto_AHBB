@@ -66,6 +66,9 @@ let UsuariosController = class UsuariosController {
     async obtenerUsuarios_ahbb(rol_ahbb) {
         return this.usuariosService_ahbb.obtenerTodos_ahbb(rol_ahbb);
     }
+    async obtenerAlumnosSuscripciones_ahbb() {
+        return this.usuariosService_ahbb.obtenerAlumnosPendientes_ahbb();
+    }
     async obtenerUsuarioPorId_ahbb(id_usuario_ahbb) {
         return this.usuariosService_ahbb.obtenerPerfilPorId_ahbb(id_usuario_ahbb);
     }
@@ -93,13 +96,15 @@ let UsuariosController = class UsuariosController {
     async aprobarAlumno_ahbb(datos_ahbb, request_ahbb) {
         const contrasenaTemporalPlano_ahbb = this.usuariosService_ahbb.generarContrasenaTemporal_ahbb();
         const hashTemporal_ahbb = await bcrypt.hash(contrasenaTemporalPlano_ahbb, 10);
-        const usuario_ahbb = await this.usuariosService_ahbb.aprobarAlumno_ahbb(datos_ahbb.id_usuario_ahbb, Number(request_ahbb.usuario_ahbb?.sub), datos_ahbb.referenciaPagoMovil_ahbb, hashTemporal_ahbb);
+        const usuario_ahbb = await this.usuariosService_ahbb.aprobarAlumno_ahbb(datos_ahbb.id_usuario_ahbb, Number(request_ahbb.usuario_ahbb?.sub), datos_ahbb.referenciaPagoMovil_ahbb, hashTemporal_ahbb, contrasenaTemporalPlano_ahbb);
         return {
             exito: true,
             usuario: usuario_ahbb,
-            contrasenaTemporal_ahbb: contrasenaTemporalPlano_ahbb,
-            mensaje: 'Alumno aprobado y marcado para cambio de clave obligatorio.',
+            mensaje: 'Alumno aprobado. Se enviaron sus credenciales por correo.',
         };
+    }
+    async aprobarAlumnosMasivo_ahbb(datos_ahbb, request_ahbb) {
+        return this.usuariosService_ahbb.aprobarAlumnosMasivo_ahbb(datos_ahbb.ids, Number(request_ahbb.usuario_ahbb?.sub));
     }
     async guardarFirmaDigital_ahbb(id_usuario_ahbb, datos_ahbb) {
         return this.usuariosService_ahbb.guardarFirmaDigital_ahbb(id_usuario_ahbb, datos_ahbb.imagenBase64_ahbb);
@@ -124,6 +129,14 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], UsuariosController.prototype, "obtenerUsuarios_ahbb", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_ahbb_1.JwtAuthGuard_ahbb, roles_guard_ahbb_1.RolesGuard_ahbb),
+    (0, roles_decorator_ahbb_1.RolesDecorator_ahbb)('ADMIN'),
+    (0, common_1.Get)('alumnos-suscripciones'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], UsuariosController.prototype, "obtenerAlumnosSuscripciones_ahbb", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_ahbb_1.JwtAuthGuard_ahbb, roles_guard_ahbb_1.RolesGuard_ahbb),
     (0, roles_decorator_ahbb_1.RolesDecorator_ahbb)('ADMIN', 'PROFESOR', 'ALUMNO'),
@@ -180,6 +193,16 @@ __decorate([
     __metadata("design:paramtypes", [aprobar_alumno_dto_ahbb_1.AprobarAlumnoDto_ahbb, Object]),
     __metadata("design:returntype", Promise)
 ], UsuariosController.prototype, "aprobarAlumno_ahbb", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_ahbb_1.JwtAuthGuard_ahbb, roles_guard_ahbb_1.RolesGuard_ahbb),
+    (0, roles_decorator_ahbb_1.RolesDecorator_ahbb)('ADMIN'),
+    (0, common_1.Post)('aprobar-alumnos-masivo'),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UsuariosController.prototype, "aprobarAlumnosMasivo_ahbb", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_ahbb_1.JwtAuthGuard_ahbb, roles_guard_ahbb_1.RolesGuard_ahbb),
     (0, roles_decorator_ahbb_1.RolesDecorator_ahbb)('PROFESOR', 'ADMIN'),

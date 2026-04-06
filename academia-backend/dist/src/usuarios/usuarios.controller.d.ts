@@ -21,6 +21,19 @@ export declare class UsuariosController {
         firmaDigital: any;
         creadoEn: any;
     }[]>;
+    obtenerAlumnosSuscripciones_ahbb(): Promise<{
+        referenciaPagoMovil: string | null;
+        id: any;
+        cedula: any;
+        nombre: any;
+        apellido: any;
+        correo: any;
+        rol: string;
+        estadoCuenta: any;
+        requiereCambioContrasena: any;
+        firmaDigital: any;
+        creadoEn: any;
+    }[]>;
     obtenerUsuarioPorId_ahbb(id_usuario_ahbb: number): Promise<{
         id: any;
         cedula: any;
@@ -77,8 +90,13 @@ export declare class UsuariosController {
             firmaDigital: any;
             creadoEn: any;
         };
-        contrasenaTemporal_ahbb: string;
         mensaje: string;
+    }>;
+    aprobarAlumnosMasivo_ahbb(datos_ahbb: {
+        ids: number[];
+    }, request_ahbb: RequestConUsuario_ahbb): Promise<{
+        aprobados: number;
+        detalle: any[];
     }>;
     guardarFirmaDigital_ahbb(id_usuario_ahbb: number, datos_ahbb: GuardarFirmaDto_ahbb): Promise<{
         exito: boolean;

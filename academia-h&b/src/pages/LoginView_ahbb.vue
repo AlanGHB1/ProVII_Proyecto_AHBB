@@ -35,6 +35,17 @@ const manejarLogin_ahbb = async () => {
 
 <template>
   <div class="auth-fondo_ahbb flex flex-center">
+    <!-- Botón Volver al Inicio -->
+    <q-btn
+      round flat
+      icon="home"
+      color="white"
+      to="/"
+      size="lg"
+      class="absolute-top-left q-mt-md q-ml-md"
+      title="Volver al inicio"
+    />
+
     <q-card class="auth-card_ahbb" flat bordered>
       <!-- Logo -->
       <q-card-section class="text-center q-pb-none">

@@ -128,7 +128,8 @@ export declare class UsuariosService {
         creadoEn: any;
     }[]>;
     exportarProfesoresExcel_ahbb(): Promise<Buffer>;
-    aprobarAlumno_ahbb(id_usuario_ahbb: number, id_aprobador_ahbb: number, referenciaPagoMovil_ahbb: string, contrasenaTemporalHash_ahbb: string): Promise<{
+    obtenerAlumnosPendientes_ahbb(): Promise<{
+        referenciaPagoMovil: string | null;
         id: any;
         cedula: any;
         nombre: any;
@@ -139,6 +140,22 @@ export declare class UsuariosService {
         requiereCambioContrasena: any;
         firmaDigital: any;
         creadoEn: any;
+    }[]>;
+    aprobarAlumno_ahbb(id_usuario_ahbb: number, id_aprobador_ahbb: number, referenciaPagoMovil_ahbb: string, contrasenaTemporalHash_ahbb: string, contrasenaTemporal_ahbb: string): Promise<{
+        id: any;
+        cedula: any;
+        nombre: any;
+        apellido: any;
+        correo: any;
+        rol: string;
+        estadoCuenta: any;
+        requiereCambioContrasena: any;
+        firmaDigital: any;
+        creadoEn: any;
+    }>;
+    aprobarAlumnosMasivo_ahbb(ids_ahbb: number[], id_aprobador_ahbb: number): Promise<{
+        aprobados: number;
+        detalle: any[];
     }>;
     guardarFirmaDigital_ahbb(id_usuario_ahbb: number, imagenBase64_ahbb: string): Promise<{
         exito: boolean;

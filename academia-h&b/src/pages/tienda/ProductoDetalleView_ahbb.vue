@@ -65,7 +65,14 @@ const toggleFavorito = async () => {
 
 const agregarAlCarrito = async () => {
   if (!estaLogueado.value) {
-    $q.notify({ type: 'warning', message: 'Debes iniciar sesión para comprar' });
+    $q.dialog({
+      title: '¡Acceso Exclusivo!',
+      message: '¿Quieres acceder a nuestra merch? ¡Conviértete en miembro de la Academia H&B iniciando sesión o registrándote ahora mismo!',
+      ok: { label: 'Iniciar Sesión', color: 'primary', unelevated: true },
+      cancel: { label: 'Cerrar', color: 'grey-7', flat: true },
+    }).onOk(() => {
+      router.push('/login');
+    });
     return;
   }
   try {
@@ -79,7 +86,7 @@ const agregarAlCarrito = async () => {
 </script>
 
 <template>
-  <q-page class="q-pa-md">
+  <div class="q-pa-md" style="min-height: 80vh">
     <div v-if="cargando" class="flex flex-center" style="min-height: 400px">
       <q-spinner-dots color="primary" size="40px" />
     </div>
@@ -173,5 +180,5 @@ const agregarAlCarrito = async () => {
 
       </div>
     </div>
-  </q-page>
+  </div>
 </template>
