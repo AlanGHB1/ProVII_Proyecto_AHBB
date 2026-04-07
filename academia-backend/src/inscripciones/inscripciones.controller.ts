@@ -57,6 +57,17 @@ export class InscripcionesController_ahbb {
 
   @UseGuards(JwtAuthGuard_ahbb, RolesGuard_ahbb)
   @RolesDecorator_ahbb('ADMIN', 'PROFESOR')
+  @Get('profesor/:id_profesor')
+  async obtenerAlumnosPorProfesor_ahbb(
+    @Param('id_profesor', ParseIntPipe) id_profesor: number,
+  ) {
+    return this.inscripcionesService_ahbb.obtenerAlumnosPorProfesor_ahbb(
+      id_profesor,
+    );
+  }
+
+  @UseGuards(JwtAuthGuard_ahbb, RolesGuard_ahbb)
+  @RolesDecorator_ahbb('ADMIN', 'PROFESOR')
   @Patch(':id_inscripcion_ahbb/estado')
   async actualizarEstado_ahbb(
     @Param('id_inscripcion_ahbb', ParseIntPipe) id_inscripcion_ahbb: number,

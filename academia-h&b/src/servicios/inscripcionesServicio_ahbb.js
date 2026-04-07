@@ -5,6 +5,13 @@ export const obtenerInscripciones_ahbb = async () => {
   return respuesta_ahbb.data;
 };
 
+export const obtenerInscripcionesPorProfesor_ahbb = async (profesorId_ahbb) => {
+  const respuesta_ahbb = await apiCliente_ahbb.get(
+    `/inscripciones/profesor/${profesorId_ahbb}`,
+  );
+  return respuesta_ahbb.data;
+};
+
 export const obtenerInscripcionesPorAlumno_ahbb = async (alumnoId_ahbb) => {
   const respuesta_ahbb = await apiCliente_ahbb.get(
     `/inscripciones/historial/${alumnoId_ahbb}`,

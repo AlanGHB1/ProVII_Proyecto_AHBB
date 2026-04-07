@@ -139,6 +139,18 @@ const routes = [
     meta: { publica_ahbb: false, layout_ahbb: 'sistema', rolesPermitidos_ahbb: [PROF] },
   },
   {
+    path: '/profesor/inscripciones',
+    name: 'profesorInscripciones',
+    component: () => import('pages/profesor/InscripcionesCursosView_ahbb.vue'),
+    meta: { publica_ahbb: false, layout_ahbb: 'sistema', rolesPermitidos_ahbb: [PROF] },
+  },
+  {
+    path: '/profesor/inscripciones/:id',
+    name: 'profesorDetalleInscripciones',
+    component: () => import('pages/profesor/DetalleInscripcionesView_ahbb.vue'),
+    meta: { publica_ahbb: false, layout_ahbb: 'sistema', rolesPermitidos_ahbb: [PROF] },
+  },
+  {
     path: '/profesor/firma-digital',
     name: 'profesorFirmaDigital',
     component: () => import('pages/profesor/FirmaDigitalView_ahbb.vue'),

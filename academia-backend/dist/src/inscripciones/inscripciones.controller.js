@@ -37,6 +37,9 @@ let InscripcionesController_ahbb = class InscripcionesController_ahbb {
     async obtenerPorCurso_ahbb(id_curso_ahbb) {
         return this.inscripcionesService_ahbb.obtenerPorCurso_ahbb(id_curso_ahbb);
     }
+    async obtenerAlumnosPorProfesor_ahbb(id_profesor) {
+        return this.inscripcionesService_ahbb.obtenerAlumnosPorProfesor_ahbb(id_profesor);
+    }
     async actualizarEstado_ahbb(id_inscripcion_ahbb, datos_ahbb) {
         return this.inscripcionesService_ahbb.actualizarEstado_ahbb(id_inscripcion_ahbb, datos_ahbb);
     }
@@ -77,6 +80,15 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], InscripcionesController_ahbb.prototype, "obtenerPorCurso_ahbb", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_ahbb_1.JwtAuthGuard_ahbb, roles_guard_ahbb_1.RolesGuard_ahbb),
+    (0, roles_decorator_ahbb_1.RolesDecorator_ahbb)('ADMIN', 'PROFESOR'),
+    (0, common_1.Get)('profesor/:id_profesor'),
+    __param(0, (0, common_1.Param)('id_profesor', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], InscripcionesController_ahbb.prototype, "obtenerAlumnosPorProfesor_ahbb", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_ahbb_1.JwtAuthGuard_ahbb, roles_guard_ahbb_1.RolesGuard_ahbb),
     (0, roles_decorator_ahbb_1.RolesDecorator_ahbb)('ADMIN', 'PROFESOR'),

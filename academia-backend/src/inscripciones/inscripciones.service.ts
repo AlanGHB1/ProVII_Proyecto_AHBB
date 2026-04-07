@@ -127,9 +127,41 @@ export class InscripcionesService_ahbb {
             nombre_ahbb: true,
             apellido_ahbb: true,
             correo_ahbb: true,
+            cedula_ahbb: true,
+          },
+        },
+        curso: true,
+      },
+      orderBy: { alumno: { apellido_ahbb: 'asc' } },
+    });
+  }
+
+  async obtenerAlumnosPorProfesor_ahbb(id_profesor_ahbb: number) {
+    return this.prisma_ahbb.td_inscripcion_ahbb.findMany({
+      where: {
+        curso: { id_usuario_curso_ahbb: id_profesor_ahbb },
+      },
+      include: {
+        alumno: {
+          select: {
+            id_usuario_ahbb: true,
+            nombre_ahbb: true,
+            apellido_ahbb: true,
+            correo_ahbb: true,
+            cedula_ahbb: true,
+          },
+        },
+        curso: {
+          select: {
+            id_curso_ahbb: true,
+            nombre_ahbb: true,
           },
         },
       },
+      orderBy: [
+        { curso: { nombre_ahbb: 'asc' } },
+        { alumno: { apellido_ahbb: 'asc' } },
+      ],
     });
   }
 

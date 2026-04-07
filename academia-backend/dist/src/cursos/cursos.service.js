@@ -505,13 +505,15 @@ let CursosService = class CursosService {
                     ? 'pendiente'
                     : curso_ahbb.estadoAprobacion_ahbb === 'RECHAZADO'
                         ? 'rechazado'
-                        : (curso_ahbb.estadoAprobacion_ahbb === 'ACTIVO' &&
-                            curso_ahbb.isPublished_ahbb &&
-                            curso_ahbb.fechaInicio_ahbb &&
-                            new Date(curso_ahbb.fechaInicio_ahbb) <= new Date() &&
-                            (curso_ahbb.inscripciones?.length ?? 0) > 0)
-                            ? 'iniciado'
-                            : 'activo',
+                        : (curso_ahbb.fechaFin_ahbb && new Date(curso_ahbb.fechaFin_ahbb) < new Date())
+                            ? 'inactivo'
+                            : (curso_ahbb.estadoAprobacion_ahbb === 'ACTIVO' &&
+                                curso_ahbb.isPublished_ahbb &&
+                                curso_ahbb.fechaInicio_ahbb &&
+                                new Date(curso_ahbb.fechaInicio_ahbb) <= new Date() &&
+                                (curso_ahbb.inscripciones?.length ?? 0) > 0)
+                                ? 'iniciado'
+                                : 'activo',
             estadoAprobacion: curso_ahbb.estadoAprobacion_ahbb,
             motivoRechazo: curso_ahbb.motivoRechazo_ahbb,
             mensajeCorreccion: curso_ahbb.mensajeCorreccion_ahbb,

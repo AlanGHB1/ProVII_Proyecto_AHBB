@@ -26,6 +26,7 @@ const MENU_PROFESOR_AHBB = [
   { icono: 'calendar_month', etiqueta: 'Mis Horarios', ruta: '/horarios' },
   { icono: 'school', etiqueta: 'Mis Cursos', ruta: '/cursos', encabezado: 'Académico', separador: true },
   { icono: 'add_circle', etiqueta: 'Crear Curso', ruta: '/cursos/nuevo' },
+  { icono: 'how_to_reg', etiqueta: 'Inscripciones', ruta: '/profesor/inscripciones' },
   { icono: 'groups', etiqueta: 'Mis Alumnos', ruta: '/profesor/mis-alumnos' },
   { icono: 'workspace_premium', etiqueta: 'Certificados', ruta: '/certificados', encabezado: 'Certificación', separador: true },
   { icono: 'draw', etiqueta: 'Mi Firma Digital', ruta: '/profesor/firma-digital' },
