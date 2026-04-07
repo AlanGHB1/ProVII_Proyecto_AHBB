@@ -1,11 +1,12 @@
 <!-- Componente raíz de la aplicación con layout condicional y menú dinámico por rol -->
 <script setup>
-import { computed, ref, onMounted } from 'vue';
+import { computed, ref, onMounted, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useAutenticacionStore_ahbb } from './stores/autenticacionStore_ahbb';
 import { useCursosStore_ahbb } from './stores/cursosStore_ahbb';
 import { obtenerMenuPorRol_ahbb } from './constantes/menuSistema_ahbb';
 import { obtenerAlumnosSuscripciones_ahbb } from './servicios/usuariosServicio_ahbb';
+import { useAutoRefresh_ahbb } from './composables/useAutoRefresh_ahbb';
 
 // Componentes de layout landing
 import Navbar_ah from './components/layout/Navbar_ah.vue';
@@ -92,22 +93,43 @@ const alternarMenuLateral_ahbb = () => {
 };
 
 /**
- * Contador de alumnos pendientes de aprobación (solo Admin)
+ * Contadores de notificaciones (solo Admin)
  */
-const alumnosPendientes_ahbb = ref(0);
-const cargarContadorPendientes_ahbb = async () => {
+const pendientes_ahbb = ref({
+  alumnos: 0,
+  cursos: 0,
+});
+
+const cargarContadoresAdmin_ahbb = async () => {
   if (!authStore_ahbb.esAdministrador_ahbb) return;
   try {
+    // 1. Alumnos pendientes
     const alumnos = await obtenerAlumnosSuscripciones_ahbb();
-    alumnosPendientes_ahbb.value = alumnos.filter(a => a.estadoCuenta === 'PENDIENTE_APROBACION').length;
-  } catch {
-    alumnosPendientes_ahbb.value = 0;
+    pendientes_ahbb.value.alumnos = alumnos.filter(a => a.estadoCuenta === 'PENDIENTE_APROBACION').length;
+    
+    // 2. Cursos pendientes
+    // Aseguramos que los cursos estén cargados en el store
+    await cursosStore_ahbb.inicializar_ahbb();
+    pendientes_ahbb.value.cursos = cursosStore_ahbb.listaCursos_ahbb.filter(c => c.estadoAprobacion === 'PENDIENTE').length;
+  } catch (error) {
+    console.error('Error cargando contadores admin:', error);
   }
 };
 
+// Refrescar badges al cambiar de ruta (ej: volver de Cursos o Inscripciones)
+watch(
+  () => route_ahbb.path,
+  async () => {
+    await cargarContadoresAdmin_ahbb();
+  }
+);
+
+// Polling automático cada 60 segundos para badges del Admin
+useAutoRefresh_ahbb(cargarContadoresAdmin_ahbb, 60_000, false); // false = no duplicar la carga inicial
+
 onMounted(async () => {
   await authStore_ahbb.inicializar_ahbb();
-  await cargarContadorPendientes_ahbb();
+  await cargarContadoresAdmin_ahbb();
 });
 </script>
 
@@ -230,9 +252,16 @@ onMounted(async () => {
             <!-- Badge de notificación para Inscripciones -->
             <q-item-section
               side
-              v-if="enlace.ruta === '/inscripciones' && alumnosPendientes_ahbb > 0"
+              v-if="enlace.ruta === '/inscripciones' && pendientes_ahbb.alumnos > 0"
             >
-              <q-badge color="negative" rounded :label="alumnosPendientes_ahbb" />
+              <q-badge color="negative" rounded :label="pendientes_ahbb.alumnos" />
+            </q-item-section>
+            <!-- Badge de notificación para Cursos (Admin) -->
+            <q-item-section
+              side
+              v-if="enlace.ruta === '/cursos' && authStore_ahbb.esAdministrador_ahbb && pendientes_ahbb.cursos > 0"
+            >
+              <q-badge color="orange" rounded :label="pendientes_ahbb.cursos" />
             </q-item-section>
           </q-item>
         </template>

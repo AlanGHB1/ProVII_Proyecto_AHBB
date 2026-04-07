@@ -15,21 +15,22 @@ export declare class UsuariosService {
         creadoEn: any;
     }[]>;
     encontrarPorCorreo_ahbb(correo_ahbb: string): Promise<{
+        rol_ahbb: string | null;
+        estadoCuenta_ahbb: string;
+        creadoEn_ahbb: Date | null;
+        actualizadoEn_ahbb: Date | null;
+        nombre_ahbb: string;
         id_usuario_ahbb: number;
         cedula_ahbb: string;
-        nombre_ahbb: string;
         apellido_ahbb: string;
         correo_ahbb: string;
         contrasena_ahbb: string;
-        rol_ahbb: string | null;
         firmaDigital_ahbb: string | null;
-        estadoCuenta_ahbb: string;
         requiereCambioContrasena_ahbb: boolean;
         referenciaPagoMovil_ahbb: string | null;
         aprobadoPorUsuarioId_ahbb: number | null;
-        creadoEn_ahbb: Date | null;
-        actualizadoEn_ahbb: Date | null;
     } | null>;
+    hashearContrasena_ahbb(contrasenaPlana_ahbb: string): Promise<string>;
     crearUsuario_ahbb(datos_ahbb: any): Promise<{
         id: any;
         cedula: any;
@@ -55,20 +56,20 @@ export declare class UsuariosService {
         creadoEn: any;
     }>;
     obtenerUsuarioPorId_ahbb(id_usuario_ahbb: number): Promise<{
+        rol_ahbb: string | null;
+        estadoCuenta_ahbb: string;
+        creadoEn_ahbb: Date | null;
+        actualizadoEn_ahbb: Date | null;
+        nombre_ahbb: string;
         id_usuario_ahbb: number;
         cedula_ahbb: string;
-        nombre_ahbb: string;
         apellido_ahbb: string;
         correo_ahbb: string;
         contrasena_ahbb: string;
-        rol_ahbb: string | null;
         firmaDigital_ahbb: string | null;
-        estadoCuenta_ahbb: string;
         requiereCambioContrasena_ahbb: boolean;
         referenciaPagoMovil_ahbb: string | null;
         aprobadoPorUsuarioId_ahbb: number | null;
-        creadoEn_ahbb: Date | null;
-        actualizadoEn_ahbb: Date | null;
     } | null>;
     actualizarContrasena_ahbb(id_usuario_ahbb: number, hashContrasena_ahbb: string): Promise<void>;
     actualizarPerfil_ahbb(id_usuario_ahbb: number, datos_ahbb: any): Promise<{
@@ -141,7 +142,7 @@ export declare class UsuariosService {
         firmaDigital: any;
         creadoEn: any;
     }[]>;
-    aprobarAlumno_ahbb(id_usuario_ahbb: number, id_aprobador_ahbb: number, referenciaPagoMovil_ahbb: string, contrasenaTemporalHash_ahbb: string, contrasenaTemporal_ahbb: string): Promise<{
+    aprobarAlumno_ahbb(id_usuario_ahbb: number, id_aprobador_ahbb: number, referenciaPagoMovil_ahbb: string): Promise<{
         id: any;
         cedula: any;
         nombre: any;
@@ -162,7 +163,7 @@ export declare class UsuariosService {
         rutaFirma_ahbb: string;
     }>;
     generarContrasenaTemporal_ahbb(): string;
-    normalizarRolInterno_ahbb(rol_ahbb: string): "ADMIN" | "PROFESOR" | "ALUMNO";
+    normalizarRolInterno_ahbb(rol_ahbb: string): "ADMIN" | "ALUMNO" | "PROFESOR";
     mapearRolFrontend_ahbb(rol_ahbb?: string | null): "administrador" | "profesor" | "alumno";
     mapearUsuarioPublico_ahbb(usuario_ahbb: any): {
         id: any;
@@ -176,4 +177,5 @@ export declare class UsuariosService {
         firmaDigital: any;
         creadoEn: any;
     };
+    obtenerAlumnosPorProfesor_ahbb(id_profesor_ahbb: number): Promise<any[]>;
 }

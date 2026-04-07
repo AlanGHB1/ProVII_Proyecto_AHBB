@@ -24,6 +24,11 @@ export type td_usuario_ahbb = $Result.DefaultSelection<Prisma.$td_usuario_ahbbPa
  */
 export type td_curso_ahbb = $Result.DefaultSelection<Prisma.$td_curso_ahbbPayload>
 /**
+ * Model td_sesion_curso_ahbb
+ * 
+ */
+export type td_sesion_curso_ahbb = $Result.DefaultSelection<Prisma.$td_sesion_curso_ahbbPayload>
+/**
  * Model td_horario_ahbb
  * 
  */
@@ -214,6 +219,16 @@ export class PrismaClient<
     * ```
     */
   get td_curso_ahbb(): Prisma.td_curso_ahbbDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.td_sesion_curso_ahbb`: Exposes CRUD operations for the **td_sesion_curso_ahbb** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Td_sesion_curso_ahbbs
+    * const td_sesion_curso_ahbbs = await prisma.td_sesion_curso_ahbb.findMany()
+    * ```
+    */
+  get td_sesion_curso_ahbb(): Prisma.td_sesion_curso_ahbbDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.td_horario_ahbb`: Exposes CRUD operations for the **td_horario_ahbb** model.
@@ -750,6 +765,7 @@ export namespace Prisma {
   export const ModelName: {
     td_usuario_ahbb: 'td_usuario_ahbb',
     td_curso_ahbb: 'td_curso_ahbb',
+    td_sesion_curso_ahbb: 'td_sesion_curso_ahbb',
     td_horario_ahbb: 'td_horario_ahbb',
     td_inscripcion_ahbb: 'td_inscripcion_ahbb',
     td_certificado_ahbb: 'td_certificado_ahbb',
@@ -775,7 +791,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "td_usuario_ahbb" | "td_curso_ahbb" | "td_horario_ahbb" | "td_inscripcion_ahbb" | "td_certificado_ahbb" | "td_configuracionglobal_ahbb" | "td_auditoria_aprobacion_ahbb" | "td_producto_ahbb" | "td_carrito_ahbb" | "td_factura_ahbb" | "td_detalle_factura_ahbb" | "td_favorito_ahbb"
+      modelProps: "td_usuario_ahbb" | "td_curso_ahbb" | "td_sesion_curso_ahbb" | "td_horario_ahbb" | "td_inscripcion_ahbb" | "td_certificado_ahbb" | "td_configuracionglobal_ahbb" | "td_auditoria_aprobacion_ahbb" | "td_producto_ahbb" | "td_carrito_ahbb" | "td_factura_ahbb" | "td_detalle_factura_ahbb" | "td_favorito_ahbb"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -924,6 +940,80 @@ export namespace Prisma {
           count: {
             args: Prisma.td_curso_ahbbCountArgs<ExtArgs>
             result: $Utils.Optional<Td_curso_ahbbCountAggregateOutputType> | number
+          }
+        }
+      }
+      td_sesion_curso_ahbb: {
+        payload: Prisma.$td_sesion_curso_ahbbPayload<ExtArgs>
+        fields: Prisma.td_sesion_curso_ahbbFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.td_sesion_curso_ahbbFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_sesion_curso_ahbbPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.td_sesion_curso_ahbbFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_sesion_curso_ahbbPayload>
+          }
+          findFirst: {
+            args: Prisma.td_sesion_curso_ahbbFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_sesion_curso_ahbbPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.td_sesion_curso_ahbbFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_sesion_curso_ahbbPayload>
+          }
+          findMany: {
+            args: Prisma.td_sesion_curso_ahbbFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_sesion_curso_ahbbPayload>[]
+          }
+          create: {
+            args: Prisma.td_sesion_curso_ahbbCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_sesion_curso_ahbbPayload>
+          }
+          createMany: {
+            args: Prisma.td_sesion_curso_ahbbCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.td_sesion_curso_ahbbCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_sesion_curso_ahbbPayload>[]
+          }
+          delete: {
+            args: Prisma.td_sesion_curso_ahbbDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_sesion_curso_ahbbPayload>
+          }
+          update: {
+            args: Prisma.td_sesion_curso_ahbbUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_sesion_curso_ahbbPayload>
+          }
+          deleteMany: {
+            args: Prisma.td_sesion_curso_ahbbDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.td_sesion_curso_ahbbUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.td_sesion_curso_ahbbUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_sesion_curso_ahbbPayload>[]
+          }
+          upsert: {
+            args: Prisma.td_sesion_curso_ahbbUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$td_sesion_curso_ahbbPayload>
+          }
+          aggregate: {
+            args: Prisma.Td_sesion_curso_ahbbAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTd_sesion_curso_ahbb>
+          }
+          groupBy: {
+            args: Prisma.td_sesion_curso_ahbbGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Td_sesion_curso_ahbbGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.td_sesion_curso_ahbbCountArgs<ExtArgs>
+            result: $Utils.Optional<Td_sesion_curso_ahbbCountAggregateOutputType> | number
           }
         }
       }
@@ -1777,6 +1867,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     td_usuario_ahbb?: td_usuario_ahbbOmit
     td_curso_ahbb?: td_curso_ahbbOmit
+    td_sesion_curso_ahbb?: td_sesion_curso_ahbbOmit
     td_horario_ahbb?: td_horario_ahbbOmit
     td_inscripcion_ahbb?: td_inscripcion_ahbbOmit
     td_certificado_ahbb?: td_certificado_ahbbOmit
@@ -1955,12 +2046,14 @@ export namespace Prisma {
     prelaciones: number
     horarios: number
     inscripciones: number
+    sesiones: number
   }
 
   export type Td_curso_ahbbCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     prelaciones?: boolean | Td_curso_ahbbCountOutputTypeCountPrelacionesArgs
     horarios?: boolean | Td_curso_ahbbCountOutputTypeCountHorariosArgs
     inscripciones?: boolean | Td_curso_ahbbCountOutputTypeCountInscripcionesArgs
+    sesiones?: boolean | Td_curso_ahbbCountOutputTypeCountSesionesArgs
   }
 
   // Custom InputTypes
@@ -1993,6 +2086,13 @@ export namespace Prisma {
    */
   export type Td_curso_ahbbCountOutputTypeCountInscripcionesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: td_inscripcion_ahbbWhereInput
+  }
+
+  /**
+   * Td_curso_ahbbCountOutputType without action
+   */
+  export type Td_curso_ahbbCountOutputTypeCountSesionesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: td_sesion_curso_ahbbWhereInput
   }
 
 
@@ -3523,6 +3623,9 @@ export namespace Prisma {
     imagenBasePdf_ahbb: string | null
     imagenBloqueada_ahbb: boolean | null
     isPublished_ahbb: boolean | null
+    estadoAprobacion_ahbb: string | null
+    motivoRechazo_ahbb: string | null
+    mensajeCorreccion_ahbb: string | null
     id_usuario_curso_ahbb: number | null
     id_curso_curso_ahbb: number | null
     creadoEn_ahbb: Date | null
@@ -3544,6 +3647,9 @@ export namespace Prisma {
     imagenBasePdf_ahbb: string | null
     imagenBloqueada_ahbb: boolean | null
     isPublished_ahbb: boolean | null
+    estadoAprobacion_ahbb: string | null
+    motivoRechazo_ahbb: string | null
+    mensajeCorreccion_ahbb: string | null
     id_usuario_curso_ahbb: number | null
     id_curso_curso_ahbb: number | null
     creadoEn_ahbb: Date | null
@@ -3565,6 +3671,9 @@ export namespace Prisma {
     imagenBasePdf_ahbb: number
     imagenBloqueada_ahbb: number
     isPublished_ahbb: number
+    estadoAprobacion_ahbb: number
+    motivoRechazo_ahbb: number
+    mensajeCorreccion_ahbb: number
     id_usuario_curso_ahbb: number
     id_curso_curso_ahbb: number
     creadoEn_ahbb: number
@@ -3606,6 +3715,9 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: true
     imagenBloqueada_ahbb?: true
     isPublished_ahbb?: true
+    estadoAprobacion_ahbb?: true
+    motivoRechazo_ahbb?: true
+    mensajeCorreccion_ahbb?: true
     id_usuario_curso_ahbb?: true
     id_curso_curso_ahbb?: true
     creadoEn_ahbb?: true
@@ -3627,6 +3739,9 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: true
     imagenBloqueada_ahbb?: true
     isPublished_ahbb?: true
+    estadoAprobacion_ahbb?: true
+    motivoRechazo_ahbb?: true
+    mensajeCorreccion_ahbb?: true
     id_usuario_curso_ahbb?: true
     id_curso_curso_ahbb?: true
     creadoEn_ahbb?: true
@@ -3648,6 +3763,9 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: true
     imagenBloqueada_ahbb?: true
     isPublished_ahbb?: true
+    estadoAprobacion_ahbb?: true
+    motivoRechazo_ahbb?: true
+    mensajeCorreccion_ahbb?: true
     id_usuario_curso_ahbb?: true
     id_curso_curso_ahbb?: true
     creadoEn_ahbb?: true
@@ -3756,6 +3874,9 @@ export namespace Prisma {
     imagenBasePdf_ahbb: string | null
     imagenBloqueada_ahbb: boolean | null
     isPublished_ahbb: boolean
+    estadoAprobacion_ahbb: string
+    motivoRechazo_ahbb: string | null
+    mensajeCorreccion_ahbb: string | null
     id_usuario_curso_ahbb: number
     id_curso_curso_ahbb: number | null
     creadoEn_ahbb: Date | null
@@ -3796,6 +3917,9 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: boolean
     imagenBloqueada_ahbb?: boolean
     isPublished_ahbb?: boolean
+    estadoAprobacion_ahbb?: boolean
+    motivoRechazo_ahbb?: boolean
+    mensajeCorreccion_ahbb?: boolean
     id_usuario_curso_ahbb?: boolean
     id_curso_curso_ahbb?: boolean
     creadoEn_ahbb?: boolean
@@ -3805,6 +3929,7 @@ export namespace Prisma {
     prelaciones?: boolean | td_curso_ahbb$prelacionesArgs<ExtArgs>
     horarios?: boolean | td_curso_ahbb$horariosArgs<ExtArgs>
     inscripciones?: boolean | td_curso_ahbb$inscripcionesArgs<ExtArgs>
+    sesiones?: boolean | td_curso_ahbb$sesionesArgs<ExtArgs>
     _count?: boolean | Td_curso_ahbbCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["td_curso_ahbb"]>
 
@@ -3823,6 +3948,9 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: boolean
     imagenBloqueada_ahbb?: boolean
     isPublished_ahbb?: boolean
+    estadoAprobacion_ahbb?: boolean
+    motivoRechazo_ahbb?: boolean
+    mensajeCorreccion_ahbb?: boolean
     id_usuario_curso_ahbb?: boolean
     id_curso_curso_ahbb?: boolean
     creadoEn_ahbb?: boolean
@@ -3846,6 +3974,9 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: boolean
     imagenBloqueada_ahbb?: boolean
     isPublished_ahbb?: boolean
+    estadoAprobacion_ahbb?: boolean
+    motivoRechazo_ahbb?: boolean
+    mensajeCorreccion_ahbb?: boolean
     id_usuario_curso_ahbb?: boolean
     id_curso_curso_ahbb?: boolean
     creadoEn_ahbb?: boolean
@@ -3869,19 +4000,23 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: boolean
     imagenBloqueada_ahbb?: boolean
     isPublished_ahbb?: boolean
+    estadoAprobacion_ahbb?: boolean
+    motivoRechazo_ahbb?: boolean
+    mensajeCorreccion_ahbb?: boolean
     id_usuario_curso_ahbb?: boolean
     id_curso_curso_ahbb?: boolean
     creadoEn_ahbb?: boolean
     actualizadoEn_ahbb?: boolean
   }
 
-  export type td_curso_ahbbOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_curso_ahbb" | "nombre_ahbb" | "tematica_ahbb" | "descripcion_ahbb" | "diasDefinidos_ahbb" | "horasDefinidas_ahbb" | "fechaInicio_ahbb" | "fechaFin_ahbb" | "fechaDuracion_ahbb" | "topeEstudiantes_ahbb" | "temarioTexto_ahbb" | "imagenBasePdf_ahbb" | "imagenBloqueada_ahbb" | "isPublished_ahbb" | "id_usuario_curso_ahbb" | "id_curso_curso_ahbb" | "creadoEn_ahbb" | "actualizadoEn_ahbb", ExtArgs["result"]["td_curso_ahbb"]>
+  export type td_curso_ahbbOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_curso_ahbb" | "nombre_ahbb" | "tematica_ahbb" | "descripcion_ahbb" | "diasDefinidos_ahbb" | "horasDefinidas_ahbb" | "fechaInicio_ahbb" | "fechaFin_ahbb" | "fechaDuracion_ahbb" | "topeEstudiantes_ahbb" | "temarioTexto_ahbb" | "imagenBasePdf_ahbb" | "imagenBloqueada_ahbb" | "isPublished_ahbb" | "estadoAprobacion_ahbb" | "motivoRechazo_ahbb" | "mensajeCorreccion_ahbb" | "id_usuario_curso_ahbb" | "id_curso_curso_ahbb" | "creadoEn_ahbb" | "actualizadoEn_ahbb", ExtArgs["result"]["td_curso_ahbb"]>
   export type td_curso_ahbbInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     profesor?: boolean | td_usuario_ahbbDefaultArgs<ExtArgs>
     prelacion?: boolean | td_curso_ahbb$prelacionArgs<ExtArgs>
     prelaciones?: boolean | td_curso_ahbb$prelacionesArgs<ExtArgs>
     horarios?: boolean | td_curso_ahbb$horariosArgs<ExtArgs>
     inscripciones?: boolean | td_curso_ahbb$inscripcionesArgs<ExtArgs>
+    sesiones?: boolean | td_curso_ahbb$sesionesArgs<ExtArgs>
     _count?: boolean | Td_curso_ahbbCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type td_curso_ahbbIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3901,6 +4036,7 @@ export namespace Prisma {
       prelaciones: Prisma.$td_curso_ahbbPayload<ExtArgs>[]
       horarios: Prisma.$td_horario_ahbbPayload<ExtArgs>[]
       inscripciones: Prisma.$td_inscripcion_ahbbPayload<ExtArgs>[]
+      sesiones: Prisma.$td_sesion_curso_ahbbPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id_curso_ahbb: number
@@ -3917,6 +4053,9 @@ export namespace Prisma {
       imagenBasePdf_ahbb: string | null
       imagenBloqueada_ahbb: boolean | null
       isPublished_ahbb: boolean
+      estadoAprobacion_ahbb: string
+      motivoRechazo_ahbb: string | null
+      mensajeCorreccion_ahbb: string | null
       id_usuario_curso_ahbb: number
       id_curso_curso_ahbb: number | null
       creadoEn_ahbb: Date | null
@@ -4320,6 +4459,7 @@ export namespace Prisma {
     prelaciones<T extends td_curso_ahbb$prelacionesArgs<ExtArgs> = {}>(args?: Subset<T, td_curso_ahbb$prelacionesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_curso_ahbbPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     horarios<T extends td_curso_ahbb$horariosArgs<ExtArgs> = {}>(args?: Subset<T, td_curso_ahbb$horariosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_horario_ahbbPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     inscripciones<T extends td_curso_ahbb$inscripcionesArgs<ExtArgs> = {}>(args?: Subset<T, td_curso_ahbb$inscripcionesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_inscripcion_ahbbPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    sesiones<T extends td_curso_ahbb$sesionesArgs<ExtArgs> = {}>(args?: Subset<T, td_curso_ahbb$sesionesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_sesion_curso_ahbbPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4363,6 +4503,9 @@ export namespace Prisma {
     readonly imagenBasePdf_ahbb: FieldRef<"td_curso_ahbb", 'String'>
     readonly imagenBloqueada_ahbb: FieldRef<"td_curso_ahbb", 'Boolean'>
     readonly isPublished_ahbb: FieldRef<"td_curso_ahbb", 'Boolean'>
+    readonly estadoAprobacion_ahbb: FieldRef<"td_curso_ahbb", 'String'>
+    readonly motivoRechazo_ahbb: FieldRef<"td_curso_ahbb", 'String'>
+    readonly mensajeCorreccion_ahbb: FieldRef<"td_curso_ahbb", 'String'>
     readonly id_usuario_curso_ahbb: FieldRef<"td_curso_ahbb", 'Int'>
     readonly id_curso_curso_ahbb: FieldRef<"td_curso_ahbb", 'Int'>
     readonly creadoEn_ahbb: FieldRef<"td_curso_ahbb", 'DateTime'>
@@ -4859,6 +5002,30 @@ export namespace Prisma {
   }
 
   /**
+   * td_curso_ahbb.sesiones
+   */
+  export type td_curso_ahbb$sesionesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_sesion_curso_ahbb
+     */
+    select?: td_sesion_curso_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_sesion_curso_ahbb
+     */
+    omit?: td_sesion_curso_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_sesion_curso_ahbbInclude<ExtArgs> | null
+    where?: td_sesion_curso_ahbbWhereInput
+    orderBy?: td_sesion_curso_ahbbOrderByWithRelationInput | td_sesion_curso_ahbbOrderByWithRelationInput[]
+    cursor?: td_sesion_curso_ahbbWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Td_sesion_curso_ahbbScalarFieldEnum | Td_sesion_curso_ahbbScalarFieldEnum[]
+  }
+
+  /**
    * td_curso_ahbb without action
    */
   export type td_curso_ahbbDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4874,6 +5041,1154 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: td_curso_ahbbInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model td_sesion_curso_ahbb
+   */
+
+  export type AggregateTd_sesion_curso_ahbb = {
+    _count: Td_sesion_curso_ahbbCountAggregateOutputType | null
+    _avg: Td_sesion_curso_ahbbAvgAggregateOutputType | null
+    _sum: Td_sesion_curso_ahbbSumAggregateOutputType | null
+    _min: Td_sesion_curso_ahbbMinAggregateOutputType | null
+    _max: Td_sesion_curso_ahbbMaxAggregateOutputType | null
+  }
+
+  export type Td_sesion_curso_ahbbAvgAggregateOutputType = {
+    id_sesion_ahbb: number | null
+    nroSesion_ahbb: number | null
+    horasDuracion_ahbb: Decimal | null
+    id_curso_sesion_ahbb: number | null
+  }
+
+  export type Td_sesion_curso_ahbbSumAggregateOutputType = {
+    id_sesion_ahbb: number | null
+    nroSesion_ahbb: number | null
+    horasDuracion_ahbb: Decimal | null
+    id_curso_sesion_ahbb: number | null
+  }
+
+  export type Td_sesion_curso_ahbbMinAggregateOutputType = {
+    id_sesion_ahbb: number | null
+    nroSesion_ahbb: number | null
+    fechaSesion_ahbb: Date | null
+    horaInicio_ahbb: string | null
+    horaFin_ahbb: string | null
+    horasDuracion_ahbb: Decimal | null
+    diaSemana_ahbb: string | null
+    id_curso_sesion_ahbb: number | null
+  }
+
+  export type Td_sesion_curso_ahbbMaxAggregateOutputType = {
+    id_sesion_ahbb: number | null
+    nroSesion_ahbb: number | null
+    fechaSesion_ahbb: Date | null
+    horaInicio_ahbb: string | null
+    horaFin_ahbb: string | null
+    horasDuracion_ahbb: Decimal | null
+    diaSemana_ahbb: string | null
+    id_curso_sesion_ahbb: number | null
+  }
+
+  export type Td_sesion_curso_ahbbCountAggregateOutputType = {
+    id_sesion_ahbb: number
+    nroSesion_ahbb: number
+    fechaSesion_ahbb: number
+    horaInicio_ahbb: number
+    horaFin_ahbb: number
+    horasDuracion_ahbb: number
+    diaSemana_ahbb: number
+    id_curso_sesion_ahbb: number
+    _all: number
+  }
+
+
+  export type Td_sesion_curso_ahbbAvgAggregateInputType = {
+    id_sesion_ahbb?: true
+    nroSesion_ahbb?: true
+    horasDuracion_ahbb?: true
+    id_curso_sesion_ahbb?: true
+  }
+
+  export type Td_sesion_curso_ahbbSumAggregateInputType = {
+    id_sesion_ahbb?: true
+    nroSesion_ahbb?: true
+    horasDuracion_ahbb?: true
+    id_curso_sesion_ahbb?: true
+  }
+
+  export type Td_sesion_curso_ahbbMinAggregateInputType = {
+    id_sesion_ahbb?: true
+    nroSesion_ahbb?: true
+    fechaSesion_ahbb?: true
+    horaInicio_ahbb?: true
+    horaFin_ahbb?: true
+    horasDuracion_ahbb?: true
+    diaSemana_ahbb?: true
+    id_curso_sesion_ahbb?: true
+  }
+
+  export type Td_sesion_curso_ahbbMaxAggregateInputType = {
+    id_sesion_ahbb?: true
+    nroSesion_ahbb?: true
+    fechaSesion_ahbb?: true
+    horaInicio_ahbb?: true
+    horaFin_ahbb?: true
+    horasDuracion_ahbb?: true
+    diaSemana_ahbb?: true
+    id_curso_sesion_ahbb?: true
+  }
+
+  export type Td_sesion_curso_ahbbCountAggregateInputType = {
+    id_sesion_ahbb?: true
+    nroSesion_ahbb?: true
+    fechaSesion_ahbb?: true
+    horaInicio_ahbb?: true
+    horaFin_ahbb?: true
+    horasDuracion_ahbb?: true
+    diaSemana_ahbb?: true
+    id_curso_sesion_ahbb?: true
+    _all?: true
+  }
+
+  export type Td_sesion_curso_ahbbAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which td_sesion_curso_ahbb to aggregate.
+     */
+    where?: td_sesion_curso_ahbbWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of td_sesion_curso_ahbbs to fetch.
+     */
+    orderBy?: td_sesion_curso_ahbbOrderByWithRelationInput | td_sesion_curso_ahbbOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: td_sesion_curso_ahbbWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` td_sesion_curso_ahbbs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` td_sesion_curso_ahbbs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned td_sesion_curso_ahbbs
+    **/
+    _count?: true | Td_sesion_curso_ahbbCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Td_sesion_curso_ahbbAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Td_sesion_curso_ahbbSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Td_sesion_curso_ahbbMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Td_sesion_curso_ahbbMaxAggregateInputType
+  }
+
+  export type GetTd_sesion_curso_ahbbAggregateType<T extends Td_sesion_curso_ahbbAggregateArgs> = {
+        [P in keyof T & keyof AggregateTd_sesion_curso_ahbb]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTd_sesion_curso_ahbb[P]>
+      : GetScalarType<T[P], AggregateTd_sesion_curso_ahbb[P]>
+  }
+
+
+
+
+  export type td_sesion_curso_ahbbGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: td_sesion_curso_ahbbWhereInput
+    orderBy?: td_sesion_curso_ahbbOrderByWithAggregationInput | td_sesion_curso_ahbbOrderByWithAggregationInput[]
+    by: Td_sesion_curso_ahbbScalarFieldEnum[] | Td_sesion_curso_ahbbScalarFieldEnum
+    having?: td_sesion_curso_ahbbScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Td_sesion_curso_ahbbCountAggregateInputType | true
+    _avg?: Td_sesion_curso_ahbbAvgAggregateInputType
+    _sum?: Td_sesion_curso_ahbbSumAggregateInputType
+    _min?: Td_sesion_curso_ahbbMinAggregateInputType
+    _max?: Td_sesion_curso_ahbbMaxAggregateInputType
+  }
+
+  export type Td_sesion_curso_ahbbGroupByOutputType = {
+    id_sesion_ahbb: number
+    nroSesion_ahbb: number
+    fechaSesion_ahbb: Date
+    horaInicio_ahbb: string
+    horaFin_ahbb: string
+    horasDuracion_ahbb: Decimal
+    diaSemana_ahbb: string
+    id_curso_sesion_ahbb: number
+    _count: Td_sesion_curso_ahbbCountAggregateOutputType | null
+    _avg: Td_sesion_curso_ahbbAvgAggregateOutputType | null
+    _sum: Td_sesion_curso_ahbbSumAggregateOutputType | null
+    _min: Td_sesion_curso_ahbbMinAggregateOutputType | null
+    _max: Td_sesion_curso_ahbbMaxAggregateOutputType | null
+  }
+
+  type GetTd_sesion_curso_ahbbGroupByPayload<T extends td_sesion_curso_ahbbGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Td_sesion_curso_ahbbGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Td_sesion_curso_ahbbGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Td_sesion_curso_ahbbGroupByOutputType[P]>
+            : GetScalarType<T[P], Td_sesion_curso_ahbbGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type td_sesion_curso_ahbbSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id_sesion_ahbb?: boolean
+    nroSesion_ahbb?: boolean
+    fechaSesion_ahbb?: boolean
+    horaInicio_ahbb?: boolean
+    horaFin_ahbb?: boolean
+    horasDuracion_ahbb?: boolean
+    diaSemana_ahbb?: boolean
+    id_curso_sesion_ahbb?: boolean
+    curso?: boolean | td_curso_ahbbDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["td_sesion_curso_ahbb"]>
+
+  export type td_sesion_curso_ahbbSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id_sesion_ahbb?: boolean
+    nroSesion_ahbb?: boolean
+    fechaSesion_ahbb?: boolean
+    horaInicio_ahbb?: boolean
+    horaFin_ahbb?: boolean
+    horasDuracion_ahbb?: boolean
+    diaSemana_ahbb?: boolean
+    id_curso_sesion_ahbb?: boolean
+    curso?: boolean | td_curso_ahbbDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["td_sesion_curso_ahbb"]>
+
+  export type td_sesion_curso_ahbbSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id_sesion_ahbb?: boolean
+    nroSesion_ahbb?: boolean
+    fechaSesion_ahbb?: boolean
+    horaInicio_ahbb?: boolean
+    horaFin_ahbb?: boolean
+    horasDuracion_ahbb?: boolean
+    diaSemana_ahbb?: boolean
+    id_curso_sesion_ahbb?: boolean
+    curso?: boolean | td_curso_ahbbDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["td_sesion_curso_ahbb"]>
+
+  export type td_sesion_curso_ahbbSelectScalar = {
+    id_sesion_ahbb?: boolean
+    nroSesion_ahbb?: boolean
+    fechaSesion_ahbb?: boolean
+    horaInicio_ahbb?: boolean
+    horaFin_ahbb?: boolean
+    horasDuracion_ahbb?: boolean
+    diaSemana_ahbb?: boolean
+    id_curso_sesion_ahbb?: boolean
+  }
+
+  export type td_sesion_curso_ahbbOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_sesion_ahbb" | "nroSesion_ahbb" | "fechaSesion_ahbb" | "horaInicio_ahbb" | "horaFin_ahbb" | "horasDuracion_ahbb" | "diaSemana_ahbb" | "id_curso_sesion_ahbb", ExtArgs["result"]["td_sesion_curso_ahbb"]>
+  export type td_sesion_curso_ahbbInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    curso?: boolean | td_curso_ahbbDefaultArgs<ExtArgs>
+  }
+  export type td_sesion_curso_ahbbIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    curso?: boolean | td_curso_ahbbDefaultArgs<ExtArgs>
+  }
+  export type td_sesion_curso_ahbbIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    curso?: boolean | td_curso_ahbbDefaultArgs<ExtArgs>
+  }
+
+  export type $td_sesion_curso_ahbbPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "td_sesion_curso_ahbb"
+    objects: {
+      curso: Prisma.$td_curso_ahbbPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id_sesion_ahbb: number
+      nroSesion_ahbb: number
+      fechaSesion_ahbb: Date
+      horaInicio_ahbb: string
+      horaFin_ahbb: string
+      horasDuracion_ahbb: Prisma.Decimal
+      diaSemana_ahbb: string
+      id_curso_sesion_ahbb: number
+    }, ExtArgs["result"]["td_sesion_curso_ahbb"]>
+    composites: {}
+  }
+
+  type td_sesion_curso_ahbbGetPayload<S extends boolean | null | undefined | td_sesion_curso_ahbbDefaultArgs> = $Result.GetResult<Prisma.$td_sesion_curso_ahbbPayload, S>
+
+  type td_sesion_curso_ahbbCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<td_sesion_curso_ahbbFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Td_sesion_curso_ahbbCountAggregateInputType | true
+    }
+
+  export interface td_sesion_curso_ahbbDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['td_sesion_curso_ahbb'], meta: { name: 'td_sesion_curso_ahbb' } }
+    /**
+     * Find zero or one Td_sesion_curso_ahbb that matches the filter.
+     * @param {td_sesion_curso_ahbbFindUniqueArgs} args - Arguments to find a Td_sesion_curso_ahbb
+     * @example
+     * // Get one Td_sesion_curso_ahbb
+     * const td_sesion_curso_ahbb = await prisma.td_sesion_curso_ahbb.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends td_sesion_curso_ahbbFindUniqueArgs>(args: SelectSubset<T, td_sesion_curso_ahbbFindUniqueArgs<ExtArgs>>): Prisma__td_sesion_curso_ahbbClient<$Result.GetResult<Prisma.$td_sesion_curso_ahbbPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Td_sesion_curso_ahbb that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {td_sesion_curso_ahbbFindUniqueOrThrowArgs} args - Arguments to find a Td_sesion_curso_ahbb
+     * @example
+     * // Get one Td_sesion_curso_ahbb
+     * const td_sesion_curso_ahbb = await prisma.td_sesion_curso_ahbb.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends td_sesion_curso_ahbbFindUniqueOrThrowArgs>(args: SelectSubset<T, td_sesion_curso_ahbbFindUniqueOrThrowArgs<ExtArgs>>): Prisma__td_sesion_curso_ahbbClient<$Result.GetResult<Prisma.$td_sesion_curso_ahbbPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Td_sesion_curso_ahbb that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_sesion_curso_ahbbFindFirstArgs} args - Arguments to find a Td_sesion_curso_ahbb
+     * @example
+     * // Get one Td_sesion_curso_ahbb
+     * const td_sesion_curso_ahbb = await prisma.td_sesion_curso_ahbb.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends td_sesion_curso_ahbbFindFirstArgs>(args?: SelectSubset<T, td_sesion_curso_ahbbFindFirstArgs<ExtArgs>>): Prisma__td_sesion_curso_ahbbClient<$Result.GetResult<Prisma.$td_sesion_curso_ahbbPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Td_sesion_curso_ahbb that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_sesion_curso_ahbbFindFirstOrThrowArgs} args - Arguments to find a Td_sesion_curso_ahbb
+     * @example
+     * // Get one Td_sesion_curso_ahbb
+     * const td_sesion_curso_ahbb = await prisma.td_sesion_curso_ahbb.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends td_sesion_curso_ahbbFindFirstOrThrowArgs>(args?: SelectSubset<T, td_sesion_curso_ahbbFindFirstOrThrowArgs<ExtArgs>>): Prisma__td_sesion_curso_ahbbClient<$Result.GetResult<Prisma.$td_sesion_curso_ahbbPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Td_sesion_curso_ahbbs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_sesion_curso_ahbbFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Td_sesion_curso_ahbbs
+     * const td_sesion_curso_ahbbs = await prisma.td_sesion_curso_ahbb.findMany()
+     * 
+     * // Get first 10 Td_sesion_curso_ahbbs
+     * const td_sesion_curso_ahbbs = await prisma.td_sesion_curso_ahbb.findMany({ take: 10 })
+     * 
+     * // Only select the `id_sesion_ahbb`
+     * const td_sesion_curso_ahbbWithId_sesion_ahbbOnly = await prisma.td_sesion_curso_ahbb.findMany({ select: { id_sesion_ahbb: true } })
+     * 
+     */
+    findMany<T extends td_sesion_curso_ahbbFindManyArgs>(args?: SelectSubset<T, td_sesion_curso_ahbbFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_sesion_curso_ahbbPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Td_sesion_curso_ahbb.
+     * @param {td_sesion_curso_ahbbCreateArgs} args - Arguments to create a Td_sesion_curso_ahbb.
+     * @example
+     * // Create one Td_sesion_curso_ahbb
+     * const Td_sesion_curso_ahbb = await prisma.td_sesion_curso_ahbb.create({
+     *   data: {
+     *     // ... data to create a Td_sesion_curso_ahbb
+     *   }
+     * })
+     * 
+     */
+    create<T extends td_sesion_curso_ahbbCreateArgs>(args: SelectSubset<T, td_sesion_curso_ahbbCreateArgs<ExtArgs>>): Prisma__td_sesion_curso_ahbbClient<$Result.GetResult<Prisma.$td_sesion_curso_ahbbPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Td_sesion_curso_ahbbs.
+     * @param {td_sesion_curso_ahbbCreateManyArgs} args - Arguments to create many Td_sesion_curso_ahbbs.
+     * @example
+     * // Create many Td_sesion_curso_ahbbs
+     * const td_sesion_curso_ahbb = await prisma.td_sesion_curso_ahbb.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends td_sesion_curso_ahbbCreateManyArgs>(args?: SelectSubset<T, td_sesion_curso_ahbbCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Td_sesion_curso_ahbbs and returns the data saved in the database.
+     * @param {td_sesion_curso_ahbbCreateManyAndReturnArgs} args - Arguments to create many Td_sesion_curso_ahbbs.
+     * @example
+     * // Create many Td_sesion_curso_ahbbs
+     * const td_sesion_curso_ahbb = await prisma.td_sesion_curso_ahbb.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Td_sesion_curso_ahbbs and only return the `id_sesion_ahbb`
+     * const td_sesion_curso_ahbbWithId_sesion_ahbbOnly = await prisma.td_sesion_curso_ahbb.createManyAndReturn({
+     *   select: { id_sesion_ahbb: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends td_sesion_curso_ahbbCreateManyAndReturnArgs>(args?: SelectSubset<T, td_sesion_curso_ahbbCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_sesion_curso_ahbbPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Td_sesion_curso_ahbb.
+     * @param {td_sesion_curso_ahbbDeleteArgs} args - Arguments to delete one Td_sesion_curso_ahbb.
+     * @example
+     * // Delete one Td_sesion_curso_ahbb
+     * const Td_sesion_curso_ahbb = await prisma.td_sesion_curso_ahbb.delete({
+     *   where: {
+     *     // ... filter to delete one Td_sesion_curso_ahbb
+     *   }
+     * })
+     * 
+     */
+    delete<T extends td_sesion_curso_ahbbDeleteArgs>(args: SelectSubset<T, td_sesion_curso_ahbbDeleteArgs<ExtArgs>>): Prisma__td_sesion_curso_ahbbClient<$Result.GetResult<Prisma.$td_sesion_curso_ahbbPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Td_sesion_curso_ahbb.
+     * @param {td_sesion_curso_ahbbUpdateArgs} args - Arguments to update one Td_sesion_curso_ahbb.
+     * @example
+     * // Update one Td_sesion_curso_ahbb
+     * const td_sesion_curso_ahbb = await prisma.td_sesion_curso_ahbb.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends td_sesion_curso_ahbbUpdateArgs>(args: SelectSubset<T, td_sesion_curso_ahbbUpdateArgs<ExtArgs>>): Prisma__td_sesion_curso_ahbbClient<$Result.GetResult<Prisma.$td_sesion_curso_ahbbPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Td_sesion_curso_ahbbs.
+     * @param {td_sesion_curso_ahbbDeleteManyArgs} args - Arguments to filter Td_sesion_curso_ahbbs to delete.
+     * @example
+     * // Delete a few Td_sesion_curso_ahbbs
+     * const { count } = await prisma.td_sesion_curso_ahbb.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends td_sesion_curso_ahbbDeleteManyArgs>(args?: SelectSubset<T, td_sesion_curso_ahbbDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Td_sesion_curso_ahbbs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_sesion_curso_ahbbUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Td_sesion_curso_ahbbs
+     * const td_sesion_curso_ahbb = await prisma.td_sesion_curso_ahbb.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends td_sesion_curso_ahbbUpdateManyArgs>(args: SelectSubset<T, td_sesion_curso_ahbbUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Td_sesion_curso_ahbbs and returns the data updated in the database.
+     * @param {td_sesion_curso_ahbbUpdateManyAndReturnArgs} args - Arguments to update many Td_sesion_curso_ahbbs.
+     * @example
+     * // Update many Td_sesion_curso_ahbbs
+     * const td_sesion_curso_ahbb = await prisma.td_sesion_curso_ahbb.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Td_sesion_curso_ahbbs and only return the `id_sesion_ahbb`
+     * const td_sesion_curso_ahbbWithId_sesion_ahbbOnly = await prisma.td_sesion_curso_ahbb.updateManyAndReturn({
+     *   select: { id_sesion_ahbb: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends td_sesion_curso_ahbbUpdateManyAndReturnArgs>(args: SelectSubset<T, td_sesion_curso_ahbbUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$td_sesion_curso_ahbbPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Td_sesion_curso_ahbb.
+     * @param {td_sesion_curso_ahbbUpsertArgs} args - Arguments to update or create a Td_sesion_curso_ahbb.
+     * @example
+     * // Update or create a Td_sesion_curso_ahbb
+     * const td_sesion_curso_ahbb = await prisma.td_sesion_curso_ahbb.upsert({
+     *   create: {
+     *     // ... data to create a Td_sesion_curso_ahbb
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Td_sesion_curso_ahbb we want to update
+     *   }
+     * })
+     */
+    upsert<T extends td_sesion_curso_ahbbUpsertArgs>(args: SelectSubset<T, td_sesion_curso_ahbbUpsertArgs<ExtArgs>>): Prisma__td_sesion_curso_ahbbClient<$Result.GetResult<Prisma.$td_sesion_curso_ahbbPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Td_sesion_curso_ahbbs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_sesion_curso_ahbbCountArgs} args - Arguments to filter Td_sesion_curso_ahbbs to count.
+     * @example
+     * // Count the number of Td_sesion_curso_ahbbs
+     * const count = await prisma.td_sesion_curso_ahbb.count({
+     *   where: {
+     *     // ... the filter for the Td_sesion_curso_ahbbs we want to count
+     *   }
+     * })
+    **/
+    count<T extends td_sesion_curso_ahbbCountArgs>(
+      args?: Subset<T, td_sesion_curso_ahbbCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Td_sesion_curso_ahbbCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Td_sesion_curso_ahbb.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Td_sesion_curso_ahbbAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Td_sesion_curso_ahbbAggregateArgs>(args: Subset<T, Td_sesion_curso_ahbbAggregateArgs>): Prisma.PrismaPromise<GetTd_sesion_curso_ahbbAggregateType<T>>
+
+    /**
+     * Group by Td_sesion_curso_ahbb.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {td_sesion_curso_ahbbGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends td_sesion_curso_ahbbGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: td_sesion_curso_ahbbGroupByArgs['orderBy'] }
+        : { orderBy?: td_sesion_curso_ahbbGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, td_sesion_curso_ahbbGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTd_sesion_curso_ahbbGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the td_sesion_curso_ahbb model
+   */
+  readonly fields: td_sesion_curso_ahbbFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for td_sesion_curso_ahbb.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__td_sesion_curso_ahbbClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    curso<T extends td_curso_ahbbDefaultArgs<ExtArgs> = {}>(args?: Subset<T, td_curso_ahbbDefaultArgs<ExtArgs>>): Prisma__td_curso_ahbbClient<$Result.GetResult<Prisma.$td_curso_ahbbPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the td_sesion_curso_ahbb model
+   */
+  interface td_sesion_curso_ahbbFieldRefs {
+    readonly id_sesion_ahbb: FieldRef<"td_sesion_curso_ahbb", 'Int'>
+    readonly nroSesion_ahbb: FieldRef<"td_sesion_curso_ahbb", 'Int'>
+    readonly fechaSesion_ahbb: FieldRef<"td_sesion_curso_ahbb", 'DateTime'>
+    readonly horaInicio_ahbb: FieldRef<"td_sesion_curso_ahbb", 'String'>
+    readonly horaFin_ahbb: FieldRef<"td_sesion_curso_ahbb", 'String'>
+    readonly horasDuracion_ahbb: FieldRef<"td_sesion_curso_ahbb", 'Decimal'>
+    readonly diaSemana_ahbb: FieldRef<"td_sesion_curso_ahbb", 'String'>
+    readonly id_curso_sesion_ahbb: FieldRef<"td_sesion_curso_ahbb", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * td_sesion_curso_ahbb findUnique
+   */
+  export type td_sesion_curso_ahbbFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_sesion_curso_ahbb
+     */
+    select?: td_sesion_curso_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_sesion_curso_ahbb
+     */
+    omit?: td_sesion_curso_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_sesion_curso_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter, which td_sesion_curso_ahbb to fetch.
+     */
+    where: td_sesion_curso_ahbbWhereUniqueInput
+  }
+
+  /**
+   * td_sesion_curso_ahbb findUniqueOrThrow
+   */
+  export type td_sesion_curso_ahbbFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_sesion_curso_ahbb
+     */
+    select?: td_sesion_curso_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_sesion_curso_ahbb
+     */
+    omit?: td_sesion_curso_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_sesion_curso_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter, which td_sesion_curso_ahbb to fetch.
+     */
+    where: td_sesion_curso_ahbbWhereUniqueInput
+  }
+
+  /**
+   * td_sesion_curso_ahbb findFirst
+   */
+  export type td_sesion_curso_ahbbFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_sesion_curso_ahbb
+     */
+    select?: td_sesion_curso_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_sesion_curso_ahbb
+     */
+    omit?: td_sesion_curso_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_sesion_curso_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter, which td_sesion_curso_ahbb to fetch.
+     */
+    where?: td_sesion_curso_ahbbWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of td_sesion_curso_ahbbs to fetch.
+     */
+    orderBy?: td_sesion_curso_ahbbOrderByWithRelationInput | td_sesion_curso_ahbbOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for td_sesion_curso_ahbbs.
+     */
+    cursor?: td_sesion_curso_ahbbWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` td_sesion_curso_ahbbs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` td_sesion_curso_ahbbs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of td_sesion_curso_ahbbs.
+     */
+    distinct?: Td_sesion_curso_ahbbScalarFieldEnum | Td_sesion_curso_ahbbScalarFieldEnum[]
+  }
+
+  /**
+   * td_sesion_curso_ahbb findFirstOrThrow
+   */
+  export type td_sesion_curso_ahbbFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_sesion_curso_ahbb
+     */
+    select?: td_sesion_curso_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_sesion_curso_ahbb
+     */
+    omit?: td_sesion_curso_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_sesion_curso_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter, which td_sesion_curso_ahbb to fetch.
+     */
+    where?: td_sesion_curso_ahbbWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of td_sesion_curso_ahbbs to fetch.
+     */
+    orderBy?: td_sesion_curso_ahbbOrderByWithRelationInput | td_sesion_curso_ahbbOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for td_sesion_curso_ahbbs.
+     */
+    cursor?: td_sesion_curso_ahbbWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` td_sesion_curso_ahbbs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` td_sesion_curso_ahbbs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of td_sesion_curso_ahbbs.
+     */
+    distinct?: Td_sesion_curso_ahbbScalarFieldEnum | Td_sesion_curso_ahbbScalarFieldEnum[]
+  }
+
+  /**
+   * td_sesion_curso_ahbb findMany
+   */
+  export type td_sesion_curso_ahbbFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_sesion_curso_ahbb
+     */
+    select?: td_sesion_curso_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_sesion_curso_ahbb
+     */
+    omit?: td_sesion_curso_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_sesion_curso_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter, which td_sesion_curso_ahbbs to fetch.
+     */
+    where?: td_sesion_curso_ahbbWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of td_sesion_curso_ahbbs to fetch.
+     */
+    orderBy?: td_sesion_curso_ahbbOrderByWithRelationInput | td_sesion_curso_ahbbOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing td_sesion_curso_ahbbs.
+     */
+    cursor?: td_sesion_curso_ahbbWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` td_sesion_curso_ahbbs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` td_sesion_curso_ahbbs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of td_sesion_curso_ahbbs.
+     */
+    distinct?: Td_sesion_curso_ahbbScalarFieldEnum | Td_sesion_curso_ahbbScalarFieldEnum[]
+  }
+
+  /**
+   * td_sesion_curso_ahbb create
+   */
+  export type td_sesion_curso_ahbbCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_sesion_curso_ahbb
+     */
+    select?: td_sesion_curso_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_sesion_curso_ahbb
+     */
+    omit?: td_sesion_curso_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_sesion_curso_ahbbInclude<ExtArgs> | null
+    /**
+     * The data needed to create a td_sesion_curso_ahbb.
+     */
+    data: XOR<td_sesion_curso_ahbbCreateInput, td_sesion_curso_ahbbUncheckedCreateInput>
+  }
+
+  /**
+   * td_sesion_curso_ahbb createMany
+   */
+  export type td_sesion_curso_ahbbCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many td_sesion_curso_ahbbs.
+     */
+    data: td_sesion_curso_ahbbCreateManyInput | td_sesion_curso_ahbbCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * td_sesion_curso_ahbb createManyAndReturn
+   */
+  export type td_sesion_curso_ahbbCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_sesion_curso_ahbb
+     */
+    select?: td_sesion_curso_ahbbSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_sesion_curso_ahbb
+     */
+    omit?: td_sesion_curso_ahbbOmit<ExtArgs> | null
+    /**
+     * The data used to create many td_sesion_curso_ahbbs.
+     */
+    data: td_sesion_curso_ahbbCreateManyInput | td_sesion_curso_ahbbCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_sesion_curso_ahbbIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * td_sesion_curso_ahbb update
+   */
+  export type td_sesion_curso_ahbbUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_sesion_curso_ahbb
+     */
+    select?: td_sesion_curso_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_sesion_curso_ahbb
+     */
+    omit?: td_sesion_curso_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_sesion_curso_ahbbInclude<ExtArgs> | null
+    /**
+     * The data needed to update a td_sesion_curso_ahbb.
+     */
+    data: XOR<td_sesion_curso_ahbbUpdateInput, td_sesion_curso_ahbbUncheckedUpdateInput>
+    /**
+     * Choose, which td_sesion_curso_ahbb to update.
+     */
+    where: td_sesion_curso_ahbbWhereUniqueInput
+  }
+
+  /**
+   * td_sesion_curso_ahbb updateMany
+   */
+  export type td_sesion_curso_ahbbUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update td_sesion_curso_ahbbs.
+     */
+    data: XOR<td_sesion_curso_ahbbUpdateManyMutationInput, td_sesion_curso_ahbbUncheckedUpdateManyInput>
+    /**
+     * Filter which td_sesion_curso_ahbbs to update
+     */
+    where?: td_sesion_curso_ahbbWhereInput
+    /**
+     * Limit how many td_sesion_curso_ahbbs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * td_sesion_curso_ahbb updateManyAndReturn
+   */
+  export type td_sesion_curso_ahbbUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_sesion_curso_ahbb
+     */
+    select?: td_sesion_curso_ahbbSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_sesion_curso_ahbb
+     */
+    omit?: td_sesion_curso_ahbbOmit<ExtArgs> | null
+    /**
+     * The data used to update td_sesion_curso_ahbbs.
+     */
+    data: XOR<td_sesion_curso_ahbbUpdateManyMutationInput, td_sesion_curso_ahbbUncheckedUpdateManyInput>
+    /**
+     * Filter which td_sesion_curso_ahbbs to update
+     */
+    where?: td_sesion_curso_ahbbWhereInput
+    /**
+     * Limit how many td_sesion_curso_ahbbs to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_sesion_curso_ahbbIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * td_sesion_curso_ahbb upsert
+   */
+  export type td_sesion_curso_ahbbUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_sesion_curso_ahbb
+     */
+    select?: td_sesion_curso_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_sesion_curso_ahbb
+     */
+    omit?: td_sesion_curso_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_sesion_curso_ahbbInclude<ExtArgs> | null
+    /**
+     * The filter to search for the td_sesion_curso_ahbb to update in case it exists.
+     */
+    where: td_sesion_curso_ahbbWhereUniqueInput
+    /**
+     * In case the td_sesion_curso_ahbb found by the `where` argument doesn't exist, create a new td_sesion_curso_ahbb with this data.
+     */
+    create: XOR<td_sesion_curso_ahbbCreateInput, td_sesion_curso_ahbbUncheckedCreateInput>
+    /**
+     * In case the td_sesion_curso_ahbb was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<td_sesion_curso_ahbbUpdateInput, td_sesion_curso_ahbbUncheckedUpdateInput>
+  }
+
+  /**
+   * td_sesion_curso_ahbb delete
+   */
+  export type td_sesion_curso_ahbbDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_sesion_curso_ahbb
+     */
+    select?: td_sesion_curso_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_sesion_curso_ahbb
+     */
+    omit?: td_sesion_curso_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_sesion_curso_ahbbInclude<ExtArgs> | null
+    /**
+     * Filter which td_sesion_curso_ahbb to delete.
+     */
+    where: td_sesion_curso_ahbbWhereUniqueInput
+  }
+
+  /**
+   * td_sesion_curso_ahbb deleteMany
+   */
+  export type td_sesion_curso_ahbbDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which td_sesion_curso_ahbbs to delete
+     */
+    where?: td_sesion_curso_ahbbWhereInput
+    /**
+     * Limit how many td_sesion_curso_ahbbs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * td_sesion_curso_ahbb without action
+   */
+  export type td_sesion_curso_ahbbDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the td_sesion_curso_ahbb
+     */
+    select?: td_sesion_curso_ahbbSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the td_sesion_curso_ahbb
+     */
+    omit?: td_sesion_curso_ahbbOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: td_sesion_curso_ahbbInclude<ExtArgs> | null
   }
 
 
@@ -16169,6 +17484,9 @@ export namespace Prisma {
     imagenBasePdf_ahbb: 'imagenBasePdf_ahbb',
     imagenBloqueada_ahbb: 'imagenBloqueada_ahbb',
     isPublished_ahbb: 'isPublished_ahbb',
+    estadoAprobacion_ahbb: 'estadoAprobacion_ahbb',
+    motivoRechazo_ahbb: 'motivoRechazo_ahbb',
+    mensajeCorreccion_ahbb: 'mensajeCorreccion_ahbb',
     id_usuario_curso_ahbb: 'id_usuario_curso_ahbb',
     id_curso_curso_ahbb: 'id_curso_curso_ahbb',
     creadoEn_ahbb: 'creadoEn_ahbb',
@@ -16176,6 +17494,20 @@ export namespace Prisma {
   };
 
   export type Td_curso_ahbbScalarFieldEnum = (typeof Td_curso_ahbbScalarFieldEnum)[keyof typeof Td_curso_ahbbScalarFieldEnum]
+
+
+  export const Td_sesion_curso_ahbbScalarFieldEnum: {
+    id_sesion_ahbb: 'id_sesion_ahbb',
+    nroSesion_ahbb: 'nroSesion_ahbb',
+    fechaSesion_ahbb: 'fechaSesion_ahbb',
+    horaInicio_ahbb: 'horaInicio_ahbb',
+    horaFin_ahbb: 'horaFin_ahbb',
+    horasDuracion_ahbb: 'horasDuracion_ahbb',
+    diaSemana_ahbb: 'diaSemana_ahbb',
+    id_curso_sesion_ahbb: 'id_curso_sesion_ahbb'
+  };
+
+  export type Td_sesion_curso_ahbbScalarFieldEnum = (typeof Td_sesion_curso_ahbbScalarFieldEnum)[keyof typeof Td_sesion_curso_ahbbScalarFieldEnum]
 
 
   export const Td_horario_ahbbScalarFieldEnum: {
@@ -16542,6 +17874,9 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: StringNullableFilter<"td_curso_ahbb"> | string | null
     imagenBloqueada_ahbb?: BoolNullableFilter<"td_curso_ahbb"> | boolean | null
     isPublished_ahbb?: BoolFilter<"td_curso_ahbb"> | boolean
+    estadoAprobacion_ahbb?: StringFilter<"td_curso_ahbb"> | string
+    motivoRechazo_ahbb?: StringNullableFilter<"td_curso_ahbb"> | string | null
+    mensajeCorreccion_ahbb?: StringNullableFilter<"td_curso_ahbb"> | string | null
     id_usuario_curso_ahbb?: IntFilter<"td_curso_ahbb"> | number
     id_curso_curso_ahbb?: IntNullableFilter<"td_curso_ahbb"> | number | null
     creadoEn_ahbb?: DateTimeNullableFilter<"td_curso_ahbb"> | Date | string | null
@@ -16551,6 +17886,7 @@ export namespace Prisma {
     prelaciones?: Td_curso_ahbbListRelationFilter
     horarios?: Td_horario_ahbbListRelationFilter
     inscripciones?: Td_inscripcion_ahbbListRelationFilter
+    sesiones?: Td_sesion_curso_ahbbListRelationFilter
   }
 
   export type td_curso_ahbbOrderByWithRelationInput = {
@@ -16568,6 +17904,9 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: SortOrderInput | SortOrder
     imagenBloqueada_ahbb?: SortOrderInput | SortOrder
     isPublished_ahbb?: SortOrder
+    estadoAprobacion_ahbb?: SortOrder
+    motivoRechazo_ahbb?: SortOrderInput | SortOrder
+    mensajeCorreccion_ahbb?: SortOrderInput | SortOrder
     id_usuario_curso_ahbb?: SortOrder
     id_curso_curso_ahbb?: SortOrderInput | SortOrder
     creadoEn_ahbb?: SortOrderInput | SortOrder
@@ -16577,6 +17916,7 @@ export namespace Prisma {
     prelaciones?: td_curso_ahbbOrderByRelationAggregateInput
     horarios?: td_horario_ahbbOrderByRelationAggregateInput
     inscripciones?: td_inscripcion_ahbbOrderByRelationAggregateInput
+    sesiones?: td_sesion_curso_ahbbOrderByRelationAggregateInput
   }
 
   export type td_curso_ahbbWhereUniqueInput = Prisma.AtLeast<{
@@ -16597,6 +17937,9 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: StringNullableFilter<"td_curso_ahbb"> | string | null
     imagenBloqueada_ahbb?: BoolNullableFilter<"td_curso_ahbb"> | boolean | null
     isPublished_ahbb?: BoolFilter<"td_curso_ahbb"> | boolean
+    estadoAprobacion_ahbb?: StringFilter<"td_curso_ahbb"> | string
+    motivoRechazo_ahbb?: StringNullableFilter<"td_curso_ahbb"> | string | null
+    mensajeCorreccion_ahbb?: StringNullableFilter<"td_curso_ahbb"> | string | null
     id_usuario_curso_ahbb?: IntFilter<"td_curso_ahbb"> | number
     id_curso_curso_ahbb?: IntNullableFilter<"td_curso_ahbb"> | number | null
     creadoEn_ahbb?: DateTimeNullableFilter<"td_curso_ahbb"> | Date | string | null
@@ -16606,6 +17949,7 @@ export namespace Prisma {
     prelaciones?: Td_curso_ahbbListRelationFilter
     horarios?: Td_horario_ahbbListRelationFilter
     inscripciones?: Td_inscripcion_ahbbListRelationFilter
+    sesiones?: Td_sesion_curso_ahbbListRelationFilter
   }, "id_curso_ahbb">
 
   export type td_curso_ahbbOrderByWithAggregationInput = {
@@ -16623,6 +17967,9 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: SortOrderInput | SortOrder
     imagenBloqueada_ahbb?: SortOrderInput | SortOrder
     isPublished_ahbb?: SortOrder
+    estadoAprobacion_ahbb?: SortOrder
+    motivoRechazo_ahbb?: SortOrderInput | SortOrder
+    mensajeCorreccion_ahbb?: SortOrderInput | SortOrder
     id_usuario_curso_ahbb?: SortOrder
     id_curso_curso_ahbb?: SortOrderInput | SortOrder
     creadoEn_ahbb?: SortOrderInput | SortOrder
@@ -16652,10 +17999,85 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: StringNullableWithAggregatesFilter<"td_curso_ahbb"> | string | null
     imagenBloqueada_ahbb?: BoolNullableWithAggregatesFilter<"td_curso_ahbb"> | boolean | null
     isPublished_ahbb?: BoolWithAggregatesFilter<"td_curso_ahbb"> | boolean
+    estadoAprobacion_ahbb?: StringWithAggregatesFilter<"td_curso_ahbb"> | string
+    motivoRechazo_ahbb?: StringNullableWithAggregatesFilter<"td_curso_ahbb"> | string | null
+    mensajeCorreccion_ahbb?: StringNullableWithAggregatesFilter<"td_curso_ahbb"> | string | null
     id_usuario_curso_ahbb?: IntWithAggregatesFilter<"td_curso_ahbb"> | number
     id_curso_curso_ahbb?: IntNullableWithAggregatesFilter<"td_curso_ahbb"> | number | null
     creadoEn_ahbb?: DateTimeNullableWithAggregatesFilter<"td_curso_ahbb"> | Date | string | null
     actualizadoEn_ahbb?: DateTimeNullableWithAggregatesFilter<"td_curso_ahbb"> | Date | string | null
+  }
+
+  export type td_sesion_curso_ahbbWhereInput = {
+    AND?: td_sesion_curso_ahbbWhereInput | td_sesion_curso_ahbbWhereInput[]
+    OR?: td_sesion_curso_ahbbWhereInput[]
+    NOT?: td_sesion_curso_ahbbWhereInput | td_sesion_curso_ahbbWhereInput[]
+    id_sesion_ahbb?: IntFilter<"td_sesion_curso_ahbb"> | number
+    nroSesion_ahbb?: IntFilter<"td_sesion_curso_ahbb"> | number
+    fechaSesion_ahbb?: DateTimeFilter<"td_sesion_curso_ahbb"> | Date | string
+    horaInicio_ahbb?: StringFilter<"td_sesion_curso_ahbb"> | string
+    horaFin_ahbb?: StringFilter<"td_sesion_curso_ahbb"> | string
+    horasDuracion_ahbb?: DecimalFilter<"td_sesion_curso_ahbb"> | Decimal | DecimalJsLike | number | string
+    diaSemana_ahbb?: StringFilter<"td_sesion_curso_ahbb"> | string
+    id_curso_sesion_ahbb?: IntFilter<"td_sesion_curso_ahbb"> | number
+    curso?: XOR<Td_curso_ahbbScalarRelationFilter, td_curso_ahbbWhereInput>
+  }
+
+  export type td_sesion_curso_ahbbOrderByWithRelationInput = {
+    id_sesion_ahbb?: SortOrder
+    nroSesion_ahbb?: SortOrder
+    fechaSesion_ahbb?: SortOrder
+    horaInicio_ahbb?: SortOrder
+    horaFin_ahbb?: SortOrder
+    horasDuracion_ahbb?: SortOrder
+    diaSemana_ahbb?: SortOrder
+    id_curso_sesion_ahbb?: SortOrder
+    curso?: td_curso_ahbbOrderByWithRelationInput
+  }
+
+  export type td_sesion_curso_ahbbWhereUniqueInput = Prisma.AtLeast<{
+    id_sesion_ahbb?: number
+    AND?: td_sesion_curso_ahbbWhereInput | td_sesion_curso_ahbbWhereInput[]
+    OR?: td_sesion_curso_ahbbWhereInput[]
+    NOT?: td_sesion_curso_ahbbWhereInput | td_sesion_curso_ahbbWhereInput[]
+    nroSesion_ahbb?: IntFilter<"td_sesion_curso_ahbb"> | number
+    fechaSesion_ahbb?: DateTimeFilter<"td_sesion_curso_ahbb"> | Date | string
+    horaInicio_ahbb?: StringFilter<"td_sesion_curso_ahbb"> | string
+    horaFin_ahbb?: StringFilter<"td_sesion_curso_ahbb"> | string
+    horasDuracion_ahbb?: DecimalFilter<"td_sesion_curso_ahbb"> | Decimal | DecimalJsLike | number | string
+    diaSemana_ahbb?: StringFilter<"td_sesion_curso_ahbb"> | string
+    id_curso_sesion_ahbb?: IntFilter<"td_sesion_curso_ahbb"> | number
+    curso?: XOR<Td_curso_ahbbScalarRelationFilter, td_curso_ahbbWhereInput>
+  }, "id_sesion_ahbb">
+
+  export type td_sesion_curso_ahbbOrderByWithAggregationInput = {
+    id_sesion_ahbb?: SortOrder
+    nroSesion_ahbb?: SortOrder
+    fechaSesion_ahbb?: SortOrder
+    horaInicio_ahbb?: SortOrder
+    horaFin_ahbb?: SortOrder
+    horasDuracion_ahbb?: SortOrder
+    diaSemana_ahbb?: SortOrder
+    id_curso_sesion_ahbb?: SortOrder
+    _count?: td_sesion_curso_ahbbCountOrderByAggregateInput
+    _avg?: td_sesion_curso_ahbbAvgOrderByAggregateInput
+    _max?: td_sesion_curso_ahbbMaxOrderByAggregateInput
+    _min?: td_sesion_curso_ahbbMinOrderByAggregateInput
+    _sum?: td_sesion_curso_ahbbSumOrderByAggregateInput
+  }
+
+  export type td_sesion_curso_ahbbScalarWhereWithAggregatesInput = {
+    AND?: td_sesion_curso_ahbbScalarWhereWithAggregatesInput | td_sesion_curso_ahbbScalarWhereWithAggregatesInput[]
+    OR?: td_sesion_curso_ahbbScalarWhereWithAggregatesInput[]
+    NOT?: td_sesion_curso_ahbbScalarWhereWithAggregatesInput | td_sesion_curso_ahbbScalarWhereWithAggregatesInput[]
+    id_sesion_ahbb?: IntWithAggregatesFilter<"td_sesion_curso_ahbb"> | number
+    nroSesion_ahbb?: IntWithAggregatesFilter<"td_sesion_curso_ahbb"> | number
+    fechaSesion_ahbb?: DateTimeWithAggregatesFilter<"td_sesion_curso_ahbb"> | Date | string
+    horaInicio_ahbb?: StringWithAggregatesFilter<"td_sesion_curso_ahbb"> | string
+    horaFin_ahbb?: StringWithAggregatesFilter<"td_sesion_curso_ahbb"> | string
+    horasDuracion_ahbb?: DecimalWithAggregatesFilter<"td_sesion_curso_ahbb"> | Decimal | DecimalJsLike | number | string
+    diaSemana_ahbb?: StringWithAggregatesFilter<"td_sesion_curso_ahbb"> | string
+    id_curso_sesion_ahbb?: IntWithAggregatesFilter<"td_sesion_curso_ahbb"> | number
   }
 
   export type td_horario_ahbbWhereInput = {
@@ -17447,6 +18869,9 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: string | null
     imagenBloqueada_ahbb?: boolean | null
     isPublished_ahbb?: boolean
+    estadoAprobacion_ahbb?: string
+    motivoRechazo_ahbb?: string | null
+    mensajeCorreccion_ahbb?: string | null
     creadoEn_ahbb?: Date | string | null
     actualizadoEn_ahbb?: Date | string | null
     profesor: td_usuario_ahbbCreateNestedOneWithoutCursosInput
@@ -17454,6 +18879,7 @@ export namespace Prisma {
     prelaciones?: td_curso_ahbbCreateNestedManyWithoutPrelacionInput
     horarios?: td_horario_ahbbCreateNestedManyWithoutCursoInput
     inscripciones?: td_inscripcion_ahbbCreateNestedManyWithoutCursoInput
+    sesiones?: td_sesion_curso_ahbbCreateNestedManyWithoutCursoInput
   }
 
   export type td_curso_ahbbUncheckedCreateInput = {
@@ -17471,6 +18897,9 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: string | null
     imagenBloqueada_ahbb?: boolean | null
     isPublished_ahbb?: boolean
+    estadoAprobacion_ahbb?: string
+    motivoRechazo_ahbb?: string | null
+    mensajeCorreccion_ahbb?: string | null
     id_usuario_curso_ahbb: number
     id_curso_curso_ahbb?: number | null
     creadoEn_ahbb?: Date | string | null
@@ -17478,6 +18907,7 @@ export namespace Prisma {
     prelaciones?: td_curso_ahbbUncheckedCreateNestedManyWithoutPrelacionInput
     horarios?: td_horario_ahbbUncheckedCreateNestedManyWithoutCursoInput
     inscripciones?: td_inscripcion_ahbbUncheckedCreateNestedManyWithoutCursoInput
+    sesiones?: td_sesion_curso_ahbbUncheckedCreateNestedManyWithoutCursoInput
   }
 
   export type td_curso_ahbbUpdateInput = {
@@ -17494,6 +18924,9 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     imagenBloqueada_ahbb?: NullableBoolFieldUpdateOperationsInput | boolean | null
     isPublished_ahbb?: BoolFieldUpdateOperationsInput | boolean
+    estadoAprobacion_ahbb?: StringFieldUpdateOperationsInput | string
+    motivoRechazo_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeCorreccion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profesor?: td_usuario_ahbbUpdateOneRequiredWithoutCursosNestedInput
@@ -17501,6 +18934,7 @@ export namespace Prisma {
     prelaciones?: td_curso_ahbbUpdateManyWithoutPrelacionNestedInput
     horarios?: td_horario_ahbbUpdateManyWithoutCursoNestedInput
     inscripciones?: td_inscripcion_ahbbUpdateManyWithoutCursoNestedInput
+    sesiones?: td_sesion_curso_ahbbUpdateManyWithoutCursoNestedInput
   }
 
   export type td_curso_ahbbUncheckedUpdateInput = {
@@ -17518,6 +18952,9 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     imagenBloqueada_ahbb?: NullableBoolFieldUpdateOperationsInput | boolean | null
     isPublished_ahbb?: BoolFieldUpdateOperationsInput | boolean
+    estadoAprobacion_ahbb?: StringFieldUpdateOperationsInput | string
+    motivoRechazo_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeCorreccion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     id_usuario_curso_ahbb?: IntFieldUpdateOperationsInput | number
     id_curso_curso_ahbb?: NullableIntFieldUpdateOperationsInput | number | null
     creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17525,6 +18962,7 @@ export namespace Prisma {
     prelaciones?: td_curso_ahbbUncheckedUpdateManyWithoutPrelacionNestedInput
     horarios?: td_horario_ahbbUncheckedUpdateManyWithoutCursoNestedInput
     inscripciones?: td_inscripcion_ahbbUncheckedUpdateManyWithoutCursoNestedInput
+    sesiones?: td_sesion_curso_ahbbUncheckedUpdateManyWithoutCursoNestedInput
   }
 
   export type td_curso_ahbbCreateManyInput = {
@@ -17542,6 +18980,9 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: string | null
     imagenBloqueada_ahbb?: boolean | null
     isPublished_ahbb?: boolean
+    estadoAprobacion_ahbb?: string
+    motivoRechazo_ahbb?: string | null
+    mensajeCorreccion_ahbb?: string | null
     id_usuario_curso_ahbb: number
     id_curso_curso_ahbb?: number | null
     creadoEn_ahbb?: Date | string | null
@@ -17562,6 +19003,9 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     imagenBloqueada_ahbb?: NullableBoolFieldUpdateOperationsInput | boolean | null
     isPublished_ahbb?: BoolFieldUpdateOperationsInput | boolean
+    estadoAprobacion_ahbb?: StringFieldUpdateOperationsInput | string
+    motivoRechazo_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeCorreccion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -17581,10 +19025,86 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     imagenBloqueada_ahbb?: NullableBoolFieldUpdateOperationsInput | boolean | null
     isPublished_ahbb?: BoolFieldUpdateOperationsInput | boolean
+    estadoAprobacion_ahbb?: StringFieldUpdateOperationsInput | string
+    motivoRechazo_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeCorreccion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     id_usuario_curso_ahbb?: IntFieldUpdateOperationsInput | number
     id_curso_curso_ahbb?: NullableIntFieldUpdateOperationsInput | number | null
     creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type td_sesion_curso_ahbbCreateInput = {
+    nroSesion_ahbb: number
+    fechaSesion_ahbb: Date | string
+    horaInicio_ahbb: string
+    horaFin_ahbb: string
+    horasDuracion_ahbb: Decimal | DecimalJsLike | number | string
+    diaSemana_ahbb: string
+    curso: td_curso_ahbbCreateNestedOneWithoutSesionesInput
+  }
+
+  export type td_sesion_curso_ahbbUncheckedCreateInput = {
+    id_sesion_ahbb?: number
+    nroSesion_ahbb: number
+    fechaSesion_ahbb: Date | string
+    horaInicio_ahbb: string
+    horaFin_ahbb: string
+    horasDuracion_ahbb: Decimal | DecimalJsLike | number | string
+    diaSemana_ahbb: string
+    id_curso_sesion_ahbb: number
+  }
+
+  export type td_sesion_curso_ahbbUpdateInput = {
+    nroSesion_ahbb?: IntFieldUpdateOperationsInput | number
+    fechaSesion_ahbb?: DateTimeFieldUpdateOperationsInput | Date | string
+    horaInicio_ahbb?: StringFieldUpdateOperationsInput | string
+    horaFin_ahbb?: StringFieldUpdateOperationsInput | string
+    horasDuracion_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    diaSemana_ahbb?: StringFieldUpdateOperationsInput | string
+    curso?: td_curso_ahbbUpdateOneRequiredWithoutSesionesNestedInput
+  }
+
+  export type td_sesion_curso_ahbbUncheckedUpdateInput = {
+    id_sesion_ahbb?: IntFieldUpdateOperationsInput | number
+    nroSesion_ahbb?: IntFieldUpdateOperationsInput | number
+    fechaSesion_ahbb?: DateTimeFieldUpdateOperationsInput | Date | string
+    horaInicio_ahbb?: StringFieldUpdateOperationsInput | string
+    horaFin_ahbb?: StringFieldUpdateOperationsInput | string
+    horasDuracion_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    diaSemana_ahbb?: StringFieldUpdateOperationsInput | string
+    id_curso_sesion_ahbb?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type td_sesion_curso_ahbbCreateManyInput = {
+    id_sesion_ahbb?: number
+    nroSesion_ahbb: number
+    fechaSesion_ahbb: Date | string
+    horaInicio_ahbb: string
+    horaFin_ahbb: string
+    horasDuracion_ahbb: Decimal | DecimalJsLike | number | string
+    diaSemana_ahbb: string
+    id_curso_sesion_ahbb: number
+  }
+
+  export type td_sesion_curso_ahbbUpdateManyMutationInput = {
+    nroSesion_ahbb?: IntFieldUpdateOperationsInput | number
+    fechaSesion_ahbb?: DateTimeFieldUpdateOperationsInput | Date | string
+    horaInicio_ahbb?: StringFieldUpdateOperationsInput | string
+    horaFin_ahbb?: StringFieldUpdateOperationsInput | string
+    horasDuracion_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    diaSemana_ahbb?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type td_sesion_curso_ahbbUncheckedUpdateManyInput = {
+    id_sesion_ahbb?: IntFieldUpdateOperationsInput | number
+    nroSesion_ahbb?: IntFieldUpdateOperationsInput | number
+    fechaSesion_ahbb?: DateTimeFieldUpdateOperationsInput | Date | string
+    horaInicio_ahbb?: StringFieldUpdateOperationsInput | string
+    horaFin_ahbb?: StringFieldUpdateOperationsInput | string
+    horasDuracion_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    diaSemana_ahbb?: StringFieldUpdateOperationsInput | string
+    id_curso_sesion_ahbb?: IntFieldUpdateOperationsInput | number
   }
 
   export type td_horario_ahbbCreateInput = {
@@ -18478,7 +19998,17 @@ export namespace Prisma {
     none?: td_horario_ahbbWhereInput
   }
 
+  export type Td_sesion_curso_ahbbListRelationFilter = {
+    every?: td_sesion_curso_ahbbWhereInput
+    some?: td_sesion_curso_ahbbWhereInput
+    none?: td_sesion_curso_ahbbWhereInput
+  }
+
   export type td_horario_ahbbOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type td_sesion_curso_ahbbOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -18497,6 +20027,9 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: SortOrder
     imagenBloqueada_ahbb?: SortOrder
     isPublished_ahbb?: SortOrder
+    estadoAprobacion_ahbb?: SortOrder
+    motivoRechazo_ahbb?: SortOrder
+    mensajeCorreccion_ahbb?: SortOrder
     id_usuario_curso_ahbb?: SortOrder
     id_curso_curso_ahbb?: SortOrder
     creadoEn_ahbb?: SortOrder
@@ -18527,6 +20060,9 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: SortOrder
     imagenBloqueada_ahbb?: SortOrder
     isPublished_ahbb?: SortOrder
+    estadoAprobacion_ahbb?: SortOrder
+    motivoRechazo_ahbb?: SortOrder
+    mensajeCorreccion_ahbb?: SortOrder
     id_usuario_curso_ahbb?: SortOrder
     id_curso_curso_ahbb?: SortOrder
     creadoEn_ahbb?: SortOrder
@@ -18548,6 +20084,9 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: SortOrder
     imagenBloqueada_ahbb?: SortOrder
     isPublished_ahbb?: SortOrder
+    estadoAprobacion_ahbb?: SortOrder
+    motivoRechazo_ahbb?: SortOrder
+    mensajeCorreccion_ahbb?: SortOrder
     id_usuario_curso_ahbb?: SortOrder
     id_curso_curso_ahbb?: SortOrder
     creadoEn_ahbb?: SortOrder
@@ -18571,9 +20110,108 @@ export namespace Prisma {
     _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type DecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
   export type Td_curso_ahbbScalarRelationFilter = {
     is?: td_curso_ahbbWhereInput
     isNot?: td_curso_ahbbWhereInput
+  }
+
+  export type td_sesion_curso_ahbbCountOrderByAggregateInput = {
+    id_sesion_ahbb?: SortOrder
+    nroSesion_ahbb?: SortOrder
+    fechaSesion_ahbb?: SortOrder
+    horaInicio_ahbb?: SortOrder
+    horaFin_ahbb?: SortOrder
+    horasDuracion_ahbb?: SortOrder
+    diaSemana_ahbb?: SortOrder
+    id_curso_sesion_ahbb?: SortOrder
+  }
+
+  export type td_sesion_curso_ahbbAvgOrderByAggregateInput = {
+    id_sesion_ahbb?: SortOrder
+    nroSesion_ahbb?: SortOrder
+    horasDuracion_ahbb?: SortOrder
+    id_curso_sesion_ahbb?: SortOrder
+  }
+
+  export type td_sesion_curso_ahbbMaxOrderByAggregateInput = {
+    id_sesion_ahbb?: SortOrder
+    nroSesion_ahbb?: SortOrder
+    fechaSesion_ahbb?: SortOrder
+    horaInicio_ahbb?: SortOrder
+    horaFin_ahbb?: SortOrder
+    horasDuracion_ahbb?: SortOrder
+    diaSemana_ahbb?: SortOrder
+    id_curso_sesion_ahbb?: SortOrder
+  }
+
+  export type td_sesion_curso_ahbbMinOrderByAggregateInput = {
+    id_sesion_ahbb?: SortOrder
+    nroSesion_ahbb?: SortOrder
+    fechaSesion_ahbb?: SortOrder
+    horaInicio_ahbb?: SortOrder
+    horaFin_ahbb?: SortOrder
+    horasDuracion_ahbb?: SortOrder
+    diaSemana_ahbb?: SortOrder
+    id_curso_sesion_ahbb?: SortOrder
+  }
+
+  export type td_sesion_curso_ahbbSumOrderByAggregateInput = {
+    id_sesion_ahbb?: SortOrder
+    nroSesion_ahbb?: SortOrder
+    horasDuracion_ahbb?: SortOrder
+    id_curso_sesion_ahbb?: SortOrder
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
   }
 
   export type td_horario_ahbbCountOrderByAggregateInput = {
@@ -18753,17 +20391,6 @@ export namespace Prisma {
     id_configuracionglobal_ahbb?: SortOrder
   }
 
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
   export type td_auditoria_aprobacion_ahbbCountOrderByAggregateInput = {
     id_auditoria_aprobacion_ahbb?: SortOrder
     tipoOperacion_ahbb?: SortOrder
@@ -18804,31 +20431,6 @@ export namespace Prisma {
     id_auditoria_aprobacion_ahbb?: SortOrder
     id_usuario_auditado_ahbb?: SortOrder
     id_aprobador_ahbb?: SortOrder
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type DecimalFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
   }
 
   export type Td_detalle_factura_ahbbListRelationFilter = {
@@ -18890,22 +20492,6 @@ export namespace Prisma {
     id_producto_ahbb?: SortOrder
     precio_ahbb?: SortOrder
     stock_ahbb?: SortOrder
-  }
-
-  export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedDecimalFilter<$PrismaModel>
-    _sum?: NestedDecimalFilter<$PrismaModel>
-    _min?: NestedDecimalFilter<$PrismaModel>
-    _max?: NestedDecimalFilter<$PrismaModel>
   }
 
   export type Td_producto_ahbbScalarRelationFilter = {
@@ -19437,6 +21023,13 @@ export namespace Prisma {
     connect?: td_inscripcion_ahbbWhereUniqueInput | td_inscripcion_ahbbWhereUniqueInput[]
   }
 
+  export type td_sesion_curso_ahbbCreateNestedManyWithoutCursoInput = {
+    create?: XOR<td_sesion_curso_ahbbCreateWithoutCursoInput, td_sesion_curso_ahbbUncheckedCreateWithoutCursoInput> | td_sesion_curso_ahbbCreateWithoutCursoInput[] | td_sesion_curso_ahbbUncheckedCreateWithoutCursoInput[]
+    connectOrCreate?: td_sesion_curso_ahbbCreateOrConnectWithoutCursoInput | td_sesion_curso_ahbbCreateOrConnectWithoutCursoInput[]
+    createMany?: td_sesion_curso_ahbbCreateManyCursoInputEnvelope
+    connect?: td_sesion_curso_ahbbWhereUniqueInput | td_sesion_curso_ahbbWhereUniqueInput[]
+  }
+
   export type td_curso_ahbbUncheckedCreateNestedManyWithoutPrelacionInput = {
     create?: XOR<td_curso_ahbbCreateWithoutPrelacionInput, td_curso_ahbbUncheckedCreateWithoutPrelacionInput> | td_curso_ahbbCreateWithoutPrelacionInput[] | td_curso_ahbbUncheckedCreateWithoutPrelacionInput[]
     connectOrCreate?: td_curso_ahbbCreateOrConnectWithoutPrelacionInput | td_curso_ahbbCreateOrConnectWithoutPrelacionInput[]
@@ -19456,6 +21049,13 @@ export namespace Prisma {
     connectOrCreate?: td_inscripcion_ahbbCreateOrConnectWithoutCursoInput | td_inscripcion_ahbbCreateOrConnectWithoutCursoInput[]
     createMany?: td_inscripcion_ahbbCreateManyCursoInputEnvelope
     connect?: td_inscripcion_ahbbWhereUniqueInput | td_inscripcion_ahbbWhereUniqueInput[]
+  }
+
+  export type td_sesion_curso_ahbbUncheckedCreateNestedManyWithoutCursoInput = {
+    create?: XOR<td_sesion_curso_ahbbCreateWithoutCursoInput, td_sesion_curso_ahbbUncheckedCreateWithoutCursoInput> | td_sesion_curso_ahbbCreateWithoutCursoInput[] | td_sesion_curso_ahbbUncheckedCreateWithoutCursoInput[]
+    connectOrCreate?: td_sesion_curso_ahbbCreateOrConnectWithoutCursoInput | td_sesion_curso_ahbbCreateOrConnectWithoutCursoInput[]
+    createMany?: td_sesion_curso_ahbbCreateManyCursoInputEnvelope
+    connect?: td_sesion_curso_ahbbWhereUniqueInput | td_sesion_curso_ahbbWhereUniqueInput[]
   }
 
   export type NullableBoolFieldUpdateOperationsInput = {
@@ -19522,6 +21122,20 @@ export namespace Prisma {
     deleteMany?: td_inscripcion_ahbbScalarWhereInput | td_inscripcion_ahbbScalarWhereInput[]
   }
 
+  export type td_sesion_curso_ahbbUpdateManyWithoutCursoNestedInput = {
+    create?: XOR<td_sesion_curso_ahbbCreateWithoutCursoInput, td_sesion_curso_ahbbUncheckedCreateWithoutCursoInput> | td_sesion_curso_ahbbCreateWithoutCursoInput[] | td_sesion_curso_ahbbUncheckedCreateWithoutCursoInput[]
+    connectOrCreate?: td_sesion_curso_ahbbCreateOrConnectWithoutCursoInput | td_sesion_curso_ahbbCreateOrConnectWithoutCursoInput[]
+    upsert?: td_sesion_curso_ahbbUpsertWithWhereUniqueWithoutCursoInput | td_sesion_curso_ahbbUpsertWithWhereUniqueWithoutCursoInput[]
+    createMany?: td_sesion_curso_ahbbCreateManyCursoInputEnvelope
+    set?: td_sesion_curso_ahbbWhereUniqueInput | td_sesion_curso_ahbbWhereUniqueInput[]
+    disconnect?: td_sesion_curso_ahbbWhereUniqueInput | td_sesion_curso_ahbbWhereUniqueInput[]
+    delete?: td_sesion_curso_ahbbWhereUniqueInput | td_sesion_curso_ahbbWhereUniqueInput[]
+    connect?: td_sesion_curso_ahbbWhereUniqueInput | td_sesion_curso_ahbbWhereUniqueInput[]
+    update?: td_sesion_curso_ahbbUpdateWithWhereUniqueWithoutCursoInput | td_sesion_curso_ahbbUpdateWithWhereUniqueWithoutCursoInput[]
+    updateMany?: td_sesion_curso_ahbbUpdateManyWithWhereWithoutCursoInput | td_sesion_curso_ahbbUpdateManyWithWhereWithoutCursoInput[]
+    deleteMany?: td_sesion_curso_ahbbScalarWhereInput | td_sesion_curso_ahbbScalarWhereInput[]
+  }
+
   export type td_curso_ahbbUncheckedUpdateManyWithoutPrelacionNestedInput = {
     create?: XOR<td_curso_ahbbCreateWithoutPrelacionInput, td_curso_ahbbUncheckedCreateWithoutPrelacionInput> | td_curso_ahbbCreateWithoutPrelacionInput[] | td_curso_ahbbUncheckedCreateWithoutPrelacionInput[]
     connectOrCreate?: td_curso_ahbbCreateOrConnectWithoutPrelacionInput | td_curso_ahbbCreateOrConnectWithoutPrelacionInput[]
@@ -19562,6 +21176,46 @@ export namespace Prisma {
     update?: td_inscripcion_ahbbUpdateWithWhereUniqueWithoutCursoInput | td_inscripcion_ahbbUpdateWithWhereUniqueWithoutCursoInput[]
     updateMany?: td_inscripcion_ahbbUpdateManyWithWhereWithoutCursoInput | td_inscripcion_ahbbUpdateManyWithWhereWithoutCursoInput[]
     deleteMany?: td_inscripcion_ahbbScalarWhereInput | td_inscripcion_ahbbScalarWhereInput[]
+  }
+
+  export type td_sesion_curso_ahbbUncheckedUpdateManyWithoutCursoNestedInput = {
+    create?: XOR<td_sesion_curso_ahbbCreateWithoutCursoInput, td_sesion_curso_ahbbUncheckedCreateWithoutCursoInput> | td_sesion_curso_ahbbCreateWithoutCursoInput[] | td_sesion_curso_ahbbUncheckedCreateWithoutCursoInput[]
+    connectOrCreate?: td_sesion_curso_ahbbCreateOrConnectWithoutCursoInput | td_sesion_curso_ahbbCreateOrConnectWithoutCursoInput[]
+    upsert?: td_sesion_curso_ahbbUpsertWithWhereUniqueWithoutCursoInput | td_sesion_curso_ahbbUpsertWithWhereUniqueWithoutCursoInput[]
+    createMany?: td_sesion_curso_ahbbCreateManyCursoInputEnvelope
+    set?: td_sesion_curso_ahbbWhereUniqueInput | td_sesion_curso_ahbbWhereUniqueInput[]
+    disconnect?: td_sesion_curso_ahbbWhereUniqueInput | td_sesion_curso_ahbbWhereUniqueInput[]
+    delete?: td_sesion_curso_ahbbWhereUniqueInput | td_sesion_curso_ahbbWhereUniqueInput[]
+    connect?: td_sesion_curso_ahbbWhereUniqueInput | td_sesion_curso_ahbbWhereUniqueInput[]
+    update?: td_sesion_curso_ahbbUpdateWithWhereUniqueWithoutCursoInput | td_sesion_curso_ahbbUpdateWithWhereUniqueWithoutCursoInput[]
+    updateMany?: td_sesion_curso_ahbbUpdateManyWithWhereWithoutCursoInput | td_sesion_curso_ahbbUpdateManyWithWhereWithoutCursoInput[]
+    deleteMany?: td_sesion_curso_ahbbScalarWhereInput | td_sesion_curso_ahbbScalarWhereInput[]
+  }
+
+  export type td_curso_ahbbCreateNestedOneWithoutSesionesInput = {
+    create?: XOR<td_curso_ahbbCreateWithoutSesionesInput, td_curso_ahbbUncheckedCreateWithoutSesionesInput>
+    connectOrCreate?: td_curso_ahbbCreateOrConnectWithoutSesionesInput
+    connect?: td_curso_ahbbWhereUniqueInput
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type DecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type td_curso_ahbbUpdateOneRequiredWithoutSesionesNestedInput = {
+    create?: XOR<td_curso_ahbbCreateWithoutSesionesInput, td_curso_ahbbUncheckedCreateWithoutSesionesInput>
+    connectOrCreate?: td_curso_ahbbCreateOrConnectWithoutSesionesInput
+    upsert?: td_curso_ahbbUpsertWithoutSesionesInput
+    connect?: td_curso_ahbbWhereUniqueInput
+    update?: XOR<XOR<td_curso_ahbbUpdateToOneWithWhereWithoutSesionesInput, td_curso_ahbbUpdateWithoutSesionesInput>, td_curso_ahbbUncheckedUpdateWithoutSesionesInput>
   }
 
   export type td_curso_ahbbCreateNestedOneWithoutHorariosInput = {
@@ -19672,10 +21326,6 @@ export namespace Prisma {
     connect?: td_usuario_ahbbWhereUniqueInput
   }
 
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
-  }
-
   export type td_usuario_ahbbUpdateOneRequiredWithoutAuditoriasUsuario_ahbbNestedInput = {
     create?: XOR<td_usuario_ahbbCreateWithoutAuditoriasUsuario_ahbbInput, td_usuario_ahbbUncheckedCreateWithoutAuditoriasUsuario_ahbbInput>
     connectOrCreate?: td_usuario_ahbbCreateOrConnectWithoutAuditoriasUsuario_ahbbInput
@@ -19732,14 +21382,6 @@ export namespace Prisma {
     connectOrCreate?: td_favorito_ahbbCreateOrConnectWithoutProducto_ahbbInput | td_favorito_ahbbCreateOrConnectWithoutProducto_ahbbInput[]
     createMany?: td_favorito_ahbbCreateManyProducto_ahbbInputEnvelope
     connect?: td_favorito_ahbbWhereUniqueInput | td_favorito_ahbbWhereUniqueInput[]
-  }
-
-  export type DecimalFieldUpdateOperationsInput = {
-    set?: Decimal | DecimalJsLike | number | string
-    increment?: Decimal | DecimalJsLike | number | string
-    decrement?: Decimal | DecimalJsLike | number | string
-    multiply?: Decimal | DecimalJsLike | number | string
-    divide?: Decimal | DecimalJsLike | number | string
   }
 
   export type td_carrito_ahbbUpdateManyWithoutProducto_ahbbNestedInput = {
@@ -20155,6 +21797,58 @@ export namespace Prisma {
     _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedDecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
   export type NestedDecimalNullableFilter<$PrismaModel = never> = {
     equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
     in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
@@ -20182,58 +21876,6 @@ export namespace Prisma {
     _max?: NestedDecimalNullableFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type NestedDecimalFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-  }
-
-  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedDecimalFilter<$PrismaModel>
-    _sum?: NestedDecimalFilter<$PrismaModel>
-    _min?: NestedDecimalFilter<$PrismaModel>
-    _max?: NestedDecimalFilter<$PrismaModel>
-  }
-
   export type td_curso_ahbbCreateWithoutProfesorInput = {
     nombre_ahbb: string
     tematica_ahbb: string
@@ -20248,12 +21890,16 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: string | null
     imagenBloqueada_ahbb?: boolean | null
     isPublished_ahbb?: boolean
+    estadoAprobacion_ahbb?: string
+    motivoRechazo_ahbb?: string | null
+    mensajeCorreccion_ahbb?: string | null
     creadoEn_ahbb?: Date | string | null
     actualizadoEn_ahbb?: Date | string | null
     prelacion?: td_curso_ahbbCreateNestedOneWithoutPrelacionesInput
     prelaciones?: td_curso_ahbbCreateNestedManyWithoutPrelacionInput
     horarios?: td_horario_ahbbCreateNestedManyWithoutCursoInput
     inscripciones?: td_inscripcion_ahbbCreateNestedManyWithoutCursoInput
+    sesiones?: td_sesion_curso_ahbbCreateNestedManyWithoutCursoInput
   }
 
   export type td_curso_ahbbUncheckedCreateWithoutProfesorInput = {
@@ -20271,12 +21917,16 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: string | null
     imagenBloqueada_ahbb?: boolean | null
     isPublished_ahbb?: boolean
+    estadoAprobacion_ahbb?: string
+    motivoRechazo_ahbb?: string | null
+    mensajeCorreccion_ahbb?: string | null
     id_curso_curso_ahbb?: number | null
     creadoEn_ahbb?: Date | string | null
     actualizadoEn_ahbb?: Date | string | null
     prelaciones?: td_curso_ahbbUncheckedCreateNestedManyWithoutPrelacionInput
     horarios?: td_horario_ahbbUncheckedCreateNestedManyWithoutCursoInput
     inscripciones?: td_inscripcion_ahbbUncheckedCreateNestedManyWithoutCursoInput
+    sesiones?: td_sesion_curso_ahbbUncheckedCreateNestedManyWithoutCursoInput
   }
 
   export type td_curso_ahbbCreateOrConnectWithoutProfesorInput = {
@@ -20481,6 +22131,9 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: StringNullableFilter<"td_curso_ahbb"> | string | null
     imagenBloqueada_ahbb?: BoolNullableFilter<"td_curso_ahbb"> | boolean | null
     isPublished_ahbb?: BoolFilter<"td_curso_ahbb"> | boolean
+    estadoAprobacion_ahbb?: StringFilter<"td_curso_ahbb"> | string
+    motivoRechazo_ahbb?: StringNullableFilter<"td_curso_ahbb"> | string | null
+    mensajeCorreccion_ahbb?: StringNullableFilter<"td_curso_ahbb"> | string | null
     id_usuario_curso_ahbb?: IntFilter<"td_curso_ahbb"> | number
     id_curso_curso_ahbb?: IntNullableFilter<"td_curso_ahbb"> | number | null
     creadoEn_ahbb?: DateTimeNullableFilter<"td_curso_ahbb"> | Date | string | null
@@ -20708,12 +22361,16 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: string | null
     imagenBloqueada_ahbb?: boolean | null
     isPublished_ahbb?: boolean
+    estadoAprobacion_ahbb?: string
+    motivoRechazo_ahbb?: string | null
+    mensajeCorreccion_ahbb?: string | null
     creadoEn_ahbb?: Date | string | null
     actualizadoEn_ahbb?: Date | string | null
     profesor: td_usuario_ahbbCreateNestedOneWithoutCursosInput
     prelacion?: td_curso_ahbbCreateNestedOneWithoutPrelacionesInput
     horarios?: td_horario_ahbbCreateNestedManyWithoutCursoInput
     inscripciones?: td_inscripcion_ahbbCreateNestedManyWithoutCursoInput
+    sesiones?: td_sesion_curso_ahbbCreateNestedManyWithoutCursoInput
   }
 
   export type td_curso_ahbbUncheckedCreateWithoutPrelacionesInput = {
@@ -20731,12 +22388,16 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: string | null
     imagenBloqueada_ahbb?: boolean | null
     isPublished_ahbb?: boolean
+    estadoAprobacion_ahbb?: string
+    motivoRechazo_ahbb?: string | null
+    mensajeCorreccion_ahbb?: string | null
     id_usuario_curso_ahbb: number
     id_curso_curso_ahbb?: number | null
     creadoEn_ahbb?: Date | string | null
     actualizadoEn_ahbb?: Date | string | null
     horarios?: td_horario_ahbbUncheckedCreateNestedManyWithoutCursoInput
     inscripciones?: td_inscripcion_ahbbUncheckedCreateNestedManyWithoutCursoInput
+    sesiones?: td_sesion_curso_ahbbUncheckedCreateNestedManyWithoutCursoInput
   }
 
   export type td_curso_ahbbCreateOrConnectWithoutPrelacionesInput = {
@@ -20758,12 +22419,16 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: string | null
     imagenBloqueada_ahbb?: boolean | null
     isPublished_ahbb?: boolean
+    estadoAprobacion_ahbb?: string
+    motivoRechazo_ahbb?: string | null
+    mensajeCorreccion_ahbb?: string | null
     creadoEn_ahbb?: Date | string | null
     actualizadoEn_ahbb?: Date | string | null
     profesor: td_usuario_ahbbCreateNestedOneWithoutCursosInput
     prelaciones?: td_curso_ahbbCreateNestedManyWithoutPrelacionInput
     horarios?: td_horario_ahbbCreateNestedManyWithoutCursoInput
     inscripciones?: td_inscripcion_ahbbCreateNestedManyWithoutCursoInput
+    sesiones?: td_sesion_curso_ahbbCreateNestedManyWithoutCursoInput
   }
 
   export type td_curso_ahbbUncheckedCreateWithoutPrelacionInput = {
@@ -20781,12 +22446,16 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: string | null
     imagenBloqueada_ahbb?: boolean | null
     isPublished_ahbb?: boolean
+    estadoAprobacion_ahbb?: string
+    motivoRechazo_ahbb?: string | null
+    mensajeCorreccion_ahbb?: string | null
     id_usuario_curso_ahbb: number
     creadoEn_ahbb?: Date | string | null
     actualizadoEn_ahbb?: Date | string | null
     prelaciones?: td_curso_ahbbUncheckedCreateNestedManyWithoutPrelacionInput
     horarios?: td_horario_ahbbUncheckedCreateNestedManyWithoutCursoInput
     inscripciones?: td_inscripcion_ahbbUncheckedCreateNestedManyWithoutCursoInput
+    sesiones?: td_sesion_curso_ahbbUncheckedCreateNestedManyWithoutCursoInput
   }
 
   export type td_curso_ahbbCreateOrConnectWithoutPrelacionInput = {
@@ -20852,6 +22521,35 @@ export namespace Prisma {
 
   export type td_inscripcion_ahbbCreateManyCursoInputEnvelope = {
     data: td_inscripcion_ahbbCreateManyCursoInput | td_inscripcion_ahbbCreateManyCursoInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type td_sesion_curso_ahbbCreateWithoutCursoInput = {
+    nroSesion_ahbb: number
+    fechaSesion_ahbb: Date | string
+    horaInicio_ahbb: string
+    horaFin_ahbb: string
+    horasDuracion_ahbb: Decimal | DecimalJsLike | number | string
+    diaSemana_ahbb: string
+  }
+
+  export type td_sesion_curso_ahbbUncheckedCreateWithoutCursoInput = {
+    id_sesion_ahbb?: number
+    nroSesion_ahbb: number
+    fechaSesion_ahbb: Date | string
+    horaInicio_ahbb: string
+    horaFin_ahbb: string
+    horasDuracion_ahbb: Decimal | DecimalJsLike | number | string
+    diaSemana_ahbb: string
+  }
+
+  export type td_sesion_curso_ahbbCreateOrConnectWithoutCursoInput = {
+    where: td_sesion_curso_ahbbWhereUniqueInput
+    create: XOR<td_sesion_curso_ahbbCreateWithoutCursoInput, td_sesion_curso_ahbbUncheckedCreateWithoutCursoInput>
+  }
+
+  export type td_sesion_curso_ahbbCreateManyCursoInputEnvelope = {
+    data: td_sesion_curso_ahbbCreateManyCursoInput | td_sesion_curso_ahbbCreateManyCursoInput[]
     skipDuplicates?: boolean
   }
 
@@ -20936,12 +22634,16 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     imagenBloqueada_ahbb?: NullableBoolFieldUpdateOperationsInput | boolean | null
     isPublished_ahbb?: BoolFieldUpdateOperationsInput | boolean
+    estadoAprobacion_ahbb?: StringFieldUpdateOperationsInput | string
+    motivoRechazo_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeCorreccion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profesor?: td_usuario_ahbbUpdateOneRequiredWithoutCursosNestedInput
     prelacion?: td_curso_ahbbUpdateOneWithoutPrelacionesNestedInput
     horarios?: td_horario_ahbbUpdateManyWithoutCursoNestedInput
     inscripciones?: td_inscripcion_ahbbUpdateManyWithoutCursoNestedInput
+    sesiones?: td_sesion_curso_ahbbUpdateManyWithoutCursoNestedInput
   }
 
   export type td_curso_ahbbUncheckedUpdateWithoutPrelacionesInput = {
@@ -20959,12 +22661,16 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     imagenBloqueada_ahbb?: NullableBoolFieldUpdateOperationsInput | boolean | null
     isPublished_ahbb?: BoolFieldUpdateOperationsInput | boolean
+    estadoAprobacion_ahbb?: StringFieldUpdateOperationsInput | string
+    motivoRechazo_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeCorreccion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     id_usuario_curso_ahbb?: IntFieldUpdateOperationsInput | number
     id_curso_curso_ahbb?: NullableIntFieldUpdateOperationsInput | number | null
     creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     horarios?: td_horario_ahbbUncheckedUpdateManyWithoutCursoNestedInput
     inscripciones?: td_inscripcion_ahbbUncheckedUpdateManyWithoutCursoNestedInput
+    sesiones?: td_sesion_curso_ahbbUncheckedUpdateManyWithoutCursoNestedInput
   }
 
   export type td_curso_ahbbUpsertWithWhereUniqueWithoutPrelacionInput = {
@@ -21026,6 +22732,158 @@ export namespace Prisma {
     data: XOR<td_inscripcion_ahbbUpdateManyMutationInput, td_inscripcion_ahbbUncheckedUpdateManyWithoutCursoInput>
   }
 
+  export type td_sesion_curso_ahbbUpsertWithWhereUniqueWithoutCursoInput = {
+    where: td_sesion_curso_ahbbWhereUniqueInput
+    update: XOR<td_sesion_curso_ahbbUpdateWithoutCursoInput, td_sesion_curso_ahbbUncheckedUpdateWithoutCursoInput>
+    create: XOR<td_sesion_curso_ahbbCreateWithoutCursoInput, td_sesion_curso_ahbbUncheckedCreateWithoutCursoInput>
+  }
+
+  export type td_sesion_curso_ahbbUpdateWithWhereUniqueWithoutCursoInput = {
+    where: td_sesion_curso_ahbbWhereUniqueInput
+    data: XOR<td_sesion_curso_ahbbUpdateWithoutCursoInput, td_sesion_curso_ahbbUncheckedUpdateWithoutCursoInput>
+  }
+
+  export type td_sesion_curso_ahbbUpdateManyWithWhereWithoutCursoInput = {
+    where: td_sesion_curso_ahbbScalarWhereInput
+    data: XOR<td_sesion_curso_ahbbUpdateManyMutationInput, td_sesion_curso_ahbbUncheckedUpdateManyWithoutCursoInput>
+  }
+
+  export type td_sesion_curso_ahbbScalarWhereInput = {
+    AND?: td_sesion_curso_ahbbScalarWhereInput | td_sesion_curso_ahbbScalarWhereInput[]
+    OR?: td_sesion_curso_ahbbScalarWhereInput[]
+    NOT?: td_sesion_curso_ahbbScalarWhereInput | td_sesion_curso_ahbbScalarWhereInput[]
+    id_sesion_ahbb?: IntFilter<"td_sesion_curso_ahbb"> | number
+    nroSesion_ahbb?: IntFilter<"td_sesion_curso_ahbb"> | number
+    fechaSesion_ahbb?: DateTimeFilter<"td_sesion_curso_ahbb"> | Date | string
+    horaInicio_ahbb?: StringFilter<"td_sesion_curso_ahbb"> | string
+    horaFin_ahbb?: StringFilter<"td_sesion_curso_ahbb"> | string
+    horasDuracion_ahbb?: DecimalFilter<"td_sesion_curso_ahbb"> | Decimal | DecimalJsLike | number | string
+    diaSemana_ahbb?: StringFilter<"td_sesion_curso_ahbb"> | string
+    id_curso_sesion_ahbb?: IntFilter<"td_sesion_curso_ahbb"> | number
+  }
+
+  export type td_curso_ahbbCreateWithoutSesionesInput = {
+    nombre_ahbb: string
+    tematica_ahbb: string
+    descripcion_ahbb?: string | null
+    diasDefinidos_ahbb: number
+    horasDefinidas_ahbb: number
+    fechaInicio_ahbb?: Date | string | null
+    fechaFin_ahbb?: Date | string | null
+    fechaDuracion_ahbb?: Date | string | null
+    topeEstudiantes_ahbb?: number | null
+    temarioTexto_ahbb?: string | null
+    imagenBasePdf_ahbb?: string | null
+    imagenBloqueada_ahbb?: boolean | null
+    isPublished_ahbb?: boolean
+    estadoAprobacion_ahbb?: string
+    motivoRechazo_ahbb?: string | null
+    mensajeCorreccion_ahbb?: string | null
+    creadoEn_ahbb?: Date | string | null
+    actualizadoEn_ahbb?: Date | string | null
+    profesor: td_usuario_ahbbCreateNestedOneWithoutCursosInput
+    prelacion?: td_curso_ahbbCreateNestedOneWithoutPrelacionesInput
+    prelaciones?: td_curso_ahbbCreateNestedManyWithoutPrelacionInput
+    horarios?: td_horario_ahbbCreateNestedManyWithoutCursoInput
+    inscripciones?: td_inscripcion_ahbbCreateNestedManyWithoutCursoInput
+  }
+
+  export type td_curso_ahbbUncheckedCreateWithoutSesionesInput = {
+    id_curso_ahbb?: number
+    nombre_ahbb: string
+    tematica_ahbb: string
+    descripcion_ahbb?: string | null
+    diasDefinidos_ahbb: number
+    horasDefinidas_ahbb: number
+    fechaInicio_ahbb?: Date | string | null
+    fechaFin_ahbb?: Date | string | null
+    fechaDuracion_ahbb?: Date | string | null
+    topeEstudiantes_ahbb?: number | null
+    temarioTexto_ahbb?: string | null
+    imagenBasePdf_ahbb?: string | null
+    imagenBloqueada_ahbb?: boolean | null
+    isPublished_ahbb?: boolean
+    estadoAprobacion_ahbb?: string
+    motivoRechazo_ahbb?: string | null
+    mensajeCorreccion_ahbb?: string | null
+    id_usuario_curso_ahbb: number
+    id_curso_curso_ahbb?: number | null
+    creadoEn_ahbb?: Date | string | null
+    actualizadoEn_ahbb?: Date | string | null
+    prelaciones?: td_curso_ahbbUncheckedCreateNestedManyWithoutPrelacionInput
+    horarios?: td_horario_ahbbUncheckedCreateNestedManyWithoutCursoInput
+    inscripciones?: td_inscripcion_ahbbUncheckedCreateNestedManyWithoutCursoInput
+  }
+
+  export type td_curso_ahbbCreateOrConnectWithoutSesionesInput = {
+    where: td_curso_ahbbWhereUniqueInput
+    create: XOR<td_curso_ahbbCreateWithoutSesionesInput, td_curso_ahbbUncheckedCreateWithoutSesionesInput>
+  }
+
+  export type td_curso_ahbbUpsertWithoutSesionesInput = {
+    update: XOR<td_curso_ahbbUpdateWithoutSesionesInput, td_curso_ahbbUncheckedUpdateWithoutSesionesInput>
+    create: XOR<td_curso_ahbbCreateWithoutSesionesInput, td_curso_ahbbUncheckedCreateWithoutSesionesInput>
+    where?: td_curso_ahbbWhereInput
+  }
+
+  export type td_curso_ahbbUpdateToOneWithWhereWithoutSesionesInput = {
+    where?: td_curso_ahbbWhereInput
+    data: XOR<td_curso_ahbbUpdateWithoutSesionesInput, td_curso_ahbbUncheckedUpdateWithoutSesionesInput>
+  }
+
+  export type td_curso_ahbbUpdateWithoutSesionesInput = {
+    nombre_ahbb?: StringFieldUpdateOperationsInput | string
+    tematica_ahbb?: StringFieldUpdateOperationsInput | string
+    descripcion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    diasDefinidos_ahbb?: IntFieldUpdateOperationsInput | number
+    horasDefinidas_ahbb?: IntFieldUpdateOperationsInput | number
+    fechaInicio_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fechaFin_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fechaDuracion_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    topeEstudiantes_ahbb?: NullableIntFieldUpdateOperationsInput | number | null
+    temarioTexto_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    imagenBasePdf_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    imagenBloqueada_ahbb?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    isPublished_ahbb?: BoolFieldUpdateOperationsInput | boolean
+    estadoAprobacion_ahbb?: StringFieldUpdateOperationsInput | string
+    motivoRechazo_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeCorreccion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profesor?: td_usuario_ahbbUpdateOneRequiredWithoutCursosNestedInput
+    prelacion?: td_curso_ahbbUpdateOneWithoutPrelacionesNestedInput
+    prelaciones?: td_curso_ahbbUpdateManyWithoutPrelacionNestedInput
+    horarios?: td_horario_ahbbUpdateManyWithoutCursoNestedInput
+    inscripciones?: td_inscripcion_ahbbUpdateManyWithoutCursoNestedInput
+  }
+
+  export type td_curso_ahbbUncheckedUpdateWithoutSesionesInput = {
+    id_curso_ahbb?: IntFieldUpdateOperationsInput | number
+    nombre_ahbb?: StringFieldUpdateOperationsInput | string
+    tematica_ahbb?: StringFieldUpdateOperationsInput | string
+    descripcion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    diasDefinidos_ahbb?: IntFieldUpdateOperationsInput | number
+    horasDefinidas_ahbb?: IntFieldUpdateOperationsInput | number
+    fechaInicio_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fechaFin_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fechaDuracion_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    topeEstudiantes_ahbb?: NullableIntFieldUpdateOperationsInput | number | null
+    temarioTexto_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    imagenBasePdf_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    imagenBloqueada_ahbb?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    isPublished_ahbb?: BoolFieldUpdateOperationsInput | boolean
+    estadoAprobacion_ahbb?: StringFieldUpdateOperationsInput | string
+    motivoRechazo_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeCorreccion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    id_usuario_curso_ahbb?: IntFieldUpdateOperationsInput | number
+    id_curso_curso_ahbb?: NullableIntFieldUpdateOperationsInput | number | null
+    creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    prelaciones?: td_curso_ahbbUncheckedUpdateManyWithoutPrelacionNestedInput
+    horarios?: td_horario_ahbbUncheckedUpdateManyWithoutCursoNestedInput
+    inscripciones?: td_inscripcion_ahbbUncheckedUpdateManyWithoutCursoNestedInput
+  }
+
   export type td_curso_ahbbCreateWithoutHorariosInput = {
     nombre_ahbb: string
     tematica_ahbb: string
@@ -21040,12 +22898,16 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: string | null
     imagenBloqueada_ahbb?: boolean | null
     isPublished_ahbb?: boolean
+    estadoAprobacion_ahbb?: string
+    motivoRechazo_ahbb?: string | null
+    mensajeCorreccion_ahbb?: string | null
     creadoEn_ahbb?: Date | string | null
     actualizadoEn_ahbb?: Date | string | null
     profesor: td_usuario_ahbbCreateNestedOneWithoutCursosInput
     prelacion?: td_curso_ahbbCreateNestedOneWithoutPrelacionesInput
     prelaciones?: td_curso_ahbbCreateNestedManyWithoutPrelacionInput
     inscripciones?: td_inscripcion_ahbbCreateNestedManyWithoutCursoInput
+    sesiones?: td_sesion_curso_ahbbCreateNestedManyWithoutCursoInput
   }
 
   export type td_curso_ahbbUncheckedCreateWithoutHorariosInput = {
@@ -21063,12 +22925,16 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: string | null
     imagenBloqueada_ahbb?: boolean | null
     isPublished_ahbb?: boolean
+    estadoAprobacion_ahbb?: string
+    motivoRechazo_ahbb?: string | null
+    mensajeCorreccion_ahbb?: string | null
     id_usuario_curso_ahbb: number
     id_curso_curso_ahbb?: number | null
     creadoEn_ahbb?: Date | string | null
     actualizadoEn_ahbb?: Date | string | null
     prelaciones?: td_curso_ahbbUncheckedCreateNestedManyWithoutPrelacionInput
     inscripciones?: td_inscripcion_ahbbUncheckedCreateNestedManyWithoutCursoInput
+    sesiones?: td_sesion_curso_ahbbUncheckedCreateNestedManyWithoutCursoInput
   }
 
   export type td_curso_ahbbCreateOrConnectWithoutHorariosInput = {
@@ -21101,12 +22967,16 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     imagenBloqueada_ahbb?: NullableBoolFieldUpdateOperationsInput | boolean | null
     isPublished_ahbb?: BoolFieldUpdateOperationsInput | boolean
+    estadoAprobacion_ahbb?: StringFieldUpdateOperationsInput | string
+    motivoRechazo_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeCorreccion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profesor?: td_usuario_ahbbUpdateOneRequiredWithoutCursosNestedInput
     prelacion?: td_curso_ahbbUpdateOneWithoutPrelacionesNestedInput
     prelaciones?: td_curso_ahbbUpdateManyWithoutPrelacionNestedInput
     inscripciones?: td_inscripcion_ahbbUpdateManyWithoutCursoNestedInput
+    sesiones?: td_sesion_curso_ahbbUpdateManyWithoutCursoNestedInput
   }
 
   export type td_curso_ahbbUncheckedUpdateWithoutHorariosInput = {
@@ -21124,12 +22994,16 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     imagenBloqueada_ahbb?: NullableBoolFieldUpdateOperationsInput | boolean | null
     isPublished_ahbb?: BoolFieldUpdateOperationsInput | boolean
+    estadoAprobacion_ahbb?: StringFieldUpdateOperationsInput | string
+    motivoRechazo_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeCorreccion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     id_usuario_curso_ahbb?: IntFieldUpdateOperationsInput | number
     id_curso_curso_ahbb?: NullableIntFieldUpdateOperationsInput | number | null
     creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     prelaciones?: td_curso_ahbbUncheckedUpdateManyWithoutPrelacionNestedInput
     inscripciones?: td_inscripcion_ahbbUncheckedUpdateManyWithoutCursoNestedInput
+    sesiones?: td_sesion_curso_ahbbUncheckedUpdateManyWithoutCursoNestedInput
   }
 
   export type td_usuario_ahbbCreateWithoutInscripcionesInput = {
@@ -21196,12 +23070,16 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: string | null
     imagenBloqueada_ahbb?: boolean | null
     isPublished_ahbb?: boolean
+    estadoAprobacion_ahbb?: string
+    motivoRechazo_ahbb?: string | null
+    mensajeCorreccion_ahbb?: string | null
     creadoEn_ahbb?: Date | string | null
     actualizadoEn_ahbb?: Date | string | null
     profesor: td_usuario_ahbbCreateNestedOneWithoutCursosInput
     prelacion?: td_curso_ahbbCreateNestedOneWithoutPrelacionesInput
     prelaciones?: td_curso_ahbbCreateNestedManyWithoutPrelacionInput
     horarios?: td_horario_ahbbCreateNestedManyWithoutCursoInput
+    sesiones?: td_sesion_curso_ahbbCreateNestedManyWithoutCursoInput
   }
 
   export type td_curso_ahbbUncheckedCreateWithoutInscripcionesInput = {
@@ -21219,12 +23097,16 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: string | null
     imagenBloqueada_ahbb?: boolean | null
     isPublished_ahbb?: boolean
+    estadoAprobacion_ahbb?: string
+    motivoRechazo_ahbb?: string | null
+    mensajeCorreccion_ahbb?: string | null
     id_usuario_curso_ahbb: number
     id_curso_curso_ahbb?: number | null
     creadoEn_ahbb?: Date | string | null
     actualizadoEn_ahbb?: Date | string | null
     prelaciones?: td_curso_ahbbUncheckedCreateNestedManyWithoutPrelacionInput
     horarios?: td_horario_ahbbUncheckedCreateNestedManyWithoutCursoInput
+    sesiones?: td_sesion_curso_ahbbUncheckedCreateNestedManyWithoutCursoInput
   }
 
   export type td_curso_ahbbCreateOrConnectWithoutInscripcionesInput = {
@@ -21329,12 +23211,16 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     imagenBloqueada_ahbb?: NullableBoolFieldUpdateOperationsInput | boolean | null
     isPublished_ahbb?: BoolFieldUpdateOperationsInput | boolean
+    estadoAprobacion_ahbb?: StringFieldUpdateOperationsInput | string
+    motivoRechazo_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeCorreccion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profesor?: td_usuario_ahbbUpdateOneRequiredWithoutCursosNestedInput
     prelacion?: td_curso_ahbbUpdateOneWithoutPrelacionesNestedInput
     prelaciones?: td_curso_ahbbUpdateManyWithoutPrelacionNestedInput
     horarios?: td_horario_ahbbUpdateManyWithoutCursoNestedInput
+    sesiones?: td_sesion_curso_ahbbUpdateManyWithoutCursoNestedInput
   }
 
   export type td_curso_ahbbUncheckedUpdateWithoutInscripcionesInput = {
@@ -21352,12 +23238,16 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     imagenBloqueada_ahbb?: NullableBoolFieldUpdateOperationsInput | boolean | null
     isPublished_ahbb?: BoolFieldUpdateOperationsInput | boolean
+    estadoAprobacion_ahbb?: StringFieldUpdateOperationsInput | string
+    motivoRechazo_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeCorreccion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     id_usuario_curso_ahbb?: IntFieldUpdateOperationsInput | number
     id_curso_curso_ahbb?: NullableIntFieldUpdateOperationsInput | number | null
     creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     prelaciones?: td_curso_ahbbUncheckedUpdateManyWithoutPrelacionNestedInput
     horarios?: td_horario_ahbbUncheckedUpdateManyWithoutCursoNestedInput
+    sesiones?: td_sesion_curso_ahbbUncheckedUpdateManyWithoutCursoNestedInput
   }
 
   export type td_certificado_ahbbUpsertWithoutInscripcionInput = {
@@ -22426,6 +24316,9 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: string | null
     imagenBloqueada_ahbb?: boolean | null
     isPublished_ahbb?: boolean
+    estadoAprobacion_ahbb?: string
+    motivoRechazo_ahbb?: string | null
+    mensajeCorreccion_ahbb?: string | null
     id_curso_curso_ahbb?: number | null
     creadoEn_ahbb?: Date | string | null
     actualizadoEn_ahbb?: Date | string | null
@@ -22495,12 +24388,16 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     imagenBloqueada_ahbb?: NullableBoolFieldUpdateOperationsInput | boolean | null
     isPublished_ahbb?: BoolFieldUpdateOperationsInput | boolean
+    estadoAprobacion_ahbb?: StringFieldUpdateOperationsInput | string
+    motivoRechazo_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeCorreccion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     prelacion?: td_curso_ahbbUpdateOneWithoutPrelacionesNestedInput
     prelaciones?: td_curso_ahbbUpdateManyWithoutPrelacionNestedInput
     horarios?: td_horario_ahbbUpdateManyWithoutCursoNestedInput
     inscripciones?: td_inscripcion_ahbbUpdateManyWithoutCursoNestedInput
+    sesiones?: td_sesion_curso_ahbbUpdateManyWithoutCursoNestedInput
   }
 
   export type td_curso_ahbbUncheckedUpdateWithoutProfesorInput = {
@@ -22518,12 +24415,16 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     imagenBloqueada_ahbb?: NullableBoolFieldUpdateOperationsInput | boolean | null
     isPublished_ahbb?: BoolFieldUpdateOperationsInput | boolean
+    estadoAprobacion_ahbb?: StringFieldUpdateOperationsInput | string
+    motivoRechazo_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeCorreccion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     id_curso_curso_ahbb?: NullableIntFieldUpdateOperationsInput | number | null
     creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     prelaciones?: td_curso_ahbbUncheckedUpdateManyWithoutPrelacionNestedInput
     horarios?: td_horario_ahbbUncheckedUpdateManyWithoutCursoNestedInput
     inscripciones?: td_inscripcion_ahbbUncheckedUpdateManyWithoutCursoNestedInput
+    sesiones?: td_sesion_curso_ahbbUncheckedUpdateManyWithoutCursoNestedInput
   }
 
   export type td_curso_ahbbUncheckedUpdateManyWithoutProfesorInput = {
@@ -22541,6 +24442,9 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     imagenBloqueada_ahbb?: NullableBoolFieldUpdateOperationsInput | boolean | null
     isPublished_ahbb?: BoolFieldUpdateOperationsInput | boolean
+    estadoAprobacion_ahbb?: StringFieldUpdateOperationsInput | string
+    motivoRechazo_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeCorreccion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     id_curso_curso_ahbb?: NullableIntFieldUpdateOperationsInput | number | null
     creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22709,6 +24613,9 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: string | null
     imagenBloqueada_ahbb?: boolean | null
     isPublished_ahbb?: boolean
+    estadoAprobacion_ahbb?: string
+    motivoRechazo_ahbb?: string | null
+    mensajeCorreccion_ahbb?: string | null
     id_usuario_curso_ahbb: number
     creadoEn_ahbb?: Date | string | null
     actualizadoEn_ahbb?: Date | string | null
@@ -22732,6 +24639,16 @@ export namespace Prisma {
     actualizadoEn_ahbb?: Date | string | null
   }
 
+  export type td_sesion_curso_ahbbCreateManyCursoInput = {
+    id_sesion_ahbb?: number
+    nroSesion_ahbb: number
+    fechaSesion_ahbb: Date | string
+    horaInicio_ahbb: string
+    horaFin_ahbb: string
+    horasDuracion_ahbb: Decimal | DecimalJsLike | number | string
+    diaSemana_ahbb: string
+  }
+
   export type td_curso_ahbbUpdateWithoutPrelacionInput = {
     nombre_ahbb?: StringFieldUpdateOperationsInput | string
     tematica_ahbb?: StringFieldUpdateOperationsInput | string
@@ -22746,12 +24663,16 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     imagenBloqueada_ahbb?: NullableBoolFieldUpdateOperationsInput | boolean | null
     isPublished_ahbb?: BoolFieldUpdateOperationsInput | boolean
+    estadoAprobacion_ahbb?: StringFieldUpdateOperationsInput | string
+    motivoRechazo_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeCorreccion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profesor?: td_usuario_ahbbUpdateOneRequiredWithoutCursosNestedInput
     prelaciones?: td_curso_ahbbUpdateManyWithoutPrelacionNestedInput
     horarios?: td_horario_ahbbUpdateManyWithoutCursoNestedInput
     inscripciones?: td_inscripcion_ahbbUpdateManyWithoutCursoNestedInput
+    sesiones?: td_sesion_curso_ahbbUpdateManyWithoutCursoNestedInput
   }
 
   export type td_curso_ahbbUncheckedUpdateWithoutPrelacionInput = {
@@ -22769,12 +24690,16 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     imagenBloqueada_ahbb?: NullableBoolFieldUpdateOperationsInput | boolean | null
     isPublished_ahbb?: BoolFieldUpdateOperationsInput | boolean
+    estadoAprobacion_ahbb?: StringFieldUpdateOperationsInput | string
+    motivoRechazo_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeCorreccion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     id_usuario_curso_ahbb?: IntFieldUpdateOperationsInput | number
     creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     prelaciones?: td_curso_ahbbUncheckedUpdateManyWithoutPrelacionNestedInput
     horarios?: td_horario_ahbbUncheckedUpdateManyWithoutCursoNestedInput
     inscripciones?: td_inscripcion_ahbbUncheckedUpdateManyWithoutCursoNestedInput
+    sesiones?: td_sesion_curso_ahbbUncheckedUpdateManyWithoutCursoNestedInput
   }
 
   export type td_curso_ahbbUncheckedUpdateManyWithoutPrelacionInput = {
@@ -22792,6 +24717,9 @@ export namespace Prisma {
     imagenBasePdf_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     imagenBloqueada_ahbb?: NullableBoolFieldUpdateOperationsInput | boolean | null
     isPublished_ahbb?: BoolFieldUpdateOperationsInput | boolean
+    estadoAprobacion_ahbb?: StringFieldUpdateOperationsInput | string
+    motivoRechazo_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeCorreccion_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     id_usuario_curso_ahbb?: IntFieldUpdateOperationsInput | number
     creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22849,6 +24777,35 @@ export namespace Prisma {
     id_usuario_inscripcion_ahbb?: IntFieldUpdateOperationsInput | number
     creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type td_sesion_curso_ahbbUpdateWithoutCursoInput = {
+    nroSesion_ahbb?: IntFieldUpdateOperationsInput | number
+    fechaSesion_ahbb?: DateTimeFieldUpdateOperationsInput | Date | string
+    horaInicio_ahbb?: StringFieldUpdateOperationsInput | string
+    horaFin_ahbb?: StringFieldUpdateOperationsInput | string
+    horasDuracion_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    diaSemana_ahbb?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type td_sesion_curso_ahbbUncheckedUpdateWithoutCursoInput = {
+    id_sesion_ahbb?: IntFieldUpdateOperationsInput | number
+    nroSesion_ahbb?: IntFieldUpdateOperationsInput | number
+    fechaSesion_ahbb?: DateTimeFieldUpdateOperationsInput | Date | string
+    horaInicio_ahbb?: StringFieldUpdateOperationsInput | string
+    horaFin_ahbb?: StringFieldUpdateOperationsInput | string
+    horasDuracion_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    diaSemana_ahbb?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type td_sesion_curso_ahbbUncheckedUpdateManyWithoutCursoInput = {
+    id_sesion_ahbb?: IntFieldUpdateOperationsInput | number
+    nroSesion_ahbb?: IntFieldUpdateOperationsInput | number
+    fechaSesion_ahbb?: DateTimeFieldUpdateOperationsInput | Date | string
+    horaInicio_ahbb?: StringFieldUpdateOperationsInput | string
+    horaFin_ahbb?: StringFieldUpdateOperationsInput | string
+    horasDuracion_ahbb?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    diaSemana_ahbb?: StringFieldUpdateOperationsInput | string
   }
 
   export type td_carrito_ahbbCreateManyProducto_ahbbInput = {

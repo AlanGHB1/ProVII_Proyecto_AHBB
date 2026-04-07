@@ -37,7 +37,7 @@ const authStore_ahbb = useAutenticacionStore_ahbb();
           class="navbar-enlace_ah"
           active-class="enlace-activo_ah"
         >
-          Panel Principal
+          Mi Panel
         </router-link>
         <router-link
           v-else
@@ -47,7 +47,11 @@ const authStore_ahbb = useAutenticacionStore_ahbb();
         >
           Iniciar Sesión
         </router-link>
-        
+
+        <q-btn v-if="authStore_ahbb.estaAutenticado_ahbb" flat round color="white" icon="logout" @click="authStore_ahbb.cerrarSesion_ahbb(); $router.push('/')">
+          <q-tooltip>Cerrar Sesión</q-tooltip>
+        </q-btn>
+
         <div v-if="authStore_ahbb.estaAutenticado_ahbb" class="q-ml-sm row items-center">
           <BadgeCarrito_ahbb />
         </div>

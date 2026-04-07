@@ -18,15 +18,15 @@ export declare class InscripcionesService_ahbb {
         id_curso_inscripcion_ahbb: number;
     }>;
     obtenerTodas_ahbb(): Promise<({
-        alumno: {
-            id_usuario_ahbb: number;
+        curso: {
+            id_curso_ahbb: number;
             nombre_ahbb: string;
+        };
+        alumno: {
+            nombre_ahbb: string;
+            id_usuario_ahbb: number;
             apellido_ahbb: string;
             correo_ahbb: string;
-        };
-        curso: {
-            nombre_ahbb: string;
-            id_curso_ahbb: number;
         };
     } & {
         creadoEn_ahbb: Date | null;
@@ -53,10 +53,8 @@ export declare class InscripcionesService_ahbb {
                 id_curso_horario_ahbb: number;
             }[];
         } & {
-            nombre_ahbb: string;
-            creadoEn_ahbb: Date | null;
-            actualizadoEn_ahbb: Date | null;
             id_curso_ahbb: number;
+            nombre_ahbb: string;
             tematica_ahbb: string;
             descripcion_ahbb: string | null;
             diasDefinidos_ahbb: number;
@@ -69,8 +67,13 @@ export declare class InscripcionesService_ahbb {
             imagenBasePdf_ahbb: string | null;
             imagenBloqueada_ahbb: boolean | null;
             isPublished_ahbb: boolean;
+            estadoAprobacion_ahbb: string;
+            motivoRechazo_ahbb: string | null;
+            mensajeCorreccion_ahbb: string | null;
             id_usuario_curso_ahbb: number;
             id_curso_curso_ahbb: number | null;
+            creadoEn_ahbb: Date | null;
+            actualizadoEn_ahbb: Date | null;
         };
     } & {
         creadoEn_ahbb: Date | null;
@@ -85,8 +88,8 @@ export declare class InscripcionesService_ahbb {
     })[]>;
     obtenerPorCurso_ahbb(id_curso_ahbb: number): Promise<({
         alumno: {
-            id_usuario_ahbb: number;
             nombre_ahbb: string;
+            id_usuario_ahbb: number;
             apellido_ahbb: string;
             correo_ahbb: string;
         };
@@ -112,7 +115,7 @@ export declare class InscripcionesService_ahbb {
         id_usuario_inscripcion_ahbb: number;
         id_curso_inscripcion_ahbb: number;
     }>;
-    validarSolapamiento_ahbb(id_usuario_ahbb: number, horariosCursoNuevo_ahbb: any[]): Promise<void>;
+    validarSolapamiento_ahbb(id_usuario_ahbb: number, horariosCursoNuevo_ahbb: any[], fechaInicioBase_ahbb: Date, fechaFinBase_ahbb: Date): Promise<void>;
     validarPrelacion_ahbb(id_usuario_ahbb: number, id_curso_prelacion_ahbb?: number | null): Promise<void>;
     validarReingreso_ahbb(id_usuario_ahbb: number, id_curso_ahbb: number): Promise<void>;
 }

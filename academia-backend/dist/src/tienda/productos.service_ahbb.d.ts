@@ -7,9 +7,9 @@ export declare class ProductosService_ahbb {
         busqueda?: string;
         estado?: string;
     }): Promise<{
-        nombre_ahbb: string;
         creadoEn_ahbb: Date | null;
         actualizadoEn_ahbb: Date | null;
+        nombre_ahbb: string;
         descripcion_ahbb: string | null;
         id_producto_ahbb: number;
         precio_ahbb: import("@prisma/client-runtime-utils").Decimal;
@@ -19,9 +19,9 @@ export declare class ProductosService_ahbb {
         estado_producto_ahbb: string;
     }[]>;
     obtenerPorId_ahbb(id_producto_ahbb: number): Promise<{
-        nombre_ahbb: string;
         creadoEn_ahbb: Date | null;
         actualizadoEn_ahbb: Date | null;
+        nombre_ahbb: string;
         descripcion_ahbb: string | null;
         id_producto_ahbb: number;
         precio_ahbb: import("@prisma/client-runtime-utils").Decimal;
@@ -31,9 +31,9 @@ export declare class ProductosService_ahbb {
         estado_producto_ahbb: string;
     }>;
     crear_ahbb(datos_ahbb: any): Promise<{
-        nombre_ahbb: string;
         creadoEn_ahbb: Date | null;
         actualizadoEn_ahbb: Date | null;
+        nombre_ahbb: string;
         descripcion_ahbb: string | null;
         id_producto_ahbb: number;
         precio_ahbb: import("@prisma/client-runtime-utils").Decimal;
@@ -43,9 +43,9 @@ export declare class ProductosService_ahbb {
         estado_producto_ahbb: string;
     }>;
     actualizar_ahbb(id_producto_ahbb: number, datos_ahbb: any): Promise<{
-        nombre_ahbb: string;
         creadoEn_ahbb: Date | null;
         actualizadoEn_ahbb: Date | null;
+        nombre_ahbb: string;
         descripcion_ahbb: string | null;
         id_producto_ahbb: number;
         precio_ahbb: import("@prisma/client-runtime-utils").Decimal;

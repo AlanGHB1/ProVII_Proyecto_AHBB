@@ -31,6 +31,8 @@ export const useAutenticacionStore_ahbb = defineStore('autenticacion_ahbb', {
     totalUsuarios_ahbb: (estado) => estado.listaUsuarios_ahbb.length,
     esAdministrador_ahbb: (estado) =>
       estado.usuarioActivo_ahbb?.rol === ROLES_AHBB.ADMINISTRADOR,
+    esAdmin_ahbb: (estado) =>
+      estado.usuarioActivo_ahbb?.rol === ROLES_AHBB.ADMINISTRADOR,
     esProfesor_ahbb: (estado) =>
       estado.usuarioActivo_ahbb?.rol === ROLES_AHBB.PROFESOR,
     esAlumno_ahbb: (estado) =>

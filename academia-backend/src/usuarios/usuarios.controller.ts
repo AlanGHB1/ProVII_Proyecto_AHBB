@@ -40,12 +40,28 @@ export class UsuariosController {
     return this.usuariosService_ahbb.obtenerTodos_ahbb(rol_ahbb);
   }
 
+  @UseGuards(JwtAuthGuard_ahbb, RolesGuard_ahbb)
+  @RolesDecorator_ahbb('ADMIN')
+  @Get('profesores')
+  async obtenerProfesoresParaSelect_ahbb() {
+    return this.usuariosService_ahbb.obtenerTodos_ahbb('PROFESOR');
+  }
+
   // Endpoint para obtener todos los alumnos con estados de suscripción
   @UseGuards(JwtAuthGuard_ahbb, RolesGuard_ahbb)
   @RolesDecorator_ahbb('ADMIN')
   @Get('alumnos-suscripciones')
   async obtenerAlumnosSuscripciones_ahbb() {
     return this.usuariosService_ahbb.obtenerAlumnosPendientes_ahbb();
+  }
+
+  @UseGuards(JwtAuthGuard_ahbb, RolesGuard_ahbb)
+  @RolesDecorator_ahbb('PROFESOR')
+  @Get('mis-alumnos')
+  async obtenerMisAlumnos_ahbb(@Req() request_ahbb: RequestConUsuario_ahbb) {
+    return this.usuariosService_ahbb.obtenerAlumnosPorProfesor_ahbb(
+      Number(request_ahbb.usuario_ahbb?.sub),
+    );
   }
 
   @UseGuards(JwtAuthGuard_ahbb, RolesGuard_ahbb)
@@ -110,19 +126,10 @@ export class UsuariosController {
     @Body() datos_ahbb: AprobarAlumnoDto_ahbb,
     @Req() request_ahbb: RequestConUsuario_ahbb,
   ) {
-    const contrasenaTemporalPlano_ahbb =
-      this.usuariosService_ahbb.generarContrasenaTemporal_ahbb();
-    const hashTemporal_ahbb = await bcrypt.hash(
-      contrasenaTemporalPlano_ahbb,
-      10,
-    );
-
     const usuario_ahbb = await this.usuariosService_ahbb.aprobarAlumno_ahbb(
       datos_ahbb.id_usuario_ahbb,
       Number(request_ahbb.usuario_ahbb?.sub),
       datos_ahbb.referenciaPagoMovil_ahbb,
-      hashTemporal_ahbb,
-      contrasenaTemporalPlano_ahbb,
     );
 
     return {

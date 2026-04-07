@@ -25,8 +25,11 @@ let CursosController = class CursosController {
     constructor(cursosService_ahbb) {
         this.cursosService_ahbb = cursosService_ahbb;
     }
-    async obtenerCursos_ahbb() {
-        return this.cursosService_ahbb.obtenerTodos_ahbb();
+    async obtenerSesiones_ahbb(request_ahbb, id_usuario_ahbb, rol_ahbb, id_curso_ahbb) {
+        return this.cursosService_ahbb.obtenerSesiones_ahbb(request_ahbb.usuario_ahbb?.rol || 'ALUMNO', Number(request_ahbb.usuario_ahbb?.sub), rol_ahbb, id_usuario_ahbb ? Number(id_usuario_ahbb) : undefined, id_curso_ahbb ? Number(id_curso_ahbb) : undefined);
+    }
+    async obtenerCursos_ahbb(request_ahbb, solo_propios, solo_inscritos) {
+        return this.cursosService_ahbb.obtenerTodos_ahbb(request_ahbb.usuario_ahbb?.rol || 'ALUMNO', Number(request_ahbb.usuario_ahbb?.sub), solo_propios === 'true', solo_inscritos === 'true');
     }
     async obtenerCursoPorId_ahbb(id_curso_ahbb) {
         return this.cursosService_ahbb.obtenerPorId_ahbb(id_curso_ahbb);
@@ -35,20 +38,38 @@ let CursosController = class CursosController {
         return this.cursosService_ahbb.obtenerDisponibilidad_ahbb(id_curso_ahbb);
     }
     async crearCurso_ahbb(datos_ahbb, request_ahbb) {
-        return this.cursosService_ahbb.crearCurso_ahbb(Number(request_ahbb.usuario_ahbb?.sub), datos_ahbb);
+        return this.cursosService_ahbb.crearCurso_ahbb(Number(request_ahbb.usuario_ahbb?.sub), datos_ahbb, request_ahbb.usuario_ahbb?.rol);
     }
     async actualizarCurso_ahbb(id_curso_ahbb, datos_ahbb, request_ahbb) {
-        return this.cursosService_ahbb.actualizarCurso_ahbb(id_curso_ahbb, Number(request_ahbb.usuario_ahbb?.sub), datos_ahbb);
+        return this.cursosService_ahbb.actualizarCurso_ahbb(id_curso_ahbb, Number(request_ahbb.usuario_ahbb?.sub), datos_ahbb, request_ahbb.usuario_ahbb?.rol);
     }
     async eliminarCurso_ahbb(id_curso_ahbb) {
         return this.cursosService_ahbb.eliminarCurso_ahbb(id_curso_ahbb);
     }
+    async evaluarCurso_ahbb(id_curso_ahbb, datos) {
+        return this.cursosService_ahbb.evaluarCurso_ahbb(id_curso_ahbb, datos);
+    }
 };
 exports.CursosController = CursosController;
 __decorate([
-    (0, common_1.Get)(),
+    (0, common_1.UseGuards)(jwt_auth_guard_ahbb_1.JwtAuthGuard_ahbb),
+    (0, common_1.Get)('sesiones'),
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Query)('id_usuario_ahbb')),
+    __param(2, (0, common_1.Query)('rol')),
+    __param(3, (0, common_1.Query)('id_curso_ahbb')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Object, String, String, String]),
+    __metadata("design:returntype", Promise)
+], CursosController.prototype, "obtenerSesiones_ahbb", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_ahbb_1.JwtAuthGuard_ahbb),
+    (0, common_1.Get)(),
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Query)('solo_propios')),
+    __param(2, (0, common_1.Query)('solo_inscritos')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, String, String]),
     __metadata("design:returntype", Promise)
 ], CursosController.prototype, "obtenerCursos_ahbb", null);
 __decorate([
@@ -95,6 +116,16 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], CursosController.prototype, "eliminarCurso_ahbb", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_ahbb_1.JwtAuthGuard_ahbb, roles_guard_ahbb_1.RolesGuard_ahbb),
+    (0, roles_decorator_ahbb_1.RolesDecorator_ahbb)('ADMIN'),
+    (0, common_1.Patch)(':id_curso_ahbb/evaluar-curso'),
+    __param(0, (0, common_1.Param)('id_curso_ahbb', common_1.ParseIntPipe)),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Object]),
+    __metadata("design:returntype", Promise)
+], CursosController.prototype, "evaluarCurso_ahbb", null);
 exports.CursosController = CursosController = __decorate([
     (0, common_1.Controller)('cursos'),
     __metadata("design:paramtypes", [cursos_service_1.CursosService])

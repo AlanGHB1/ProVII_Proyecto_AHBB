@@ -37,6 +37,36 @@ export class UsuariosService {
     });
   }
 
+  /**
+   * Centraliza el hasheo de contraseñas con validaciones de seguridad.
+   */
+  async hashearContrasena_ahbb(contrasenaPlana_ahbb: string): Promise<string> {
+    if (!contrasenaPlana_ahbb || contrasenaPlana_ahbb.length < 4) {
+      throw new BadRequestException(
+        'La contraseña es demasiado corta para ser procesada.',
+      );
+    }
+
+    const hash_ahbb = await bcrypt.hash(contrasenaPlana_ahbb, 10);
+
+    // Validación de robustez: Verificar que el hash generado sea válido para Bcrypt
+    if (!hash_ahbb || hash_ahbb.length !== 60 || !hash_ahbb.startsWith('$2b$')) {
+      throw new Error(
+        'Error crítico de seguridad: El hash generado es inválido.',
+      );
+    }
+
+    // Doble verificación: Asegurar que el hash realmente coincida con la entrada antes de retornar
+    const coincide_ahbb = await bcrypt.compare(contrasenaPlana_ahbb, hash_ahbb);
+    if (!coincide_ahbb) {
+      throw new Error(
+        'Error crítico de seguridad: Falló la verificación inmediata del hash.',
+      );
+    }
+
+    return hash_ahbb;
+  }
+
   async crearUsuario_ahbb(datos_ahbb: any) {
     const rolNormalizado_ahbb = this.normalizarRolInterno_ahbb(
       datos_ahbb.rol || 'ALUMNO',
@@ -122,13 +152,56 @@ export class UsuariosService {
     id_usuario_ahbb: number,
     estadoCuenta_ahbb: string,
   ) {
+    const estadoNuevo_ahbb = estadoCuenta_ahbb.toUpperCase();
+
+    // Fetch current user to get email before updating
+    const usuarioActual_ahbb = await this.prisma_ahbb.td_usuario_ahbb.findUnique({
+      where: { id_usuario_ahbb },
+    });
+
     const usuarioActualizado_ahbb =
       await this.prisma_ahbb.td_usuario_ahbb.update({
         where: { id_usuario_ahbb },
-        data: {
-          estadoCuenta_ahbb: estadoCuenta_ahbb.toUpperCase(),
-        },
+        data: { estadoCuenta_ahbb: estadoNuevo_ahbb },
       });
+
+    // Send email notification when account is set to INACTIVO
+    if (estadoNuevo_ahbb === 'INACTIVO' && usuarioActual_ahbb) {
+      try {
+        const transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: { user: process.env.MAIL_USER, pass: process.env.MAIL_PASS },
+        });
+        await transporter.sendMail({
+          from: '"Academia H&B" <no-reply@academiahb.com>',
+          to: usuarioActual_ahbb.correo_ahbb,
+          subject: 'Aviso importante sobre tu cuenta — Academia H&B',
+          html: `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+              <div style="background: #7f1d1d; color: white; padding: 24px; text-align: center; border-radius: 8px 8px 0 0;">
+                <h1 style="margin:0;">🎓 Academia <span style="color: #f59e0b;">H&amp;B</span></h1>
+              </div>
+              <div style="padding: 24px; background: #fef2f2;">
+                <h2 style="color:#7f1d1d;">Su cuenta se encuentra inactiva</h2>
+                <p>Estimado/a <strong>${usuarioActual_ahbb.nombre_ahbb} ${usuarioActual_ahbb.apellido_ahbb}</strong>,</p>
+                <p>Le informamos que su cuenta en Academia H&amp;B ha sido <strong>desactivada temporalmente</strong>.</p>
+                <p>Esto puede deberse a alguna de las siguientes razones:</p>
+                <ul style="color: #374151;">
+                  <li>🔍 <strong>Actividad sospechosa</strong> detectada en su cuenta que requiere verificación.</li>
+                  <li>💳 <strong>Insolvencia de membresía</strong>: el pago correspondiente al período actual no ha sido confirmado.</li>
+                </ul>
+                <p>Si considera que esto es un error o desea regularizar su situación, por favor contacte a la administración de la Academia.</p>
+                <div style="background:#e5e7eb;padding:16px;border-radius:8px;margin-top:16px;color:#374151;">
+                  <strong>Nota:</strong> Su acceso al sistema estará restringido hasta que su cuenta sea reactivada por un administrador.
+                </div>
+              </div>
+            </div>
+          `,
+        });
+      } catch (emailErr) {
+        console.error('Error al enviar correo de cuenta inactiva:', emailErr);
+      }
+    }
 
     return this.mapearUsuarioPublico_ahbb(usuarioActualizado_ahbb);
   }
@@ -276,9 +349,11 @@ export class UsuariosService {
         throw new BadRequestException('El archivo Excel debe contener columnas: Cedula, Nombre, Apellido, Correo. Revisa el documento e inténtalo de nuevo.');
       }
 
-      // Generar y hashear contraseña
+      // Generar y hashear contraseña de forma segura
       const contrasenaTemporalPlano_ahbb = this.generarContrasenaTemporal_ahbb();
-      const hashTemporal_ahbb = await bcrypt.hash(contrasenaTemporalPlano_ahbb, 10);
+      const hashTemporal_ahbb = await this.hashearContrasena_ahbb(
+        contrasenaTemporalPlano_ahbb,
+      );
 
       usuariosAImportar.push({
         cedula_ahbb: cedula,
@@ -386,8 +461,6 @@ export class UsuariosService {
     id_usuario_ahbb: number,
     id_aprobador_ahbb: number,
     referenciaPagoMovil_ahbb: string,
-    contrasenaTemporalHash_ahbb: string,
-    contrasenaTemporal_ahbb: string,
   ) {
     const usuario_ahbb = await this.prisma_ahbb.td_usuario_ahbb.findUnique({
       where: { id_usuario_ahbb },
@@ -396,6 +469,12 @@ export class UsuariosService {
     if (!usuario_ahbb) {
       throw new NotFoundException('Alumno no encontrado.');
     }
+
+    // Generar contraseña temporal internamente para asegurar sincronía
+    const contrasenaTemporal_ahbb = this.generarContrasenaTemporal_ahbb();
+    const contrasenaTemporalHash_ahbb = await this.hashearContrasena_ahbb(
+      contrasenaTemporal_ahbb,
+    );
 
     const usuarioActualizado_ahbb = await this.prisma_ahbb.$transaction(
       async (tx_ahbb) => {
@@ -470,16 +549,13 @@ export class UsuariosService {
         const usuario = await this.prisma_ahbb.td_usuario_ahbb.findUnique({
           where: { id_usuario_ahbb },
         });
-        if (!usuario || usuario.estadoCuenta_ahbb !== 'PENDIENTE_APROBACION') continue;
+        if (!usuario || usuario.estadoCuenta_ahbb !== 'PENDIENTE_APROBACION')
+          continue;
 
-        const contrasenaTemporal = this.generarContrasenaTemporal_ahbb();
-        const hash = await (await import('bcrypt')).hash(contrasenaTemporal, 10);
         const aprobado = await this.aprobarAlumno_ahbb(
           id_usuario_ahbb,
           id_aprobador_ahbb,
           usuario.referenciaPagoMovil_ahbb ?? 'aprobado-masivo',
-          hash,
-          contrasenaTemporal,
         );
         resultados_ahbb.push(aprobado);
       } catch (err) {
@@ -571,5 +647,28 @@ export class UsuariosService {
       firmaDigital: usuario_ahbb.firmaDigital_ahbb,
       creadoEn: usuario_ahbb.creadoEn_ahbb,
     };
+  }
+
+  async obtenerAlumnosPorProfesor_ahbb(id_profesor_ahbb: number) {
+    const cursos_ahbb = await this.prisma_ahbb.td_curso_ahbb.findMany({
+      where: { id_usuario_curso_ahbb: id_profesor_ahbb },
+      include: {
+        inscripciones: {
+          where: { estatus_ahbb: { in: ['INSCRITO', 'OYENTE', 'APROBADO'] } },
+          include: { alumno: true },
+        },
+      },
+    });
+
+    const alumnos_ahbb = cursos_ahbb.reduce((acc_ahbb, curso_ahbb) => {
+      curso_ahbb.inscripciones.forEach((ins_ahbb) => {
+        if (!acc_ahbb.find((u_ahbb) => u_ahbb.id === ins_ahbb.alumno.id_usuario_ahbb)) {
+          acc_ahbb.push(this.mapearUsuarioPublico_ahbb(ins_ahbb.alumno));
+        }
+      });
+      return acc_ahbb;
+    }, [] as any[]);
+
+    return alumnos_ahbb;
   }
 }

@@ -9,8 +9,10 @@ const cursosStore_ahbb = useCursosStore_ahbb();
 const opcionesEstatus_ahbb = [
   { label: 'Todos los estatus', value: 'todos' },
   { label: 'Activos', value: 'activo' },
-  { label: 'Pendientes', value: 'pendiente' },
-  { label: 'Inactivos', value: 'inactivo' },
+  { label: 'Iniciados', value: 'iniciado' },
+  { label: 'Pendientes (por aprobar)', value: 'pendiente' },
+  { label: 'Rechazados', value: 'rechazado' },
+  { label: 'Archivados', value: 'archivado' },
 ];
 
 const manejarBusqueda_ahbb = (valor_ahbb) => {

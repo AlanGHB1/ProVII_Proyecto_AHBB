@@ -20,16 +20,16 @@ export declare class FacturasController_ahbb {
         };
         detalles_ahbb: ({
             producto_ahbb: {
-                id_producto_ahbb: number;
+                creadoEn_ahbb: Date | null;
+                actualizadoEn_ahbb: Date | null;
                 nombre_ahbb: string;
                 descripcion_ahbb: string | null;
+                id_producto_ahbb: number;
                 precio_ahbb: import("@prisma/client-runtime-utils").Decimal;
                 stock_ahbb: number;
                 categoria_ahbb: string;
                 imagen_ahbb: string | null;
                 estado_producto_ahbb: string;
-                creadoEn_ahbb: Date | null;
-                actualizadoEn_ahbb: Date | null;
             };
         } & {
             cantidad_ahbb: number;
@@ -54,16 +54,16 @@ export declare class FacturasController_ahbb {
         };
         detalles_ahbb: ({
             producto_ahbb: {
-                id_producto_ahbb: number;
+                creadoEn_ahbb: Date | null;
+                actualizadoEn_ahbb: Date | null;
                 nombre_ahbb: string;
                 descripcion_ahbb: string | null;
+                id_producto_ahbb: number;
                 precio_ahbb: import("@prisma/client-runtime-utils").Decimal;
                 stock_ahbb: number;
                 categoria_ahbb: string;
                 imagen_ahbb: string | null;
                 estado_producto_ahbb: string;
-                creadoEn_ahbb: Date | null;
-                actualizadoEn_ahbb: Date | null;
             };
         } & {
             cantidad_ahbb: number;
@@ -94,16 +94,16 @@ export declare class FacturasController_ahbb {
         };
         detalles_ahbb: ({
             producto_ahbb: {
-                id_producto_ahbb: number;
+                creadoEn_ahbb: Date | null;
+                actualizadoEn_ahbb: Date | null;
                 nombre_ahbb: string;
                 descripcion_ahbb: string | null;
+                id_producto_ahbb: number;
                 precio_ahbb: import("@prisma/client-runtime-utils").Decimal;
                 stock_ahbb: number;
                 categoria_ahbb: string;
                 imagen_ahbb: string | null;
                 estado_producto_ahbb: string;
-                creadoEn_ahbb: Date | null;
-                actualizadoEn_ahbb: Date | null;
             };
         } & {
             cantidad_ahbb: number;
@@ -128,16 +128,16 @@ export declare class FacturasController_ahbb {
         };
         detalles_ahbb: ({
             producto_ahbb: {
-                id_producto_ahbb: number;
+                creadoEn_ahbb: Date | null;
+                actualizadoEn_ahbb: Date | null;
                 nombre_ahbb: string;
                 descripcion_ahbb: string | null;
+                id_producto_ahbb: number;
                 precio_ahbb: import("@prisma/client-runtime-utils").Decimal;
                 stock_ahbb: number;
                 categoria_ahbb: string;
                 imagen_ahbb: string | null;
                 estado_producto_ahbb: string;
-                creadoEn_ahbb: Date | null;
-                actualizadoEn_ahbb: Date | null;
             };
         } & {
             cantidad_ahbb: number;

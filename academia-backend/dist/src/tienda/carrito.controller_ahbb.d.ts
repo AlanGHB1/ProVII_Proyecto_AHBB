@@ -5,9 +5,9 @@ export declare class CarritoController_ahbb {
     constructor(carritoService_ahbb: CarritoService_ahbb);
     obtenerCarrito_ahbb(req_ahbb: RequestConUsuario_ahbb): Promise<({
         producto_ahbb: {
-            nombre_ahbb: string;
             creadoEn_ahbb: Date | null;
             actualizadoEn_ahbb: Date | null;
+            nombre_ahbb: string;
             descripcion_ahbb: string | null;
             id_producto_ahbb: number;
             precio_ahbb: import("@prisma/client-runtime-utils").Decimal;
@@ -28,9 +28,9 @@ export declare class CarritoController_ahbb {
         cantidad?: number;
     }): Promise<{
         producto_ahbb: {
-            nombre_ahbb: string;
             creadoEn_ahbb: Date | null;
             actualizadoEn_ahbb: Date | null;
+            nombre_ahbb: string;
             descripcion_ahbb: string | null;
             id_producto_ahbb: number;
             precio_ahbb: import("@prisma/client-runtime-utils").Decimal;
@@ -50,9 +50,9 @@ export declare class CarritoController_ahbb {
         cantidad: number;
     }): Promise<{
         producto_ahbb: {
-            nombre_ahbb: string;
             creadoEn_ahbb: Date | null;
             actualizadoEn_ahbb: Date | null;
+            nombre_ahbb: string;
             descripcion_ahbb: string | null;
             id_producto_ahbb: number;
             precio_ahbb: import("@prisma/client-runtime-utils").Decimal;

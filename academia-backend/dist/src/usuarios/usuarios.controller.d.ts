@@ -21,6 +21,18 @@ export declare class UsuariosController {
         firmaDigital: any;
         creadoEn: any;
     }[]>;
+    obtenerProfesoresParaSelect_ahbb(): Promise<{
+        id: any;
+        cedula: any;
+        nombre: any;
+        apellido: any;
+        correo: any;
+        rol: string;
+        estadoCuenta: any;
+        requiereCambioContrasena: any;
+        firmaDigital: any;
+        creadoEn: any;
+    }[]>;
     obtenerAlumnosSuscripciones_ahbb(): Promise<{
         referenciaPagoMovil: string | null;
         id: any;
@@ -34,6 +46,7 @@ export declare class UsuariosController {
         firmaDigital: any;
         creadoEn: any;
     }[]>;
+    obtenerMisAlumnos_ahbb(request_ahbb: RequestConUsuario_ahbb): Promise<any[]>;
     obtenerUsuarioPorId_ahbb(id_usuario_ahbb: number): Promise<{
         id: any;
         cedula: any;

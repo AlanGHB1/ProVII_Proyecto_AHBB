@@ -14,7 +14,6 @@ const props = defineProps({
 const $q_ahbb = useQuasar();
 const autenticacionStore_ahbb = useAutenticacionStore_ahbb();
 const disponibilidad_ahbb = ref(null);
-const observaciones_ahbb = ref('');
 const enviando_ahbb = ref(false);
 
 const consultarDisponibilidad_ahbb = async () => {
@@ -30,12 +29,8 @@ const inscribirse_ahbb = async () => {
   enviando_ahbb.value = true;
   try {
     const resultado_ahbb = await crearInscripcion_ahbb({
-      alumnoId: autenticacionStore_ahbb.usuarioActivo_ahbb.id,
-      cursoId: props.curso_ahbb.id,
-      observaciones: observaciones_ahbb.value,
       id_usuario_inscripcion_ahbb: autenticacionStore_ahbb.usuarioActivo_ahbb.id,
       id_curso_inscripcion_ahbb: props.curso_ahbb.id,
-      observaciones_ahbb: observaciones_ahbb.value,
     });
 
     if (!resultado_ahbb.exito) {
@@ -44,7 +39,6 @@ const inscribirse_ahbb = async () => {
     }
 
     await consultarDisponibilidad_ahbb();
-    observaciones_ahbb.value = '';
     $q_ahbb.notify({
       type: 'positive',
       message: 'Inscripción registrada correctamente.',
@@ -73,15 +67,6 @@ onMounted(() => {
         v-if="disponibilidad_ahbb"
         :color="disponibilidad_ahbb.disponible_ahbb ? 'positive' : 'negative'"
         :label="`${disponibilidad_ahbb.cuposRestantes_ahbb} cupos disponibles`"
-      />
-    </q-card-section>
-
-    <q-card-section class="q-pt-none">
-      <q-input
-        v-model="observaciones_ahbb"
-        autogrow
-        outlined
-        label="Observaciones para la inscripción"
       />
     </q-card-section>
 

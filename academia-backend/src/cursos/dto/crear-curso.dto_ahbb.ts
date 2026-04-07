@@ -9,12 +9,13 @@ export class CrearCursoDto_ahbb {
   tematica_ahbb!: string;
   descripcion_ahbb?: string;
   temarioTexto_ahbb?: string;
-  fechaInicio_ahbb!: string;
-  fechaFin_ahbb!: string;
+  fechaInicio_ahbb?: string;
+  fechaFin_ahbb?: string;
   horasDefinidas_ahbb!: number;
-  diasDefinidos_ahbb!: number;
+  diasDefinidos_ahbb?: number;
   topeEstudiantes_ahbb?: number;
   id_curso_curso_ahbb?: number | null;
   horarios_ahbb!: HorarioCursoDto_ahbb[];
   isPublished_ahbb?: boolean;
+  mensajeCorreccion_ahbb?: string;
 }

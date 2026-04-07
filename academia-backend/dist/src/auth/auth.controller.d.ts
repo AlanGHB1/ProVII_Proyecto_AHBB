@@ -40,6 +40,7 @@ export declare class AuthController {
             firmaDigital: any;
             creadoEn: any;
         };
+        correoEnviado: boolean;
         mensaje: string;
     }>;
     obtenerPerfil_ahbb(request_ahbb: RequestConUsuario_ahbb): Promise<{

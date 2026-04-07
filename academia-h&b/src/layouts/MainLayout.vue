@@ -25,53 +25,50 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import { useAutenticacionStore_ahbb } from '../stores/autenticacionStore_ahbb';
 import EssentialLink from 'components/EssentialLink.vue';
 
-const linksList = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev',
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework',
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev',
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev',
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev',
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev',
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev',
-  },
-];
+const authStore_ahbb = useAutenticacionStore_ahbb();
+
+const linksList = computed(() => {
+  const base_ahbb = [
+    { title: 'Dashboard', icon: 'dashboard', link: '/dashboard' },
+    { title: 'Horarios', icon: 'schedule', link: '/horarios' },
+    { title: 'Mi Perfil', icon: 'person', link: '/perfil' },
+  ];
+
+  if (authStore_ahbb.esAdmin_ahbb) {
+    return [
+      ...base_ahbb,
+      { title: 'Usuarios', icon: 'people', link: '/admin/usuarios' },
+      { title: 'Cursos', icon: 'menu_book', link: '/cursos' },
+      { title: 'Inscripciones', icon: 'assignment', link: '/inscripciones' },
+      { title: 'Tienda (Admin)', icon: 'shopping_bag', link: '/admin/tienda' },
+    ];
+  }
+
+  if (authStore_ahbb.esProfesor_ahbb) {
+    return [
+      ...base_ahbb,
+      { title: 'Mis Cursos', icon: 'menu_book', link: '/cursos' },
+      { title: 'Mis Alumnos', icon: 'groups', link: '/profesor/mis-alumnos' },
+      { title: 'Firma Digital', icon: 'gesture', link: '/profesor/firma-digital' },
+    ];
+  }
+
+  if (authStore_ahbb.esAlumno_ahbb) {
+    return [
+      ...base_ahbb,
+      { title: 'Oferta Académica', icon: 'school', link: '/alumno/oferta-academica' },
+      { title: 'Mis Inscripciones', icon: 'assignment_turned_in', link: '/alumno/mis-inscripciones' },
+      { title: 'Historial Académico', icon: 'history_edu', link: '/alumno/historial' },
+      { title: 'Mis Certificados', icon: 'card_membership', link: '/alumno/mis-certificados' },
+    ];
+  }
+
+  return base_ahbb;
+});
 
 const leftDrawerOpen = ref(false);
 

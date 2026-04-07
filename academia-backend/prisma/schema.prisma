@@ -53,6 +53,9 @@ model td_curso_ahbb {
   imagenBasePdf_ahbb           String?  @db.Text
   imagenBloqueada_ahbb         Boolean? @default(false)
   isPublished_ahbb             Boolean  @default(false)
+  estadoAprobacion_ahbb        String   @default("ACTIVO") @db.VarChar(20)
+  motivoRechazo_ahbb           String?  @db.Text
+  mensajeCorreccion_ahbb       String?  @db.Text
   id_usuario_curso_ahbb        Int
   id_curso_curso_ahbb          Int?
   creadoEn_ahbb                DateTime? @default(now()) @db.Timestamp(6)
@@ -64,7 +67,23 @@ model td_curso_ahbb {
   prelaciones   td_curso_ahbb[]        @relation("Prelacion")
   horarios      td_horario_ahbb[]
   inscripciones td_inscripcion_ahbb[]
+  sesiones      td_sesion_curso_ahbb[]
 }
+
+model td_sesion_curso_ahbb {
+  id_sesion_ahbb        Int      @id @default(autoincrement())
+  nroSesion_ahbb        Int
+  fechaSesion_ahbb      DateTime @db.Date
+  horaInicio_ahbb       String   @db.VarChar(10)
+  horaFin_ahbb          String   @db.VarChar(10)
+  horasDuracion_ahbb    Decimal  @db.Decimal(4, 2)
+  diaSemana_ahbb        String   @db.VarChar(20)
+  id_curso_sesion_ahbb  Int
+
+  // Relaciones
+  curso                 td_curso_ahbb @relation(fields: [id_curso_sesion_ahbb], references: [id_curso_ahbb], onDelete: Cascade)
+}
+
 
 model td_horario_ahbb {
   id_horario_ahbb       Int      @id @default(autoincrement())

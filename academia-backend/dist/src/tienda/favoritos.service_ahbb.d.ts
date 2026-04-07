@@ -4,9 +4,9 @@ export declare class FavoritosService_ahbb {
     constructor(prisma_ahbb: PrismaService);
     obtenerFavoritos_ahbb(id_usuario_ahbb: number): Promise<({
         producto_ahbb: {
-            nombre_ahbb: string;
             creadoEn_ahbb: Date | null;
             actualizadoEn_ahbb: Date | null;
+            nombre_ahbb: string;
             descripcion_ahbb: string | null;
             id_producto_ahbb: number;
             precio_ahbb: import("@prisma/client-runtime-utils").Decimal;

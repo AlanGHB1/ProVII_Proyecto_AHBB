@@ -4,7 +4,9 @@ import {
   crearCurso_ahbb as servicioCrearCurso_ahbb,
   actualizarCurso_ahbb as servicioActualizarCurso_ahbb,
   eliminarCurso_ahbb as servicioEliminarCurso_ahbb,
+  evaluarCurso_ahbb as servicioEvaluarCurso_ahbb,
   inicializarCursos_ahbb as servicioInicializarCursos_ahbb,
+  obtenerSesiones_ahbb as servicioObtenerSesiones_ahbb,
 } from '../servicios/cursosServicio_ahbb';
 
 export const useCursosStore_ahbb = defineStore('cursos_ahbb', {
@@ -14,6 +16,7 @@ export const useCursosStore_ahbb = defineStore('cursos_ahbb', {
     filtroEstatus_ahbb: 'todos',
     cursoSeleccionado_ahbb: null,
     cargando_ahbb: false,
+    listaSesiones_ahbb: [],
   }),
 
   getters: {
@@ -30,9 +33,9 @@ export const useCursosStore_ahbb = defineStore('cursos_ahbb', {
         const termino_ahbb = estado.terminoBusqueda_ahbb.toLowerCase().trim();
         resultado_ahbb = resultado_ahbb.filter(
           (curso_ahbb) =>
-            curso_ahbb.nombre.toLowerCase().includes(termino_ahbb) ||
-            curso_ahbb.profesor.toLowerCase().includes(termino_ahbb) ||
-            curso_ahbb.descripcion.toLowerCase().includes(termino_ahbb),
+            curso_ahbb.nombre?.toLowerCase().includes(termino_ahbb) ||
+            curso_ahbb.profesor?.toLowerCase().includes(termino_ahbb) ||
+            curso_ahbb.descripcion?.toLowerCase().includes(termino_ahbb),
         );
       }
 
@@ -56,19 +59,19 @@ export const useCursosStore_ahbb = defineStore('cursos_ahbb', {
   },
 
   actions: {
-    async inicializar_ahbb() {
+    async inicializar_ahbb(filtros_ahbb = {}) {
       this.cargando_ahbb = true;
       try {
-        this.listaCursos_ahbb = await servicioInicializarCursos_ahbb();
+        this.listaCursos_ahbb = await servicioObtenerCursos_ahbb(filtros_ahbb);
       } finally {
         this.cargando_ahbb = false;
       }
     },
 
-    async recargarCursos_ahbb() {
+    async recargarCursos_ahbb(filtros_ahbb = {}) {
       this.cargando_ahbb = true;
       try {
-        this.listaCursos_ahbb = await servicioObtenerCursos_ahbb();
+        this.listaCursos_ahbb = await servicioObtenerCursos_ahbb(filtros_ahbb);
       } finally {
         this.cargando_ahbb = false;
       }
@@ -85,7 +88,7 @@ export const useCursosStore_ahbb = defineStore('cursos_ahbb', {
       this.cargando_ahbb = true;
       try {
         const nuevoCurso_ahbb = await servicioCrearCurso_ahbb(datosCurso_ahbb);
-        this.listaCursos_ahbb.unshift(nuevoCurso_ahbb);
+        await this.recargarCursos_ahbb();
         return nuevoCurso_ahbb;
       } finally {
         this.cargando_ahbb = false;
@@ -108,13 +111,37 @@ export const useCursosStore_ahbb = defineStore('cursos_ahbb', {
     async eliminarCurso_ahbb(id_ahbb) {
       this.cargando_ahbb = true;
       try {
-        const exito_ahbb = await servicioEliminarCurso_ahbb(id_ahbb);
-        if (exito_ahbb) {
-          this.listaCursos_ahbb = this.listaCursos_ahbb.filter(
-            (curso_ahbb) => String(curso_ahbb.id) !== String(id_ahbb),
-          );
+        const respuesta_ahbb = await servicioEliminarCurso_ahbb(id_ahbb);
+        if (respuesta_ahbb?.exito) {
+          await this.recargarCursos_ahbb();
         }
-        return exito_ahbb;
+        return respuesta_ahbb;
+      } finally {
+        this.cargando_ahbb = false;
+      }
+    },
+
+    async evaluarCurso_ahbb(id_ahbb, estado_ahbb, motivo_ahbb) {
+      this.cargando_ahbb = true;
+      try {
+        const respuesta_ahbb = await servicioEvaluarCurso_ahbb(id_ahbb, estado_ahbb, motivo_ahbb);
+        if (respuesta_ahbb?.exito) {
+          await this.recargarCursos_ahbb();
+        }
+        return respuesta_ahbb;
+      } finally {
+        this.cargando_ahbb = false;
+      }
+    },
+
+    async republicarCurso_ahbb(id_ahbb) {
+      this.cargando_ahbb = true;
+      try {
+        const respuesta_ahbb = await servicioEvaluarCurso_ahbb(id_ahbb, 'PENDIENTE', 'Republicación por falta de alumnos');
+        if (respuesta_ahbb?.exito) {
+          await this.recargarCursos_ahbb();
+        }
+        return respuesta_ahbb;
       } finally {
         this.cargando_ahbb = false;
       }
@@ -131,6 +158,14 @@ export const useCursosStore_ahbb = defineStore('cursos_ahbb', {
     limpiarFiltros_ahbb() {
       this.terminoBusqueda_ahbb = '';
       this.filtroEstatus_ahbb = 'todos';
+    },
+    async fetchSesiones_ahbb(filtros_ahbb = {}) {
+      this.cargando_ahbb = true;
+      try {
+        this.listaSesiones_ahbb = await servicioObtenerSesiones_ahbb(filtros_ahbb);
+      } finally {
+        this.cargando_ahbb = false;
+      }
     },
   },
 });

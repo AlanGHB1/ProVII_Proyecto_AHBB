@@ -17,8 +17,45 @@ let CursosService = class CursosService {
     constructor(prisma_ahbb) {
         this.prisma_ahbb = prisma_ahbb;
     }
-    async obtenerTodos_ahbb() {
+    async obtenerTodos_ahbb(rol_ahbb, id_usuario_ahbb, soloPropios_ahbb = false, soloInscritos_ahbb = false) {
+        let whereClause = {
+            isPublished_ahbb: true,
+            imagenBloqueada_ahbb: { not: true },
+        };
+        const rolNormal_ahbb = rol_ahbb?.toUpperCase();
+        if (rolNormal_ahbb === 'ADMIN') {
+            whereClause = {};
+            if (soloPropios_ahbb && id_usuario_ahbb) {
+                whereClause = { id_usuario_curso_ahbb: id_usuario_ahbb };
+            }
+        }
+        else if (rolNormal_ahbb === 'PROFESOR' && id_usuario_ahbb) {
+            if (soloPropios_ahbb) {
+                whereClause = { id_usuario_curso_ahbb: id_usuario_ahbb };
+            }
+            else {
+                whereClause = {
+                    OR: [
+                        { id_usuario_curso_ahbb: id_usuario_ahbb },
+                        { isPublished_ahbb: true, imagenBloqueada_ahbb: { not: true } },
+                    ],
+                };
+            }
+        }
+        else if (rolNormal_ahbb === 'ALUMNO' && id_usuario_ahbb) {
+            if (soloInscritos_ahbb) {
+                whereClause = {
+                    inscripciones: {
+                        some: {
+                            id_usuario_inscripcion_ahbb: id_usuario_ahbb,
+                            estatus_ahbb: { in: ['INSCRITO', 'OYENTE', 'APROBADO'] },
+                        },
+                    },
+                };
+            }
+        }
         const cursos_ahbb = await this.prisma_ahbb.td_curso_ahbb.findMany({
+            where: whereClause,
             include: {
                 profesor: {
                     select: { nombre_ahbb: true, apellido_ahbb: true },
@@ -37,6 +74,7 @@ let CursosService = class CursosService {
             },
             orderBy: { creadoEn_ahbb: 'desc' },
         });
+        await this.sincronizarEstadosInscritos_ahbb();
         return cursos_ahbb.map((curso_ahbb) => this.mapearCurso_ahbb(curso_ahbb));
     }
     async obtenerPorId_ahbb(id_curso_ahbb) {
@@ -58,15 +96,42 @@ let CursosService = class CursosService {
         }
         return this.mapearCurso_ahbb(curso_ahbb);
     }
-    async crearCurso_ahbb(id_profesor_ahbb, datos_ahbb) {
-        await this.validarSolapamientoProfesor_ahbb(id_profesor_ahbb, datos_ahbb.horarios_ahbb);
+    validarFechaInicio_ahbb(fechaInicio_ahbb) {
+        const ahora_ahbb = new Date();
+        const minFecha_ahbb = new Date(ahora_ahbb.getTime() + 3 * 24 * 60 * 60 * 1000);
+        const maxFecha_ahbb = new Date(ahora_ahbb.getTime() + 31 * 24 * 60 * 60 * 1000);
+        if (fechaInicio_ahbb < minFecha_ahbb) {
+            throw new common_1.BadRequestException('La fecha de inicio debe ser al menos 3 días a partir de hoy, para dar tiempo a los alumnos de inscribirse.');
+        }
+        if (fechaInicio_ahbb > maxFecha_ahbb) {
+            throw new common_1.BadRequestException('La fecha de inicio no puede ser mayor a 1 mes desde la fecha actual.');
+        }
+    }
+    async crearCurso_ahbb(id_usuario_logueado, datos_ahbb, rol_ahbb) {
+        const id_profesor_ahbb = rol_ahbb === 'ADMIN' && datos_ahbb.id_usuario_curso_ahbb
+            ? Number(datos_ahbb.id_usuario_curso_ahbb)
+            : id_usuario_logueado;
+        let horasSemanales = 0;
+        datos_ahbb.horarios_ahbb.forEach((h) => {
+            const [ih, im] = h.horaInicio_ahbb.split(':').map(Number);
+            const [fh, fm] = h.horaFin_ahbb.split(':').map(Number);
+            horasSemanales += fh + fm / 60 - (ih + im / 60);
+        });
+        if (horasSemanales <= 0)
+            horasSemanales = 2;
+        const diasSemanales = datos_ahbb.horarios_ahbb.length || 1;
+        const semanas = Math.ceil(Number(datos_ahbb.horasDefinidas_ahbb) / horasSemanales);
+        const diasCalculados = semanas * diasSemanales;
         const fechaInicio_ahbb = datos_ahbb.fechaInicio_ahbb
-            ? new Date(datos_ahbb.fechaInicio_ahbb)
+            ? new Date(datos_ahbb.fechaInicio_ahbb.includes('T') ? datos_ahbb.fechaInicio_ahbb : `${datos_ahbb.fechaInicio_ahbb}T12:00:00`)
             : new Date();
+        this.validarFechaInicio_ahbb(fechaInicio_ahbb);
         const fechaFin_ahbb = datos_ahbb.fechaFin_ahbb
-            ? new Date(datos_ahbb.fechaFin_ahbb)
-            : new Date(fechaInicio_ahbb.getTime() +
-                Number(datos_ahbb.diasDefinidos_ahbb ?? 1) * 24 * 60 * 60 * 1000);
+            ? new Date(datos_ahbb.fechaFin_ahbb.includes('T') ? datos_ahbb.fechaFin_ahbb : `${datos_ahbb.fechaFin_ahbb}T12:00:00`)
+            : new Date(fechaInicio_ahbb.getTime() + semanas * 7 * 24 * 60 * 60 * 1000);
+        await this.validarSolapamientoProfesor_ahbb(id_profesor_ahbb, datos_ahbb.horarios_ahbb, fechaInicio_ahbb, fechaFin_ahbb);
+        const estadoAprobacion = rol_ahbb === 'ADMIN' ? 'ACTIVO' : 'PENDIENTE';
+        const isPublished = rol_ahbb === 'ADMIN';
         const curso_ahbb = await this.prisma_ahbb.td_curso_ahbb.create({
             data: {
                 nombre_ahbb: datos_ahbb.nombre_ahbb,
@@ -77,9 +142,10 @@ let CursosService = class CursosService {
                 fechaFin_ahbb,
                 fechaDuracion_ahbb: fechaFin_ahbb,
                 horasDefinidas_ahbb: Number(datos_ahbb.horasDefinidas_ahbb),
-                diasDefinidos_ahbb: Number(datos_ahbb.diasDefinidos_ahbb),
+                diasDefinidos_ahbb: diasCalculados,
                 topeEstudiantes_ahbb: Number(datos_ahbb.topeEstudiantes_ahbb ?? 5),
-                isPublished_ahbb: Boolean(datos_ahbb.isPublished_ahbb),
+                isPublished_ahbb: isPublished,
+                estadoAprobacion_ahbb: estadoAprobacion,
                 id_usuario_curso_ahbb: id_profesor_ahbb,
                 id_curso_curso_ahbb: datos_ahbb.id_curso_curso_ahbb ?? null,
                 horarios: {
@@ -101,9 +167,23 @@ let CursosService = class CursosService {
                 inscripciones: true,
             },
         });
+        const diasArray_ahbb = datos_ahbb.horarios_ahbb.map(h => h.diaSemana_ahbb.toUpperCase());
+        const iniciosArray_ahbb = datos_ahbb.horarios_ahbb.map(h => h.horaInicio_ahbb);
+        const finesArray_ahbb = datos_ahbb.horarios_ahbb.map(h => h.horaFin_ahbb);
+        await this.prisma_ahbb.$queryRaw `SELECT fn_generar_sesiones_curso_ahbb(
+      ${curso_ahbb.id_curso_ahbb}::INT,
+      ${fechaInicio_ahbb.toISOString().split('T')[0]}::DATE,
+      ${diasArray_ahbb}::TEXT[],
+      ${iniciosArray_ahbb}::TEXT[],
+      ${finesArray_ahbb}::TEXT[],
+      ${Number(datos_ahbb.horasDefinidas_ahbb)}::NUMERIC
+    )`;
         return this.mapearCurso_ahbb(curso_ahbb);
     }
-    async actualizarCurso_ahbb(id_curso_ahbb, id_usuario_ahbb, datos_ahbb) {
+    async actualizarCurso_ahbb(id_curso_ahbb, id_usuario_logueado, datos_ahbb, rol_ahbb) {
+        const id_profesor_ahbb = rol_ahbb === 'ADMIN' && datos_ahbb.id_usuario_curso_ahbb
+            ? Number(datos_ahbb.id_usuario_curso_ahbb)
+            : id_usuario_logueado;
         const cursoExistente_ahbb = await this.prisma_ahbb.td_curso_ahbb.findUnique({
             where: { id_curso_ahbb },
         });
@@ -111,10 +191,17 @@ let CursosService = class CursosService {
             throw new common_1.NotFoundException('Curso no encontrado.');
         }
         const fechaInicio_ahbb = datos_ahbb.fechaInicio_ahbb
-            ? new Date(datos_ahbb.fechaInicio_ahbb)
+            ? new Date(datos_ahbb.fechaInicio_ahbb.includes('T') ? datos_ahbb.fechaInicio_ahbb : `${datos_ahbb.fechaInicio_ahbb}T12:00:00`)
             : (cursoExistente_ahbb.fechaInicio_ahbb ?? new Date());
+        if (datos_ahbb.fechaInicio_ahbb) {
+            const nuevaFecha_str = new Date(datos_ahbb.fechaInicio_ahbb.includes('T') ? datos_ahbb.fechaInicio_ahbb : `${datos_ahbb.fechaInicio_ahbb}T12:00:00`).toISOString().split('T')[0];
+            const fechaAnterior_str = cursoExistente_ahbb.fechaInicio_ahbb?.toISOString().split('T')[0];
+            if (nuevaFecha_str !== fechaAnterior_str) {
+                this.validarFechaInicio_ahbb(fechaInicio_ahbb);
+            }
+        }
         const fechaFin_ahbb = datos_ahbb.fechaFin_ahbb
-            ? new Date(datos_ahbb.fechaFin_ahbb)
+            ? new Date(datos_ahbb.fechaFin_ahbb.includes('T') ? datos_ahbb.fechaFin_ahbb : `${datos_ahbb.fechaFin_ahbb}T12:00:00`)
             : new Date(fechaInicio_ahbb.getTime() +
                 Number(datos_ahbb.diasDefinidos_ahbb ??
                     cursoExistente_ahbb.diasDefinidos_ahbb ??
@@ -123,11 +210,40 @@ let CursosService = class CursosService {
                     60 *
                     60 *
                     1000);
-        await this.validarSolapamientoProfesor_ahbb(id_usuario_ahbb, datos_ahbb.horarios_ahbb ?? []);
+        await this.validarSolapamientoProfesor_ahbb(id_profesor_ahbb, datos_ahbb.horarios_ahbb ?? [], fechaInicio_ahbb, fechaFin_ahbb, id_curso_ahbb);
+        if (datos_ahbb.fechaInicio_ahbb) {
+            const nuevaFecha_str = new Date(datos_ahbb.fechaInicio_ahbb.includes('T') ? datos_ahbb.fechaInicio_ahbb : `${datos_ahbb.fechaInicio_ahbb}T12:00:00`).toISOString().split('T')[0];
+            const fechaAnterior_str = cursoExistente_ahbb.fechaInicio_ahbb?.toISOString().split('T')[0];
+            if (nuevaFecha_str !== fechaAnterior_str) {
+                const inscritosCount_ahbb = await this.prisma_ahbb.td_inscripcion_ahbb.count({
+                    where: {
+                        id_curso_inscripcion_ahbb: id_curso_ahbb,
+                        estatus_ahbb: { in: ['INSCRITO', 'OYENTE', 'APROBADO'] },
+                    },
+                });
+                if (inscritosCount_ahbb > 0) {
+                    throw new common_1.BadRequestException('No se puede cambiar la fecha de inicio del curso porque ya posee alumnos inscritos activos.');
+                }
+            }
+        }
+        let horasSemanales = 0;
+        (datos_ahbb.horarios_ahbb ?? []).forEach((h) => {
+            const [ih, im] = h.horaInicio_ahbb.split(':').map(Number);
+            const [fh, fm] = h.horaFin_ahbb.split(':').map(Number);
+            horasSemanales += fh + fm / 60 - (ih + im / 60);
+        });
+        if (horasSemanales <= 0)
+            horasSemanales = 2;
+        const diasSemanales = (datos_ahbb.horarios_ahbb ?? []).length || 1;
+        const semanas = Math.ceil(Number(datos_ahbb.horasDefinidas_ahbb) / horasSemanales);
+        const diasCalculados = semanas * diasSemanales;
         const cursoActualizado_ahbb = await this.prisma_ahbb.$transaction(async (tx_ahbb) => {
             await tx_ahbb.td_horario_ahbb.deleteMany({
                 where: { id_curso_horario_ahbb: id_curso_ahbb },
             });
+            const esProfesorActualizando_ahbb = rol_ahbb === 'PROFESOR';
+            const nuevoEstadoAprobacion_ahbb = esProfesorActualizando_ahbb ? 'PENDIENTE' : undefined;
+            const nuevoIsPublished_ahbb = esProfesorActualizando_ahbb ? false : undefined;
             return tx_ahbb.td_curso_ahbb.update({
                 where: { id_curso_ahbb },
                 data: {
@@ -139,10 +255,16 @@ let CursosService = class CursosService {
                     fechaFin_ahbb,
                     fechaDuracion_ahbb: fechaFin_ahbb,
                     horasDefinidas_ahbb: Number(datos_ahbb.horasDefinidas_ahbb),
-                    diasDefinidos_ahbb: Number(datos_ahbb.diasDefinidos_ahbb),
+                    diasDefinidos_ahbb: diasCalculados,
                     topeEstudiantes_ahbb: Number(datos_ahbb.topeEstudiantes_ahbb ?? 5),
-                    isPublished_ahbb: Boolean(datos_ahbb.isPublished_ahbb),
+                    id_usuario_curso_ahbb: id_profesor_ahbb,
                     id_curso_curso_ahbb: datos_ahbb.id_curso_curso_ahbb ?? null,
+                    ...(nuevoEstadoAprobacion_ahbb && { estadoAprobacion_ahbb: nuevoEstadoAprobacion_ahbb }),
+                    ...(nuevoIsPublished_ahbb !== undefined && { isPublished_ahbb: nuevoIsPublished_ahbb }),
+                    ...(esProfesorActualizando_ahbb && datos_ahbb.mensajeCorreccion_ahbb && {
+                        mensajeCorreccion_ahbb: datos_ahbb.mensajeCorreccion_ahbb,
+                        motivoRechazo_ahbb: null,
+                    }),
                     horarios: {
                         create: (datos_ahbb.horarios_ahbb ?? []).map((horario_ahbb) => ({
                             diaSemana_ahbb: horario_ahbb.diaSemana_ahbb.toUpperCase(),
@@ -163,13 +285,69 @@ let CursosService = class CursosService {
                 },
             });
         });
+        const horarios_ahbb = datos_ahbb.horarios_ahbb ?? [];
+        if (horarios_ahbb.length > 0) {
+            const diasArray_ahbb = horarios_ahbb.map(h => h.diaSemana_ahbb.toUpperCase());
+            const iniciosArray_ahbb = horarios_ahbb.map(h => h.horaInicio_ahbb);
+            const finesArray_ahbb = horarios_ahbb.map(h => h.horaFin_ahbb);
+            await this.prisma_ahbb.$queryRaw `SELECT fn_generar_sesiones_curso_ahbb(
+        ${id_curso_ahbb}::INT,
+        ${fechaInicio_ahbb.toISOString().split('T')[0]}::DATE,
+        ${diasArray_ahbb}::TEXT[],
+        ${iniciosArray_ahbb}::TEXT[],
+        ${finesArray_ahbb}::TEXT[],
+        ${Number(datos_ahbb.horasDefinidas_ahbb)}::NUMERIC
+      )`;
+        }
         return this.mapearCurso_ahbb(cursoActualizado_ahbb);
     }
     async eliminarCurso_ahbb(id_curso_ahbb) {
+        const inscripciones = await this.prisma_ahbb.td_inscripcion_ahbb.count({
+            where: { id_curso_inscripcion_ahbb: id_curso_ahbb },
+        });
+        if (inscripciones > 0) {
+            await this.prisma_ahbb.td_curso_ahbb.update({
+                where: { id_curso_ahbb },
+                data: {
+                    isPublished_ahbb: false,
+                    imagenBloqueada_ahbb: true,
+                },
+            });
+            return {
+                exito: true,
+                softDeleted: true,
+                mensaje: 'Curso archivado y retirado de la oferta por tener alumnos inscritos.',
+            };
+        }
         await this.prisma_ahbb.td_curso_ahbb.delete({
             where: { id_curso_ahbb },
         });
-        return { exito: true };
+        return {
+            exito: true,
+            softDeleted: false,
+            mensaje: 'Curso eliminado permanentemente.',
+        };
+    }
+    async evaluarCurso_ahbb(id_curso_ahbb, data) {
+        const cursoExistente = await this.prisma_ahbb.td_curso_ahbb.findUnique({
+            where: { id_curso_ahbb },
+        });
+        if (!cursoExistente) {
+            throw new common_1.NotFoundException('Curso no encontrado');
+        }
+        const { estado, motivo } = data;
+        await this.prisma_ahbb.td_curso_ahbb.update({
+            where: { id_curso_ahbb },
+            data: {
+                estadoAprobacion_ahbb: estado,
+                motivoRechazo_ahbb: motivo || null,
+                isPublished_ahbb: estado === 'ACTIVO',
+            },
+        });
+        return {
+            exito: true,
+            mensaje: `Curso ${estado === 'ACTIVO' ? 'aprobado' : 'rechazado'} exitosamente.`,
+        };
     }
     async obtenerDisponibilidad_ahbb(id_curso_ahbb) {
         const curso_ahbb = await this.prisma_ahbb.td_curso_ahbb.findUnique({
@@ -195,19 +373,29 @@ let CursosService = class CursosService {
             cuposRestantes_ahbb: Math.max(capacidad_ahbb - ocupados_ahbb, 0),
         };
     }
-    async validarSolapamientoProfesor_ahbb(id_profesor_ahbb, horariosNuevos_ahbb) {
+    async validarSolapamientoProfesor_ahbb(id_profesor_ahbb, horariosNuevos_ahbb, fechaInicioNivel_ahbb, fechaFinNivel_ahbb, id_curso_excluir) {
         const cursos_ahbb = await this.prisma_ahbb.td_curso_ahbb.findMany({
-            where: { id_usuario_curso_ahbb: id_profesor_ahbb },
+            where: {
+                id_usuario_curso_ahbb: id_profesor_ahbb,
+                id_curso_ahbb: id_curso_excluir ? { not: id_curso_excluir } : undefined,
+                estadoAprobacion_ahbb: { not: 'ARCHIVADO' },
+            },
             include: { horarios: true },
         });
-        for (const curso_ahbb of cursos_ahbb) {
-            for (const horarioExistente_ahbb of curso_ahbb.horarios) {
+        for (const cursoExistente_ahbb of cursos_ahbb) {
+            const inicioExistente_ahbb = cursoExistente_ahbb.fechaInicio_ahbb ?? new Date();
+            const finExistente_ahbb = cursoExistente_ahbb.fechaFin_ahbb ?? new Date();
+            const fechasSeCruzan_ahbb = (inicioExistente_ahbb <= fechaFinNivel_ahbb) &&
+                (fechaInicioNivel_ahbb <= finExistente_ahbb);
+            if (!fechasSeCruzan_ahbb)
+                continue;
+            for (const horarioExistente_ahbb of cursoExistente_ahbb.horarios) {
                 for (const horarioNuevo_ahbb of horariosNuevos_ahbb) {
                     const mismoDia_ahbb = horarioExistente_ahbb.diaSemana_ahbb ===
                         horarioNuevo_ahbb.diaSemana_ahbb.toUpperCase();
                     if (mismoDia_ahbb &&
                         this.hayCruceHoras_ahbb(horarioExistente_ahbb.horaInicio_ahbb, horarioExistente_ahbb.horaFin_ahbb, horarioNuevo_ahbb.horaInicio_ahbb, horarioNuevo_ahbb.horaFin_ahbb)) {
-                        throw new common_1.BadRequestException(`El profesor ya imparte otro curso en ${horarioExistente_ahbb.diaSemana_ahbb} ${horarioExistente_ahbb.horaInicio_ahbb}-${horarioExistente_ahbb.horaFin_ahbb}.`);
+                        throw new common_1.BadRequestException('Tu disponibilidad para este curso ya se encuentra ocupada parcial o totalmente por otro/s cursos, cambia el horario o espera a que finalice uno de los cursos');
                     }
                 }
             }
@@ -215,6 +403,88 @@ let CursosService = class CursosService {
     }
     hayCruceHoras_ahbb(inicioA_ahbb, finA_ahbb, inicioB_ahbb, finB_ahbb) {
         return inicioA_ahbb < finB_ahbb && inicioB_ahbb < finA_ahbb;
+    }
+    async obtenerSesiones_ahbb(rolLogueado_ahbb, idLogueado_ahbb, rolFiltro_ahbb, idUsuarioFiltro_ahbb, id_curso_ahbb) {
+        let id_target_ahbb = idLogueado_ahbb;
+        let rol_target_ahbb = rolLogueado_ahbb;
+        if (idUsuarioFiltro_ahbb && rolFiltro_ahbb) {
+            if (rolLogueado_ahbb === 'ADMIN') {
+                id_target_ahbb = idUsuarioFiltro_ahbb;
+                rol_target_ahbb = rolFiltro_ahbb;
+            }
+            else if (rolLogueado_ahbb === 'PROFESOR') {
+                if (rolFiltro_ahbb === 'ALUMNO') {
+                    const estaVinculado_ahbb = await this.prisma_ahbb.td_inscripcion_ahbb.findFirst({
+                        where: {
+                            id_usuario_inscripcion_ahbb: idUsuarioFiltro_ahbb,
+                            curso: { id_usuario_curso_ahbb: idLogueado_ahbb },
+                        },
+                    });
+                    if (!estaVinculado_ahbb)
+                        return [];
+                    id_target_ahbb = idUsuarioFiltro_ahbb;
+                    rol_target_ahbb = 'ALUMNO';
+                }
+                else if (idUsuarioFiltro_ahbb === idLogueado_ahbb) {
+                    id_target_ahbb = idLogueado_ahbb;
+                    rol_target_ahbb = 'PROFESOR';
+                }
+                else {
+                    return [];
+                }
+            }
+        }
+        const rolNormal_ahbb = rol_target_ahbb?.toUpperCase();
+        let whereClause;
+        if (rolNormal_ahbb === 'PROFESOR') {
+            whereClause = {
+                curso: { id_usuario_curso_ahbb: id_target_ahbb },
+            };
+        }
+        else if (rolNormal_ahbb === 'ALUMNO') {
+            whereClause = {
+                curso: {
+                    inscripciones: {
+                        some: {
+                            id_usuario_inscripcion_ahbb: id_target_ahbb,
+                            estatus_ahbb: { in: ['INSCRITO', 'OYENTE', 'APROBADO'] },
+                        },
+                    },
+                },
+            };
+        }
+        else {
+            whereClause = {};
+        }
+        if (id_curso_ahbb) {
+            whereClause.id_curso_sesion_ahbb = id_curso_ahbb;
+        }
+        const sesiones_ahbb = await this.prisma_ahbb.td_sesion_curso_ahbb.findMany({
+            where: whereClause,
+            select: {
+                id_sesion_ahbb: true,
+                nroSesion_ahbb: true,
+                fechaSesion_ahbb: true,
+                horaInicio_ahbb: true,
+                horaFin_ahbb: true,
+                id_curso_sesion_ahbb: true,
+                curso: {
+                    select: {
+                        nombre_ahbb: true,
+                    },
+                },
+            },
+            orderBy: { fechaSesion_ahbb: 'asc' },
+        });
+        return sesiones_ahbb.map((s) => ({
+            id: s.id_sesion_ahbb,
+            nroClase: s.nroSesion_ahbb,
+            fecha: s.fechaSesion_ahbb,
+            horaInicio: s.horaInicio_ahbb,
+            horaFin: s.horaFin_ahbb,
+            cursoNombre: s.curso.nombre_ahbb,
+            idCurso: s.id_curso_sesion_ahbb,
+        }));
     }
     mapearCurso_ahbb(curso_ahbb) {
         const profesorNombre_ahbb = curso_ahbb.profesor
@@ -229,7 +499,22 @@ let CursosService = class CursosService {
             duracionHoras: curso_ahbb.horasDefinidas_ahbb,
             cantidadDias: curso_ahbb.diasDefinidos_ahbb,
             topeEstudiantes: curso_ahbb.topeEstudiantes_ahbb ?? 5,
-            estatus: curso_ahbb.isPublished_ahbb ? 'activo' : 'pendiente',
+            estatus: curso_ahbb.imagenBloqueada_ahbb
+                ? 'archivado'
+                : curso_ahbb.estadoAprobacion_ahbb === 'PENDIENTE'
+                    ? 'pendiente'
+                    : curso_ahbb.estadoAprobacion_ahbb === 'RECHAZADO'
+                        ? 'rechazado'
+                        : (curso_ahbb.estadoAprobacion_ahbb === 'ACTIVO' &&
+                            curso_ahbb.isPublished_ahbb &&
+                            curso_ahbb.fechaInicio_ahbb &&
+                            new Date(curso_ahbb.fechaInicio_ahbb) <= new Date() &&
+                            (curso_ahbb.inscripciones?.length ?? 0) > 0)
+                            ? 'iniciado'
+                            : 'activo',
+            estadoAprobacion: curso_ahbb.estadoAprobacion_ahbb,
+            motivoRechazo: curso_ahbb.motivoRechazo_ahbb,
+            mensajeCorreccion: curso_ahbb.mensajeCorreccion_ahbb,
             temario: curso_ahbb.temarioTexto_ahbb,
             fechaInicio: curso_ahbb.fechaInicio_ahbb,
             fechaFin: curso_ahbb.fechaFin_ahbb,
@@ -244,6 +529,26 @@ let CursosService = class CursosService {
             prelacionNombre: curso_ahbb.prelacion?.nombre_ahbb ?? null,
             isPublished: curso_ahbb.isPublished_ahbb,
         };
+    }
+    async sincronizarEstadosInscritos_ahbb() {
+        const ahora_ahbb = new Date();
+        const cursosIniciadosIds_ahbb = await this.prisma_ahbb.td_curso_ahbb.findMany({
+            where: {
+                estadoAprobacion_ahbb: 'ACTIVO',
+                isPublished_ahbb: true,
+                fechaInicio_ahbb: { lte: ahora_ahbb },
+            },
+            select: { id_curso_ahbb: true },
+        }).then(res => res.map(c => c.id_curso_ahbb));
+        if (cursosIniciadosIds_ahbb.length > 0) {
+            await this.prisma_ahbb.td_inscripcion_ahbb.updateMany({
+                where: {
+                    id_curso_inscripcion_ahbb: { in: cursosIniciadosIds_ahbb },
+                    estatus_ahbb: 'INSCRITO',
+                },
+                data: { estatus_ahbb: 'OYENTE' },
+            });
+        }
     }
 };
 exports.CursosService = CursosService;

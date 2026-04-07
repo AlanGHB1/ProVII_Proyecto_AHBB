@@ -1,43 +1,10 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __importStar = (this && this.__importStar) || (function () {
-    var ownKeys = function(o) {
-        ownKeys = Object.getOwnPropertyNames || function (o) {
-            var ar = [];
-            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
-            return ar;
-        };
-        return ownKeys(o);
-    };
-    return function (mod) {
-        if (mod && mod.__esModule) return mod;
-        var result = {};
-        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
-        __setModuleDefault(result, mod);
-        return result;
-    };
-})();
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
@@ -55,7 +22,6 @@ const roles_decorator_ahbb_1 = require("../common/decorators/roles.decorator_ahb
 const carga_masiva_usuarios_dto_ahbb_1 = require("./dto/carga-masiva-usuarios.dto_ahbb");
 const aprobar_alumno_dto_ahbb_1 = require("./dto/aprobar-alumno.dto_ahbb");
 const guardar_firma_dto_ahbb_1 = require("./dto/guardar-firma.dto_ahbb");
-const bcrypt = __importStar(require("bcrypt"));
 const actualizar_usuario_dto_ahbb_1 = require("./dto/actualizar-usuario.dto_ahbb");
 const actualizar_estado_usuario_dto_ahbb_1 = require("./dto/actualizar-estado-usuario.dto_ahbb");
 let UsuariosController = class UsuariosController {
@@ -66,8 +32,14 @@ let UsuariosController = class UsuariosController {
     async obtenerUsuarios_ahbb(rol_ahbb) {
         return this.usuariosService_ahbb.obtenerTodos_ahbb(rol_ahbb);
     }
+    async obtenerProfesoresParaSelect_ahbb() {
+        return this.usuariosService_ahbb.obtenerTodos_ahbb('PROFESOR');
+    }
     async obtenerAlumnosSuscripciones_ahbb() {
         return this.usuariosService_ahbb.obtenerAlumnosPendientes_ahbb();
+    }
+    async obtenerMisAlumnos_ahbb(request_ahbb) {
+        return this.usuariosService_ahbb.obtenerAlumnosPorProfesor_ahbb(Number(request_ahbb.usuario_ahbb?.sub));
     }
     async obtenerUsuarioPorId_ahbb(id_usuario_ahbb) {
         return this.usuariosService_ahbb.obtenerPerfilPorId_ahbb(id_usuario_ahbb);
@@ -94,9 +66,7 @@ let UsuariosController = class UsuariosController {
         res.send(buffer);
     }
     async aprobarAlumno_ahbb(datos_ahbb, request_ahbb) {
-        const contrasenaTemporalPlano_ahbb = this.usuariosService_ahbb.generarContrasenaTemporal_ahbb();
-        const hashTemporal_ahbb = await bcrypt.hash(contrasenaTemporalPlano_ahbb, 10);
-        const usuario_ahbb = await this.usuariosService_ahbb.aprobarAlumno_ahbb(datos_ahbb.id_usuario_ahbb, Number(request_ahbb.usuario_ahbb?.sub), datos_ahbb.referenciaPagoMovil_ahbb, hashTemporal_ahbb, contrasenaTemporalPlano_ahbb);
+        const usuario_ahbb = await this.usuariosService_ahbb.aprobarAlumno_ahbb(datos_ahbb.id_usuario_ahbb, Number(request_ahbb.usuario_ahbb?.sub), datos_ahbb.referenciaPagoMovil_ahbb);
         return {
             exito: true,
             usuario: usuario_ahbb,
@@ -132,11 +102,28 @@ __decorate([
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_ahbb_1.JwtAuthGuard_ahbb, roles_guard_ahbb_1.RolesGuard_ahbb),
     (0, roles_decorator_ahbb_1.RolesDecorator_ahbb)('ADMIN'),
+    (0, common_1.Get)('profesores'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], UsuariosController.prototype, "obtenerProfesoresParaSelect_ahbb", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_ahbb_1.JwtAuthGuard_ahbb, roles_guard_ahbb_1.RolesGuard_ahbb),
+    (0, roles_decorator_ahbb_1.RolesDecorator_ahbb)('ADMIN'),
     (0, common_1.Get)('alumnos-suscripciones'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], UsuariosController.prototype, "obtenerAlumnosSuscripciones_ahbb", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_ahbb_1.JwtAuthGuard_ahbb, roles_guard_ahbb_1.RolesGuard_ahbb),
+    (0, roles_decorator_ahbb_1.RolesDecorator_ahbb)('PROFESOR'),
+    (0, common_1.Get)('mis-alumnos'),
+    __param(0, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UsuariosController.prototype, "obtenerMisAlumnos_ahbb", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_ahbb_1.JwtAuthGuard_ahbb, roles_guard_ahbb_1.RolesGuard_ahbb),
     (0, roles_decorator_ahbb_1.RolesDecorator_ahbb)('ADMIN', 'PROFESOR', 'ALUMNO'),

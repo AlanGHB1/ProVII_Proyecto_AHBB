@@ -40,6 +40,8 @@ export class InscripcionesService_ahbb {
     await this.validarSolapamiento_ahbb(
       datos_ahbb.id_usuario_inscripcion_ahbb,
       curso_ahbb.horarios,
+      curso_ahbb.fechaInicio_ahbb ?? new Date(),
+      curso_ahbb.fechaFin_ahbb ?? new Date(),
     );
 
     return this.prisma_ahbb.$transaction(async (tx_ahbb) => {
@@ -151,6 +153,8 @@ export class InscripcionesService_ahbb {
   async validarSolapamiento_ahbb(
     id_usuario_ahbb: number,
     horariosCursoNuevo_ahbb: any[],
+    fechaInicioBase_ahbb: Date,
+    fechaFinBase_ahbb: Date,
   ) {
     const inscripcionesActivas_ahbb =
       await this.prisma_ahbb.td_inscripcion_ahbb.findMany({
@@ -166,11 +170,21 @@ export class InscripcionesService_ahbb {
       });
 
     for (const inscripcion_ahbb of inscripcionesActivas_ahbb) {
+      // Comparar rangos de fecha de los cursos
+      const inicioExistente_ahbb = inscripcion_ahbb.curso.fechaInicio_ahbb ?? new Date();
+      const finExistente_ahbb = inscripcion_ahbb.curso.fechaFin_ahbb ?? new Date();
+
+      const fechasSeCruzan_ahbb = 
+        (inicioExistente_ahbb <= fechaFinBase_ahbb) &&
+        (fechaInicioBase_ahbb <= finExistente_ahbb);
+
+      if (!fechasSeCruzan_ahbb) continue;
+
       for (const horarioActual_ahbb of inscripcion_ahbb.curso.horarios) {
         for (const horarioNuevo_ahbb of horariosCursoNuevo_ahbb) {
           const mismoDia_ahbb =
             horarioActual_ahbb.diaSemana_ahbb ===
-            horarioNuevo_ahbb.diaSemana_ahbb;
+            horarioNuevo_ahbb.diaSemana_ahbb.toUpperCase();
 
           if (
             mismoDia_ahbb &&
@@ -182,7 +196,7 @@ export class InscripcionesService_ahbb {
             )
           ) {
             throw new BadRequestException(
-              `El alumno ya posee otro curso en ${horarioActual_ahbb.diaSemana_ahbb} ${horarioActual_ahbb.horaInicio_ahbb}-${horarioActual_ahbb.horaFin_ahbb}.`,
+              'Tu disponibilidad para este curso ya se encuentra ocupada parcial o totalmente por otro/s cursos, cambia el horario o espera a que finalice uno de los cursos',
             );
           }
         }
@@ -235,16 +249,20 @@ export class InscripcionesService_ahbb {
         ['INSCRITO', 'OYENTE'].includes(String(inscripcion_ahbb.estatus_ahbb)),
     );
     if (tieneActivo_ahbb) {
-      throw new BadRequestException(
-        'El alumno ya tiene una inscripción activa en este curso.',
-      );
+      throw new BadRequestException('Usted ya está inscrito en este curso.');
     }
 
     const ultima_ahbb = inscripcionesPrevias_ahbb[0];
-    if (ultima_ahbb && ultima_ahbb.estatus_ahbb !== 'REPROBADO') {
-      throw new BadRequestException(
-        'Solo es posible repetir el curso cuando el estado previo es REPROBADO.',
-      );
+    if (ultima_ahbb) {
+      // Si ya tiene un registro previo, solo puede re-inscribirse si reprobó
+      if (ultima_ahbb.estatus_ahbb !== 'REPROBADO') {
+        throw new BadRequestException(
+          'Solo es posible inscribirse nuevamente si el estado previo es REPROBADO.',
+        );
+      }
+
+      // Además, el curso debe haber terminado (opcional, pero sugerido por el usuario)
+      // En este sistema, REPROBADO solo se asigna al final, así que la lógica de REPROBADO ya cubre "que terminó"
     }
   }
 }

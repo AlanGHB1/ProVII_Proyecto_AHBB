@@ -152,10 +152,24 @@ exports.Prisma.Td_curso_ahbbScalarFieldEnum = {
   imagenBasePdf_ahbb: 'imagenBasePdf_ahbb',
   imagenBloqueada_ahbb: 'imagenBloqueada_ahbb',
   isPublished_ahbb: 'isPublished_ahbb',
+  estadoAprobacion_ahbb: 'estadoAprobacion_ahbb',
+  motivoRechazo_ahbb: 'motivoRechazo_ahbb',
+  mensajeCorreccion_ahbb: 'mensajeCorreccion_ahbb',
   id_usuario_curso_ahbb: 'id_usuario_curso_ahbb',
   id_curso_curso_ahbb: 'id_curso_curso_ahbb',
   creadoEn_ahbb: 'creadoEn_ahbb',
   actualizadoEn_ahbb: 'actualizadoEn_ahbb'
+};
+
+exports.Prisma.Td_sesion_curso_ahbbScalarFieldEnum = {
+  id_sesion_ahbb: 'id_sesion_ahbb',
+  nroSesion_ahbb: 'nroSesion_ahbb',
+  fechaSesion_ahbb: 'fechaSesion_ahbb',
+  horaInicio_ahbb: 'horaInicio_ahbb',
+  horaFin_ahbb: 'horaFin_ahbb',
+  horasDuracion_ahbb: 'horasDuracion_ahbb',
+  diaSemana_ahbb: 'diaSemana_ahbb',
+  id_curso_sesion_ahbb: 'id_curso_sesion_ahbb'
 };
 
 exports.Prisma.Td_horario_ahbbScalarFieldEnum = {
@@ -264,6 +278,7 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   td_usuario_ahbb: 'td_usuario_ahbb',
   td_curso_ahbb: 'td_curso_ahbb',
+  td_sesion_curso_ahbb: 'td_sesion_curso_ahbb',
   td_horario_ahbb: 'td_horario_ahbb',
   td_inscripcion_ahbb: 'td_inscripcion_ahbb',
   td_certificado_ahbb: 'td_certificado_ahbb',

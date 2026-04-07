@@ -20,6 +20,7 @@ class CrearCursoDto_ahbb {
     id_curso_curso_ahbb;
     horarios_ahbb;
     isPublished_ahbb;
+    mensajeCorreccion_ahbb;
 }
 exports.CrearCursoDto_ahbb = CrearCursoDto_ahbb;
 //# sourceMappingURL=crear-curso.dto_ahbb.js.map

@@ -36,6 +36,7 @@ export declare class AuthService {
             firmaDigital: any;
             creadoEn: any;
         };
+        correoEnviado: boolean;
         mensaje: string;
     }>;
     cambiarContrasena_ahbb(id_usuario_ahbb: number, contrasenaActual_ahbb: string, contrasenaNueva_ahbb: string): Promise<{

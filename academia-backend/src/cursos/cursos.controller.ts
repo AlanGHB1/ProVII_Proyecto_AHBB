@@ -5,10 +5,12 @@ import {
   Get,
   Param,
   ParseIntPipe,
+  Patch,
   Post,
   Put,
   Req,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { CursosService } from './cursos.service';
 import { CrearCursoDto_ahbb } from './dto/crear-curso.dto_ahbb';
@@ -22,9 +24,36 @@ import type { RequestConUsuario_ahbb } from '../common/interfaces/request-usuari
 export class CursosController {
   constructor(private readonly cursosService_ahbb: CursosService) {}
 
+  @UseGuards(JwtAuthGuard_ahbb)
+  @Get('sesiones')
+  async obtenerSesiones_ahbb(
+    @Req() request_ahbb: RequestConUsuario_ahbb,
+    @Query('id_usuario_ahbb') id_usuario_ahbb?: string,
+    @Query('rol') rol_ahbb?: string,
+    @Query('id_curso_ahbb') id_curso_ahbb?: string,
+  ) {
+    return this.cursosService_ahbb.obtenerSesiones_ahbb(
+      request_ahbb.usuario_ahbb?.rol || 'ALUMNO',
+      Number(request_ahbb.usuario_ahbb?.sub),
+      rol_ahbb,
+      id_usuario_ahbb ? Number(id_usuario_ahbb) : undefined,
+      id_curso_ahbb ? Number(id_curso_ahbb) : undefined,
+    );
+  }
+
+  @UseGuards(JwtAuthGuard_ahbb)
   @Get()
-  async obtenerCursos_ahbb() {
-    return this.cursosService_ahbb.obtenerTodos_ahbb();
+  async obtenerCursos_ahbb(
+    @Req() request_ahbb: RequestConUsuario_ahbb,
+    @Query('solo_propios') solo_propios?: string,
+    @Query('solo_inscritos') solo_inscritos?: string,
+  ) {
+    return this.cursosService_ahbb.obtenerTodos_ahbb(
+      request_ahbb.usuario_ahbb?.rol || 'ALUMNO',
+      Number(request_ahbb.usuario_ahbb?.sub),
+      solo_propios === 'true',
+      solo_inscritos === 'true',
+    );
   }
 
   @Get(':id_curso_ahbb')
@@ -51,6 +80,7 @@ export class CursosController {
     return this.cursosService_ahbb.crearCurso_ahbb(
       Number(request_ahbb.usuario_ahbb?.sub),
       datos_ahbb,
+      request_ahbb.usuario_ahbb?.rol
     );
   }
 
@@ -66,6 +96,7 @@ export class CursosController {
       id_curso_ahbb,
       Number(request_ahbb.usuario_ahbb?.sub),
       datos_ahbb,
+      request_ahbb.usuario_ahbb?.rol
     );
   }
 
@@ -76,5 +107,15 @@ export class CursosController {
     @Param('id_curso_ahbb', ParseIntPipe) id_curso_ahbb: number,
   ) {
     return this.cursosService_ahbb.eliminarCurso_ahbb(id_curso_ahbb);
+  }
+
+  @UseGuards(JwtAuthGuard_ahbb, RolesGuard_ahbb)
+  @RolesDecorator_ahbb('ADMIN')
+  @Patch(':id_curso_ahbb/evaluar-curso')
+  async evaluarCurso_ahbb(
+    @Param('id_curso_ahbb', ParseIntPipe) id_curso_ahbb: number,
+    @Body() datos: { estado: string, motivo?: string }
+  ) {
+    return this.cursosService_ahbb.evaluarCurso_ahbb(id_curso_ahbb, datos);
   }
 }

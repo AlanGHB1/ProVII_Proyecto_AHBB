@@ -5,7 +5,16 @@ import type { RequestConUsuario_ahbb } from '../common/interfaces/request-usuari
 export declare class CursosController {
     private readonly cursosService_ahbb;
     constructor(cursosService_ahbb: CursosService);
-    obtenerCursos_ahbb(): Promise<{
+    obtenerSesiones_ahbb(request_ahbb: RequestConUsuario_ahbb, id_usuario_ahbb?: string, rol_ahbb?: string, id_curso_ahbb?: string): Promise<{
+        id: number;
+        nroClase: number;
+        fecha: Date;
+        horaInicio: string;
+        horaFin: string;
+        cursoNombre: string;
+        idCurso: number;
+    }[]>;
+    obtenerCursos_ahbb(request_ahbb: RequestConUsuario_ahbb, solo_propios?: string, solo_inscritos?: string): Promise<{
         id: any;
         nombre: any;
         descripcion: any;
@@ -15,6 +24,9 @@ export declare class CursosController {
         cantidadDias: any;
         topeEstudiantes: any;
         estatus: string;
+        estadoAprobacion: any;
+        motivoRechazo: any;
+        mensajeCorreccion: any;
         temario: any;
         fechaInicio: any;
         fechaFin: any;
@@ -39,6 +51,9 @@ export declare class CursosController {
         cantidadDias: any;
         topeEstudiantes: any;
         estatus: string;
+        estadoAprobacion: any;
+        motivoRechazo: any;
+        mensajeCorreccion: any;
         temario: any;
         fechaInicio: any;
         fechaFin: any;
@@ -70,6 +85,9 @@ export declare class CursosController {
         cantidadDias: any;
         topeEstudiantes: any;
         estatus: string;
+        estadoAprobacion: any;
+        motivoRechazo: any;
+        mensajeCorreccion: any;
         temario: any;
         fechaInicio: any;
         fechaFin: any;
@@ -94,6 +112,9 @@ export declare class CursosController {
         cantidadDias: any;
         topeEstudiantes: any;
         estatus: string;
+        estadoAprobacion: any;
+        motivoRechazo: any;
+        mensajeCorreccion: any;
         temario: any;
         fechaInicio: any;
         fechaFin: any;
@@ -110,5 +131,14 @@ export declare class CursosController {
     }>;
     eliminarCurso_ahbb(id_curso_ahbb: number): Promise<{
         exito: boolean;
+        softDeleted: boolean;
+        mensaje: string;
+    }>;
+    evaluarCurso_ahbb(id_curso_ahbb: number, datos: {
+        estado: string;
+        motivo?: string;
+    }): Promise<{
+        exito: boolean;
+        mensaje: string;
     }>;
 }

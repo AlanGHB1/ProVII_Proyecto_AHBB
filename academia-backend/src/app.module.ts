@@ -7,10 +7,11 @@ import { AuthModule } from './auth/auth.module';
 import { CursosModule } from './cursos/cursos.module';
 import { InscripcionesModule_ahbb } from './inscripciones/inscripciones.module';
 import { TiendaModule_ahbb } from './tienda/tienda.module_ahbb';
+import { DashboardModule } from './dashboard/dashboard.module';
 import { BootstrapService_ahbb } from './bootstrap/bootstrap.service_ahbb';
 
 @Module({
-  imports: [UsuariosModule, AuthModule, CursosModule, InscripcionesModule_ahbb, TiendaModule_ahbb],
+  imports: [UsuariosModule, AuthModule, CursosModule, InscripcionesModule_ahbb, TiendaModule_ahbb, DashboardModule],
   controllers: [AppController],
   providers: [AppService, PrismaService, BootstrapService_ahbb],
 })

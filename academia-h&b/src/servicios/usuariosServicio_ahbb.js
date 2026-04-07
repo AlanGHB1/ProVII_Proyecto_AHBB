@@ -6,6 +6,11 @@ export const obtenerUsuariosPorRol_ahbb = async (rol_ahbb) => {
   return respuesta_ahbb.data;
 };
 
+export const obtenerProfesoresParaSelect_ahbb = async () => {
+  const respuesta = await apiCliente_ahbb.get('/usuarios/profesores');
+  return respuesta.data;
+};
+
 export const obtenerUsuarioPorId_ahbb = async (id_ahbb) => {
   try {
     const respuesta_ahbb = await apiCliente_ahbb.get(`/usuarios/${id_ahbb}`);
@@ -82,6 +87,11 @@ export const exportarProfesoresExcel_ahbb = async () => {
 
 export const obtenerAlumnosSuscripciones_ahbb = async () => {
   const respuesta_ahbb = await apiCliente_ahbb.get('/usuarios/alumnos-suscripciones');
+  return respuesta_ahbb.data;
+};
+
+export const obtenerAlumnosPorProfesor_ahbb = async () => {
+  const respuesta_ahbb = await apiCliente_ahbb.get('/usuarios/mis-alumnos');
   return respuesta_ahbb.data;
 };
 

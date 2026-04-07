@@ -8,10 +8,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppController = void 0;
 const common_1 = require("@nestjs/common");
 const app_service_1 = require("./app.service");
+const jwt_auth_guard_ahbb_1 = require("./common/guards/jwt-auth.guard_ahbb");
+const roles_guard_ahbb_1 = require("./common/guards/roles.guard_ahbb");
+const roles_decorator_ahbb_1 = require("./common/decorators/roles.decorator_ahbb");
 let AppController = class AppController {
     appService;
     constructor(appService) {
@@ -19,6 +25,11 @@ let AppController = class AppController {
     }
     getHello() {
         return this.appService.getHello();
+    }
+    async getDashboardStats(request_ahbb) {
+        const userId = Number(request_ahbb.usuario_ahbb?.sub);
+        const rol = request_ahbb.usuario_ahbb?.rol || '';
+        return this.appService.getDashboardStats(userId, rol);
     }
 };
 exports.AppController = AppController;
@@ -28,6 +39,15 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", String)
 ], AppController.prototype, "getHello", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_ahbb_1.JwtAuthGuard_ahbb, roles_guard_ahbb_1.RolesGuard_ahbb),
+    (0, roles_decorator_ahbb_1.RolesDecorator_ahbb)('ADMIN', 'PROFESOR', 'ALUMNO'),
+    (0, common_1.Get)('dashboard/stats'),
+    __param(0, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], AppController.prototype, "getDashboardStats", null);
 exports.AppController = AppController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [app_service_1.AppService])

@@ -1,7 +1,8 @@
 <!-- InscripcionesView_ahbb.vue — Panel de Suscripciones de Alumnos (Administrador) -->
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 import { useQuasar } from 'quasar';
+import { useAutoRefresh_ahbb } from '../../composables/useAutoRefresh_ahbb';
 import {
   obtenerAlumnosSuscripciones_ahbb,
   aprobarAlumno_ahbb,
@@ -163,6 +164,9 @@ const formatearFecha_ahbb = (fecha) => {
   if (!fecha) return '—';
   return new Date(fecha).toLocaleDateString('es-VE', { day: '2-digit', month: 'short', year: 'numeric' });
 };
+
+// Polling: recarga la lista cada 30 segundos para detectar nuevas inscripciones
+useAutoRefresh_ahbb(cargarAlumnos_ahbb, 30_000, false);
 
 onMounted(cargarAlumnos_ahbb);
 </script>

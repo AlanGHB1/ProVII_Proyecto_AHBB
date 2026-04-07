@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+import * as nodemailer from 'nodemailer';
 import { UsuariosService } from '../usuarios/usuarios.service';
 
 @Injectable()
@@ -84,10 +85,10 @@ export class AuthService {
       datos_ahbb.contrasena_ahbb ??
       datos_ahbb.contrasena ??
       this.usuariosService_ahbb.generarContrasenaTemporal_ahbb();
-    const contrasenaEncriptada_ahbb = await bcrypt.hash(
-      contrasenaBase_ahbb,
-      10,
-    );
+    const contrasenaEncriptada_ahbb =
+      await this.usuariosService_ahbb.hashearContrasena_ahbb(
+        contrasenaBase_ahbb,
+      );
     const cedulaGenerada_ahbb =
       datos_ahbb.cedula_ahbb ??
       datos_ahbb.cedula ??
@@ -111,13 +112,47 @@ export class AuthService {
       },
     );
 
+    // Send email with temp credentials for all roles (including manual creation of students)
+    try {
+      const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: { user: process.env.MAIL_USER, pass: process.env.MAIL_PASS },
+      });
+      await transporter.sendMail({
+        from: '"Academia H&B" <no-reply@academiahb.com>',
+        to: nuevoUsuario_ahbb.correo,
+        subject: 'Tu cuenta en Academia H&B ha sido creada',
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <div style="background: #1b2a4a; color: white; padding: 24px; text-align: center; border-radius: 8px 8px 0 0;">
+              <h1 style="margin:0;">🎓 Academia <span style="color: #f59e0b;">H&amp;B</span></h1>
+            </div>
+            <div style="padding: 24px; background: #f8fafc;">
+              <h2>¡Bienvenido/a, ${nuevoUsuario_ahbb.nombre}!</h2>
+              <p>Tu cuenta en la plataforma Academia H&amp;B ha sido creada como <strong>${rol_ahbb.toLowerCase()}</strong>.</p>
+              <p>Tus credenciales de acceso son:</p>
+              <div style="background: #e2e8f0; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                <strong>Correo:</strong> ${nuevoUsuario_ahbb.correo}<br/>
+                <strong>Contraseña temporal:</strong> ${contrasenaBase_ahbb}
+              </div>
+              <p style="color: #dc2626;"><strong>⚠️ Por seguridad, deberás cambiar tu contraseña al iniciar sesión por primera vez.</strong></p>
+              <a href="http://localhost:9000/login" style="display:inline-block;background:#1b2a4a;color:white;padding:12px 24px;border-radius:6px;text-decoration:none;margin-top:8px;">Iniciar Sesión</a>
+            </div>
+          </div>
+        `,
+      });
+    } catch (emailErr) {
+      console.error('Error al enviar correo de bienvenida:', emailErr);
+    }
+
     return {
       exito: true,
       usuario: nuevoUsuario_ahbb,
+      correoEnviado: true,
       mensaje:
         rol_ahbb === 'ALUMNO'
-          ? 'Registro recibido. Debe ser aprobado por administración.'
-          : 'Usuario creado exitosamente.',
+          ? 'Cuenta de alumno creada exitosamente. Se ha enviado el correo con sus credenciales.'
+          : 'Usuario creado exitosamente. Se ha enviado el correo con la clave temporal.',
     };
   }
 
@@ -145,7 +180,10 @@ export class AuthService {
       throw new UnauthorizedException('La contraseña actual no coincide.');
     }
 
-    const hashNueva_ahbb = await bcrypt.hash(contrasenaNueva_ahbb, 10);
+    const hashNueva_ahbb =
+      await this.usuariosService_ahbb.hashearContrasena_ahbb(
+        contrasenaNueva_ahbb,
+      );
     await this.usuariosService_ahbb.actualizarContrasena_ahbb(
       id_usuario_ahbb,
       hashNueva_ahbb,
