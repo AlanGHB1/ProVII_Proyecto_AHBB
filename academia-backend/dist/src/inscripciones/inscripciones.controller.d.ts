@@ -6,14 +6,14 @@ export declare class InscripcionesController_ahbb {
     constructor(inscripcionesService_ahbb: InscripcionesService_ahbb);
     obtenerInscripciones_ahbb(): Promise<({
         alumno: {
-            id_usuario_ahbb: number;
             nombre_ahbb: string;
+            id_usuario_ahbb: number;
             apellido_ahbb: string;
             correo_ahbb: string;
         };
         curso: {
-            nombre_ahbb: string;
             id_curso_ahbb: number;
+            nombre_ahbb: string;
         };
     } & {
         id_inscripcion_ahbb: number;
@@ -51,10 +51,12 @@ export declare class InscripcionesController_ahbb {
                 id_curso_horario_ahbb: number;
             }[];
         } & {
+            isPublished_ahbb: boolean;
+            id_usuario_curso_ahbb: number;
             creadoEn_ahbb: Date | null;
             actualizadoEn_ahbb: Date | null;
-            nombre_ahbb: string;
             id_curso_ahbb: number;
+            nombre_ahbb: string;
             tematica_ahbb: string;
             descripcion_ahbb: string | null;
             diasDefinidos_ahbb: number;
@@ -66,11 +68,9 @@ export declare class InscripcionesController_ahbb {
             temarioTexto_ahbb: string | null;
             imagenBasePdf_ahbb: string | null;
             imagenBloqueada_ahbb: boolean | null;
-            isPublished_ahbb: boolean;
             estadoAprobacion_ahbb: string;
             motivoRechazo_ahbb: string | null;
             mensajeCorreccion_ahbb: string | null;
-            id_usuario_curso_ahbb: number;
             id_curso_curso_ahbb: number | null;
         };
     } & {
@@ -86,17 +86,19 @@ export declare class InscripcionesController_ahbb {
     })[]>;
     obtenerPorCurso_ahbb(id_curso_ahbb: number): Promise<({
         alumno: {
+            nombre_ahbb: string;
             id_usuario_ahbb: number;
             cedula_ahbb: string;
-            nombre_ahbb: string;
             apellido_ahbb: string;
             correo_ahbb: string;
         };
         curso: {
+            isPublished_ahbb: boolean;
+            id_usuario_curso_ahbb: number;
             creadoEn_ahbb: Date | null;
             actualizadoEn_ahbb: Date | null;
-            nombre_ahbb: string;
             id_curso_ahbb: number;
+            nombre_ahbb: string;
             tematica_ahbb: string;
             descripcion_ahbb: string | null;
             diasDefinidos_ahbb: number;
@@ -108,11 +110,9 @@ export declare class InscripcionesController_ahbb {
             temarioTexto_ahbb: string | null;
             imagenBasePdf_ahbb: string | null;
             imagenBloqueada_ahbb: boolean | null;
-            isPublished_ahbb: boolean;
             estadoAprobacion_ahbb: string;
             motivoRechazo_ahbb: string | null;
             mensajeCorreccion_ahbb: string | null;
-            id_usuario_curso_ahbb: number;
             id_curso_curso_ahbb: number | null;
         };
     } & {
@@ -128,15 +128,15 @@ export declare class InscripcionesController_ahbb {
     })[]>;
     obtenerAlumnosPorProfesor_ahbb(id_profesor: number): Promise<({
         alumno: {
+            nombre_ahbb: string;
             id_usuario_ahbb: number;
             cedula_ahbb: string;
-            nombre_ahbb: string;
             apellido_ahbb: string;
             correo_ahbb: string;
         };
         curso: {
-            nombre_ahbb: string;
             id_curso_ahbb: number;
+            nombre_ahbb: string;
         };
     } & {
         id_inscripcion_ahbb: number;

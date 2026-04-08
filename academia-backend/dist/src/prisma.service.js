@@ -11,9 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PrismaService = void 0;
 const common_1 = require("@nestjs/common");
-const index_js_1 = require("./generated/prisma_ahbb/index.js");
+const prisma_ahbb_1 = require("./generated/prisma_ahbb");
 const adapter_pg_1 = require("@prisma/adapter-pg");
-let PrismaService = class PrismaService extends index_js_1.PrismaClient {
+let PrismaService = class PrismaService extends prisma_ahbb_1.PrismaClient {
     constructor() {
         super({
             adapter: new adapter_pg_1.PrismaPg({ connectionString: process.env.DATABASE_URL }),

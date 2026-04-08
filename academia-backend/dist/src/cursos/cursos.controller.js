@@ -18,6 +18,7 @@ const cursos_service_1 = require("./cursos.service");
 const crear_curso_dto_ahbb_1 = require("./dto/crear-curso.dto_ahbb");
 const actualizar_curso_dto_ahbb_1 = require("./dto/actualizar-curso.dto_ahbb");
 const jwt_auth_guard_ahbb_1 = require("../common/guards/jwt-auth.guard_ahbb");
+const jwt_optional_auth_guard_ahbb_1 = require("../common/guards/jwt-optional-auth.guard_ahbb");
 const roles_guard_ahbb_1 = require("../common/guards/roles.guard_ahbb");
 const roles_decorator_ahbb_1 = require("../common/decorators/roles.decorator_ahbb");
 let CursosController = class CursosController {
@@ -29,6 +30,10 @@ let CursosController = class CursosController {
         return this.cursosService_ahbb.obtenerSesiones_ahbb(request_ahbb.usuario_ahbb?.rol || 'ALUMNO', Number(request_ahbb.usuario_ahbb?.sub), rol_ahbb, id_usuario_ahbb ? Number(id_usuario_ahbb) : undefined, id_curso_ahbb ? Number(id_curso_ahbb) : undefined);
     }
     async obtenerCursos_ahbb(request_ahbb, solo_propios, solo_inscritos) {
+        const requiereSesion_ahbb = solo_propios === 'true' || solo_inscritos === 'true';
+        if (requiereSesion_ahbb && !request_ahbb.usuario_ahbb) {
+            throw new common_1.UnauthorizedException('Debes iniciar sesion para consultar ese filtro de cursos.');
+        }
         return this.cursosService_ahbb.obtenerTodos_ahbb(request_ahbb.usuario_ahbb?.rol || 'ALUMNO', Number(request_ahbb.usuario_ahbb?.sub), solo_propios === 'true', solo_inscritos === 'true');
     }
     async obtenerCursoPorId_ahbb(id_curso_ahbb) {
@@ -63,7 +68,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], CursosController.prototype, "obtenerSesiones_ahbb", null);
 __decorate([
-    (0, common_1.UseGuards)(jwt_auth_guard_ahbb_1.JwtAuthGuard_ahbb),
+    (0, common_1.UseGuards)(jwt_optional_auth_guard_ahbb_1.JwtOptionalAuthGuard_ahbb),
     (0, common_1.Get)(),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Query)('solo_propios')),

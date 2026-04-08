@@ -1,8 +1,9 @@
 import { ProductosService_ahbb } from './productos.service_ahbb';
+import type { RequestConUsuario_ahbb } from '../common/interfaces/request-usuario.interface_ahbb';
 export declare class ProductosController_ahbb {
     private readonly productosService_ahbb;
     constructor(productosService_ahbb: ProductosService_ahbb);
-    obtenerTodos_ahbb(categoria_ahbb?: string, busqueda_ahbb?: string, estado_ahbb?: string): Promise<{
+    obtenerTodos_ahbb(categoria_ahbb?: string, busqueda_ahbb?: string, estado_ahbb?: string, req_ahbb?: RequestConUsuario_ahbb): Promise<{
         creadoEn_ahbb: Date | null;
         actualizadoEn_ahbb: Date | null;
         nombre_ahbb: string;
@@ -52,5 +53,7 @@ export declare class ProductosController_ahbb {
     }>;
     eliminar_ahbb(id_ahbb: number): Promise<{
         exito: boolean;
+        softDeleted: boolean;
+        mensaje: string;
     }>;
 }

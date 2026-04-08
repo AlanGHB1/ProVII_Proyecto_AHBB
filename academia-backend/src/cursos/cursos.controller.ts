@@ -9,6 +9,7 @@ import {
   Post,
   Put,
   Req,
+  UnauthorizedException,
   UseGuards,
   Query,
 } from '@nestjs/common';
@@ -16,6 +17,7 @@ import { CursosService } from './cursos.service';
 import { CrearCursoDto_ahbb } from './dto/crear-curso.dto_ahbb';
 import { ActualizarCursoDto_ahbb } from './dto/actualizar-curso.dto_ahbb';
 import { JwtAuthGuard_ahbb } from '../common/guards/jwt-auth.guard_ahbb';
+import { JwtOptionalAuthGuard_ahbb } from '../common/guards/jwt-optional-auth.guard_ahbb';
 import { RolesGuard_ahbb } from '../common/guards/roles.guard_ahbb';
 import { RolesDecorator_ahbb } from '../common/decorators/roles.decorator_ahbb';
 import type { RequestConUsuario_ahbb } from '../common/interfaces/request-usuario.interface_ahbb';
@@ -41,13 +43,22 @@ export class CursosController {
     );
   }
 
-  @UseGuards(JwtAuthGuard_ahbb)
+  @UseGuards(JwtOptionalAuthGuard_ahbb)
   @Get()
   async obtenerCursos_ahbb(
     @Req() request_ahbb: RequestConUsuario_ahbb,
     @Query('solo_propios') solo_propios?: string,
     @Query('solo_inscritos') solo_inscritos?: string,
   ) {
+    const requiereSesion_ahbb =
+      solo_propios === 'true' || solo_inscritos === 'true';
+
+    if (requiereSesion_ahbb && !request_ahbb.usuario_ahbb) {
+      throw new UnauthorizedException(
+        'Debes iniciar sesion para consultar ese filtro de cursos.',
+      );
+    }
+
     return this.cursosService_ahbb.obtenerTodos_ahbb(
       request_ahbb.usuario_ahbb?.rol || 'ALUMNO',
       Number(request_ahbb.usuario_ahbb?.sub),

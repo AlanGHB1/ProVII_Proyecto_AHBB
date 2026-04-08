@@ -16,11 +16,11 @@ export declare class CarritoService_ahbb {
             estado_producto_ahbb: string;
         };
     } & {
+        id_producto_carrito_ahbb: number;
         id_carrito_ahbb: number;
         cantidad_ahbb: number;
         fechaAgregado_ahbb: Date | null;
         id_usuario_carrito_ahbb: number;
-        id_producto_carrito_ahbb: number;
     })[]>;
     agregarAlCarrito_ahbb(id_usuario_ahbb: number, id_producto_ahbb: number, cantidad_ahbb?: number): Promise<{
         producto_ahbb: {
@@ -36,11 +36,11 @@ export declare class CarritoService_ahbb {
             estado_producto_ahbb: string;
         };
     } & {
+        id_producto_carrito_ahbb: number;
         id_carrito_ahbb: number;
         cantidad_ahbb: number;
         fechaAgregado_ahbb: Date | null;
         id_usuario_carrito_ahbb: number;
-        id_producto_carrito_ahbb: number;
     }>;
     actualizarCantidad_ahbb(id_carrito_ahbb: number, id_usuario_ahbb: number, cantidad_ahbb: number): Promise<{
         producto_ahbb: {
@@ -56,11 +56,11 @@ export declare class CarritoService_ahbb {
             estado_producto_ahbb: string;
         };
     } & {
+        id_producto_carrito_ahbb: number;
         id_carrito_ahbb: number;
         cantidad_ahbb: number;
         fechaAgregado_ahbb: Date | null;
         id_usuario_carrito_ahbb: number;
-        id_producto_carrito_ahbb: number;
     }>;
     eliminarItem_ahbb(id_carrito_ahbb: number, id_usuario_ahbb: number): Promise<{
         exito: boolean;

@@ -2,6 +2,8 @@ import { PrismaService } from '../prisma.service';
 export declare class ProductosService_ahbb {
     private readonly prisma_ahbb;
     constructor(prisma_ahbb: PrismaService);
+    private resolverEstadoProducto_ahbb;
+    private obtenerProductoConDependencias_ahbb;
     obtenerTodos_ahbb(filtros_ahbb?: {
         categoria?: string;
         busqueda?: string;
@@ -56,5 +58,7 @@ export declare class ProductosService_ahbb {
     }>;
     eliminar_ahbb(id_producto_ahbb: number): Promise<{
         exito: boolean;
+        softDeleted: boolean;
+        mensaje: string;
     }>;
 }

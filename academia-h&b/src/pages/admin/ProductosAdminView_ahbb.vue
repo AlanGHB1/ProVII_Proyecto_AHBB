@@ -11,6 +11,7 @@ import {
 const $q = useQuasar();
 const cargando = ref(true);
 const productos = ref([]);
+const filtroEstado = ref('todos');
 
 const mostrarModal = ref(false);
 const editando = ref(false);
@@ -27,6 +28,11 @@ const productoFom = ref({ ...formularioBase });
 const productoActualId = ref(null);
 
 const categorias = ['camisas', 'gorras', 'papeleria', 'accesorios', 'otros'];
+const estadosFiltro = [
+  { label: 'Todos', value: 'todos' },
+  { label: 'Activos', value: 'activo' },
+  { label: 'Inactivos', value: 'inactivo' },
+];
 
 onMounted(async () => {
   await cargarProductos();
@@ -35,7 +41,7 @@ onMounted(async () => {
 const cargarProductos = async () => {
   cargando.value = true;
   try {
-    const res = await obtenerProductos_ahbb();
+    const res = await obtenerProductos_ahbb({ estado: filtroEstado.value });
     productos.value = res.data;
   } catch (err) {
     $q.notify({ type: 'negative', message: 'Error cargando productos' });
@@ -85,16 +91,22 @@ const guardarProducto = async () => {
 const eliminarGarantizado = (id) => {
   $q.dialog({
     title: 'Eliminar producto',
-    message: '¿Estás seguro de que deseas eliminar este producto (y borrarlo de los carritos de todos los usuarios)?',
+    message: '¿Estás seguro de que deseas eliminar este producto? Si ya tiene compras registradas, se retirará del catálogo para conservar el historial.',
     ok: { color: 'negative', label: 'Eliminar' },
     cancel: true,
   }).onOk(async () => {
     try {
-      await eliminarProducto_ahbb(id);
-      $q.notify({ type: 'positive', message: 'Producto eliminado' });
+      const respuesta = await eliminarProducto_ahbb(id);
+      $q.notify({
+        type: 'positive',
+        message: respuesta.data?.mensaje || 'Producto eliminado',
+      });
       await cargarProductos();
-    } catch {
-      $q.notify({ type: 'negative', message: 'Error al eliminar' });
+    } catch (error) {
+      $q.notify({
+        type: 'negative',
+        message: error.response?.data?.message || 'Error al eliminar',
+      });
     }
   });
 };
@@ -116,6 +128,20 @@ const columnas = [
     <div class="row items-center justify-between q-mb-lg">
       <div class="text-h4 text-weight-bold text-primary">Gestion del Catálogo (Tienda)</div>
       <q-btn color="primary" icon="add" label="Nuevo Producto" @click="abrirModalNuevo" unelevated />
+    </div>
+
+    <div class="row q-col-gutter-md q-mb-md">
+      <div class="col-12 col-sm-5 col-md-4 col-lg-3">
+        <q-select
+          v-model="filtroEstado"
+          :options="estadosFiltro"
+          emit-value
+          map-options
+          outlined
+          label="Filtrar por estado"
+          @update:model-value="cargarProductos"
+        />
+      </div>
     </div>
 
     <q-card flat bordered>

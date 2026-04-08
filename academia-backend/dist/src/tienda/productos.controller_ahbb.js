@@ -18,16 +18,19 @@ const productos_service_ahbb_1 = require("./productos.service_ahbb");
 const jwt_auth_guard_ahbb_1 = require("../common/guards/jwt-auth.guard_ahbb");
 const roles_guard_ahbb_1 = require("../common/guards/roles.guard_ahbb");
 const roles_decorator_ahbb_1 = require("../common/decorators/roles.decorator_ahbb");
+const jwt_optional_auth_guard_ahbb_1 = require("../common/guards/jwt-optional-auth.guard_ahbb");
 let ProductosController_ahbb = class ProductosController_ahbb {
     productosService_ahbb;
     constructor(productosService_ahbb) {
         this.productosService_ahbb = productosService_ahbb;
     }
-    async obtenerTodos_ahbb(categoria_ahbb, busqueda_ahbb, estado_ahbb) {
+    async obtenerTodos_ahbb(categoria_ahbb, busqueda_ahbb, estado_ahbb, req_ahbb) {
+        const esAdmin_ahbb = req_ahbb?.usuario_ahbb?.rol === 'ADMIN';
+        const estadoPermitido_ahbb = esAdmin_ahbb ? estado_ahbb : undefined;
         return this.productosService_ahbb.obtenerTodos_ahbb({
             categoria: categoria_ahbb,
             busqueda: busqueda_ahbb,
-            estado: estado_ahbb,
+            estado: estadoPermitido_ahbb,
         });
     }
     async obtenerPorId_ahbb(id_ahbb) {
@@ -45,12 +48,14 @@ let ProductosController_ahbb = class ProductosController_ahbb {
 };
 exports.ProductosController_ahbb = ProductosController_ahbb;
 __decorate([
+    (0, common_1.UseGuards)(jwt_optional_auth_guard_ahbb_1.JwtOptionalAuthGuard_ahbb),
     (0, common_1.Get)(),
     __param(0, (0, common_1.Query)('categoria')),
     __param(1, (0, common_1.Query)('busqueda')),
     __param(2, (0, common_1.Query)('estado')),
+    __param(3, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String, String]),
+    __metadata("design:paramtypes", [String, String, String, Object]),
     __metadata("design:returntype", Promise)
 ], ProductosController_ahbb.prototype, "obtenerTodos_ahbb", null);
 __decorate([

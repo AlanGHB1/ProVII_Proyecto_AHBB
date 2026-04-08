@@ -2,7 +2,7 @@
   "name": "proyecto-prog-viii-ahbb",
   "private": true,
   "scripts": {
-    "dev": "echo URL del Proyecto: http://localhost:9000 && start http://localhost:9000 && concurrently -k -n BACKEND,FRONTEND -c blue,green \"run-backend.bat\" \"run-frontend.bat\"",
+    "dev": "run-dev.bat",
     "dev:backend": "cd /d \"academia-backend\" && npm run start:dev",
     "dev:frontend": "cd /d \"academia-h&b\" && npm run dev",
     "build": "cd /d \"academia-backend\" && npm run build && cd /d \"..\" && cd /d \"academia-h&b\" && npm run build"

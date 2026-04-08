@@ -1,1 +1,0 @@
-import{D as e,T as t,g as n}from"./runtime-core.esm-bundler-BNSW7PER.js";import{o as r}from"./use-router-link-CxI69AnF.js";function i(){let i=null,a=n();function o(){i!==null&&(clearTimeout(i),i=null)}return e(o),t(o),{removeTimeout:o,registerTimeout(e,t){o(),r(a)===!1&&(i=setTimeout(()=>{i=null,e()},t))}}}export{i as t};

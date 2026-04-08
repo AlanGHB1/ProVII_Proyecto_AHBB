@@ -16,10 +16,10 @@ export declare class FavoritosService_ahbb {
             estado_producto_ahbb: string;
         };
     } & {
+        id_producto_favorito_ahbb: number;
         fechaAgregado_ahbb: Date | null;
         id_favorito_ahbb: number;
         id_usuario_favorito_ahbb: number;
-        id_producto_favorito_ahbb: number;
     })[]>;
     toggleFavorito_ahbb(id_usuario_ahbb: number, id_producto_ahbb: number): Promise<{
         esFavorito: boolean;

@@ -17,10 +17,10 @@ export declare class FavoritosController_ahbb {
             estado_producto_ahbb: string;
         };
     } & {
+        id_producto_favorito_ahbb: number;
         fechaAgregado_ahbb: Date | null;
         id_favorito_ahbb: number;
         id_usuario_favorito_ahbb: number;
-        id_producto_favorito_ahbb: number;
     })[]>;
     obtenerIds_ahbb(req_ahbb: RequestConUsuario_ahbb): Promise<number[]>;
     toggleFavorito_ahbb(idProducto_ahbb: number, req_ahbb: RequestConUsuario_ahbb): Promise<{

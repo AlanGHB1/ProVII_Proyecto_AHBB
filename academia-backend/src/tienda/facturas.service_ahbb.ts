@@ -73,10 +73,17 @@ export class FacturasService_ahbb {
           },
         });
 
-        await tx_ahbb.td_producto_ahbb.update({
+        const productoActualizado_ahbb = await tx_ahbb.td_producto_ahbb.update({
           where: { id_producto_ahbb: item_ahbb.id_producto_carrito_ahbb },
           data: { stock_ahbb: { decrement: item_ahbb.cantidad_ahbb } },
         });
+
+        if (productoActualizado_ahbb.stock_ahbb <= 0) {
+          await tx_ahbb.td_producto_ahbb.update({
+            where: { id_producto_ahbb: item_ahbb.id_producto_carrito_ahbb },
+            data: { estado_producto_ahbb: 'inactivo', stock_ahbb: 0 },
+          });
+        }
       }
 
       // Vaciar carrito
