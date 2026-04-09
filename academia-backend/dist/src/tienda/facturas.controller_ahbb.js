@@ -38,6 +38,23 @@ let FacturasController_ahbb = class FacturasController_ahbb {
     async cambiarEstado_ahbb(id_ahbb, datos_ahbb) {
         return this.facturasService_ahbb.cambiarEstado_ahbb(id_ahbb, datos_ahbb.estado);
     }
+    async descargarPdf_ahbb(id_ahbb, req_ahbb, res_ahbb) {
+        try {
+            const pdfBuffer = await this.facturasService_ahbb.generarPdf_ahbb(id_ahbb, Number(req_ahbb.usuario_ahbb?.sub));
+            res_ahbb.set({
+                'Content-Type': 'application/pdf',
+                'Content-Disposition': `inline; filename="factura-${id_ahbb}.pdf"`,
+                'Content-Length': pdfBuffer.length,
+            });
+            res_ahbb.end(pdfBuffer);
+        }
+        catch (error) {
+            console.error(`Error al servir PDF para la factura ${id_ahbb}:`, error);
+            if (!res_ahbb.headersSent) {
+                res_ahbb.status(500).json({ message: 'Error interno al generar el PDF de la factura.' });
+            }
+        }
+    }
 };
 exports.FacturasController_ahbb = FacturasController_ahbb;
 __decorate([
@@ -81,6 +98,15 @@ __decorate([
     __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
 ], FacturasController_ahbb.prototype, "cambiarEstado_ahbb", null);
+__decorate([
+    (0, common_1.Get)(':id/pdf'),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __param(1, (0, common_1.Req)()),
+    __param(2, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Object, Object]),
+    __metadata("design:returntype", Promise)
+], FacturasController_ahbb.prototype, "descargarPdf_ahbb", null);
 exports.FacturasController_ahbb = FacturasController_ahbb = __decorate([
     (0, common_1.Controller)('facturas'),
     (0, common_1.UseGuards)(jwt_auth_guard_ahbb_1.JwtAuthGuard_ahbb),

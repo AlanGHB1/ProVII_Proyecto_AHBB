@@ -1,6 +1,11 @@
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
 import { validarReferenciaPago_ahbb } from '../common/utils/validacion-pago.util_ahbb';
+import * as fs from 'fs';
+// @ts-ignore - pdfmake 0.3.x exporta el constructor en una subruta para Node
+import PdfPrinter from 'pdfmake/js/Printer';
+import URLResolver from 'pdfmake/js/URLResolver';
+import type { TDocumentDefinitions } from 'pdfmake/interfaces';
 
 @Injectable()
 export class FacturasService_ahbb {
@@ -171,5 +176,141 @@ export class FacturasService_ahbb {
       where: { id_factura_ahbb },
       data: { estadoFactura_ahbb },
     });
+  }
+
+  // Generar Factura en PDF usando pdfmake
+  async generarPdf_ahbb(id_factura_ahbb: number, id_usuario_ahbb?: number): Promise<Buffer> {
+    console.log(`[DEBUG:FacturasService] Iniciando generación de PDF para factura ${id_factura_ahbb}`);
+    try {
+      const factura = await this.obtenerPorId_ahbb(id_factura_ahbb, id_usuario_ahbb);
+      console.log(`[DEBUG:FacturasService] Factura encontrada: ${factura.nroReferenciaPago_ahbb}`);
+
+      const fonts = {
+        Helvetica: {
+          normal: 'Helvetica',
+          bold: 'Helvetica-Bold',
+          italics: 'Helvetica-Oblique',
+          bolditalics: 'Helvetica-BoldOblique',
+        },
+      };
+
+      const urlResolver = new URLResolver(fs);
+      const printer = new PdfPrinter(fonts, fs, urlResolver);
+      console.log(`[DEBUG:FacturasService] Printer inicializado con fuentes:`, Object.keys(fonts));
+
+      const docDefinition: TDocumentDefinitions = {
+        defaultStyle: {
+          font: 'Helvetica',
+        },
+        content: [
+          {
+            columns: [
+              {
+                width: '*',
+                text: [
+                  { text: '🎓 Academia ', style: 'header' },
+                  { text: 'H&B', style: 'headerAccent' },
+                ]
+              },
+              {
+                width: 'auto',
+                stack: [
+                  { text: 'Comprobante de Compra', style: 'title' },
+                  { text: `REF: ${factura.nroReferenciaPago_ahbb || '—'}`, style: 'metaText' },
+                  { text: `Fecha: ${factura.fechaFactura_ahbb ? factura.fechaFactura_ahbb.toISOString().split('T')[0] : '—'}`, style: 'metaText' },
+                  { text: `Estado: ${factura.estadoFactura_ahbb}`, style: 'estadoBadge' },
+                ],
+                alignment: 'right'
+              }
+            ],
+            margin: [0, 0, 0, 20]
+          },
+          { text: 'merch@academiahb.com\nCaracas, Venezuela\nRIF: J-1234567-8', style: 'subheader', margin: [0, 0, 0, 30] },
+          {
+            table: {
+              headerRows: 1,
+              widths: ['*', 'auto', 'auto', 'auto'],
+              body: [
+                [
+                  { text: 'Producto', style: 'tableHeader' },
+                  { text: 'Cant.', style: 'tableHeader', alignment: 'center' as const },
+                  { text: 'P. Unitario', style: 'tableHeader', alignment: 'right' as const },
+                  { text: 'Subtotal', style: 'tableHeader', alignment: 'right' as const }
+                ],
+                ...factura.detalles_ahbb.map(d => [
+                  d.producto_ahbb?.nombre_ahbb || '—',
+                  { text: d.cantidad_ahbb.toString(), alignment: 'center' as const },
+                  { text: `$${Number(d.precioUnitario_ahbb).toFixed(2)}`, alignment: 'right' as const },
+                  { text: `$${(d.cantidad_ahbb * Number(d.precioUnitario_ahbb)).toFixed(2)}`, alignment: 'right' as const }
+                ])
+              ]
+            },
+            layout: 'lightHorizontalLines',
+            margin: [0, 0, 0, 30]
+          },
+          {
+            columns: [
+              { width: '*', text: '' },
+              {
+                width: 250,
+                table: {
+                  widths: ['*', '*'],
+                  body: [
+                    [{ text: 'Subtotal (sin IVA)', color: '#64748b' }, { text: `$${factura.desglose_ahbb.subtotal.toFixed(2)}`, alignment: 'right' as const }],
+                    [{ text: `IVA (${factura.desglose_ahbb.ivaPorcentaje}%)`, color: '#64748b' }, { text: `$${factura.desglose_ahbb.ivaMontoUSD.toFixed(2)}`, alignment: 'right' as const }],
+                    [
+                      { text: 'TOTAL', bold: true, margin: [0, 5, 0, 5], fontSize: 14 },
+                      { text: `$${factura.desglose_ahbb.totalConIva.toFixed(2)}`, bold: true, alignment: 'right' as const, margin: [0, 5, 0, 5], fontSize: 14 }
+                    ]
+                  ]
+                },
+                layout: 'noBorders'
+              }
+            ]
+          },
+          { text: `* IVA calculado según SENIAT (${factura.desglose_ahbb.ivaPorcentaje}%)`, style: 'footerNota', margin: [0, 10, 0, 0] },
+          { text: '\n\nAcademia H&B — Tu academia de certificaciones de confianza.\nEste comprobante es válido como constancia de pago.', style: 'footer' }
+        ],
+        styles: {
+          header: { fontSize: 22, bold: true, color: '#1b2a4a' },
+          headerAccent: { fontSize: 22, bold: true, color: '#f59e0b' },
+          subheader: { fontSize: 11, color: '#64748b', lineHeight: 1.2 },
+          title: { fontSize: 14, bold: true, color: '#64748b', margin: [0, 0, 0, 5] },
+          metaText: { fontSize: 12, color: '#1e293b', margin: [0, 2, 0, 2] },
+          estadoBadge: { fontSize: 12, bold: true, color: '#16a34a', margin: [0, 5, 0, 0] },
+          tableHeader: { bold: true, fontSize: 12, color: 'white', fillColor: '#1b2a4a', margin: [5, 5, 5, 5] },
+          footerNota: { fontSize: 10, color: '#94a3b8', alignment: 'right' },
+          footer: { fontSize: 11, color: '#94a3b8', alignment: 'center' }
+        }
+      };
+
+      return new Promise<Buffer>(async (resolve, reject) => {
+        try {
+          console.log(`[DEBUG:FacturasService] Llamando a printer.createPdfKitDocument...`);
+          // En pdfmake 0.3.x, createPdfKitDocument es asíncrono
+          const pdfDoc = await printer.createPdfKitDocument(docDefinition);
+          console.log(`[DEBUG:FacturasService] Documento PDF creado. Empezando a leer stream...`);
+          const chunks: Buffer[] = [];
+          pdfDoc.on('data', (chunk) => {
+            chunks.push(chunk);
+          });
+          pdfDoc.on('end', () => {
+            console.log(`[DEBUG:FacturasService] Stream finalizado. Chunks acumulados: ${chunks.length}`);
+            resolve(Buffer.concat(chunks));
+          });
+          pdfDoc.on('error', (err) => {
+            console.error('[DEBUG:FacturasService] Error suscribiendo al stream del PDF:', err);
+            reject(err);
+          });
+          pdfDoc.end();
+        } catch (error) {
+          console.error('[DEBUG:FacturasService] Error generando documento PDF:', error);
+          reject(error);
+        }
+      });
+    } catch (error) {
+      console.error('Error en generarPdf_ahbb:', error);
+      throw error; // Re-lanzar error para que sea capturado por el controlador u otro filtro
+    }
   }
 }

@@ -15,17 +15,17 @@ export declare class UsuariosService {
         creadoEn: any;
     }[]>;
     encontrarPorCorreo_ahbb(correo_ahbb: string): Promise<{
-        rol_ahbb: string | null;
-        estadoCuenta_ahbb: string;
+        nombre_ahbb: string;
         creadoEn_ahbb: Date | null;
         actualizadoEn_ahbb: Date | null;
-        nombre_ahbb: string;
         id_usuario_ahbb: number;
         cedula_ahbb: string;
         apellido_ahbb: string;
         correo_ahbb: string;
         contrasena_ahbb: string;
+        rol_ahbb: string | null;
         firmaDigital_ahbb: string | null;
+        estadoCuenta_ahbb: string;
         requiereCambioContrasena_ahbb: boolean;
         referenciaPagoMovil_ahbb: string | null;
         aprobadoPorUsuarioId_ahbb: number | null;
@@ -56,17 +56,17 @@ export declare class UsuariosService {
         creadoEn: any;
     }>;
     obtenerUsuarioPorId_ahbb(id_usuario_ahbb: number): Promise<{
-        rol_ahbb: string | null;
-        estadoCuenta_ahbb: string;
+        nombre_ahbb: string;
         creadoEn_ahbb: Date | null;
         actualizadoEn_ahbb: Date | null;
-        nombre_ahbb: string;
         id_usuario_ahbb: number;
         cedula_ahbb: string;
         apellido_ahbb: string;
         correo_ahbb: string;
         contrasena_ahbb: string;
+        rol_ahbb: string | null;
         firmaDigital_ahbb: string | null;
+        estadoCuenta_ahbb: string;
         requiereCambioContrasena_ahbb: boolean;
         referenciaPagoMovil_ahbb: string | null;
         aprobadoPorUsuarioId_ahbb: number | null;
@@ -163,7 +163,7 @@ export declare class UsuariosService {
         rutaFirma_ahbb: string;
     }>;
     generarContrasenaTemporal_ahbb(): string;
-    normalizarRolInterno_ahbb(rol_ahbb: string): "ADMIN" | "ALUMNO" | "PROFESOR";
+    normalizarRolInterno_ahbb(rol_ahbb: string): "ALUMNO" | "ADMIN" | "PROFESOR";
     mapearRolFrontend_ahbb(rol_ahbb?: string | null): "administrador" | "profesor" | "alumno";
     mapearUsuarioPublico_ahbb(usuario_ahbb: any): {
         id: any;

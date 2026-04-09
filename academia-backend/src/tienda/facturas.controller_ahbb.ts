@@ -7,6 +7,7 @@ import {
   Patch,
   Post,
   Req,
+  Res,
   UseGuards,
 } from '@nestjs/common';
 import { FacturasService_ahbb } from './facturas.service_ahbb';
@@ -64,5 +65,33 @@ export class FacturasController_ahbb {
     @Body() datos_ahbb: { estado: string },
   ) {
     return this.facturasService_ahbb.cambiarEstado_ahbb(id_ahbb, datos_ahbb.estado);
+  }
+
+  // Descargar o ver factura en PDF
+  @Get(':id/pdf')
+  async descargarPdf_ahbb(
+    @Param('id', ParseIntPipe) id_ahbb: number,
+    @Req() req_ahbb: RequestConUsuario_ahbb,
+    @Res() res_ahbb: any,
+  ) {
+    try {
+      const pdfBuffer = await this.facturasService_ahbb.generarPdf_ahbb(
+        id_ahbb,
+        Number(req_ahbb.usuario_ahbb?.sub),
+      );
+
+      res_ahbb.set({
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': `inline; filename="factura-${id_ahbb}.pdf"`,
+        'Content-Length': pdfBuffer.length,
+      });
+
+      res_ahbb.end(pdfBuffer);
+    } catch (error) {
+      console.error(`Error al servir PDF para la factura ${id_ahbb}:`, error);
+      if (!res_ahbb.headersSent) {
+        res_ahbb.status(500).json({ message: 'Error interno al generar el PDF de la factura.' });
+      }
+    }
   }
 }

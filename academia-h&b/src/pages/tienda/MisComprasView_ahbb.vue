@@ -2,9 +2,11 @@
 <script setup>
 import { onMounted, ref, computed } from 'vue';
 import { useTiendaStore_ahbb } from '../../stores/tiendaStore_ahbb';
-import { date } from 'quasar';
+import { date, useQuasar } from 'quasar';
+import { obtenerPdfFactura_ahbb } from '../../servicios/tiendaServicio_ahbb';
 
 const tiendaStore = useTiendaStore_ahbb();
+const $q = useQuasar();
 const cargando = ref(true);
 
 // Filtros
@@ -121,134 +123,38 @@ const limpiarFiltros_ahbb = () => {
 };
 
 // Imprimir / Exportar PDF de la factura
-const imprimirFactura_ahbb = (factura) => {
+const imprimirFactura_ahbb = async (factura) => {
   if (!factura) return;
-  const desglose = getDesglose_ahbb(factura);
 
-  const filasProductos = factura.detalles_ahbb?.map(d => `
-    <tr>
-      <td style="padding: 10px 12px; border-bottom: 1px solid #e2e8f0;">
-        <div style="font-weight: 600; color: #1e293b;">${d.producto_ahbb?.nombre_ahbb ?? ''}</div>
-        <div style="font-size: 11px; color: #64748b; text-transform: capitalize;">${d.producto_ahbb?.categoria_ahbb ?? ''}</div>
-      </td>
-      <td style="padding: 10px 12px; text-align: center; border-bottom: 1px solid #e2e8f0;">${d.cantidad_ahbb}</td>
-      <td style="padding: 10px 12px; text-align: right; border-bottom: 1px solid #e2e8f0;">$${Number(d.precioUnitario_ahbb).toFixed(2)}</td>
-      <td style="padding: 10px 12px; text-align: right; border-bottom: 1px solid #e2e8f0; font-weight: 700;">$${(d.cantidad_ahbb * Number(d.precioUnitario_ahbb)).toFixed(2)}</td>
-    </tr>
-  `).join('') ?? '';
+  let cargandoNotificacion = null;
+  try {
+    cargandoNotificacion = $q.notify({
+      spinner: true,
+      message: 'Generando PDF de la factura...',
+      color: 'primary',
+      timeout: 0,
+      position: 'center'
+    });
 
-  const htmlContent = `
-    <!DOCTYPE html>
-    <html lang="es">
-    <head>
-      <meta charset="UTF-8" />
-      <title>Factura — Academia H&B</title>
-      <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: Arial, sans-serif; color: #1e293b; background: #fff; padding: 40px; }
-        .membrete { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 36px; }
-        .academia-nombre { font-size: 26px; font-weight: 900; color: #1b2a4a; }
-        .academia-nombre span { color: #f59e0b; }
-        .academia-sub { font-size: 12px; color: #64748b; margin-top: 4px; line-height: 1.8; }
-        .factura-id { text-align: right; }
-        .factura-id .label { font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
-        .factura-id .ref { font-size: 20px; font-weight: 800; color: #1b2a4a; font-family: 'Courier New', monospace; }
-        .factura-id .fecha { font-size: 13px; color: #475569; margin-top: 4px; }
-        .estado-badge { display: inline-block; margin-top: 8px; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; background: #dcfce7; color: #16a34a; }
-        hr { border: none; border-top: 2px solid #e2e8f0; margin: 24px 0; }
-        table { width: 100%; border-collapse: collapse; }
-        thead tr { background: #1b2a4a; color: #fff; }
-        thead th { padding: 12px 14px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
-        thead th:first-child { text-align: left; border-radius: 6px 0 0 6px; }
-        thead th:last-child { border-radius: 0 6px 6px 0; text-align: right; }
-        thead th:nth-child(2) { text-align: center; }
-        thead th:nth-child(3), thead th:nth-child(4) { text-align: right; }
-        tbody tr:last-child td { border-bottom: none; }
-        .totales { margin-top: 28px; display: flex; justify-content: flex-end; }
-        .totales-inner { min-width: 280px; }
-        .linea-total { display: flex; justify-content: space-between; padding: 7px 0; font-size: 14px; }
-        .linea-total.final { background: #1b2a4a; color: #fff; padding: 12px 16px; border-radius: 8px; margin-top: 8px; font-size: 18px; font-weight: 800; }
-        .nota-iva { font-size: 11px; color: #94a3b8; text-align: right; margin-top: 6px; }
-        .pie { margin-top: 48px; border-top: 1px solid #e2e8f0; padding-top: 16px; text-align: center; color: #94a3b8; font-size: 11px; line-height: 1.8; }
-        @media print {
-          body { padding: 20px; }
-          button { display: none !important; }
-        }
-      </style>
-    </head>
-    <body>
-      <div class="membrete">
-        <div>
-          <div class="academia-nombre">🎓 Academia <span>H&B</span></div>
-          <div class="academia-sub">
-            merch@academiahb.com<br/>
-            Caracas, Venezuela<br/>
-            RIF: J-1234567-8
-          </div>
-        </div>
-        <div class="factura-id">
-          <div class="label">Comprobante de Compra</div>
-          <div class="ref">REF: ${factura.nroReferenciaPago_ahbb ?? '—'}</div>
-          <div class="fecha">${formatearFecha(factura.fechaFactura_ahbb)}</div>
-          <div class="estado-badge">✔ Pagada</div>
-        </div>
-      </div>
+    const response = await obtenerPdfFactura_ahbb(factura.id_factura_ahbb);
+    
+    // Convertir el blob a URL
+    const fileURL = window.URL.createObjectURL(new Blob([response.data], { type: 'application/pdf' }));
+    
+    if (cargandoNotificacion) cargandoNotificacion(); // cierra la notificacion
 
-      <hr />
-
-      <table>
-        <thead>
-          <tr>
-            <th>Producto</th>
-            <th style="text-align: center;">Cant.</th>
-            <th style="text-align: right;">P. Unitario</th>
-            <th style="text-align: right;">Subtotal</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${filasProductos}
-        </tbody>
-      </table>
-
-      <div class="totales">
-        <div class="totales-inner">
-          <div class="linea-total">
-            <span style="color: #64748b;">Subtotal (sin IVA)</span>
-            <span>$${desglose.subtotal.toFixed(2)}</span>
-          </div>
-          <div class="linea-total">
-            <span style="color: #64748b;">IVA (${desglose.ivaPorcentaje}%)</span>
-            <span>$${desglose.ivaMontoUSD.toFixed(2)}</span>
-          </div>
-          <div class="linea-total final">
-            <span>TOTAL</span>
-            <span>$${desglose.totalConIva.toFixed(2)}</span>
-          </div>
-          <div class="nota-iva">* IVA calculado según SENIAT (${desglose.ivaPorcentaje}%)</div>
-        </div>
-      </div>
-
-      <div class="pie">
-        Academia H&B &mdash; Tu academia de certificaciones de confianza.<br/>
-        Este comprobante es válido como constancia de pago.
-      </div>
-    </body>
-    </html>
-  `;
-
-  const ventana = window.open('', '_blank', 'width=900,height=700');
-  if (!ventana) return;
-  ventana.document.write(htmlContent);
-  ventana.document.close();
-  ventana.focus();
-  // Esperar a que el contenido cargue antes de mostrar el diálogo de impresión
-  ventana.onload = () => {
-    ventana.print();
-  };
-  // Fallback por si onload ya fue disparado
-  setTimeout(() => {
-    try { ventana.print(); } catch {/* ya se imprimio */}
-  }, 500);
+    // Abrir visor de pdf nativo en una nueva pestaña
+    const ventana = window.open(fileURL, '_blank');
+    if (!ventana) {
+      $q.notify({ type: 'warning', message: 'Por favor, permite ventanas emergentes para ver el PDF.', position: 'top' });
+    } else {
+      ventana.focus();
+    }
+  } catch (error) {
+    if (cargandoNotificacion) cargandoNotificacion();
+    console.error('Error al descargar el PDF de la factura:', error);
+    $q.notify({ type: 'negative', message: 'Error al generar el documento PDF desde el servidor.', position: 'top' });
+  }
 };
 
 onMounted(async () => {

@@ -45,6 +45,9 @@ export const obtenerHistorialFacturas_ahbb = () =>
 export const obtenerFacturaPorId_ahbb = (id) =>
   apiCliente_ahbb.get(`/facturas/${id}`);
 
+export const obtenerPdfFactura_ahbb = (id) =>
+  apiCliente_ahbb.get(`/facturas/${id}/pdf`, { responseType: 'blob' });
+
 export const obtenerTodasFacturas_ahbb = () =>
   apiCliente_ahbb.get('/facturas/admin/todas');
 

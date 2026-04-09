@@ -8,11 +8,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FacturasService_ahbb = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma.service");
 const validacion_pago_util_ahbb_1 = require("../common/utils/validacion-pago.util_ahbb");
+const Printer_1 = __importDefault(require("pdfmake/js/Printer"));
 let FacturasService_ahbb = class FacturasService_ahbb {
     prisma_ahbb;
     constructor(prisma_ahbb) {
@@ -150,6 +154,126 @@ let FacturasService_ahbb = class FacturasService_ahbb {
             where: { id_factura_ahbb },
             data: { estadoFactura_ahbb },
         });
+    }
+    async generarPdf_ahbb(id_factura_ahbb, id_usuario_ahbb) {
+        try {
+            const factura = await this.obtenerPorId_ahbb(id_factura_ahbb, id_usuario_ahbb);
+            const fonts = {
+                Helvetica: {
+                    normal: 'Helvetica',
+                    bold: 'Helvetica-Bold',
+                    italics: 'Helvetica-Oblique',
+                    bolditalics: 'Helvetica-BoldOblique',
+                },
+            };
+            const printer = new Printer_1.default(fonts);
+            const docDefinition = {
+                defaultStyle: {
+                    font: 'Helvetica',
+                },
+                content: [
+                    {
+                        columns: [
+                            {
+                                width: '*',
+                                text: [
+                                    { text: '🎓 Academia ', style: 'header' },
+                                    { text: 'H&B', style: 'headerAccent' },
+                                ]
+                            },
+                            {
+                                width: 'auto',
+                                stack: [
+                                    { text: 'Comprobante de Compra', style: 'title' },
+                                    { text: `REF: ${factura.nroReferenciaPago_ahbb || '—'}`, style: 'metaText' },
+                                    { text: `Fecha: ${factura.fechaFactura_ahbb ? factura.fechaFactura_ahbb.toISOString().split('T')[0] : '—'}`, style: 'metaText' },
+                                    { text: `Estado: ${factura.estadoFactura_ahbb}`, style: 'estadoBadge' },
+                                ],
+                                alignment: 'right'
+                            }
+                        ],
+                        margin: [0, 0, 0, 20]
+                    },
+                    { text: 'merch@academiahb.com\nCaracas, Venezuela\nRIF: J-1234567-8', style: 'subheader', margin: [0, 0, 0, 30] },
+                    {
+                        table: {
+                            headerRows: 1,
+                            widths: ['*', 'auto', 'auto', 'auto'],
+                            body: [
+                                [
+                                    { text: 'Producto', style: 'tableHeader' },
+                                    { text: 'Cant.', style: 'tableHeader', alignment: 'center' },
+                                    { text: 'P. Unitario', style: 'tableHeader', alignment: 'right' },
+                                    { text: 'Subtotal', style: 'tableHeader', alignment: 'right' }
+                                ],
+                                ...factura.detalles_ahbb.map(d => [
+                                    d.producto_ahbb?.nombre_ahbb || '—',
+                                    { text: d.cantidad_ahbb.toString(), alignment: 'center' },
+                                    { text: `$${Number(d.precioUnitario_ahbb).toFixed(2)}`, alignment: 'right' },
+                                    { text: `$${(d.cantidad_ahbb * Number(d.precioUnitario_ahbb)).toFixed(2)}`, alignment: 'right' }
+                                ])
+                            ]
+                        },
+                        layout: 'lightHorizontalLines',
+                        margin: [0, 0, 0, 30]
+                    },
+                    {
+                        columns: [
+                            { width: '*', text: '' },
+                            {
+                                width: 250,
+                                table: {
+                                    widths: ['*', '*'],
+                                    body: [
+                                        [{ text: 'Subtotal (sin IVA)', color: '#64748b' }, { text: `$${factura.desglose_ahbb.subtotal.toFixed(2)}`, alignment: 'right' }],
+                                        [{ text: `IVA (${factura.desglose_ahbb.ivaPorcentaje}%)`, color: '#64748b' }, { text: `$${factura.desglose_ahbb.ivaMontoUSD.toFixed(2)}`, alignment: 'right' }],
+                                        [
+                                            { text: 'TOTAL', bold: true, margin: [0, 5, 0, 5], fontSize: 14 },
+                                            { text: `$${factura.desglose_ahbb.totalConIva.toFixed(2)}`, bold: true, alignment: 'right', margin: [0, 5, 0, 5], fontSize: 14 }
+                                        ]
+                                    ]
+                                },
+                                layout: 'noBorders'
+                            }
+                        ]
+                    },
+                    { text: `* IVA calculado según SENIAT (${factura.desglose_ahbb.ivaPorcentaje}%)`, style: 'footerNota', margin: [0, 10, 0, 0] },
+                    { text: '\n\nAcademia H&B — Tu academia de certificaciones de confianza.\nEste comprobante es válido como constancia de pago.', style: 'footer' }
+                ],
+                styles: {
+                    header: { fontSize: 22, bold: true, color: '#1b2a4a' },
+                    headerAccent: { fontSize: 22, bold: true, color: '#f59e0b' },
+                    subheader: { fontSize: 11, color: '#64748b', lineHeight: 1.2 },
+                    title: { fontSize: 14, bold: true, color: '#64748b', margin: [0, 0, 0, 5] },
+                    metaText: { fontSize: 12, color: '#1e293b', margin: [0, 2, 0, 2] },
+                    estadoBadge: { fontSize: 12, bold: true, color: '#16a34a', margin: [0, 5, 0, 0] },
+                    tableHeader: { bold: true, fontSize: 12, color: 'white', fillColor: '#1b2a4a', margin: [5, 5, 5, 5] },
+                    footerNota: { fontSize: 10, color: '#94a3b8', alignment: 'right' },
+                    footer: { fontSize: 11, color: '#94a3b8', alignment: 'center' }
+                }
+            };
+            return new Promise(async (resolve, reject) => {
+                try {
+                    const pdfDoc = await printer.createPdfKitDocument(docDefinition);
+                    const chunks = [];
+                    pdfDoc.on('data', (chunk) => chunks.push(chunk));
+                    pdfDoc.on('end', () => resolve(Buffer.concat(chunks)));
+                    pdfDoc.on('error', (err) => {
+                        console.error('Error suscribiendo al stream del PDF:', err);
+                        reject(err);
+                    });
+                    pdfDoc.end();
+                }
+                catch (error) {
+                    console.error('Error generando documento PDF:', error);
+                    reject(error);
+                }
+            });
+        }
+        catch (error) {
+            console.error('Error en generarPdf_ahbb:', error);
+            throw error;
+        }
     }
 };
 exports.FacturasService_ahbb = FacturasService_ahbb;
