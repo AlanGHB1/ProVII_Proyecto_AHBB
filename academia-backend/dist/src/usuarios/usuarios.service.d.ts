@@ -163,7 +163,7 @@ export declare class UsuariosService {
         rutaFirma_ahbb: string;
     }>;
     generarContrasenaTemporal_ahbb(): string;
-    normalizarRolInterno_ahbb(rol_ahbb: string): "ALUMNO" | "ADMIN" | "PROFESOR";
+    normalizarRolInterno_ahbb(rol_ahbb: string): "ADMIN" | "ALUMNO" | "PROFESOR";
     mapearRolFrontend_ahbb(rol_ahbb?: string | null): "administrador" | "profesor" | "alumno";
     mapearUsuarioPublico_ahbb(usuario_ahbb: any): {
         id: any;

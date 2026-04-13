@@ -4,20 +4,20 @@ export declare class FavoritosService_ahbb {
     constructor(prisma_ahbb: PrismaService);
     obtenerFavoritos_ahbb(id_usuario_ahbb: number): Promise<({
         producto_ahbb: {
+            id_producto_ahbb: number;
             nombre_ahbb: string;
             descripcion_ahbb: string | null;
-            creadoEn_ahbb: Date | null;
-            actualizadoEn_ahbb: Date | null;
-            id_producto_ahbb: number;
             precio_ahbb: import("@prisma/client-runtime-utils").Decimal;
             stock_ahbb: number;
             categoria_ahbb: string;
             imagen_ahbb: string | null;
             estado_producto_ahbb: string;
+            creadoEn_ahbb: Date | null;
+            actualizadoEn_ahbb: Date | null;
         };
     } & {
-        id_producto_favorito_ahbb: number;
         fechaAgregado_ahbb: Date | null;
+        id_producto_favorito_ahbb: number;
         id_favorito_ahbb: number;
         id_usuario_favorito_ahbb: number;
     })[]>;

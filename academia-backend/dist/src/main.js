@@ -38,12 +38,36 @@ const core_1 = require("@nestjs/core");
 const path_1 = require("path");
 const express = __importStar(require("express"));
 const app_module_1 = require("./app.module");
+const tunnel_service_ahbb_1 = require("./common/tunnel/tunnel.service_ahbb");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
-    app.enableCors();
+    const puerto = Number(process.env.PORT) || 3000;
+    app.enableCors({
+        origin: (origin, callback) => {
+            if (!origin)
+                return callback(null, true);
+            const origenesPermitidos_ahbb = [
+                'http://localhost:9000',
+                'http://localhost:9200',
+                `http://localhost:${puerto}`,
+            ];
+            const tunnelService = app.get(tunnel_service_ahbb_1.TunnelService_ahbb);
+            const urlTunel = tunnelService.getUrlPublica_ahbb();
+            if (urlTunel) {
+                origenesPermitidos_ahbb.push(urlTunel);
+            }
+            if (origenesPermitidos_ahbb.includes(origin) || origin.endsWith('.loca.lt')) {
+                return callback(null, true);
+            }
+            return callback(null, true);
+        },
+        credentials: true,
+    });
     app.setGlobalPrefix('api');
     app.use('/uploads', express.static((0, path_1.join)(process.cwd(), 'uploads')));
-    await app.listen(process.env.PORT ?? 3000);
+    await app.listen(puerto);
+    const tunnelService = app.get(tunnel_service_ahbb_1.TunnelService_ahbb);
+    await tunnelService.iniciarTunel_ahbb(puerto);
 }
 bootstrap();
 //# sourceMappingURL=main.js.map

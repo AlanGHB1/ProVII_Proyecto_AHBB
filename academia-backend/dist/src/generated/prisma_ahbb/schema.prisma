@@ -188,8 +188,20 @@ model td_factura_ahbb {
   id_usuario_factura_ahbb Int
 
   // Relaciones
-  usuario_ahbb  td_usuario_ahbb           @relation(fields: [id_usuario_factura_ahbb], references: [id_usuario_ahbb], onDelete: Cascade)
+  usuario_ahbb  td_usuario_ahbb             @relation(fields: [id_usuario_factura_ahbb], references: [id_usuario_ahbb], onDelete: Cascade)
   detalles_ahbb td_detalle_factura_ahbb[]
+  reportes_ahbb td_reportes_facturas_ahbb[]
+}
+
+model td_reportes_facturas_ahbb {
+  id_reporte_ahbb         Int      @id @default(autoincrement())
+  id_factura_reporte_ahbb Int
+  detalles_factura_ahbb   Json
+  qr_base64_ahbb          String   @db.Text
+  creadoEn_ahbb           DateTime @default(now()) @db.Timestamp(6)
+
+  // Relaciones
+  factura_ahbb td_factura_ahbb @relation(fields: [id_factura_reporte_ahbb], references: [id_factura_ahbb], onDelete: Cascade)
 }
 
 model td_detalle_factura_ahbb {

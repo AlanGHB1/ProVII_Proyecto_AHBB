@@ -6,7 +6,9 @@ const mapearPayloadCursoApi_ahbb = (datosCurso_ahbb) => {
     tematica_ahbb: datosCurso_ahbb.descripcion || datosCurso_ahbb.nombre,
     descripcion_ahbb: datosCurso_ahbb.descripcion,
     temarioTexto_ahbb: datosCurso_ahbb.temario,
-    fechaInicio_ahbb: datosCurso_ahbb.fechaInicio ?? new Date().toISOString(),
+    fechaInicio_ahbb: datosCurso_ahbb.fechaInicio && datosCurso_ahbb.fechaInicio.trim() !== ''
+      ? datosCurso_ahbb.fechaInicio
+      : new Date().toISOString(),
     horasDefinidas_ahbb: Number(datosCurso_ahbb.duracionHoras ?? 0),
     topeEstudiantes_ahbb: Number(datosCurso_ahbb.topeEstudiantes ?? 5),
     id_curso_curso_ahbb: datosCurso_ahbb.tienePrelacion

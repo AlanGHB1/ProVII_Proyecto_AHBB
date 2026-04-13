@@ -57,6 +57,11 @@ let BootstrapService_ahbb = BootstrapService_ahbb_1 = class BootstrapService_ahb
         this.logger.log('Preparando datos base de la aplicacion...');
         try {
             await this.sembrarUsuariosBase_ahbb();
+            const profesor_ahbb = await this.prisma_ahbb.td_usuario_ahbb.findFirst({ where: { rol_ahbb: 'PROFESOR' } });
+            const alumno_ahbb = await this.prisma_ahbb.td_usuario_ahbb.findFirst({ where: { rol_ahbb: 'ALUMNO' } });
+            if (profesor_ahbb && alumno_ahbb) {
+                await this.sembrarCursosDemo_ahbb(profesor_ahbb.id_usuario_ahbb, alumno_ahbb.id_usuario_ahbb);
+            }
             await this.sembrarCatalogoBase_ahbb();
             this.logger.log('Datos base listos.');
         }
@@ -109,47 +114,108 @@ let BootstrapService_ahbb = BootstrapService_ahbb_1 = class BootstrapService_ahb
                     contrasena_ahbb: alumnoHash_ahbb,
                     rol_ahbb: 'ALUMNO',
                     estadoCuenta_ahbb: 'ACTIVO',
-                    requiereCambioContrasena_ahbb: true,
+                    requiereCambioContrasena_ahbb: false,
                 },
             }),
         ]);
         this.logger.log('Usuarios iniciales creados: admin, profesor y alumno.');
+        await this.sembrarCursosDemo_ahbb(profesor_ahbb.id_usuario_ahbb, alumno_ahbb.id_usuario_ahbb);
+    }
+    async sembrarCursosDemo_ahbb(profesorId_ahbb, alumnoId_ahbb) {
         const totalCursos_ahbb = await this.prisma_ahbb.td_curso_ahbb.count();
-        if (totalCursos_ahbb === 0) {
-            await this.prisma_ahbb.td_curso_ahbb.create({
-                data: {
-                    nombre_ahbb: 'Fundamentos de JavaScript',
-                    tematica_ahbb: 'JavaScript inicial',
-                    descripcion_ahbb: 'Curso introductorio de JavaScript.',
-                    temarioTexto_ahbb: '1. Variables\n2. Funciones\n3. Objetos\n4. Arrays\n5. DOM y eventos',
-                    fechaInicio_ahbb: new Date(),
-                    fechaFin_ahbb: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
-                    fechaDuracion_ahbb: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
-                    horasDefinidas_ahbb: 40,
-                    diasDefinidos_ahbb: 20,
-                    topeEstudiantes_ahbb: 5,
-                    isPublished_ahbb: true,
-                    id_usuario_curso_ahbb: profesor_ahbb.id_usuario_ahbb,
-                    horarios: {
-                        create: [
-                            {
-                                diaSemana_ahbb: 'LUNES',
-                                horaInicio_ahbb: '09:00',
-                                horaFin_ahbb: '11:00',
-                            },
-                            {
-                                diaSemana_ahbb: 'MIERCOLES',
-                                horaInicio_ahbb: '09:00',
-                                horaFin_ahbb: '11:00',
-                            },
-                        ],
-                    },
-                },
-            });
-            this.logger.log('Curso inicial creado: Fundamentos de JavaScript.');
+        if (totalCursos_ahbb > 0)
             return;
+        const hoy_ahbb = new Date();
+        hoy_ahbb.setHours(12, 0, 0, 0);
+        const cursos_ahbb = [
+            {
+                nombre: 'Orfebreria Ancestral - Finalizado',
+                inicio: new Date('2026-02-09T12:00:00'),
+                dias: ['LUNES', 'MIERCOLES'],
+                inscritos: true,
+                desc: 'Curso completado con todas las clases evaluadas.'
+            },
+            {
+                nombre: 'Joyeria de Autor - Finalizado',
+                inicio: new Date('2026-03-03T12:00:00'),
+                dias: ['MARTES', 'JUEVES'],
+                inscritos: true,
+                desc: 'Segundo ejemplo de curso finalizado.'
+            },
+            {
+                nombre: 'Engaste de Gemas - Iniciado',
+                inicio: new Date('2026-04-06T12:00:00'),
+                dias: ['LUNES', 'VIERNES'],
+                inscritos: true,
+                desc: 'Curso que comenzo hace poco y tiene alumnos.'
+            },
+            {
+                nombre: 'Fundicion a la Cera Perdida - Iniciado',
+                inicio: new Date('2026-04-13T12:00:00'),
+                dias: ['LUNES', 'MIERCOLES'],
+                inscritos: true,
+                desc: 'Curso que inicia el dia de hoy.'
+            },
+            {
+                nombre: 'Diseño 3D (Matrix) - Activo (Proximo)',
+                inicio: new Date('2026-04-22T12:00:00'),
+                dias: ['MIERCOLES', 'VIERNES'],
+                inscritos: false,
+                desc: 'Curso publicado pero sin alumnos inscritos aun.'
+            },
+            {
+                nombre: 'Marketing para Joyeros - Activo (Proximo)',
+                inicio: new Date('2026-04-28T12:00:00'),
+                dias: ['MARTES', 'JUEVES'],
+                inscritos: false,
+                desc: 'Otro ejemplo de curso proximo sin alumnos.'
+            }
+        ];
+        for (const c_ahbb of cursos_ahbb) {
+            const curso_ahbb = await this.prisma_ahbb.td_curso_ahbb.create({
+                data: {
+                    nombre_ahbb: c_ahbb.nombre,
+                    tematica_ahbb: 'Joyeria Especializada',
+                    descripcion_ahbb: c_ahbb.desc,
+                    temarioTexto_ahbb: '1. Teoria\n2. Practica\n3. Evaluacion',
+                    fechaInicio_ahbb: c_ahbb.inicio,
+                    horasDefinidas_ahbb: 40,
+                    diasDefinidos_ahbb: 14,
+                    topeEstudiantes_ahbb: 10,
+                    isPublished_ahbb: true,
+                    estadoAprobacion_ahbb: 'ACTIVO',
+                    id_usuario_curso_ahbb: profesorId_ahbb,
+                    horarios: {
+                        create: c_ahbb.dias.map(d => ({
+                            diaSemana_ahbb: d,
+                            horaInicio_ahbb: '08:00',
+                            horaFin_ahbb: '11:00'
+                        }))
+                    }
+                }
+            });
+            const diasArr = c_ahbb.dias;
+            const iniciosArr = c_ahbb.dias.map(() => '08:00');
+            const finesArr = c_ahbb.dias.map(() => '11:00');
+            await this.prisma_ahbb.$queryRaw `SELECT fn_generar_sesiones_curso_ahbb(
+        ${curso_ahbb.id_curso_ahbb}::INT,
+        ${c_ahbb.inicio.toISOString().split('T')[0]}::DATE,
+        ${diasArr}::TEXT[],
+        ${iniciosArr}::TEXT[],
+        ${finesArr}::TEXT[],
+        40::NUMERIC
+      )`;
+            if (c_ahbb.inscritos) {
+                await this.prisma_ahbb.td_inscripcion_ahbb.create({
+                    data: {
+                        id_usuario_inscripcion_ahbb: alumnoId_ahbb,
+                        id_curso_inscripcion_ahbb: curso_ahbb.id_curso_ahbb,
+                        estatus_ahbb: 'INSCRITO'
+                    }
+                });
+            }
         }
-        this.logger.log(`Curso inicial ya existente. Registros actuales: ${totalCursos_ahbb}.`);
+        this.logger.log('Escenario demo (6 cursos coherentes) creado.');
     }
     async sembrarCatalogoBase_ahbb() {
         const totalProductos_ahbb = await this.prisma_ahbb.td_producto_ahbb.count();

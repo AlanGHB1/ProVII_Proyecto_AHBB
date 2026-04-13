@@ -105,7 +105,16 @@ const mostrarBotonRepublicar_ahbb = computed(() => {
 
 const formatearFecha_ahbb = (fecha) => {
   if (!fecha) return 'Por definir';
-  return new Date(fecha).toLocaleDateString('es-VE', {
+  
+  let d;
+  if (typeof fecha === 'string') {
+    const fechaLimpia = fecha.includes('T') ? fecha.split('T')[0] : fecha;
+    d = new Date(fechaLimpia + 'T12:00:00');
+  } else {
+    d = new Date(fecha);
+  }
+    
+  return d.toLocaleDateString('es-VE', {
     day: '2-digit',
     month: 'short',
     year: 'numeric'

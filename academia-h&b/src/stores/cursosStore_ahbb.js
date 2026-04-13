@@ -17,6 +17,7 @@ export const useCursosStore_ahbb = defineStore('cursos_ahbb', {
     cursoSeleccionado_ahbb: null,
     cargando_ahbb: false,
     listaSesiones_ahbb: [],
+    listaMarcadoresCalendario_ahbb: [],
   }),
 
   getters: {
@@ -43,7 +44,7 @@ export const useCursosStore_ahbb = defineStore('cursos_ahbb', {
     },
     totalCursos_ahbb: (estado) => estado.listaCursos_ahbb.length,
     cursosActivos_ahbb: (estado) =>
-      estado.listaCursos_ahbb.filter((curso_ahbb) => curso_ahbb.estatus === 'activo').length,
+      estado.listaCursos_ahbb.filter((curso_ahbb) => ['activo', 'iniciado'].includes(curso_ahbb.estatus)).length,
     cursosPendientes_ahbb: (estado) =>
       estado.listaCursos_ahbb.filter((curso_ahbb) => curso_ahbb.estatus === 'pendiente').length,
     totalEstudiantes_ahbb: (estado) =>
@@ -162,7 +163,18 @@ export const useCursosStore_ahbb = defineStore('cursos_ahbb', {
     async fetchSesiones_ahbb(filtros_ahbb = {}) {
       this.cargando_ahbb = true;
       try {
-        this.listaSesiones_ahbb = await servicioObtenerSesiones_ahbb(filtros_ahbb);
+        const agenda_ahbb = await servicioObtenerSesiones_ahbb(filtros_ahbb);
+        this.listaSesiones_ahbb = Array.isArray(agenda_ahbb)
+          ? agenda_ahbb
+          : (agenda_ahbb?.sesiones ?? []);
+        this.listaMarcadoresCalendario_ahbb = Array.isArray(agenda_ahbb)
+          ? (agenda_ahbb ?? []).map((sesion_ahbb) => ({
+              fecha: sesion_ahbb.fecha,
+              tipo: 'sesion',
+              cursoNombre: sesion_ahbb.cursoNombre,
+              idCurso: sesion_ahbb.idCurso,
+            }))
+          : (agenda_ahbb?.marcadores ?? []);
       } finally {
         this.cargando_ahbb = false;
       }

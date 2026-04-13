@@ -17,6 +17,176 @@ let CursosService = class CursosService {
     constructor(prisma_ahbb) {
         this.prisma_ahbb = prisma_ahbb;
     }
+    DIAS_SEMANA_AHBB = [
+        'DOMINGO',
+        'LUNES',
+        'MARTES',
+        'MIERCOLES',
+        'JUEVES',
+        'VIERNES',
+        'SABADO',
+    ];
+    normalizarDiaSemana_ahbb(diaSemana_ahbb) {
+        return String(diaSemana_ahbb ?? '')
+            .trim()
+            .toUpperCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '');
+    }
+    convertirFechaSoloDia_ahbb(fecha_ahbb) {
+        const base_ahbb = fecha_ahbb instanceof Date ? new Date(fecha_ahbb) : new Date(`${fecha_ahbb}T12:00:00`);
+        return new Date(base_ahbb.getFullYear(), base_ahbb.getMonth(), base_ahbb.getDate(), 12, 0, 0, 0);
+    }
+    obtenerNombreDiaFecha_ahbb(fecha_ahbb) {
+        return this.DIAS_SEMANA_AHBB[fecha_ahbb.getDay()];
+    }
+    formatearFechaISO_ahbb(fecha_ahbb) {
+        const anio = fecha_ahbb.getUTCFullYear();
+        const mes = String(fecha_ahbb.getUTCMonth() + 1).padStart(2, '0');
+        const dia = String(fecha_ahbb.getUTCDate()).padStart(2, '0');
+        return `${anio}-${mes}-${dia}`;
+    }
+    calcularHorasDisponiblesHorario_ahbb(horaInicio_ahbb, horaFin_ahbb) {
+        const [ih_ahbb, im_ahbb] = horaInicio_ahbb.split(':').map(Number);
+        const [fh_ahbb, fm_ahbb] = horaFin_ahbb.split(':').map(Number);
+        const inicioDecimal_ahbb = ih_ahbb + im_ahbb / 60;
+        let finDecimal_ahbb = fh_ahbb + fm_ahbb / 60;
+        if (horaFin_ahbb === '00:00' || horaFin_ahbb === '00:00:00') {
+            finDecimal_ahbb = 24;
+        }
+        else if (finDecimal_ahbb <= inicioDecimal_ahbb) {
+            finDecimal_ahbb += 24;
+        }
+        return finDecimal_ahbb - inicioDecimal_ahbb;
+    }
+    obtenerHorasProgramablesHorario_ahbb(horaInicio_ahbb, horaFin_ahbb) {
+        return Math.min(3, Math.max(0, this.calcularHorasDisponiblesHorario_ahbb(horaInicio_ahbb, horaFin_ahbb)));
+    }
+    validarHorariosCurso_ahbb(horarios_ahbb) {
+        if (!Array.isArray(horarios_ahbb) || horarios_ahbb.length === 0) {
+            throw new common_1.BadRequestException('Debes configurar al menos un horario para poder programar el curso.');
+        }
+        const horasPorDia_ahbb = new Map();
+        for (const horario_ahbb of horarios_ahbb) {
+            const diaSemana_ahbb = this.normalizarDiaSemana_ahbb(horario_ahbb.diaSemana_ahbb);
+            const horasProgramables_ahbb = this.obtenerHorasProgramablesHorario_ahbb(horario_ahbb.horaInicio_ahbb, horario_ahbb.horaFin_ahbb);
+            if (!this.DIAS_SEMANA_AHBB.includes(diaSemana_ahbb)) {
+                throw new common_1.BadRequestException('Uno de los dias configurados para el curso no es valido.');
+            }
+            if (horasProgramables_ahbb <= 0) {
+                throw new common_1.BadRequestException('Cada horario del curso debe tener una duracion valida mayor a cero.');
+            }
+            const acumuladasDia_ahbb = horasPorDia_ahbb.get(diaSemana_ahbb) ?? 0;
+            horasPorDia_ahbb.set(diaSemana_ahbb, acumuladasDia_ahbb + horasProgramables_ahbb);
+        }
+        const superaTopeDiario_ahbb = [...horasPorDia_ahbb.values()].some((horasDia_ahbb) => horasDia_ahbb > 3);
+        if (superaTopeDiario_ahbb) {
+            throw new common_1.BadRequestException('Un curso no puede exceder 3 horas academicas programadas en un mismo dia.');
+        }
+    }
+    validarFechaInicioConHorarios_ahbb(fechaInicio_ahbb, horarios_ahbb) {
+        const diaInicio_ahbb = this.obtenerNombreDiaFecha_ahbb(fechaInicio_ahbb);
+        const coincideDia_ahbb = horarios_ahbb.some((horario_ahbb) => this.normalizarDiaSemana_ahbb(horario_ahbb.diaSemana_ahbb) === diaInicio_ahbb);
+        if (!coincideDia_ahbb) {
+            throw new common_1.BadRequestException('La fecha de inicio del curso debe coincidir con uno de los dias configurados en el horario.');
+        }
+    }
+    simularProgramacionCurso_ahbb(fechaInicio_ahbb, horarios_ahbb, totalHoras_ahbb) {
+        this.validarHorariosCurso_ahbb(horarios_ahbb);
+        this.validarFechaInicioConHorarios_ahbb(fechaInicio_ahbb, horarios_ahbb);
+        if (!Number.isFinite(totalHoras_ahbb) || totalHoras_ahbb <= 0) {
+            throw new common_1.BadRequestException('La duracion total del curso debe ser mayor a cero.');
+        }
+        const horariosNormalizados_ahbb = horarios_ahbb
+            .map((horario_ahbb) => ({
+            diaSemana_ahbb: this.normalizarDiaSemana_ahbb(horario_ahbb.diaSemana_ahbb),
+            horasProgramables_ahbb: this.obtenerHorasProgramablesHorario_ahbb(horario_ahbb.horaInicio_ahbb, horario_ahbb.horaFin_ahbb),
+        }))
+            .sort((a_ahbb, b_ahbb) => this.DIAS_SEMANA_AHBB.indexOf(a_ahbb.diaSemana_ahbb) -
+            this.DIAS_SEMANA_AHBB.indexOf(b_ahbb.diaSemana_ahbb));
+        let horasAcumuladas_ahbb = 0;
+        let cantidadSesiones_ahbb = 0;
+        let fechaUltimaSesion_ahbb = null;
+        let iteraciones_ahbb = 0;
+        const fechaCursor_ahbb = this.convertirFechaSoloDia_ahbb(fechaInicio_ahbb);
+        while (horasAcumuladas_ahbb < totalHoras_ahbb && iteraciones_ahbb < 2000) {
+            iteraciones_ahbb += 1;
+            const nombreDia_ahbb = this.obtenerNombreDiaFecha_ahbb(fechaCursor_ahbb);
+            const horariosDia_ahbb = horariosNormalizados_ahbb.filter((horario_ahbb) => horario_ahbb.diaSemana_ahbb === nombreDia_ahbb);
+            for (const horarioDia_ahbb of horariosDia_ahbb) {
+                const horasRestantes_ahbb = totalHoras_ahbb - horasAcumuladas_ahbb;
+                const horasSesion_ahbb = Math.min(horarioDia_ahbb.horasProgramables_ahbb, horasRestantes_ahbb);
+                if (horasSesion_ahbb <= 0) {
+                    continue;
+                }
+                cantidadSesiones_ahbb += 1;
+                fechaUltimaSesion_ahbb = new Date(fechaCursor_ahbb);
+                horasAcumuladas_ahbb += horasSesion_ahbb;
+                if (horasAcumuladas_ahbb >= totalHoras_ahbb) {
+                    break;
+                }
+            }
+            fechaCursor_ahbb.setDate(fechaCursor_ahbb.getDate() + 1);
+        }
+        if (!fechaUltimaSesion_ahbb || cantidadSesiones_ahbb === 0) {
+            throw new common_1.BadRequestException('No se pudo calcular una programacion valida para este curso con la fecha y horarios indicados.');
+        }
+        return {
+            fechaFin_ahbb: fechaUltimaSesion_ahbb,
+            diasCalculados_ahbb: cantidadSesiones_ahbb,
+        };
+    }
+    async construirContextoAgenda_ahbb(rolLogueado_ahbb, idLogueado_ahbb, rolFiltro_ahbb, idUsuarioFiltro_ahbb) {
+        let id_target_ahbb = idLogueado_ahbb;
+        let rol_target_ahbb = rolLogueado_ahbb;
+        if (idUsuarioFiltro_ahbb && rolFiltro_ahbb) {
+            if (rolLogueado_ahbb === 'ADMIN') {
+                id_target_ahbb = idUsuarioFiltro_ahbb;
+                rol_target_ahbb = rolFiltro_ahbb;
+            }
+            else if (rolLogueado_ahbb === 'PROFESOR') {
+                if (rolFiltro_ahbb === 'ALUMNO') {
+                    const estaVinculado_ahbb = await this.prisma_ahbb.td_inscripcion_ahbb.findFirst({
+                        where: {
+                            id_usuario_inscripcion_ahbb: idUsuarioFiltro_ahbb,
+                            curso: { id_usuario_curso_ahbb: idLogueado_ahbb },
+                        },
+                    });
+                    if (!estaVinculado_ahbb) {
+                        return null;
+                    }
+                    id_target_ahbb = idUsuarioFiltro_ahbb;
+                    rol_target_ahbb = 'ALUMNO';
+                }
+                else if (idUsuarioFiltro_ahbb === idLogueado_ahbb) {
+                    id_target_ahbb = idLogueado_ahbb;
+                    rol_target_ahbb = 'PROFESOR';
+                }
+                else {
+                    return null;
+                }
+            }
+        }
+        const rolNormal_ahbb = rol_target_ahbb?.toUpperCase();
+        let whereCursos_ahbb;
+        if (rolNormal_ahbb === 'PROFESOR') {
+            whereCursos_ahbb = { id_usuario_curso_ahbb: id_target_ahbb };
+        }
+        else if (rolNormal_ahbb === 'ALUMNO') {
+            whereCursos_ahbb = {
+                inscripciones: {
+                    some: {
+                        id_usuario_inscripcion_ahbb: id_target_ahbb,
+                        estatus_ahbb: { in: ['INSCRITO', 'OYENTE', 'APROBADO'] },
+                    },
+                },
+            };
+        }
+        else {
+            whereCursos_ahbb = {};
+        }
+        return { whereCursos_ahbb };
+    }
     async obtenerTodos_ahbb(rol_ahbb, id_usuario_ahbb, soloPropios_ahbb = false, soloInscritos_ahbb = false) {
         let whereClause = {
             isPublished_ahbb: true,
@@ -96,7 +266,9 @@ let CursosService = class CursosService {
         }
         return this.mapearCurso_ahbb(curso_ahbb);
     }
-    validarFechaInicio_ahbb(fechaInicio_ahbb) {
+    validarFechaInicio_ahbb(fechaInicio_ahbb, rol_ahbb) {
+        if (rol_ahbb === 'ADMIN')
+            return;
         const ahora_ahbb = new Date();
         const minFecha_ahbb = new Date(ahora_ahbb.getTime() + 3 * 24 * 60 * 60 * 1000);
         const maxFecha_ahbb = new Date(ahora_ahbb.getTime() + 31 * 24 * 60 * 60 * 1000);
@@ -111,24 +283,13 @@ let CursosService = class CursosService {
         const id_profesor_ahbb = rol_ahbb === 'ADMIN' && datos_ahbb.id_usuario_curso_ahbb
             ? Number(datos_ahbb.id_usuario_curso_ahbb)
             : id_usuario_logueado;
-        let horasSemanales = 0;
-        datos_ahbb.horarios_ahbb.forEach((h) => {
-            const [ih, im] = h.horaInicio_ahbb.split(':').map(Number);
-            const [fh, fm] = h.horaFin_ahbb.split(':').map(Number);
-            horasSemanales += fh + fm / 60 - (ih + im / 60);
-        });
-        if (horasSemanales <= 0)
-            horasSemanales = 2;
-        const diasSemanales = datos_ahbb.horarios_ahbb.length || 1;
-        const semanas = Math.ceil(Number(datos_ahbb.horasDefinidas_ahbb) / horasSemanales);
-        const diasCalculados = semanas * diasSemanales;
         const fechaInicio_ahbb = datos_ahbb.fechaInicio_ahbb
-            ? new Date(datos_ahbb.fechaInicio_ahbb.includes('T') ? datos_ahbb.fechaInicio_ahbb : `${datos_ahbb.fechaInicio_ahbb}T12:00:00`)
-            : new Date();
-        this.validarFechaInicio_ahbb(fechaInicio_ahbb);
-        const fechaFin_ahbb = datos_ahbb.fechaFin_ahbb
-            ? new Date(datos_ahbb.fechaFin_ahbb.includes('T') ? datos_ahbb.fechaFin_ahbb : `${datos_ahbb.fechaFin_ahbb}T12:00:00`)
-            : new Date(fechaInicio_ahbb.getTime() + semanas * 7 * 24 * 60 * 60 * 1000);
+            ? this.convertirFechaSoloDia_ahbb(datos_ahbb.fechaInicio_ahbb)
+            : this.convertirFechaSoloDia_ahbb(new Date());
+        this.validarFechaInicio_ahbb(fechaInicio_ahbb, rol_ahbb);
+        const programacion_ahbb = this.simularProgramacionCurso_ahbb(fechaInicio_ahbb, datos_ahbb.horarios_ahbb, Number(datos_ahbb.horasDefinidas_ahbb));
+        const fechaFin_ahbb = programacion_ahbb.fechaFin_ahbb;
+        const diasCalculados = programacion_ahbb.diasCalculados_ahbb;
         await this.validarSolapamientoProfesor_ahbb(id_profesor_ahbb, datos_ahbb.horarios_ahbb, fechaInicio_ahbb, fechaFin_ahbb);
         const estadoAprobacion = rol_ahbb === 'ADMIN' ? 'ACTIVO' : 'PENDIENTE';
         const isPublished = rol_ahbb === 'ADMIN';
@@ -186,33 +347,29 @@ let CursosService = class CursosService {
             : id_usuario_logueado;
         const cursoExistente_ahbb = await this.prisma_ahbb.td_curso_ahbb.findUnique({
             where: { id_curso_ahbb },
+            include: { horarios: true },
         });
         if (!cursoExistente_ahbb) {
             throw new common_1.NotFoundException('Curso no encontrado.');
         }
         const fechaInicio_ahbb = datos_ahbb.fechaInicio_ahbb
-            ? new Date(datos_ahbb.fechaInicio_ahbb.includes('T') ? datos_ahbb.fechaInicio_ahbb : `${datos_ahbb.fechaInicio_ahbb}T12:00:00`)
-            : (cursoExistente_ahbb.fechaInicio_ahbb ?? new Date());
+            ? this.convertirFechaSoloDia_ahbb(datos_ahbb.fechaInicio_ahbb)
+            : this.convertirFechaSoloDia_ahbb(cursoExistente_ahbb.fechaInicio_ahbb ?? new Date());
         if (datos_ahbb.fechaInicio_ahbb) {
-            const nuevaFecha_str = new Date(datos_ahbb.fechaInicio_ahbb.includes('T') ? datos_ahbb.fechaInicio_ahbb : `${datos_ahbb.fechaInicio_ahbb}T12:00:00`).toISOString().split('T')[0];
+            const nuevaFecha_str = this.convertirFechaSoloDia_ahbb(datos_ahbb.fechaInicio_ahbb).toISOString().split('T')[0];
             const fechaAnterior_str = cursoExistente_ahbb.fechaInicio_ahbb?.toISOString().split('T')[0];
             if (nuevaFecha_str !== fechaAnterior_str) {
-                this.validarFechaInicio_ahbb(fechaInicio_ahbb);
+                this.validarFechaInicio_ahbb(fechaInicio_ahbb, rol_ahbb);
             }
         }
-        const fechaFin_ahbb = datos_ahbb.fechaFin_ahbb
-            ? new Date(datos_ahbb.fechaFin_ahbb.includes('T') ? datos_ahbb.fechaFin_ahbb : `${datos_ahbb.fechaFin_ahbb}T12:00:00`)
-            : new Date(fechaInicio_ahbb.getTime() +
-                Number(datos_ahbb.diasDefinidos_ahbb ??
-                    cursoExistente_ahbb.diasDefinidos_ahbb ??
-                    1) *
-                    24 *
-                    60 *
-                    60 *
-                    1000);
-        await this.validarSolapamientoProfesor_ahbb(id_profesor_ahbb, datos_ahbb.horarios_ahbb ?? [], fechaInicio_ahbb, fechaFin_ahbb, id_curso_ahbb);
+        const horariosProgramacion_ahbb = datos_ahbb.horarios_ahbb && datos_ahbb.horarios_ahbb.length > 0
+            ? datos_ahbb.horarios_ahbb
+            : cursoExistente_ahbb.horarios;
+        const programacion_ahbb = this.simularProgramacionCurso_ahbb(fechaInicio_ahbb, horariosProgramacion_ahbb, Number(datos_ahbb.horasDefinidas_ahbb ?? cursoExistente_ahbb.horasDefinidas_ahbb));
+        const fechaFin_ahbb = programacion_ahbb.fechaFin_ahbb;
+        await this.validarSolapamientoProfesor_ahbb(id_profesor_ahbb, horariosProgramacion_ahbb, fechaInicio_ahbb, fechaFin_ahbb, id_curso_ahbb);
         if (datos_ahbb.fechaInicio_ahbb) {
-            const nuevaFecha_str = new Date(datos_ahbb.fechaInicio_ahbb.includes('T') ? datos_ahbb.fechaInicio_ahbb : `${datos_ahbb.fechaInicio_ahbb}T12:00:00`).toISOString().split('T')[0];
+            const nuevaFecha_str = this.convertirFechaSoloDia_ahbb(datos_ahbb.fechaInicio_ahbb).toISOString().split('T')[0];
             const fechaAnterior_str = cursoExistente_ahbb.fechaInicio_ahbb?.toISOString().split('T')[0];
             if (nuevaFecha_str !== fechaAnterior_str) {
                 const inscritosCount_ahbb = await this.prisma_ahbb.td_inscripcion_ahbb.count({
@@ -226,17 +383,7 @@ let CursosService = class CursosService {
                 }
             }
         }
-        let horasSemanales = 0;
-        (datos_ahbb.horarios_ahbb ?? []).forEach((h) => {
-            const [ih, im] = h.horaInicio_ahbb.split(':').map(Number);
-            const [fh, fm] = h.horaFin_ahbb.split(':').map(Number);
-            horasSemanales += fh + fm / 60 - (ih + im / 60);
-        });
-        if (horasSemanales <= 0)
-            horasSemanales = 2;
-        const diasSemanales = (datos_ahbb.horarios_ahbb ?? []).length || 1;
-        const semanas = Math.ceil(Number(datos_ahbb.horasDefinidas_ahbb) / horasSemanales);
-        const diasCalculados = semanas * diasSemanales;
+        const diasCalculados = programacion_ahbb.diasCalculados_ahbb;
         const cursoActualizado_ahbb = await this.prisma_ahbb.$transaction(async (tx_ahbb) => {
             await tx_ahbb.td_horario_ahbb.deleteMany({
                 where: { id_curso_horario_ahbb: id_curso_ahbb },
@@ -266,7 +413,7 @@ let CursosService = class CursosService {
                         motivoRechazo_ahbb: null,
                     }),
                     horarios: {
-                        create: (datos_ahbb.horarios_ahbb ?? []).map((horario_ahbb) => ({
+                        create: horariosProgramacion_ahbb.map((horario_ahbb) => ({
                             diaSemana_ahbb: horario_ahbb.diaSemana_ahbb.toUpperCase(),
                             horaInicio_ahbb: horario_ahbb.horaInicio_ahbb,
                             horaFin_ahbb: horario_ahbb.horaFin_ahbb,
@@ -285,20 +432,17 @@ let CursosService = class CursosService {
                 },
             });
         });
-        const horarios_ahbb = datos_ahbb.horarios_ahbb ?? [];
-        if (horarios_ahbb.length > 0) {
-            const diasArray_ahbb = horarios_ahbb.map(h => h.diaSemana_ahbb.toUpperCase());
-            const iniciosArray_ahbb = horarios_ahbb.map(h => h.horaInicio_ahbb);
-            const finesArray_ahbb = horarios_ahbb.map(h => h.horaFin_ahbb);
-            await this.prisma_ahbb.$queryRaw `SELECT fn_generar_sesiones_curso_ahbb(
-        ${id_curso_ahbb}::INT,
-        ${fechaInicio_ahbb.toISOString().split('T')[0]}::DATE,
-        ${diasArray_ahbb}::TEXT[],
-        ${iniciosArray_ahbb}::TEXT[],
-        ${finesArray_ahbb}::TEXT[],
-        ${Number(datos_ahbb.horasDefinidas_ahbb)}::NUMERIC
-      )`;
-        }
+        const diasArray_ahbb = horariosProgramacion_ahbb.map((h) => h.diaSemana_ahbb.toUpperCase());
+        const iniciosArray_ahbb = horariosProgramacion_ahbb.map((h) => h.horaInicio_ahbb);
+        const finesArray_ahbb = horariosProgramacion_ahbb.map((h) => h.horaFin_ahbb);
+        await this.prisma_ahbb.$queryRaw `SELECT fn_generar_sesiones_curso_ahbb(
+      ${id_curso_ahbb}::INT,
+      ${fechaInicio_ahbb.toISOString().split('T')[0]}::DATE,
+      ${diasArray_ahbb}::TEXT[],
+      ${iniciosArray_ahbb}::TEXT[],
+      ${finesArray_ahbb}::TEXT[],
+      ${Number(datos_ahbb.horasDefinidas_ahbb ?? cursoExistente_ahbb.horasDefinidas_ahbb)}::NUMERIC
+    )`;
         return this.mapearCurso_ahbb(cursoActualizado_ahbb);
     }
     async eliminarCurso_ahbb(id_curso_ahbb) {
@@ -405,62 +549,37 @@ let CursosService = class CursosService {
         return inicioA_ahbb < finB_ahbb && inicioB_ahbb < finA_ahbb;
     }
     async obtenerSesiones_ahbb(rolLogueado_ahbb, idLogueado_ahbb, rolFiltro_ahbb, idUsuarioFiltro_ahbb, id_curso_ahbb) {
-        let id_target_ahbb = idLogueado_ahbb;
-        let rol_target_ahbb = rolLogueado_ahbb;
-        if (idUsuarioFiltro_ahbb && rolFiltro_ahbb) {
-            if (rolLogueado_ahbb === 'ADMIN') {
-                id_target_ahbb = idUsuarioFiltro_ahbb;
-                rol_target_ahbb = rolFiltro_ahbb;
-            }
-            else if (rolLogueado_ahbb === 'PROFESOR') {
-                if (rolFiltro_ahbb === 'ALUMNO') {
-                    const estaVinculado_ahbb = await this.prisma_ahbb.td_inscripcion_ahbb.findFirst({
-                        where: {
-                            id_usuario_inscripcion_ahbb: idUsuarioFiltro_ahbb,
-                            curso: { id_usuario_curso_ahbb: idLogueado_ahbb },
-                        },
-                    });
-                    if (!estaVinculado_ahbb)
-                        return [];
-                    id_target_ahbb = idUsuarioFiltro_ahbb;
-                    rol_target_ahbb = 'ALUMNO';
-                }
-                else if (idUsuarioFiltro_ahbb === idLogueado_ahbb) {
-                    id_target_ahbb = idLogueado_ahbb;
-                    rol_target_ahbb = 'PROFESOR';
-                }
-                else {
-                    return [];
-                }
-            }
+        const contextoAgenda_ahbb = await this.construirContextoAgenda_ahbb(rolLogueado_ahbb, idLogueado_ahbb, rolFiltro_ahbb, idUsuarioFiltro_ahbb);
+        if (!contextoAgenda_ahbb) {
+            return { sesiones: [], marcadores: [] };
         }
-        const rolNormal_ahbb = rol_target_ahbb?.toUpperCase();
-        let whereClause;
-        if (rolNormal_ahbb === 'PROFESOR') {
-            whereClause = {
-                curso: { id_usuario_curso_ahbb: id_target_ahbb },
-            };
-        }
-        else if (rolNormal_ahbb === 'ALUMNO') {
-            whereClause = {
-                curso: {
-                    inscripciones: {
-                        some: {
-                            id_usuario_inscripcion_ahbb: id_target_ahbb,
-                            estatus_ahbb: { in: ['INSCRITO', 'OYENTE', 'APROBADO'] },
-                        },
+        const whereCursos_ahbb = {
+            ...contextoAgenda_ahbb.whereCursos_ahbb,
+            ...(id_curso_ahbb ? { id_curso_ahbb } : {}),
+        };
+        const cursosAgenda_ahbb = await this.prisma_ahbb.td_curso_ahbb.findMany({
+            where: whereCursos_ahbb,
+            select: {
+                id_curso_ahbb: true,
+                nombre_ahbb: true,
+                fechaInicio_ahbb: true,
+                inscripciones: {
+                    where: {
+                        estatus_ahbb: { in: ['INSCRITO', 'OYENTE', 'APROBADO'] },
                     },
+                    select: { id_inscripcion_ahbb: true },
                 },
-            };
-        }
-        else {
-            whereClause = {};
-        }
-        if (id_curso_ahbb) {
-            whereClause.id_curso_sesion_ahbb = id_curso_ahbb;
-        }
+            },
+        });
+        const cursosConfirmadosIds_ahbb = cursosAgenda_ahbb
+            .filter((curso_ahbb) => curso_ahbb.inscripciones.length > 0)
+            .map((curso_ahbb) => curso_ahbb.id_curso_ahbb);
         const sesiones_ahbb = await this.prisma_ahbb.td_sesion_curso_ahbb.findMany({
-            where: whereClause,
+            where: {
+                ...(cursosConfirmadosIds_ahbb.length > 0
+                    ? { id_curso_sesion_ahbb: { in: cursosConfirmadosIds_ahbb } }
+                    : { id_curso_sesion_ahbb: -1 }),
+            },
             select: {
                 id_sesion_ahbb: true,
                 nroSesion_ahbb: true,
@@ -476,15 +595,57 @@ let CursosService = class CursosService {
             },
             orderBy: { fechaSesion_ahbb: 'asc' },
         });
-        return sesiones_ahbb.map((s) => ({
+        const sesionesMapeadas_ahbb = sesiones_ahbb.map((s) => ({
             id: s.id_sesion_ahbb,
             nroClase: s.nroSesion_ahbb,
-            fecha: s.fechaSesion_ahbb,
+            fecha: this.formatearFechaISO_ahbb(new Date(s.fechaSesion_ahbb)),
             horaInicio: s.horaInicio_ahbb,
             horaFin: s.horaFin_ahbb,
             cursoNombre: s.curso.nombre_ahbb,
             idCurso: s.id_curso_sesion_ahbb,
         }));
+        const hoy_ahbb = this.convertirFechaSoloDia_ahbb(new Date());
+        const marcadoresAgenda_ahbb = [];
+        for (const sesion_ahbb of sesionesMapeadas_ahbb) {
+            const fechaMarcador_ahbb = this.formatearFechaISO_ahbb(new Date(sesion_ahbb.fecha));
+            marcadoresAgenda_ahbb.push({
+                fecha: fechaMarcador_ahbb,
+                tipo: 'sesion',
+                cursoNombre: sesion_ahbb.cursoNombre,
+                idCurso: sesion_ahbb.idCurso,
+            });
+        }
+        for (const curso_ahbb of cursosAgenda_ahbb) {
+            if (curso_ahbb.inscripciones.length > 0 ||
+                !curso_ahbb.fechaInicio_ahbb) {
+                continue;
+            }
+            const fechaInicioCurso_ahbb = this.convertirFechaSoloDia_ahbb(curso_ahbb.fechaInicio_ahbb);
+            if (fechaInicioCurso_ahbb < hoy_ahbb) {
+                continue;
+            }
+            const anio = fechaInicioCurso_ahbb.getFullYear();
+            const mes = String(fechaInicioCurso_ahbb.getMonth() + 1).padStart(2, '0');
+            const dia = String(fechaInicioCurso_ahbb.getDate()).padStart(2, '0');
+            const fechaMarcador_ahbb = `${anio}-${mes}-${dia}`;
+            marcadoresAgenda_ahbb.push({
+                fecha: fechaMarcador_ahbb,
+                tipo: 'tentativo',
+                cursoNombre: curso_ahbb.nombre_ahbb,
+                idCurso: curso_ahbb.id_curso_ahbb,
+                mensaje: 'Inicio tentativo sin alumnos inscritos.',
+            });
+        }
+        return {
+            sesiones: sesionesMapeadas_ahbb,
+            marcadores: marcadoresAgenda_ahbb.sort((a_ahbb, b_ahbb) => {
+                const comparacionFecha_ahbb = String(a_ahbb.fecha).localeCompare(String(b_ahbb.fecha));
+                if (comparacionFecha_ahbb !== 0) {
+                    return comparacionFecha_ahbb;
+                }
+                return Number(a_ahbb.idCurso) - Number(b_ahbb.idCurso);
+            }),
+        };
     }
     mapearCurso_ahbb(curso_ahbb) {
         const profesorNombre_ahbb = curso_ahbb.profesor
@@ -518,8 +679,8 @@ let CursosService = class CursosService {
             motivoRechazo: curso_ahbb.motivoRechazo_ahbb,
             mensajeCorreccion: curso_ahbb.mensajeCorreccion_ahbb,
             temario: curso_ahbb.temarioTexto_ahbb,
-            fechaInicio: curso_ahbb.fechaInicio_ahbb,
-            fechaFin: curso_ahbb.fechaFin_ahbb,
+            fechaInicio: curso_ahbb.fechaInicio_ahbb ? this.formatearFechaISO_ahbb(new Date(curso_ahbb.fechaInicio_ahbb)) : null,
+            fechaFin: curso_ahbb.fechaFin_ahbb ? this.formatearFechaISO_ahbb(new Date(curso_ahbb.fechaFin_ahbb)) : null,
             fechaCreacion: curso_ahbb.creadoEn_ahbb,
             estudiantesInscritos: curso_ahbb.inscripciones?.length ?? 0,
             dias: curso_ahbb.horarios?.map((horario_ahbb) => horario_ahbb.diaSemana_ahbb.toLowerCase()) ?? [],

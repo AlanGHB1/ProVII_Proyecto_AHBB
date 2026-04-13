@@ -3,6 +3,17 @@ import { CrearCursoDto_ahbb } from './dto/crear-curso.dto_ahbb';
 export declare class CursosService {
     private readonly prisma_ahbb;
     constructor(prisma_ahbb: PrismaService);
+    private readonly DIAS_SEMANA_AHBB;
+    private normalizarDiaSemana_ahbb;
+    private convertirFechaSoloDia_ahbb;
+    private obtenerNombreDiaFecha_ahbb;
+    private formatearFechaISO_ahbb;
+    private calcularHorasDisponiblesHorario_ahbb;
+    private obtenerHorasProgramablesHorario_ahbb;
+    private validarHorariosCurso_ahbb;
+    private validarFechaInicioConHorarios_ahbb;
+    private simularProgramacionCurso_ahbb;
+    private construirContextoAgenda_ahbb;
     obtenerTodos_ahbb(rol_ahbb?: string, id_usuario_ahbb?: number, soloPropios_ahbb?: boolean, soloInscritos_ahbb?: boolean): Promise<{
         id: any;
         nombre: any;
@@ -17,8 +28,8 @@ export declare class CursosService {
         motivoRechazo: any;
         mensajeCorreccion: any;
         temario: any;
-        fechaInicio: any;
-        fechaFin: any;
+        fechaInicio: string | null;
+        fechaFin: string | null;
         fechaCreacion: any;
         estudiantesInscritos: any;
         dias: any;
@@ -44,8 +55,8 @@ export declare class CursosService {
         motivoRechazo: any;
         mensajeCorreccion: any;
         temario: any;
-        fechaInicio: any;
-        fechaFin: any;
+        fechaInicio: string | null;
+        fechaFin: string | null;
         fechaCreacion: any;
         estudiantesInscritos: any;
         dias: any;
@@ -74,8 +85,8 @@ export declare class CursosService {
         motivoRechazo: any;
         mensajeCorreccion: any;
         temario: any;
-        fechaInicio: any;
-        fechaFin: any;
+        fechaInicio: string | null;
+        fechaFin: string | null;
         fechaCreacion: any;
         estudiantesInscritos: any;
         dias: any;
@@ -103,8 +114,8 @@ export declare class CursosService {
         motivoRechazo: any;
         mensajeCorreccion: any;
         temario: any;
-        fechaInicio: any;
-        fechaFin: any;
+        fechaInicio: string | null;
+        fechaFin: string | null;
         fechaCreacion: any;
         estudiantesInscritos: any;
         dias: any;
@@ -138,14 +149,23 @@ export declare class CursosService {
     validarSolapamientoProfesor_ahbb(id_profesor_ahbb: number, horariosNuevos_ahbb: any[], fechaInicioNivel_ahbb: Date, fechaFinNivel_ahbb: Date, id_curso_excluir?: number): Promise<void>;
     hayCruceHoras_ahbb(inicioA_ahbb: string, finA_ahbb: string, inicioB_ahbb: string, finB_ahbb: string): boolean;
     obtenerSesiones_ahbb(rolLogueado_ahbb: string, idLogueado_ahbb: number, rolFiltro_ahbb?: string, idUsuarioFiltro_ahbb?: number, id_curso_ahbb?: number): Promise<{
-        id: number;
-        nroClase: number;
-        fecha: Date;
-        horaInicio: string;
-        horaFin: string;
-        cursoNombre: string;
-        idCurso: number;
-    }[]>;
+        sesiones: {
+            id: number;
+            nroClase: number;
+            fecha: string;
+            horaInicio: string;
+            horaFin: string;
+            cursoNombre: string;
+            idCurso: number;
+        }[];
+        marcadores: {
+            fecha: string;
+            tipo: "sesion" | "tentativo";
+            cursoNombre: string;
+            idCurso: number;
+            mensaje?: string;
+        }[];
+    }>;
     mapearCurso_ahbb(curso_ahbb: any): {
         id: any;
         nombre: any;
@@ -160,8 +180,8 @@ export declare class CursosService {
         motivoRechazo: any;
         mensajeCorreccion: any;
         temario: any;
-        fechaInicio: any;
-        fechaFin: any;
+        fechaInicio: string | null;
+        fechaFin: string | null;
         fechaCreacion: any;
         estudiantesInscritos: any;
         dias: any;

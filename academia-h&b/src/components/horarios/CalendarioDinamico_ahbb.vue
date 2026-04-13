@@ -1,6 +1,5 @@
 <template>
   <div class="calendario-contenedor-ahbb q-pa-sm">
-    <!-- Cabecera: Mes y Navegación -->
     <div class="row items-center justify-between q-mb-md">
       <div class="text-h6 text-weight-bold capitalize">
         {{ nombreMes_ahbb }} {{ anioActual_ahbb }}
@@ -12,108 +11,150 @@
       </div>
     </div>
 
-    <!-- Días de la semana -->
     <div class="grid-calendario-ahbb text-center text-weight-medium text-grey-7 q-mb-sm">
-      <div v-for="d in diasSemana_ahbb" :key="d">{{ d }}</div>
+      <div v-for="diaSemana_ahbb in diasSemana_ahbb" :key="diaSemana_ahbb">
+        {{ diaSemana_ahbb }}
+      </div>
     </div>
 
-    <!-- Días del mes -->
     <div class="grid-calendario-ahbb">
       <div
-        v-for="(dia, index) in diasDelMes_ahbb"
-        :key="index"
+        v-for="(dia_ahbb, index_ahbb) in diasDelMes_ahbb"
+        :key="index_ahbb"
         class="dia-celda-ahbb flex flex-center relative-position"
         :class="{
-          'dia-fuera-mes-ahbb': !dia.esMesActual,
-          'dia-hoy-ahbb': dia.esHoy,
-          'dia-seleccionado-ahbb': esDiaSeleccionado_ahbb(dia.fechaStr)
+          'dia-fuera-mes-ahbb': !dia_ahbb.esMesActual,
+          'dia-hoy-ahbb': dia_ahbb.esHoy,
+          'dia-seleccionado-ahbb': esDiaSeleccionado_ahbb(dia_ahbb.fechaStr),
         }"
-        @click="seleccionarDia_ahbb(dia)"
+        @click="seleccionarDia_ahbb(dia_ahbb)"
       >
-        <span class="z-index-1">{{ dia.numero }}</span>
-        
-        <!-- Indicador de Estado (Puntito) -->
-        <div 
-          v-if="dia.esMesActual"
+        <span class="z-index-1">{{ dia_ahbb.numero }}</span>
+
+        <div
+          v-if="dia_ahbb.esMesActual && obtenerClaseEstado_ahbb(dia_ahbb.fechaStr)"
           class="indicador-estado-ahbb"
-          :class="obtenerClaseEstado_ahbb(dia.fechaStr)"
-        ></div>
+          :class="obtenerClaseEstado_ahbb(dia_ahbb.fechaStr)"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { computed, ref } from 'vue';
 import { date } from 'quasar';
 
 const props = defineProps({
-  sesiones_ahbb: { type: Array, default: () => [] }
+  sesiones_ahbb: { type: Array, default: () => [] },
+  marcadores_ahbb: { type: Array, default: () => [] },
 });
 
-const emit = defineEmits(['seleccionar-dia']);
+const emit = defineEmits(['seleccionar-dia', 'update:month-view']);
 
 const hoy_ahbb = new Date();
-const fechaVisualizada_ahbb = ref(new Date(hoy_ahbb.getFullYear(), hoy_ahbb.getMonth(), 1));
+const fechaVisualizada_ahbb = ref(
+  new Date(hoy_ahbb.getFullYear(), hoy_ahbb.getMonth(), 1),
+);
 const diaSeleccionadoStr_ahbb = ref(date.formatDate(hoy_ahbb, 'YYYY-MM-DD'));
 
-const diasSemana_ahbb = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+defineExpose({
+  cambiarVistaAMes_ahbb(fechaISO) {
+    if (!fechaISO) return;
+    const [anio, mes] = fechaISO.split('-').map(Number);
+    fechaVisualizada_ahbb.value = new Date(anio, mes - 1, 1);
+  }
+});
+
+const diasSemana_ahbb = ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'];
 
 const anioActual_ahbb = computed(() => fechaVisualizada_ahbb.value.getFullYear());
 const nombreMes_ahbb = computed(() => {
-  const meses = [
-    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+  const meses_ahbb = [
+    'Enero',
+    'Febrero',
+    'Marzo',
+    'Abril',
+    'Mayo',
+    'Junio',
+    'Julio',
+    'Agosto',
+    'Septiembre',
+    'Octubre',
+    'Noviembre',
+    'Diciembre',
   ];
-  return meses[fechaVisualizada_ahbb.value.getMonth()];
+  return meses_ahbb[fechaVisualizada_ahbb.value.getMonth()];
 });
 
-// Generar los días de la cuadrícula (incluyendo relleno del mes anterior/siguiente)
+const marcadoresPorFecha_ahbb = computed(() => {
+  const mapa_ahbb = new Map();
+  const origenMarcadores_ahbb =
+    props.marcadores_ahbb.length > 0
+      ? props.marcadores_ahbb
+      : props.sesiones_ahbb.map((sesion_ahbb) => ({
+          fecha: sesion_ahbb.fecha,
+          tipo: 'sesion',
+        }));
+
+  for (const marcador_ahbb of origenMarcadores_ahbb) {
+    const fechaMarcador_ahbb =
+      typeof marcador_ahbb.fecha === 'string'
+        ? marcador_ahbb.fecha.split('T')[0]
+        : date.formatDate(marcador_ahbb.fecha, 'YYYY-MM-DD');
+
+    const listaFecha_ahbb = mapa_ahbb.get(fechaMarcador_ahbb) ?? [];
+    listaFecha_ahbb.push(marcador_ahbb);
+    mapa_ahbb.set(fechaMarcador_ahbb, listaFecha_ahbb);
+  }
+
+  return mapa_ahbb;
+});
+
 const diasDelMes_ahbb = computed(() => {
-  const anio = fechaVisualizada_ahbb.value.getFullYear();
-  const mes = fechaVisualizada_ahbb.value.getMonth();
-  
-  // Primer día del mes
-  const primerDia_ahbb = new Date(anio, mes, 1);
-  const diaSemanaInicio = primerDia_ahbb.getDay(); // 0 = Dom
-  
-  // Rellenar días del mes anterior
-  const dias = [];
-  const ultimoDiaMesAnt = new Date(anio, mes, 0).getDate();
-  for (let i = diaSemanaInicio - 1; i >= 0; i--) {
-    const f = new Date(anio, mes - 1, ultimoDiaMesAnt - i);
-    dias.push(crearObjetoDia_ahbb(f, false));
+  const anio_ahbb = fechaVisualizada_ahbb.value.getFullYear();
+  const mes_ahbb = fechaVisualizada_ahbb.value.getMonth();
+  const primerDia_ahbb = new Date(anio_ahbb, mes_ahbb, 1);
+  const diaSemanaInicio_ahbb = primerDia_ahbb.getDay();
+  const dias_ahbb = [];
+  const ultimoDiaMesAnterior_ahbb = new Date(anio_ahbb, mes_ahbb, 0).getDate();
+
+  for (let indice_ahbb = diaSemanaInicio_ahbb - 1; indice_ahbb >= 0; indice_ahbb -= 1) {
+    const fechaRelleno_ahbb = new Date(
+      anio_ahbb,
+      mes_ahbb - 1,
+      ultimoDiaMesAnterior_ahbb - indice_ahbb,
+    );
+    dias_ahbb.push(crearObjetoDia_ahbb(fechaRelleno_ahbb, false));
   }
-  
-  // Días del mes actual
-  const totalDiasMes = new Date(anio, mes + 1, 0).getDate();
-  for (let i = 1; i <= totalDiasMes; i++) {
-    const f = new Date(anio, mes, i);
-    dias.push(crearObjetoDia_ahbb(f, true));
+
+  const totalDiasMes_ahbb = new Date(anio_ahbb, mes_ahbb + 1, 0).getDate();
+  for (let diaMes_ahbb = 1; diaMes_ahbb <= totalDiasMes_ahbb; diaMes_ahbb += 1) {
+    dias_ahbb.push(crearObjetoDia_ahbb(new Date(anio_ahbb, mes_ahbb, diaMes_ahbb), true));
   }
-  
-  // Rellenar días del mes siguiente para completar la cuadrícula (6 semanas = 42 celdas)
-  const celdasRestantes = 42 - dias.length;
-  for (let i = 1; i <= celdasRestantes; i++) {
-    const f = new Date(anio, mes + 1, i);
-    dias.push(crearObjetoDia_ahbb(f, false));
+
+  const celdasRestantes_ahbb = 42 - dias_ahbb.length;
+  for (let diaExtra_ahbb = 1; diaExtra_ahbb <= celdasRestantes_ahbb; diaExtra_ahbb += 1) {
+    dias_ahbb.push(crearObjetoDia_ahbb(new Date(anio_ahbb, mes_ahbb + 1, diaExtra_ahbb), false));
   }
-  
-  return dias;
+
+  return dias_ahbb;
 });
 
-function crearObjetoDia_ahbb(f, esMesActual) {
-  const fechaStr = date.formatDate(f, 'YYYY-MM-DD');
+function crearObjetoDia_ahbb(fecha_ahbb, esMesActual_ahbb) {
+  const fechaStr_ahbb = date.formatDate(fecha_ahbb, 'YYYY-MM-DD');
   return {
-    numero: f.getDate(),
-    fechaStr,
-    esMesActual,
-    esHoy: date.isSameDate(f, hoy_ahbb, 'day')
+    numero: fecha_ahbb.getDate(),
+    fechaStr: fechaStr_ahbb,
+    esMesActual: esMesActual_ahbb,
+    esHoy: date.isSameDate(fecha_ahbb, hoy_ahbb, 'day'),
   };
 }
 
-function cambiarMes_ahbb(offset) {
-  fechaVisualizada_ahbb.value = date.addToDate(fechaVisualizada_ahbb.value, { month: offset });
+function cambiarMes_ahbb(offset_ahbb) {
+  fechaVisualizada_ahbb.value = date.addToDate(fechaVisualizada_ahbb.value, {
+    month: offset_ahbb,
+  });
 }
 
 function irHoy_ahbb() {
@@ -121,24 +162,27 @@ function irHoy_ahbb() {
   seleccionarDia_ahbb(crearObjetoDia_ahbb(hoy_ahbb, true));
 }
 
-function seleccionarDia_ahbb(dia) {
-  diaSeleccionadoStr_ahbb.value = dia.fechaStr;
-  emit('seleccionar-dia', dia.fechaStr);
+function seleccionarDia_ahbb(dia_ahbb) {
+  diaSeleccionadoStr_ahbb.value = dia_ahbb.fechaStr;
+  emit('seleccionar-dia', dia_ahbb.fechaStr);
 }
 
-function esDiaSeleccionado_ahbb(fechaStr) {
-  return diaSeleccionadoStr_ahbb.value === fechaStr;
+function esDiaSeleccionado_ahbb(fechaStr_ahbb) {
+  return diaSeleccionadoStr_ahbb.value === fechaStr_ahbb;
 }
 
-// Lógica de colores (Rojo = Ocupado, Verde = Libre)
-function obtenerClaseEstado_ahbb(fechaStr) {
-  const tieneSesion = props.sesiones_ahbb.some(s => {
-    // Manejar fechas de la DB que vienen como strings o Date
-    const sFecha = typeof s.fecha === 'string' ? s.fecha.split('T')[0] : date.formatDate(s.fecha, 'YYYY-MM-DD');
-    return sFecha === fechaStr;
-  });
+function obtenerClaseEstado_ahbb(fechaStr_ahbb) {
+  const marcadoresFecha_ahbb = marcadoresPorFecha_ahbb.value.get(fechaStr_ahbb) ?? [];
 
-  return tieneSesion ? 'estado-ocupado-ahbb' : 'estado-libre-ahbb';
+  if (marcadoresFecha_ahbb.some((marcador_ahbb) => marcador_ahbb.tipo === 'sesion')) {
+    return 'estado-sesion-ahbb';
+  }
+
+  if (marcadoresFecha_ahbb.some((marcador_ahbb) => marcador_ahbb.tipo === 'tentativo')) {
+    return 'estado-tentativo-ahbb';
+  }
+
+  return '';
 }
 </script>
 
@@ -176,7 +220,7 @@ function obtenerClaseEstado_ahbb(fechaStr) {
   background: var(--q-primary) !important;
   color: white !important;
   transform: scale(1.05);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .indicador-estado-ahbb {
@@ -187,14 +231,14 @@ function obtenerClaseEstado_ahbb(fechaStr) {
   border-radius: 50%;
 }
 
-.estado-ocupado-ahbb {
-  background-color: #f44336; /* Rojo */
+.estado-sesion-ahbb {
+  background-color: #f44336;
   box-shadow: 0 0 5px rgba(244, 67, 54, 0.4);
 }
 
-.estado-libre-ahbb {
-  background-color: #4caf50; /* Verde */
-  box-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
+.estado-tentativo-ahbb {
+  background-color: #f9a825;
+  box-shadow: 0 0 5px rgba(249, 168, 37, 0.45);
 }
 
 .dia-seleccionado-ahbb .indicador-estado-ahbb {

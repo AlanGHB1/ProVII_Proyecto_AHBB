@@ -24,12 +24,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 7.5.0
- * Query Engine version: 280c870be64f457428992c43c1f6d557fab6e29e
+ * Prisma Client JS version: 7.7.0
+ * Query Engine version: 75cbdc1eb7150937890ad5465d861175c6624711
  */
 Prisma.prismaVersion = {
-  client: "7.5.0",
-  engine: "280c870be64f457428992c43c1f6d557fab6e29e"
+  client: "7.7.0",
+  engine: "75cbdc1eb7150937890ad5465d861175c6624711"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -244,6 +244,13 @@ exports.Prisma.Td_factura_ahbbScalarFieldEnum = {
   id_usuario_factura_ahbb: 'id_usuario_factura_ahbb'
 };
 
+exports.Prisma.Td_reportes_facturas_ahbbScalarFieldEnum = {
+  id_reporte_ahbb: 'id_reporte_ahbb',
+  id_factura_reporte_ahbb: 'id_factura_reporte_ahbb',
+  qr_base64_ahbb: 'qr_base64_ahbb',
+  creadoEn_ahbb: 'creadoEn_ahbb'
+};
+
 exports.Prisma.Td_detalle_factura_ahbbScalarFieldEnum = {
   id_detalle_factura_ahbb: 'id_detalle_factura_ahbb',
   cantidad_ahbb: 'cantidad_ahbb',
@@ -287,6 +294,7 @@ exports.Prisma.ModelName = {
   td_producto_ahbb: 'td_producto_ahbb',
   td_carrito_ahbb: 'td_carrito_ahbb',
   td_factura_ahbb: 'td_factura_ahbb',
+  td_reportes_facturas_ahbb: 'td_reportes_facturas_ahbb',
   td_detalle_factura_ahbb: 'td_detalle_factura_ahbb',
   td_favorito_ahbb: 'td_favorito_ahbb'
 };

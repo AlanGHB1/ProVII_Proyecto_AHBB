@@ -17,6 +17,35 @@ import { RolesDecorator_ahbb } from '../common/decorators/roles.decorator_ahbb';
 import type { RequestConUsuario_ahbb } from '../common/interfaces/request-usuario.interface_ahbb';
 
 @Controller('facturas')
+export class FacturasPublicController_ahbb {
+  constructor(private readonly facturasService_ahbb: FacturasService_ahbb) {}
+
+  // Endpoint público: acceso al PDF sin autenticación (para QR escaneado desde cualquier dispositivo)
+  @Get('publica/:id/pdf')
+  async descargarPdfPublico_ahbb(
+    @Param('id', ParseIntPipe) id_ahbb: number,
+    @Res() res_ahbb: any,
+  ) {
+    try {
+      const pdfBuffer = await this.facturasService_ahbb.generarPdf_ahbb(id_ahbb);
+
+      res_ahbb.set({
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': `inline; filename="factura-${id_ahbb}.pdf"`,
+        'Content-Length': pdfBuffer.length,
+      });
+
+      res_ahbb.end(pdfBuffer);
+    } catch (error) {
+      console.error(`Error al servir PDF público para la factura ${id_ahbb}:`, error);
+      if (!res_ahbb.headersSent) {
+        res_ahbb.status(500).json({ message: 'Error interno al generar el PDF de la factura.' });
+      }
+    }
+  }
+}
+
+@Controller('facturas')
 @UseGuards(JwtAuthGuard_ahbb)
 export class FacturasController_ahbb {
   constructor(private readonly facturasService_ahbb: FacturasService_ahbb) {}

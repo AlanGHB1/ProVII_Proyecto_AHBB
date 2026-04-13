@@ -12,12 +12,48 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FacturasController_ahbb = void 0;
+exports.FacturasController_ahbb = exports.FacturasPublicController_ahbb = void 0;
 const common_1 = require("@nestjs/common");
 const facturas_service_ahbb_1 = require("./facturas.service_ahbb");
 const jwt_auth_guard_ahbb_1 = require("../common/guards/jwt-auth.guard_ahbb");
 const roles_guard_ahbb_1 = require("../common/guards/roles.guard_ahbb");
 const roles_decorator_ahbb_1 = require("../common/decorators/roles.decorator_ahbb");
+let FacturasPublicController_ahbb = class FacturasPublicController_ahbb {
+    facturasService_ahbb;
+    constructor(facturasService_ahbb) {
+        this.facturasService_ahbb = facturasService_ahbb;
+    }
+    async descargarPdfPublico_ahbb(id_ahbb, res_ahbb) {
+        try {
+            const pdfBuffer = await this.facturasService_ahbb.generarPdf_ahbb(id_ahbb);
+            res_ahbb.set({
+                'Content-Type': 'application/pdf',
+                'Content-Disposition': `inline; filename="factura-${id_ahbb}.pdf"`,
+                'Content-Length': pdfBuffer.length,
+            });
+            res_ahbb.end(pdfBuffer);
+        }
+        catch (error) {
+            console.error(`Error al servir PDF público para la factura ${id_ahbb}:`, error);
+            if (!res_ahbb.headersSent) {
+                res_ahbb.status(500).json({ message: 'Error interno al generar el PDF de la factura.' });
+            }
+        }
+    }
+};
+exports.FacturasPublicController_ahbb = FacturasPublicController_ahbb;
+__decorate([
+    (0, common_1.Get)('publica/:id/pdf'),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __param(1, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Object]),
+    __metadata("design:returntype", Promise)
+], FacturasPublicController_ahbb.prototype, "descargarPdfPublico_ahbb", null);
+exports.FacturasPublicController_ahbb = FacturasPublicController_ahbb = __decorate([
+    (0, common_1.Controller)('facturas'),
+    __metadata("design:paramtypes", [facturas_service_ahbb_1.FacturasService_ahbb])
+], FacturasPublicController_ahbb);
 let FacturasController_ahbb = class FacturasController_ahbb {
     facturasService_ahbb;
     constructor(facturasService_ahbb) {

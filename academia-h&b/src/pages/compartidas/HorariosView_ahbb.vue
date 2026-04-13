@@ -25,6 +25,7 @@ const cursoSeleccionado_ahbb = ref(null);
 const opcionesUsuarios_ahbb = ref([]);
 const opcionesCursos_ahbb = ref([]);
 const cargandoFiltros_ahbb = ref(false);
+const calendarioRef_ahbb = ref(null);
 
 const tienePermisoFiltrar_ahbb = computed(() => !authStore_ahbb.esAlumno_ahbb); // Admin y Profesor pueden filtrar usuarios/cursos
 
@@ -134,6 +135,13 @@ watch(cursoSeleccionado_ahbb, async (val) => {
     await cursosStore_ahbb.fetchSesiones_ahbb({
       id_curso_ahbb: val.value
     });
+    
+    // Auto-navegar el calendario al mes de inicio del curso seleccionado
+    const curso = (cursosStore_ahbb.listaCursos_ahbb || []).find(c => c.id === val.value);
+    if (curso && curso.fechaInicio && calendarioRef_ahbb.value) {
+      calendarioRef_ahbb.value.cambiarVistaAMes_ahbb(curso.fechaInicio);
+      diaSeleccionado_ahbb.value = curso.fechaInicio;
+    }
   }
 });
 
@@ -143,6 +151,20 @@ const sesionesHoy_ahbb = computed(() => {
       ? s.fecha.split('T')[0] 
       : date.formatDate(s.fecha, 'YYYY-MM-DD');
     return sFecha === diaSeleccionado_ahbb.value;
+  });
+});
+
+const iniciosTentativosHoy_ahbb = computed(() => {
+  return (cursosStore_ahbb.listaMarcadoresCalendario_ahbb || []).filter((marcador_ahbb) => {
+    const fechaMarcador_ahbb =
+      typeof marcador_ahbb.fecha === 'string'
+        ? marcador_ahbb.fecha.split('T')[0]
+        : date.formatDate(marcador_ahbb.fecha, 'YYYY-MM-DD');
+
+    return (
+      marcador_ahbb.tipo === 'tentativo' &&
+      fechaMarcador_ahbb === diaSeleccionado_ahbb.value
+    );
   });
 });
 
@@ -259,8 +281,10 @@ const formatearHora12h_ahbb = (horaStr) => {
           <div v-if="cursosStore_ahbb.cargando_ahbb" class="absolute-full flex flex-center z-top bg-white-transparent">
             <q-spinner-dots color="primary" size="3rem" />
           </div>
-          <CalendarioDinamico_ahbb 
+<CalendarioDinamico_ahbb 
+            ref="calendarioRef_ahbb"
             :sesiones_ahbb="cursosStore_ahbb.listaSesiones_ahbb"
+            :marcadores_ahbb="cursosStore_ahbb.listaMarcadoresCalendario_ahbb"
             @seleccionar-dia="alSeleccionarDia_ahbb"
           />
         </q-card-section>
@@ -273,8 +297,21 @@ const formatearHora12h_ahbb = (horaStr) => {
             {{ fechaFormateada_ahbb }}
           </div>
           <q-space />
-          <q-badge rounded :color="sesionesHoy_ahbb.length > 0 ? 'red' : 'green'" class="q-pa-sm">
-            {{ sesionesHoy_ahbb.length }} {{ sesionesHoy_ahbb.length === 1 ? 'Clase' : 'Clases' }}
+          <q-badge
+            rounded
+            :color="sesionesHoy_ahbb.length > 0 || iniciosTentativosHoy_ahbb.length > 0 ? 'orange' : 'green'"
+            class="q-pa-sm"
+          >
+            <template v-if="sesionesHoy_ahbb.length > 0">
+              <span v-if="sesionesHoy_ahbb.length === 1">Clase #{{ sesionesHoy_ahbb[0].nroClase }}</span>
+              <span v-else>{{ sesionesHoy_ahbb.length }} Clases</span>
+            </template>
+            <template v-else-if="iniciosTentativosHoy_ahbb.length > 0">
+              {{ iniciosTentativosHoy_ahbb.length }} {{ iniciosTentativosHoy_ahbb.length === 1 ? 'Inicio tentativo' : 'Inicios tentativos' }}
+            </template>
+            <template v-else>
+              0 Clases
+            </template>
           </q-badge>
         </div>
 
@@ -309,6 +346,25 @@ const formatearHora12h_ahbb = (horaStr) => {
                 </div>
               </div>
             </q-card>
+          </div>
+
+          <div v-else-if="iniciosTentativosHoy_ahbb.length > 0" class="q-gutter-y-md">
+            <q-banner
+              v-for="marcador in iniciosTentativosHoy_ahbb"
+              :key="`${marcador.idCurso}-${marcador.fecha}`"
+              rounded
+              class="bg-yellow-1 text-amber-10 banner-tentativo-ahbb"
+            >
+              <template v-slot:avatar>
+                <q-icon name="event_upcoming" color="orange-8" size="md" />
+              </template>
+              <div class="q-pl-md">
+                <div class="text-weight-bold" style="line-height: 1.2">{{ marcador.cursoNombre }}</div>
+                <div class="text-body2 opacity-80">
+                  {{ marcador.mensaje || 'Este curso tiene fecha de inicio prevista, pero aun no posee alumnos inscritos activos.' }}
+                </div>
+              </div>
+            </q-banner>
           </div>
 
           <div v-else class="text-center q-pa-xl">

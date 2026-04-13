@@ -80,7 +80,18 @@ const iconEstatus_ahbb = (estatus) => {
 
 const formatearFecha_ahbb = (fecha) => {
   if (!fecha) return 'Por definir';
-  return new Date(fecha).toLocaleDateString('es-VE', {
+  
+  let d;
+  if (typeof fecha === 'string') {
+    // Si es ISO (contiene T), extraemos solo la parte de la fecha
+    const fechaLimpia = fecha.includes('T') ? fecha.split('T')[0] : fecha;
+    // Forzamos mediodía para evitar saltos de día por zona horaria
+    d = new Date(fechaLimpia + 'T12:00:00');
+  } else {
+    d = new Date(fecha);
+  }
+  
+  return d.toLocaleDateString('es-VE', {
     day: '2-digit',
     month: 'short',
     year: 'numeric'

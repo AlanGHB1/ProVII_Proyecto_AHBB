@@ -18,12 +18,13 @@ const inscripciones_module_1 = require("./inscripciones/inscripciones.module");
 const tienda_module_ahbb_1 = require("./tienda/tienda.module_ahbb");
 const dashboard_module_1 = require("./dashboard/dashboard.module");
 const bootstrap_service_ahbb_1 = require("./bootstrap/bootstrap.service_ahbb");
+const tunnel_module_ahbb_1 = require("./common/tunnel/tunnel.module_ahbb");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [usuarios_module_1.UsuariosModule, auth_module_1.AuthModule, cursos_module_1.CursosModule, inscripciones_module_1.InscripcionesModule_ahbb, tienda_module_ahbb_1.TiendaModule_ahbb, dashboard_module_1.DashboardModule],
+        imports: [usuarios_module_1.UsuariosModule, auth_module_1.AuthModule, cursos_module_1.CursosModule, inscripciones_module_1.InscripcionesModule_ahbb, tienda_module_ahbb_1.TiendaModule_ahbb, dashboard_module_1.DashboardModule, tunnel_module_ahbb_1.TunnelModule_ahbb],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService, prisma_service_1.PrismaService, bootstrap_service_ahbb_1.BootstrapService_ahbb],
     })

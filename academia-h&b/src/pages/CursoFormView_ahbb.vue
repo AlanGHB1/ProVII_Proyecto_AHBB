@@ -116,6 +116,14 @@ const manejarGuardar_ahbb = async (datos_ahbb) => {
         }
       }
     }
+  } catch (error) {
+    console.error('Error al guardar el curso:', error);
+    const mensaje_ahbb = error.response?.data?.message || 'Ocurrió un error al intentar guardar el curso.';
+    $q_ahbb.notify({
+      type: 'negative',
+      message: Array.isArray(mensaje_ahbb) ? mensaje_ahbb[0] : mensaje_ahbb,
+      icon: 'report_problem'
+    });
   } finally {
     cargando_ahbb.value = false;
   }

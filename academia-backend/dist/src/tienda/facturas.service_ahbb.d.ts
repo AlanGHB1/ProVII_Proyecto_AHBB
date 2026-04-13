@@ -1,7 +1,10 @@
 import { PrismaService } from '../prisma.service';
+import { TunnelService_ahbb } from '../common/tunnel/tunnel.service_ahbb';
 export declare class FacturasService_ahbb {
     private readonly prisma_ahbb;
-    constructor(prisma_ahbb: PrismaService);
+    private readonly tunnelService_ahbb;
+    private readonly logger_ahbb;
+    constructor(prisma_ahbb: PrismaService, tunnelService_ahbb: TunnelService_ahbb);
     private readonly IVA_PORCENTAJE_AHBB;
     private calcularDesglose_ahbb;
     crearFactura_ahbb(id_usuario_ahbb: number, nroReferenciaPago_ahbb: string): Promise<{
@@ -19,16 +22,16 @@ export declare class FacturasService_ahbb {
         };
         detalles_ahbb: ({
             producto_ahbb: {
+                id_producto_ahbb: number;
                 nombre_ahbb: string;
                 descripcion_ahbb: string | null;
-                creadoEn_ahbb: Date | null;
-                actualizadoEn_ahbb: Date | null;
-                id_producto_ahbb: number;
                 precio_ahbb: import("@prisma/client-runtime-utils").Decimal;
                 stock_ahbb: number;
                 categoria_ahbb: string;
                 imagen_ahbb: string | null;
                 estado_producto_ahbb: string;
+                creadoEn_ahbb: Date | null;
+                actualizadoEn_ahbb: Date | null;
             };
         } & {
             cantidad_ahbb: number;
@@ -44,6 +47,12 @@ export declare class FacturasService_ahbb {
         id_factura_ahbb: number;
         id_usuario_factura_ahbb: number;
     }>;
+    registrarReporte_ahbb(id_factura_ahbb: number): Promise<{
+        creadoEn_ahbb: Date;
+        id_reporte_ahbb: number;
+        id_factura_reporte_ahbb: number;
+        qr_base64_ahbb: string;
+    }>;
     obtenerHistorial_ahbb(id_usuario_ahbb: number): Promise<{
         desglose_ahbb: {
             subtotal: number;
@@ -53,16 +62,16 @@ export declare class FacturasService_ahbb {
         };
         detalles_ahbb: ({
             producto_ahbb: {
+                id_producto_ahbb: number;
                 nombre_ahbb: string;
                 descripcion_ahbb: string | null;
-                creadoEn_ahbb: Date | null;
-                actualizadoEn_ahbb: Date | null;
-                id_producto_ahbb: number;
                 precio_ahbb: import("@prisma/client-runtime-utils").Decimal;
                 stock_ahbb: number;
                 categoria_ahbb: string;
                 imagen_ahbb: string | null;
                 estado_producto_ahbb: string;
+                creadoEn_ahbb: Date | null;
+                actualizadoEn_ahbb: Date | null;
             };
         } & {
             cantidad_ahbb: number;
@@ -93,16 +102,16 @@ export declare class FacturasService_ahbb {
         };
         detalles_ahbb: ({
             producto_ahbb: {
+                id_producto_ahbb: number;
                 nombre_ahbb: string;
                 descripcion_ahbb: string | null;
-                creadoEn_ahbb: Date | null;
-                actualizadoEn_ahbb: Date | null;
-                id_producto_ahbb: number;
                 precio_ahbb: import("@prisma/client-runtime-utils").Decimal;
                 stock_ahbb: number;
                 categoria_ahbb: string;
                 imagen_ahbb: string | null;
                 estado_producto_ahbb: string;
+                creadoEn_ahbb: Date | null;
+                actualizadoEn_ahbb: Date | null;
             };
         } & {
             cantidad_ahbb: number;
@@ -127,16 +136,16 @@ export declare class FacturasService_ahbb {
         };
         detalles_ahbb: ({
             producto_ahbb: {
+                id_producto_ahbb: number;
                 nombre_ahbb: string;
                 descripcion_ahbb: string | null;
-                creadoEn_ahbb: Date | null;
-                actualizadoEn_ahbb: Date | null;
-                id_producto_ahbb: number;
                 precio_ahbb: import("@prisma/client-runtime-utils").Decimal;
                 stock_ahbb: number;
                 categoria_ahbb: string;
                 imagen_ahbb: string | null;
                 estado_producto_ahbb: string;
+                creadoEn_ahbb: Date | null;
+                actualizadoEn_ahbb: Date | null;
             };
         } & {
             cantidad_ahbb: number;

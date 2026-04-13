@@ -83,6 +83,13 @@ const reglaseFechaInicio_ahbb = [
     maxima.setHours(23, 59, 59, 999);
     return seleccionada <= maxima || 'No puede ser mayor a 1 mes desde hoy';
   },
+  (v) => {
+    if (!v || formulario_ahbb.value.dias.length === 0) return true;
+    const dias_ahbb = ['domingo', 'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado'];
+    const diaSeleccionado_ahbb = dias_ahbb[new Date(v + 'T12:00:00').getDay()];
+    return formulario_ahbb.value.dias.includes(diaSeleccionado_ahbb) ||
+      'La fecha debe coincidir con uno de los días de clase seleccionados';
+  }
 ];
 
 // Cálculo automático de semanas y días estimados con tope de 3h/día
@@ -144,6 +151,22 @@ watch(() => formulario_ahbb.value.profesorId, (_nuevo, viejo) => {
 // Función reutilizable para precargar el formulario
 const precargarFormulario_ahbb = (curso) => {
   if (!curso) return;
+  
+  // Normalizar fechaInicio: si es string ISO (YYYY-MM-DDTHH:mm:ss.sssZ) o YYYY-MM-DD
+  let fechaInicio_ahbb = '';
+  if (curso.fechaInicio) {
+    if (typeof curso.fechaInicio === 'string' && curso.fechaInicio.length === 10) {
+      fechaInicio_ahbb = curso.fechaInicio; // Ya es YYYY-MM-DD
+    } else {
+      // Intentar extraer con UTC para evitar desfases
+      const d = new Date(curso.fechaInicio);
+      const anio = d.getUTCFullYear();
+      const mes = String(d.getUTCMonth() + 1).padStart(2, '0');
+      const dia = String(d.getUTCDate()).padStart(2, '0');
+      fechaInicio_ahbb = `${anio}-${mes}-${dia}`;
+    }
+  }
+
   formulario_ahbb.value = {
     nombre: curso.nombre || '',
     descripcion: curso.descripcion || '',
@@ -157,9 +180,7 @@ const precargarFormulario_ahbb = (curso) => {
     tienePrelacion: curso.tienePrelacion || false,
     prelacionCursoId: curso.prelacionCursoId || null,
     temario: curso.temario || '',
-    fechaInicio: curso.fechaInicio
-      ? new Date(curso.fechaInicio).toISOString().split('T')[0]
-      : '',
+    fechaInicio: fechaInicio_ahbb,
     mensajeCorreccion: '',
   };
 };
@@ -178,6 +199,9 @@ watch(
 
 
 const enviarFormulario_ahbb = () => {
+  if (formulario_ahbb.value.dias.length === 0) {
+    return;
+  }
   if (!formulario_ahbb.value.tienePrelacion) {
     formulario_ahbb.value.prelacionCursoId = null;
   }
@@ -271,7 +295,7 @@ const enviarFormulario_ahbb = () => {
             >
               <template v-slot:prepend><q-icon name="schedule" /></template>
               <template v-slot:hint>
-                ≈ {{ semanasEstimadas_ahbb }} semanas · {{ diasEstimados_ahbb }} clases en total
+                ≈ {{ semanasEstimadas_ahbb }} semanas · {{ sesionesTotales_ahbb }} clases en total
               </template>
             </q-input>
           </div>
@@ -291,7 +315,7 @@ const enviarFormulario_ahbb = () => {
         </div>
 
         <!-- Días de clase -->
-        <div>
+        <div class="q-mb-md">
           <div class="text-subtitle2 q-mb-xs">Días de clase *</div>
           <q-option-group
             v-model="formulario_ahbb.dias"
@@ -300,6 +324,9 @@ const enviarFormulario_ahbb = () => {
             inline
             color="secondary"
           />
+          <div v-if="formulario_ahbb.dias.length === 0" class="text-negative text-caption q-ml-sm">
+            Debes seleccionar al menos un día de clase
+          </div>
         </div>
 
         <!-- Horario -->

@@ -6,5 +6,6 @@ export declare class BootstrapService_ahbb implements OnModuleInit {
     constructor(prisma_ahbb: PrismaService);
     onModuleInit(): Promise<void>;
     private sembrarUsuariosBase_ahbb;
+    private sembrarCursosDemo_ahbb;
     private sembrarCatalogoBase_ahbb;
 }

@@ -33,6 +33,7 @@ exports.TiendaModule_ahbb = TiendaModule_ahbb = __decorate([
             productos_controller_ahbb_1.ProductosController_ahbb,
             carrito_controller_ahbb_1.CarritoController_ahbb,
             facturas_controller_ahbb_1.FacturasController_ahbb,
+            facturas_controller_ahbb_1.FacturasPublicController_ahbb,
             favoritos_controller_ahbb_1.FavoritosController_ahbb,
         ],
         providers: [
