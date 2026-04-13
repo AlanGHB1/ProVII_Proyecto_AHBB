@@ -215,6 +215,14 @@ const routes = [
     meta: { publica_ahbb: false, layout_ahbb: 'sistema', rolesPermitidos_ahbb: [ALUM] },
   },
 
+  // ─── Verificación pública de certificados ────────────
+  {
+    path: '/verificar-certificado/:id',
+    name: 'verificarCertificado',
+    component: () => import('pages/VerificarCertificadoView_ahbb.vue'),
+    meta: { publica_ahbb: true, layout_ahbb: 'landing' },
+  },
+
   // Catch-all
   {
     path: '/:catchAll(.*)*',

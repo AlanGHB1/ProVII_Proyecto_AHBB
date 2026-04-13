@@ -629,6 +629,47 @@ export class CursosService {
     return this.mapearCurso_ahbb(cursoActualizado_ahbb);
   }
 
+  /**
+   * Actualizar solo la imagen de fondo del certificado para un curso.
+   * No afecta el estado de aprobación del curso.
+   */
+  async actualizarImagenCertificadoCurso_ahbb(
+    id_curso_ahbb: number,
+    imagenBase64_ahbb: string | null,
+    id_usuario_ahbb: number,
+    rol_ahbb: string,
+  ) {
+    const curso_ahbb = await this.prisma_ahbb.td_curso_ahbb.findUnique({
+      where: { id_curso_ahbb },
+    });
+
+    if (!curso_ahbb) {
+      throw new NotFoundException('Curso no encontrado.');
+    }
+
+    // Profesor solo puede modificar sus propios cursos
+    if (
+      rol_ahbb === 'PROFESOR' &&
+      curso_ahbb.id_usuario_curso_ahbb !== id_usuario_ahbb
+    ) {
+      throw new BadRequestException(
+        'No puedes modificar la imagen de un curso que no te pertenece.',
+      );
+    }
+
+    await this.prisma_ahbb.td_curso_ahbb.update({
+      where: { id_curso_ahbb },
+      data: { imagenBasePdf_ahbb: imagenBase64_ahbb },
+    });
+
+    return {
+      exito: true,
+      mensaje: imagenBase64_ahbb
+        ? 'Imagen de fondo del certificado actualizada.'
+        : 'Imagen de fondo del certificado eliminada.',
+    };
+  }
+
   async eliminarCurso_ahbb(id_curso_ahbb: number) {
     const inscripciones = await this.prisma_ahbb.td_inscripcion_ahbb.count({
       where: { id_curso_inscripcion_ahbb: id_curso_ahbb },
@@ -966,6 +1007,7 @@ export class CursosService {
       prelacionCursoId: curso_ahbb.prelacion?.id_curso_ahbb ?? null,
       prelacionNombre: curso_ahbb.prelacion?.nombre_ahbb ?? null,
       isPublished: curso_ahbb.isPublished_ahbb,
+      imagenBasePdf: curso_ahbb.imagenBasePdf_ahbb ?? null,
     };
   }
 

@@ -4,6 +4,11 @@ import { ref, onMounted, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { obtenerInscripcionesPorCurso_ahbb, actualizarEstadoInscripcion_ahbb } from 'src/servicios/inscripcionesServicio_ahbb';
 import { obtenerCursoPorId_ahbb } from 'src/servicios/cursosServicio_ahbb';
+import {
+  emitirCertificadosMasivo_ahbb,
+  obtenerCertificadosCurso_ahbb,
+  descargarPdfCertificado_ahbb,
+} from 'src/servicios/certificadosServicio_ahbb';
 import { useQuasar } from 'quasar';
 
 const $q = useQuasar();
@@ -12,8 +17,10 @@ const router = useRouter();
 const idCurso = route.params.id;
 
 const cargando = ref(true);
+const emitiendo = ref(false);
 const curso = ref(null);
 const inscripciones = ref([]);
+const certificadosCurso = ref([]);
 const filtroNombre = ref('');
 
 const columnas = [
@@ -22,6 +29,7 @@ const columnas = [
   { name: 'correo', label: 'Correo', field: row => row.alumno.correo_ahbb, align: 'left' },
   { name: 'estado', label: 'Calificación (Switch)', field: 'estatus_ahbb', align: 'center' },
   { name: 'estadoLabel', label: 'Estado Actual', field: 'estatus_ahbb', align: 'center' },
+  { name: 'certificado', label: 'Certificado', field: 'id_inscripcion_ahbb', align: 'center' },
 ];
 
 const cargarDatos = async () => {
@@ -33,6 +41,13 @@ const cargarDatos = async () => {
     ]);
     curso.value = cursoData;
     inscripciones.value = insData;
+
+    // Cargar certificados del curso
+    try {
+      certificadosCurso.value = await obtenerCertificadosCurso_ahbb(idCurso);
+    } catch {
+      certificadosCurso.value = [];
+    }
   } catch (error) {
     $q.notify({
       color: 'negative',
@@ -50,7 +65,6 @@ const cursoFinalizado = computed(() => {
 });
 
 const inscripcionesFiltradas = computed(() => {
-  // Deduplicar: cada alumno solo una vez (el más reciente)
   const mapaUnicos = new Map();
   const sorted = [...inscripciones.value].sort((a,b) => b.id_inscripcion_ahbb - a.id_inscripcion_ahbb);
   
@@ -66,6 +80,20 @@ const inscripcionesFiltradas = computed(() => {
            ins.alumno.cedula_ahbb?.includes(filtroNombre.value);
   });
 });
+
+const aprobadosSinCertificado = computed(() => {
+  return inscripcionesFiltradas.value.filter(
+    ins => ins.estatus_ahbb === 'APROBADO' && !tieneCertificado(ins.id_inscripcion_ahbb)
+  ).length;
+});
+
+const tieneCertificado = (idInscripcion) => {
+  return certificadosCurso.value.some(c => c.inscripcionId === idInscripcion);
+};
+
+const obtenerCertificadoPorInscripcion = (idInscripcion) => {
+  return certificadosCurso.value.find(c => c.inscripcionId === idInscripcion);
+};
 
 const cambiarEstadoSilencioso = async (row, valorSwitch) => {
   const nuevoEstado = valorSwitch ? 'APROBADO' : 'REPROBADO';
@@ -85,8 +113,48 @@ const cambiarEstadoSilencioso = async (row, valorSwitch) => {
       message: 'Error al actualizar calificación',
       icon: 'error'
     });
-    // Forzar redibujado o recarga si falló para revertir UI
     cargarDatos();
+  }
+};
+
+const emitirCertificados = async () => {
+  emitiendo.value = true;
+  try {
+    const resultado = await emitirCertificadosMasivo_ahbb(idCurso);
+    if (resultado.exito) {
+      $q.notify({
+        color: 'positive',
+        message: resultado.mensaje,
+        icon: 'workspace_premium',
+        timeout: 3000,
+      });
+      certificadosCurso.value = await obtenerCertificadosCurso_ahbb(idCurso);
+    } else {
+      $q.notify({
+        color: 'negative',
+        message: resultado.mensaje,
+        icon: 'error',
+      });
+    }
+  } catch {
+    $q.notify({
+      color: 'negative',
+      message: 'Error al emitir certificados.',
+      icon: 'error',
+    });
+  } finally {
+    emitiendo.value = false;
+  }
+};
+
+const descargarCertificadoPdf = async (idInscripcion) => {
+  const cert = obtenerCertificadoPorInscripcion(idInscripcion);
+  if (cert) {
+    try {
+      await descargarPdfCertificado_ahbb(cert.id);
+    } catch {
+      $q.notify({ color: 'negative', message: 'Error al descargar certificado.' });
+    }
   }
 };
 
@@ -120,6 +188,31 @@ onMounted(cargarDatos);
         <q-icon name="check_circle" color="green-9" />
       </template>
       El curso ha finalizado. Puedes usar los interruptores para Aprobar o Reprobar a los estudiantes.
+      <template v-slot:action>
+        <q-btn
+          v-if="aprobadosSinCertificado > 0"
+          label="Emitir Certificados"
+          icon="workspace_premium"
+          color="amber-8"
+          text-color="white"
+          :loading="emitiendo"
+          @click="emitirCertificados"
+          class="q-ml-md"
+        >
+          <q-tooltip>
+            Emitir certificados para {{ aprobadosSinCertificado }} alumno(s) aprobado(s) pendientes
+          </q-tooltip>
+        </q-btn>
+        <q-chip
+          v-else-if="certificadosCurso.length > 0"
+          color="green"
+          text-color="white"
+          icon="verified"
+          class="q-ml-md"
+        >
+          Todos los certificados emitidos
+        </q-chip>
+      </template>
     </q-banner>
 
     <q-card flat bordered class="q-pa-md q-mb-md shadow-1">
@@ -145,7 +238,6 @@ onMounted(cargarDatos);
       no-data-label="No hay estudiantes inscritos en este curso"
       rows-per-page-label="Registros por página"
     >
-      <!-- Slot para el switch de calificación -->
       <template v-slot:body-cell-estado="props">
         <q-td :props="props">
           <q-toggle
@@ -162,7 +254,6 @@ onMounted(cargarDatos);
         </q-td>
       </template>
 
-      <!-- Slot para la etiqueta de estado -->
       <template v-slot:body-cell-estadoLabel="props">
         <q-td :props="props">
           <q-chip
@@ -173,6 +264,34 @@ onMounted(cargarDatos);
           >
             {{ props.value }}
           </q-chip>
+        </q-td>
+      </template>
+
+      <template v-slot:body-cell-certificado="props">
+        <q-td :props="props">
+          <template v-if="tieneCertificado(props.row.id_inscripcion_ahbb)">
+            <q-btn
+              flat
+              dense
+              round
+              icon="picture_as_pdf"
+              color="red"
+              @click="descargarCertificadoPdf(props.row.id_inscripcion_ahbb)"
+            >
+              <q-tooltip>Descargar PDF del certificado</q-tooltip>
+            </q-btn>
+            <q-icon name="verified" color="green" size="xs" class="q-ml-xs">
+              <q-tooltip>Certificado emitido</q-tooltip>
+            </q-icon>
+          </template>
+          <template v-else-if="props.row.estatus_ahbb === 'APROBADO'">
+            <q-chip dense color="amber-1" text-color="amber-9" icon="pending">
+              Pendiente
+            </q-chip>
+          </template>
+          <template v-else>
+            <span class="text-grey-4">—</span>
+          </template>
         </q-td>
       </template>
 

@@ -129,4 +129,21 @@ export class CursosController {
   ) {
     return this.cursosService_ahbb.evaluarCurso_ahbb(id_curso_ahbb, datos);
   }
+
+  // ── Imagen de fondo del certificado por curso ──────────────
+  @UseGuards(JwtAuthGuard_ahbb, RolesGuard_ahbb)
+  @RolesDecorator_ahbb('ADMIN', 'PROFESOR')
+  @Patch(':id_curso_ahbb/imagen-certificado')
+  async actualizarImagenCertificadoCurso_ahbb(
+    @Param('id_curso_ahbb', ParseIntPipe) id_curso_ahbb: number,
+    @Body() datos: { imagenBase64: string | null },
+    @Req() request_ahbb: RequestConUsuario_ahbb,
+  ) {
+    return this.cursosService_ahbb.actualizarImagenCertificadoCurso_ahbb(
+      id_curso_ahbb,
+      datos.imagenBase64,
+      Number(request_ahbb.usuario_ahbb?.sub),
+      request_ahbb.usuario_ahbb?.rol ?? 'PROFESOR',
+    );
+  }
 }

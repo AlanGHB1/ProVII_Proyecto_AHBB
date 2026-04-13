@@ -95,3 +95,23 @@ export const obtenerSesiones_ahbb = async (filtros_ahbb = {}) => {
 export const inicializarCursos_ahbb = async () => {
   return obtenerCursos_ahbb();
 };
+
+export const actualizarImagenCertificadoCurso_ahbb = async (
+  idCurso_ahbb,
+  imagenBase64_ahbb,
+) => {
+  try {
+    const respuesta_ahbb = await apiCliente_ahbb.patch(
+      `/cursos/${idCurso_ahbb}/imagen-certificado`,
+      { imagenBase64: imagenBase64_ahbb },
+    );
+    return respuesta_ahbb.data;
+  } catch (error_ahbb) {
+    return {
+      exito: false,
+      mensaje:
+        error_ahbb.response?.data?.message ??
+        'Error al actualizar la imagen del certificado.',
+    };
+  }
+};
