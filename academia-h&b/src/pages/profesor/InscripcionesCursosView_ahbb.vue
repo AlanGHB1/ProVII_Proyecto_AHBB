@@ -16,7 +16,7 @@ const cursos = ref([]);
 const cargarCursos = async () => {
   cargando.value = true;
   try {
-    const data = await obtenerCursos_ahbb({ solo_propios: true });
+    const data = await obtenerCursos_ahbb(authStore.esAdmin_ahbb ? {} : { solo_propios: true });
     // Solo mostrar cursos que estén ACTIVO o finalizados
     cursos.value = data.filter(c => c.estadoAprobacion === 'ACTIVO');
   } catch (error) {

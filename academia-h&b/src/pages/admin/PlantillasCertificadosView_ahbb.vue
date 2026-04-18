@@ -42,8 +42,8 @@ const cargarDatos_ahbb = async () => {
       }
     }
 
-    // Profesor/Admin: cargar cursos propios
-    const data_ahbb = await obtenerCursos_ahbb({ solo_propios: true });
+    // Administrador: ver todos los cursos. Profesor: ver solo los suyos.
+    const data_ahbb = await obtenerCursos_ahbb(esAdmin_ahbb ? {} : { solo_propios: true });
     cursos_ahbb.value = data_ahbb.filter(
       (c) => c.estadoAprobacion === 'ACTIVO',
     );
@@ -72,6 +72,18 @@ const seleccionarImagenCurso_ahbb = (evento_ahbb) => {
       type: 'negative',
       message: 'Solo se permiten archivos de imagen.',
     });
+    return;
+  }
+
+  // Prevenir que intente codificar imágenes inmensas y explote la petición HTTP
+  const tamañoMaximoBytes = 10 * 1024 * 1024; // 10 MB límite
+  if (archivo_ahbb.size > tamañoMaximoBytes) {
+    $q_ahbb.notify({
+      type: 'warning',
+      message: 'La imagen es demasiado pesada. El tamaño máximo permitido es 10 MB.',
+    });
+    // Limpiar el input para que pueda intentar de nuevo cómodamente
+    evento_ahbb.target.value = '';
     return;
   }
 
@@ -147,6 +159,16 @@ const seleccionarImagenGlobal_ahbb = (evento_ahbb) => {
   if (!archivo_ahbb) return;
   if (!archivo_ahbb.type.startsWith('image/')) {
     $q_ahbb.notify({ type: 'negative', message: 'Solo imágenes.' });
+    return;
+  }
+
+  const tamañoMaximoBytes = 10 * 1024 * 1024; // 10 MB límite
+  if (archivo_ahbb.size > tamañoMaximoBytes) {
+    $q_ahbb.notify({
+      type: 'warning',
+      message: 'La imagen es demasiado pesada. El tamaño máximo permitido es 10 MB.',
+    });
+    evento_ahbb.target.value = '';
     return;
   }
   const lector_ahbb = new FileReader();

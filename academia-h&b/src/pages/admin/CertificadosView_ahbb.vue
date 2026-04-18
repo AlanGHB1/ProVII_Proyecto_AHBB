@@ -53,12 +53,7 @@ const columnas_ahbb = [
     field: 'profesor',
     align: 'left',
   },
-  {
-    name: 'notaFinal',
-    label: 'Nota',
-    field: 'notaFinal',
-    align: 'center',
-  },
+
   {
     name: 'fechaEmision',
     label: 'Emitido',
@@ -180,18 +175,6 @@ onMounted(cargarCertificados_ahbb);
       rows-per-page-label="Registros por página"
       no-data-label="No hay certificados emitidos"
     >
-      <template v-slot:body-cell-notaFinal="props">
-        <q-td :props="props">
-          <q-chip
-            dense
-            color="green-1"
-            text-color="green-9"
-            class="text-weight-bold"
-          >
-            {{ props.value ?? 'N/A' }}
-          </q-chip>
-        </q-td>
-      </template>
 
       <template v-slot:body-cell-acciones="props">
         <q-td :props="props">

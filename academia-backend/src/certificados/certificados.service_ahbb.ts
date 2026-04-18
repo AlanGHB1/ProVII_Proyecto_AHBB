@@ -597,17 +597,8 @@ export class CertificadosService_ahbb {
       margin: [40, 0, 40, 10],
     });
 
-    // Nota final si existe
-    if (ins_ahbb.notaFinal_ahbb) {
-      contenido_ahbb.push({
-        text: `Calificación obtenida: ${ins_ahbb.notaFinal_ahbb}`,
-        style: 'notaFinal',
-        alignment: 'center',
-        margin: [0, 0, 0, 15],
-      });
-    } else {
-      contenido_ahbb.push({ text: '', margin: [0, 0, 0, 20] });
-    }
+    // Espaciado correspondiente (el usuario solicitó no imprimir la calificación obtenida)
+    contenido_ahbb.push({ text: '', margin: [0, 0, 0, 20] });
 
     // ── Sección inferior: Firma + QR ────────────────────────────
     const columnaFirma_ahbb: any[] = [];

@@ -34,12 +34,7 @@ const columnas_ahbb = [
     field: 'duracionHoras',
     align: 'center',
   },
-  {
-    name: 'notaFinal',
-    label: 'Nota',
-    field: 'notaFinal',
-    align: 'center',
-  },
+
   {
     name: 'fechaEmision',
     label: 'Fecha de Emisión',
@@ -128,18 +123,7 @@ onMounted(cargarCertificados_ahbb);
       rows-per-page-label="Registros por página"
       no-data-label="No hay certificados disponibles"
     >
-      <template v-slot:body-cell-notaFinal="props">
-        <q-td :props="props">
-          <q-chip
-            dense
-            color="green-1"
-            text-color="green-9"
-            class="text-weight-bold"
-          >
-            {{ props.value ?? 'N/A' }}
-          </q-chip>
-        </q-td>
-      </template>
+
 
       <template v-slot:body-cell-acciones="props">
         <q-td :props="props">

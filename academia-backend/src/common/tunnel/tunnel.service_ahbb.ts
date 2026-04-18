@@ -26,9 +26,12 @@ export class TunnelService_ahbb implements OnModuleDestroy {
    * Si el túnel no está activo, usa un fallback con localhost.
    */
   construirUrl_ahbb(rutaRelativa: string): string {
-    const base = this.urlPublica_ahbb || `http://localhost:${process.env.PORT ?? 3000}`;
+    const base =
+      this.urlPublica_ahbb || `http://localhost:${process.env.PORT ?? 3000}`;
     // Asegurar que la ruta comience con /
-    const ruta = rutaRelativa.startsWith('/') ? rutaRelativa : `/${rutaRelativa}`;
+    const ruta = rutaRelativa.startsWith('/')
+      ? rutaRelativa
+      : `/${rutaRelativa}`;
     return `${base}${ruta}`;
   }
 
@@ -43,11 +46,15 @@ export class TunnelService_ahbb implements OnModuleDestroy {
 
       this.logger_ahbb.log(`Verificando binario de cloudflared...`);
       if (!fs.existsSync(bin)) {
-        this.logger_ahbb.log(`Instalando binario de cloudflared (esto puede tardar un momento)...`);
+        this.logger_ahbb.log(
+          `Instalando binario de cloudflared (esto puede tardar un momento)...`,
+        );
         await install(bin);
       }
 
-      this.logger_ahbb.log(`Iniciando túnel de Cloudflare en el puerto ${puerto}...`);
+      this.logger_ahbb.log(
+        `Iniciando túnel de Cloudflare en el puerto ${puerto}...`,
+      );
 
       const localUrl = `http://localhost:${puerto}`;
       this.tunnel_ahbb = Tunnel.quick(localUrl);
@@ -56,29 +63,41 @@ export class TunnelService_ahbb implements OnModuleDestroy {
         // Capturar la URL generada por Cloudflare
         this.tunnel_ahbb.once('url', (url: string) => {
           this.urlPublica_ahbb = url;
-          this.logger_ahbb.log(`═══════════════════════════════════════════════════════`);
+          this.logger_ahbb.log(
+            `═══════════════════════════════════════════════════════`,
+          );
           this.logger_ahbb.log(`   TÚNEL PÚBLICO CLOUDFLARE ACTIVO`);
           this.logger_ahbb.log(`   URL: ${this.urlPublica_ahbb}`);
-          this.logger_ahbb.log(`═══════════════════════════════════════════════════════`);
+          this.logger_ahbb.log(
+            `═══════════════════════════════════════════════════════`,
+          );
           resolve(url);
         });
 
         // Manejar errores durante el inicio
         this.tunnel_ahbb.once('error', (err: any) => {
-          this.logger_ahbb.error(`Error al iniciar el túnel de Cloudflare: ${err}`);
+          this.logger_ahbb.error(
+            `Error al iniciar el túnel de Cloudflare: ${err}`,
+          );
           reject(err);
         });
 
         // Manejar eventos de desconexión o salida
         this.tunnel_ahbb.on('exit', (code: number) => {
-          this.logger_ahbb.warn(`El proceso de cloudflared terminó con código ${code}.`);
+          this.logger_ahbb.warn(
+            `El proceso de cloudflared terminó con código ${code}.`,
+          );
           this.urlPublica_ahbb = null;
         });
       });
     } catch (error) {
       const msg = error instanceof Error ? error.message : 'Error desconocido';
-      this.logger_ahbb.error(`No se pudo iniciar el túnel de Cloudflare: ${msg}`);
-      this.logger_ahbb.warn('El servidor continuará funcionando en modo local.');
+      this.logger_ahbb.error(
+        `No se pudo iniciar el túnel de Cloudflare: ${msg}`,
+      );
+      this.logger_ahbb.warn(
+        'El servidor continuará funcionando en modo local.',
+      );
       this.logger_ahbb.warn('Los QR apuntarán a localhost.');
       return `http://localhost:${puerto}`;
     }

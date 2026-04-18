@@ -39,6 +39,10 @@ async function bootstrap() {
     credentials: true,
   });
 
+  // Aumentar el límite del payload JSON para admitir imágenes Base64 grandes (hasta 50mb)
+  app.use(express.json({ limit: '50mb' }));
+  app.use(express.urlencoded({ limit: '50mb', extended: true }));
+
   app.setGlobalPrefix('api');
   app.use('/uploads', express.static(join(process.cwd(), 'uploads')));
 

@@ -6,7 +6,11 @@
 // Tipografía del sistema (consistente con landing)
 // =============================================
 body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family:
+    'Inter',
+    system-ui,
+    -apple-system,
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -18,7 +22,9 @@ body {
 // Cards con bordes más suaves y sombras consistentes
 .q-card {
   border-radius: 12px !important;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
 }
 
 // Botones con bordes redondeados
@@ -89,20 +95,27 @@ body {
   background: #f8fafc;
 }
 
-// Scrollbar personalizado (consistente con landing)
-::-webkit-scrollbar {
+// Scrollbars genéricos para toda la aplicación (asegura sobreescribir estilos de Quasar)
+*::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 
-::-webkit-scrollbar-track {
+*::-webkit-scrollbar-track {
   background: #f1f5f9;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #94a3b8;
-  border-radius: 9999px;
+*::-webkit-scrollbar-thumb {
+  background: #1b2a4a !important; /* Mismo azul naval oscuro del sidebar */
+  border-radius: 4px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #64748b;
+*::-webkit-scrollbar-thumb:hover {
+  background: #2a3f6c !important; /* Azul más claro al hover */
+}
+
+// Sobreescrituras específicas para el componente nativo de scroll de Quasar (QScrollArea)
+.q-scrollarea__thumb {
+  background-color: #1b2a4a !important;
+  opacity: 1 !important;
 }
