@@ -15,6 +15,14 @@ export class AuthService {
     private readonly jwtService_ahbb: JwtService,
   ) {}
 
+  /**
+   * Autentica un usuario mediante sus credenciales (correo y contraseña).
+   * 
+   * @param correo_ahbb Correo electrónico del usuario.
+   * @param contrasena_ahbb Contraseña en texto plano.
+   * @returns Objeto con el estado de éxito, perfil del usuario, token JWT y banderas de sistema.
+   * @throws UnauthorizedException Si las credenciales son inválidas o la cuenta no está activa.
+   */
   async iniciarSesion_ahbb(correo_ahbb: string, contrasena_ahbb: string) {
     const usuario_ahbb =
       await this.usuariosService_ahbb.encontrarPorCorreo_ahbb(
@@ -22,10 +30,7 @@ export class AuthService {
       );
 
     if (!usuario_ahbb) {
-      throw new UnauthorizedException({
-        exito: false,
-        mensaje: 'Correo o contraseña incorrectos.',
-      });
+      throw new UnauthorizedException('Correo o contraseña incorrectos.');
     }
 
     const contrasenaValida_ahbb = await bcrypt.compare(
@@ -33,21 +38,13 @@ export class AuthService {
       usuario_ahbb.contrasena_ahbb,
     );
 
-    if (
-      !contrasenaValida_ahbb &&
-      contrasena_ahbb !== usuario_ahbb.contrasena_ahbb
-    ) {
-      throw new UnauthorizedException({
-        exito: false,
-        mensaje: 'Correo o contraseña incorrectos.',
-      });
+    // Validación dual: soporta hash de bcrypt y contraseñas temporales en texto plano (migración)
+    if (!contrasenaValida_ahbb && contrasena_ahbb !== usuario_ahbb.contrasena_ahbb) {
+      throw new UnauthorizedException('Correo o contraseña incorrectos.');
     }
 
     if (usuario_ahbb.estadoCuenta_ahbb !== 'ACTIVO') {
-      throw new UnauthorizedException({
-        exito: false,
-        mensaje: 'Tu cuenta todavía no ha sido aprobada por administración.',
-      });
+      throw new UnauthorizedException('Tu cuenta todavía no ha sido aprobada por administración.');
     }
 
     const payload_ahbb = {
@@ -70,6 +67,15 @@ export class AuthService {
     };
   }
 
+  /**
+   * Registra un nuevo usuario en el sistema.
+   * Dependiendo del rol, el usuario puede quedar en estado pendiente (Alumnos) o activo (Profesores/Admin).
+   * Envía automáticamente un correo electrónico de bienvenida o notificación de registro.
+   * 
+   * @param datos_ahbb Objeto con los datos del usuario a registrar.
+   * @returns Objeto con el perfil del usuario creado y confirmación de envío de correo.
+   * @throws BadRequestException Si el correo ya está registrado.
+   */
   async registrarUsuario_ahbb(datos_ahbb: any) {
     const existe_ahbb = await this.usuariosService_ahbb.encontrarPorCorreo_ahbb(
       datos_ahbb.correo_ahbb ?? datos_ahbb.correo,
@@ -85,14 +91,17 @@ export class AuthService {
       datos_ahbb.contrasena_ahbb ??
       datos_ahbb.contrasena ??
       this.usuariosService_ahbb.generarContrasenaTemporal_ahbb();
+    
     const contrasenaEncriptada_ahbb =
       await this.usuariosService_ahbb.hashearContrasena_ahbb(
         contrasenaBase_ahbb,
       );
+
     const cedulaGenerada_ahbb =
       datos_ahbb.cedula_ahbb ??
       datos_ahbb.cedula ??
       `V-${Math.floor(Math.random() * 100000000)}`;
+    
     const rol_ahbb = String(
       datos_ahbb.rol_ahbb ?? datos_ahbb.rol ?? 'ALUMNO',
     ).toUpperCase();
@@ -112,37 +121,69 @@ export class AuthService {
       },
     );
 
-    // Send email with temp credentials for all roles (including manual creation of students)
     try {
+      const isStudentPending_ahbb =
+        rol_ahbb === 'ALUMNO' &&
+        nuevoUsuario_ahbb.estadoCuenta === 'PENDIENTE_APROBACION';
+
       const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: { user: process.env.MAIL_USER, pass: process.env.MAIL_PASS },
       });
-      await transporter.sendMail({
-        from: '"Academia H&B" <no-reply@academiahb.com>',
-        to: nuevoUsuario_ahbb.correo,
-        subject: 'Tu cuenta en Academia H&B ha sido creada',
-        html: `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-            <div style="background: #1b2a4a; color: white; padding: 24px; text-align: center; border-radius: 8px 8px 0 0;">
-              <h1 style="margin:0;">🎓 Academia <span style="color: #f59e0b;">H&amp;B</span></h1>
-            </div>
-            <div style="padding: 24px; background: #f8fafc;">
-              <h2>¡Bienvenido/a, ${nuevoUsuario_ahbb.nombre}!</h2>
-              <p>Tu cuenta en la plataforma Academia H&amp;B ha sido creada como <strong>${rol_ahbb.toLowerCase()}</strong>.</p>
-              <p>Tus credenciales de acceso son:</p>
-              <div style="background: #e2e8f0; padding: 16px; border-radius: 8px; margin: 16px 0;">
-                <strong>Correo:</strong> ${nuevoUsuario_ahbb.correo}<br/>
-                <strong>Contraseña temporal:</strong> ${contrasenaBase_ahbb}
+
+      if (isStudentPending_ahbb) {
+        // Notificación para Alumnos: Solicitud recibida (espera de aprobación administrativa)
+        await transporter.sendMail({
+          from: '"Academia H&B" <no-reply@academiahb.com>',
+          to: nuevoUsuario_ahbb.correo,
+          subject: 'Recibimos tu solicitud de inscripción — Academia H&B',
+          html: `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+              <div style="background: #1b2a4a; color: white; padding: 24px; text-align: center; border-radius: 8px 8px 0 0;">
+                <h1 style="margin:0;">🎓 Academia <span style="color: #f59e0b;">H&amp;B</span></h1>
               </div>
-              <p style="color: #dc2626;"><strong>⚠️ Por seguridad, deberás cambiar tu contraseña al iniciar sesión por primera vez.</strong></p>
-              <a href="http://localhost:9000/login" style="display:inline-block;background:#1b2a4a;color:white;padding:12px 24px;border-radius:6px;text-decoration:none;margin-top:8px;">Iniciar Sesión</a>
+              <div style="padding: 24px; background: #f8fafc;">
+                <h2>¡Hola, ${nuevoUsuario_ahbb.nombre}!</h2>
+                <p>Gracias por registrarte en Academia H&amp;B. Hemos recibido tu solicitud para unirte como alumno.</p>
+                <p>Actualmente, nuestro equipo está <strong>revisando tu información y el comprobante de pago</strong> (si aplica).</p>
+                <div style="background: #e2e8f0; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                  <strong>Estado de la solicitud:</strong> En Revisión Administrativa<br/>
+                  <strong>Próximo paso:</strong> Una vez aprobado, recibirás un segundo correo con tus credenciales de acceso definitivas.
+                </div>
+                <p>Agradecemos tu paciencia mientras procesamos tu inscripción.</p>
+                <p>Saludos cordiales,<br/>El Equipo de Academia H&amp;B</p>
+              </div>
             </div>
-          </div>
-        `,
-      });
+          `,
+        });
+      } else {
+        // Notificación para Staff: Cuenta activa con credenciales temporales
+        await transporter.sendMail({
+          from: '"Academia H&B" <no-reply@academiahb.com>',
+          to: nuevoUsuario_ahbb.correo,
+          subject: 'Tu cuenta en Academia H&B ha sido creada',
+          html: `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+              <div style="background: #1b2a4a; color: white; padding: 24px; text-align: center; border-radius: 8px 8px 0 0;">
+                <h1 style="margin:0;">🎓 Academia <span style="color: #f59e0b;">H&amp;B</span></h1>
+              </div>
+              <div style="padding: 24px; background: #f8fafc;">
+                <h2>¡Bienvenido/a, ${nuevoUsuario_ahbb.nombre}!</h2>
+                <p>Tu cuenta en la plataforma Academia H&amp;B ha sido creada como <strong>${rol_ahbb.toLowerCase()}</strong>.</p>
+                <p>Tus credenciales de acceso son:</p>
+                <div style="background: #e2e8f0; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                  <strong>Correo:</strong> ${nuevoUsuario_ahbb.correo}<br/>
+                  <strong>Contraseña temporal:</strong> ${contrasenaBase_ahbb}
+                </div>
+                <p style="color: #dc2626;"><strong>⚠️ Por seguridad, deberás cambiar tu contraseña al iniciar sesión por primera vez.</strong></p>
+                <a href="http://localhost:9000/login" style="display:inline-block;background:#1b2a4a;color:white;padding:12px 24px;border-radius:6px;text-decoration:none;margin-top:8px;">Iniciar Sesión</a>
+              </div>
+            </div>
+          `,
+        });
+      }
     } catch (emailErr) {
-      console.error('Error al enviar correo de bienvenida:', emailErr);
+      console.error('Error al enviar correo de registro:', emailErr);
     }
 
     return {
@@ -156,6 +197,15 @@ export class AuthService {
     };
   }
 
+  /**
+   * Permite a un usuario autenticado cambiar su contraseña actual.
+   * 
+   * @param id_usuario_ahbb ID único del usuario.
+   * @param contrasenaActual_ahbb Contraseña actual para verificación.
+   * @param contrasenaNueva_ahbb Nueva contraseña a establecer.
+   * @returns Objeto con el resultado de la operación.
+   * @throws UnauthorizedException Si el usuario no existe o la contraseña actual es incorrecta.
+   */
   async cambiarContrasena_ahbb(
     id_usuario_ahbb: number,
     contrasenaActual_ahbb: string,

@@ -120,36 +120,65 @@ let AuthService = class AuthService {
             referenciaPagoMovil: datos_ahbb.referenciaPagoMovil_ahbb ?? datos_ahbb.referenciaPagoMovil,
         });
         try {
+            const isStudentPending_ahbb = rol_ahbb === 'ALUMNO' &&
+                nuevoUsuario_ahbb.estadoCuenta === 'PENDIENTE_APROBACION';
             const transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: { user: process.env.MAIL_USER, pass: process.env.MAIL_PASS },
             });
-            await transporter.sendMail({
-                from: '"Academia H&B" <no-reply@academiahb.com>',
-                to: nuevoUsuario_ahbb.correo,
-                subject: 'Tu cuenta en Academia H&B ha sido creada',
-                html: `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-            <div style="background: #1b2a4a; color: white; padding: 24px; text-align: center; border-radius: 8px 8px 0 0;">
-              <h1 style="margin:0;">🎓 Academia <span style="color: #f59e0b;">H&amp;B</span></h1>
-            </div>
-            <div style="padding: 24px; background: #f8fafc;">
-              <h2>¡Bienvenido/a, ${nuevoUsuario_ahbb.nombre}!</h2>
-              <p>Tu cuenta en la plataforma Academia H&amp;B ha sido creada como <strong>${rol_ahbb.toLowerCase()}</strong>.</p>
-              <p>Tus credenciales de acceso son:</p>
-              <div style="background: #e2e8f0; padding: 16px; border-radius: 8px; margin: 16px 0;">
-                <strong>Correo:</strong> ${nuevoUsuario_ahbb.correo}<br/>
-                <strong>Contraseña temporal:</strong> ${contrasenaBase_ahbb}
+            if (isStudentPending_ahbb) {
+                await transporter.sendMail({
+                    from: '"Academia H&B" <no-reply@academiahb.com>',
+                    to: nuevoUsuario_ahbb.correo,
+                    subject: 'Recibimos tu solicitud de inscripción — Academia H&B',
+                    html: `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+              <div style="background: #1b2a4a; color: white; padding: 24px; text-align: center; border-radius: 8px 8px 0 0;">
+                <h1 style="margin:0;">🎓 Academia <span style="color: #f59e0b;">H&amp;B</span></h1>
               </div>
-              <p style="color: #dc2626;"><strong>⚠️ Por seguridad, deberás cambiar tu contraseña al iniciar sesión por primera vez.</strong></p>
-              <a href="http://localhost:9000/login" style="display:inline-block;background:#1b2a4a;color:white;padding:12px 24px;border-radius:6px;text-decoration:none;margin-top:8px;">Iniciar Sesión</a>
+              <div style="padding: 24px; background: #f8fafc;">
+                <h2>¡Hola, ${nuevoUsuario_ahbb.nombre}!</h2>
+                <p>Gracias por registrarte en Academia H&amp;B. Hemos recibido tu solicitud para unirte como alumno.</p>
+                <p>Actualmente, nuestro equipo está <strong>revisando tu información y el comprobante de pago</strong> (si aplica).</p>
+                <div style="background: #e2e8f0; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                  <strong>Estado de la solicitud:</strong> En Revisión Administrativa<br/>
+                  <strong>Próximo paso:</strong> Una vez aprobado, recibirás un segundo correo con tus credenciales de acceso definitivas.
+                </div>
+                <p>Agradecemos tu paciencia mientras procesamos tu inscripción.</p>
+                <p>Saludos cordiales,<br/>El Equipo de Academia H&amp;B</p>
+              </div>
             </div>
-          </div>
-        `,
-            });
+          `,
+                });
+            }
+            else {
+                await transporter.sendMail({
+                    from: '"Academia H&B" <no-reply@academiahb.com>',
+                    to: nuevoUsuario_ahbb.correo,
+                    subject: 'Tu cuenta en Academia H&B ha sido creada',
+                    html: `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+              <div style="background: #1b2a4a; color: white; padding: 24px; text-align: center; border-radius: 8px 8px 0 0;">
+                <h1 style="margin:0;">🎓 Academia <span style="color: #f59e0b;">H&amp;B</span></h1>
+              </div>
+              <div style="padding: 24px; background: #f8fafc;">
+                <h2>¡Bienvenido/a, ${nuevoUsuario_ahbb.nombre}!</h2>
+                <p>Tu cuenta en la plataforma Academia H&amp;B ha sido creada como <strong>${rol_ahbb.toLowerCase()}</strong>.</p>
+                <p>Tus credenciales de acceso son:</p>
+                <div style="background: #e2e8f0; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                  <strong>Correo:</strong> ${nuevoUsuario_ahbb.correo}<br/>
+                  <strong>Contraseña temporal:</strong> ${contrasenaBase_ahbb}
+                </div>
+                <p style="color: #dc2626;"><strong>⚠️ Por seguridad, deberás cambiar tu contraseña al iniciar sesión por primera vez.</strong></p>
+                <a href="http://localhost:9000/login" style="display:inline-block;background:#1b2a4a;color:white;padding:12px 24px;border-radius:6px;text-decoration:none;margin-top:8px;">Iniciar Sesión</a>
+              </div>
+            </div>
+          `,
+                });
+            }
         }
         catch (emailErr) {
-            console.error('Error al enviar correo de bienvenida:', emailErr);
+            console.error('Error al enviar correo de registro:', emailErr);
         }
         return {
             exito: true,

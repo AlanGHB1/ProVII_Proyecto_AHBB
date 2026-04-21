@@ -54,6 +54,9 @@ let CursosController = class CursosController {
     async evaluarCurso_ahbb(id_curso_ahbb, datos) {
         return this.cursosService_ahbb.evaluarCurso_ahbb(id_curso_ahbb, datos);
     }
+    async actualizarImagenCertificadoCurso_ahbb(id_curso_ahbb, datos, request_ahbb) {
+        return this.cursosService_ahbb.actualizarImagenCertificadoCurso_ahbb(id_curso_ahbb, datos.imagenBase64, Number(request_ahbb.usuario_ahbb?.sub), request_ahbb.usuario_ahbb?.rol ?? 'PROFESOR');
+    }
 };
 exports.CursosController = CursosController;
 __decorate([
@@ -131,6 +134,17 @@ __decorate([
     __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
 ], CursosController.prototype, "evaluarCurso_ahbb", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_ahbb_1.JwtAuthGuard_ahbb, roles_guard_ahbb_1.RolesGuard_ahbb),
+    (0, roles_decorator_ahbb_1.RolesDecorator_ahbb)('ADMIN', 'PROFESOR'),
+    (0, common_1.Patch)(':id_curso_ahbb/imagen-certificado'),
+    __param(0, (0, common_1.Param)('id_curso_ahbb', common_1.ParseIntPipe)),
+    __param(1, (0, common_1.Body)()),
+    __param(2, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Object, Object]),
+    __metadata("design:returntype", Promise)
+], CursosController.prototype, "actualizarImagenCertificadoCurso_ahbb", null);
 exports.CursosController = CursosController = __decorate([
     (0, common_1.Controller)('cursos'),
     __metadata("design:paramtypes", [cursos_service_1.CursosService])

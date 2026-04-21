@@ -15,11 +15,9 @@ export declare class UsuariosService {
         creadoEn: any;
     }[]>;
     encontrarPorCorreo_ahbb(correo_ahbb: string): Promise<{
-        nombre_ahbb: string;
-        creadoEn_ahbb: Date | null;
-        actualizadoEn_ahbb: Date | null;
         id_usuario_ahbb: number;
         cedula_ahbb: string;
+        nombre_ahbb: string;
         apellido_ahbb: string;
         correo_ahbb: string;
         contrasena_ahbb: string;
@@ -29,6 +27,8 @@ export declare class UsuariosService {
         requiereCambioContrasena_ahbb: boolean;
         referenciaPagoMovil_ahbb: string | null;
         aprobadoPorUsuarioId_ahbb: number | null;
+        creadoEn_ahbb: Date | null;
+        actualizadoEn_ahbb: Date | null;
     } | null>;
     hashearContrasena_ahbb(contrasenaPlana_ahbb: string): Promise<string>;
     crearUsuario_ahbb(datos_ahbb: any): Promise<{
@@ -56,11 +56,9 @@ export declare class UsuariosService {
         creadoEn: any;
     }>;
     obtenerUsuarioPorId_ahbb(id_usuario_ahbb: number): Promise<{
-        nombre_ahbb: string;
-        creadoEn_ahbb: Date | null;
-        actualizadoEn_ahbb: Date | null;
         id_usuario_ahbb: number;
         cedula_ahbb: string;
+        nombre_ahbb: string;
         apellido_ahbb: string;
         correo_ahbb: string;
         contrasena_ahbb: string;
@@ -70,6 +68,8 @@ export declare class UsuariosService {
         requiereCambioContrasena_ahbb: boolean;
         referenciaPagoMovil_ahbb: string | null;
         aprobadoPorUsuarioId_ahbb: number | null;
+        creadoEn_ahbb: Date | null;
+        actualizadoEn_ahbb: Date | null;
     } | null>;
     actualizarContrasena_ahbb(id_usuario_ahbb: number, hashContrasena_ahbb: string): Promise<void>;
     actualizarPerfil_ahbb(id_usuario_ahbb: number, datos_ahbb: any): Promise<{
@@ -163,7 +163,7 @@ export declare class UsuariosService {
         rutaFirma_ahbb: string;
     }>;
     generarContrasenaTemporal_ahbb(): string;
-    normalizarRolInterno_ahbb(rol_ahbb: string): "ADMIN" | "ALUMNO" | "PROFESOR";
+    normalizarRolInterno_ahbb(rol_ahbb: string): "ADMIN" | "PROFESOR" | "ALUMNO";
     mapearRolFrontend_ahbb(rol_ahbb?: string | null): "administrador" | "profesor" | "alumno";
     mapearUsuarioPublico_ahbb(usuario_ahbb: any): {
         id: any;

@@ -20,8 +20,9 @@ export const iniciarSesion_ahbb = async (correo_ahbb, contrasena_ahbb) => {
     });
 
     const { usuario, token, requiereCambioContrasena } = respuesta_ahbb.data;
-    localStorage.setItem(CLAVE_TOKEN_AHBB, token);
-    localStorage.setItem(CLAVE_USUARIO_AHBB, JSON.stringify(usuario));
+    sessionStorage.setItem(CLAVE_TOKEN_AHBB, token);
+    // Ya NO guardamos el usuario en localStorage para proteger PII
+    // localStorage.setItem(CLAVE_USUARIO_AHBB, JSON.stringify(usuario));
 
     return {
       exito: true,
@@ -31,11 +32,15 @@ export const iniciarSesion_ahbb = async (correo_ahbb, contrasena_ahbb) => {
       mensaje: respuesta_ahbb.data.mensaje,
     };
   } catch (error_ahbb) {
+    const mensaje_ahbb =
+      error_ahbb.response?.data?.message ||
+      error_ahbb.response?.data?.mensaje ||
+      'Correo o contraseña incorrectos.';
+
     return {
       exito: false,
       usuario: null,
-      mensaje:
-        error_ahbb.response?.data?.mensaje ?? 'Correo o contraseña incorrectos.',
+      mensaje: typeof mensaje_ahbb === 'string' ? mensaje_ahbb : 'Correo o contraseña incorrectos.',
     };
   }
 };
@@ -73,22 +78,22 @@ export const cerrarSesion_ahbb = async () => {
     // Ignorar error de red al cerrar sesión.
   }
 
-  localStorage.removeItem(CLAVE_TOKEN_AHBB);
-  localStorage.removeItem(CLAVE_USUARIO_AHBB);
+  sessionStorage.removeItem(CLAVE_TOKEN_AHBB);
+  localStorage.removeItem(CLAVE_USUARIO_AHBB); // Limpiar residual si existe
 };
 
 export const recuperarSesion_ahbb = async () => {
-  const token_ahbb = localStorage.getItem(CLAVE_TOKEN_AHBB);
+  const token_ahbb = sessionStorage.getItem(CLAVE_TOKEN_AHBB);
   if (!token_ahbb) {
     return null;
   }
 
   try {
     const respuesta_ahbb = await apiCliente_ahbb.get('/auth/perfil');
-    localStorage.setItem(CLAVE_USUARIO_AHBB, JSON.stringify(respuesta_ahbb.data));
+    // Ya NO persistimos el perfil en disco, solo se devuelve para el store en memoria
     return respuesta_ahbb.data;
   } catch {
-    localStorage.removeItem(CLAVE_TOKEN_AHBB);
+    sessionStorage.removeItem(CLAVE_TOKEN_AHBB);
     localStorage.removeItem(CLAVE_USUARIO_AHBB);
     return null;
   }

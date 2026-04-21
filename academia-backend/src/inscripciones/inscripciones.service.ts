@@ -70,7 +70,6 @@ export class InscripcionesService_ahbb {
         data: {
           id_usuario_inscripcion_ahbb: datos_ahbb.id_usuario_inscripcion_ahbb,
           id_curso_inscripcion_ahbb: datos_ahbb.id_curso_inscripcion_ahbb,
-          observaciones_ahbb: datos_ahbb.observaciones_ahbb ?? null,
           estatus_ahbb: 'INSCRITO',
           intento_ahbb: intentosPrevios_ahbb + 1,
         },
@@ -173,11 +172,6 @@ export class InscripcionesService_ahbb {
       where: { id_inscripcion_ahbb },
       data: {
         estatus_ahbb: datos_ahbb.estatus_ahbb,
-        notaFinal_ahbb:
-          datos_ahbb.notaFinal_ahbb !== undefined
-            ? String(datos_ahbb.notaFinal_ahbb)
-            : undefined,
-        observaciones_ahbb: datos_ahbb.observaciones_ahbb,
       },
     });
   }
@@ -188,51 +182,29 @@ export class InscripcionesService_ahbb {
     fechaInicioBase_ahbb: Date,
     fechaFinBase_ahbb: Date,
   ) {
-    const inscripcionesActivas_ahbb =
-      await this.prisma_ahbb.td_inscripcion_ahbb.findMany({
-        where: {
-          id_usuario_inscripcion_ahbb: id_usuario_ahbb,
-          estatus_ahbb: { in: ['INSCRITO', 'OYENTE'] },
-        },
-        include: {
-          curso: {
-            include: { horarios: true },
-          },
+    const solapamientos_ahbb = await this.cursosService_ahbb.obtenerSolapamientos_ahbb(
+      id_usuario_ahbb,
+      'ALUMNO',
+      horariosCursoNuevo_ahbb,
+      fechaInicioBase_ahbb,
+      fechaFinBase_ahbb,
+    );
+
+    if (solapamientos_ahbb.length > 0) {
+      const huecos_ahbb = await this.cursosService_ahbb.obtenerHuecosDisponibles_ahbb(
+        id_usuario_ahbb,
+        'ALUMNO',
+        fechaInicioBase_ahbb,
+        fechaFinBase_ahbb,
+      );
+
+      throw new BadRequestException({
+        message: 'SOLAPAMIENTO_DETECTADO',
+        payload: {
+          solapamientos: solapamientos_ahbb,
+          huecosDisponibles: huecos_ahbb,
         },
       });
-
-    for (const inscripcion_ahbb of inscripcionesActivas_ahbb) {
-      // Comparar rangos de fecha de los cursos
-      const inicioExistente_ahbb = inscripcion_ahbb.curso.fechaInicio_ahbb ?? new Date();
-      const finExistente_ahbb = inscripcion_ahbb.curso.fechaFin_ahbb ?? new Date();
-
-      const fechasSeCruzan_ahbb = 
-        (inicioExistente_ahbb <= fechaFinBase_ahbb) &&
-        (fechaInicioBase_ahbb <= finExistente_ahbb);
-
-      if (!fechasSeCruzan_ahbb) continue;
-
-      for (const horarioActual_ahbb of inscripcion_ahbb.curso.horarios) {
-        for (const horarioNuevo_ahbb of horariosCursoNuevo_ahbb) {
-          const mismoDia_ahbb =
-            horarioActual_ahbb.diaSemana_ahbb ===
-            horarioNuevo_ahbb.diaSemana_ahbb.toUpperCase();
-
-          if (
-            mismoDia_ahbb &&
-            this.cursosService_ahbb.hayCruceHoras_ahbb(
-              horarioActual_ahbb.horaInicio_ahbb,
-              horarioActual_ahbb.horaFin_ahbb,
-              horarioNuevo_ahbb.horaInicio_ahbb,
-              horarioNuevo_ahbb.horaFin_ahbb,
-            )
-          ) {
-            throw new BadRequestException(
-              'Tu disponibilidad para este curso ya se encuentra ocupada parcial o totalmente por otro/s cursos, cambia el horario o espera a que finalice uno de los cursos',
-            );
-          }
-        }
-      }
     }
   }
 

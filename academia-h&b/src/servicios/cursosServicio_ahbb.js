@@ -44,20 +44,24 @@ export const obtenerCursoPorId_ahbb = async (id_ahbb) => {
 };
 
 export const crearCurso_ahbb = async (datosCurso_ahbb) => {
-  const respuesta_ahbb = await apiCliente_ahbb.post(
-    '/cursos',
-    mapearPayloadCursoApi_ahbb(datosCurso_ahbb),
-  );
-  return respuesta_ahbb.data;
+  try {
+      const respuesta_ahbb = await apiCliente_ahbb.post(
+        '/cursos',
+        mapearPayloadCursoApi_ahbb(datosCurso_ahbb),
+      );
+      return respuesta_ahbb.data;
+  } catch {
+    return null;
+  }
 };
 
 export const actualizarCurso_ahbb = async (id_ahbb, datosCurso_ahbb) => {
-  try {
-    await apiCliente_ahbb.put(`/cursos/${id_ahbb}`, mapearPayloadCursoApi_ahbb(datosCurso_ahbb));
-    return true;
-  } catch {
-    return false;
-  }
+ try{
+    const respuesta_ahbb = await apiCliente_ahbb.put(`/cursos/${id_ahbb}`, mapearPayloadCursoApi_ahbb(datosCurso_ahbb));
+    return respuesta_ahbb.data;
+ } catch {
+  return null;
+ }
 };
 
 export const eliminarCurso_ahbb = async (id_ahbb) => {

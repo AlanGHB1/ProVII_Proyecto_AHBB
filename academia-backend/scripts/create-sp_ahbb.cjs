@@ -43,6 +43,25 @@ async function main() {
       BEFORE INSERT ON td_sesion_curso_ahbb
       FOR EACH ROW
       EXECUTE FUNCTION fn_validar_coincidencia_fecha_inicio_ahbb();
+
+      -- Función y Trigger para sincronizar fechas de fin y duración en el curso
+      CREATE OR REPLACE FUNCTION fn_sincronizar_fechas_curso_ahbb()
+      RETURNS TRIGGER AS $$
+      BEGIN
+          UPDATE td_curso_ahbb
+          SET "fechaFin_ahbb" = (SELECT MAX("fechaSesion_ahbb") FROM td_sesion_curso_ahbb WHERE "id_curso_sesion_ahbb" = COALESCE(NEW."id_curso_sesion_ahbb", OLD."id_curso_sesion_ahbb")),
+              "fechaDuracion_ahbb" = (SELECT MAX("fechaSesion_ahbb") FROM td_sesion_curso_ahbb WHERE "id_curso_sesion_ahbb" = COALESCE(NEW."id_curso_sesion_ahbb", OLD."id_curso_sesion_ahbb")),
+              "diasDefinidos_ahbb" = (SELECT COUNT(*) FROM td_sesion_curso_ahbb WHERE "id_curso_sesion_ahbb" = COALESCE(NEW."id_curso_sesion_ahbb", OLD."id_curso_sesion_ahbb"))
+          WHERE "id_curso_ahbb" = COALESCE(NEW."id_curso_sesion_ahbb", OLD."id_curso_sesion_ahbb");
+          RETURN NEW;
+      END;
+      $$ LANGUAGE plpgsql;
+
+      DROP TRIGGER IF EXISTS trg_sincronizar_fechas_curso_ahbb ON td_sesion_curso_ahbb;
+      CREATE TRIGGER trg_sincronizar_fechas_curso_ahbb
+      AFTER INSERT OR UPDATE OR DELETE ON td_sesion_curso_ahbb
+      FOR EACH ROW
+      EXECUTE FUNCTION fn_sincronizar_fechas_curso_ahbb();
     `;
     await client.query(triggerSql);
     console.log('Trigger created successfully!');

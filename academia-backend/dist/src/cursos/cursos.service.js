@@ -445,6 +445,28 @@ let CursosService = class CursosService {
     )`;
         return this.mapearCurso_ahbb(cursoActualizado_ahbb);
     }
+    async actualizarImagenCertificadoCurso_ahbb(id_curso_ahbb, imagenBase64_ahbb, id_usuario_ahbb, rol_ahbb) {
+        const curso_ahbb = await this.prisma_ahbb.td_curso_ahbb.findUnique({
+            where: { id_curso_ahbb },
+        });
+        if (!curso_ahbb) {
+            throw new common_1.NotFoundException('Curso no encontrado.');
+        }
+        if (rol_ahbb === 'PROFESOR' &&
+            curso_ahbb.id_usuario_curso_ahbb !== id_usuario_ahbb) {
+            throw new common_1.BadRequestException('No puedes modificar la imagen de un curso que no te pertenece.');
+        }
+        await this.prisma_ahbb.td_curso_ahbb.update({
+            where: { id_curso_ahbb },
+            data: { imagenBasePdf_ahbb: imagenBase64_ahbb },
+        });
+        return {
+            exito: true,
+            mensaje: imagenBase64_ahbb
+                ? 'Imagen de fondo del certificado actualizada.'
+                : 'Imagen de fondo del certificado eliminada.',
+        };
+    }
     async eliminarCurso_ahbb(id_curso_ahbb) {
         const inscripciones = await this.prisma_ahbb.td_inscripcion_ahbb.count({
             where: { id_curso_inscripcion_ahbb: id_curso_ahbb },
@@ -518,19 +540,50 @@ let CursosService = class CursosService {
         };
     }
     async validarSolapamientoProfesor_ahbb(id_profesor_ahbb, horariosNuevos_ahbb, fechaInicioNivel_ahbb, fechaFinNivel_ahbb, id_curso_excluir) {
-        const cursos_ahbb = await this.prisma_ahbb.td_curso_ahbb.findMany({
-            where: {
-                id_usuario_curso_ahbb: id_profesor_ahbb,
-                id_curso_ahbb: id_curso_excluir ? { not: id_curso_excluir } : undefined,
-                estadoAprobacion_ahbb: { not: 'ARCHIVADO' },
-            },
-            include: { horarios: true },
-        });
+        const solapamientos_ahbb = await this.obtenerSolapamientos_ahbb(id_profesor_ahbb, 'PROFESOR', horariosNuevos_ahbb, fechaInicioNivel_ahbb, fechaFinNivel_ahbb, id_curso_excluir);
+        if (solapamientos_ahbb.length > 0) {
+            const huecos_ahbb = await this.obtenerHuecosDisponibles_ahbb(id_profesor_ahbb, 'PROFESOR', fechaInicioNivel_ahbb, fechaFinNivel_ahbb);
+            throw new common_1.BadRequestException({
+                message: 'SOLAPAMIENTO_DETECTADO',
+                payload: {
+                    solapamientos: solapamientos_ahbb,
+                    huecosDisponibles: huecos_ahbb,
+                },
+            });
+        }
+    }
+    async obtenerSolapamientos_ahbb(id_usuario_ahbb, rol_ahbb, horariosNuevos_ahbb, fechaInicio_ahbb, fechaFin_ahbb, id_curso_excluir) {
+        const solapamientos_ahbb = [];
+        let cursos_ahbb = [];
+        if (rol_ahbb === 'PROFESOR') {
+            cursos_ahbb = await this.prisma_ahbb.td_curso_ahbb.findMany({
+                where: {
+                    id_usuario_curso_ahbb: id_usuario_ahbb,
+                    id_curso_ahbb: id_curso_excluir ? { not: id_curso_excluir } : undefined,
+                    estadoAprobacion_ahbb: { not: 'ARCHIVADO' },
+                },
+                include: { horarios: true },
+            });
+        }
+        else {
+            const inscripciones_ahbb = await this.prisma_ahbb.td_inscripcion_ahbb.findMany({
+                where: {
+                    id_usuario_inscripcion_ahbb: id_usuario_ahbb,
+                    estatus_ahbb: { in: ['INSCRITO', 'OYENTE'] },
+                },
+                include: {
+                    curso: {
+                        include: { horarios: true },
+                    },
+                },
+            });
+            cursos_ahbb = inscripciones_ahbb.map((i) => i.curso);
+        }
         for (const cursoExistente_ahbb of cursos_ahbb) {
             const inicioExistente_ahbb = cursoExistente_ahbb.fechaInicio_ahbb ?? new Date();
             const finExistente_ahbb = cursoExistente_ahbb.fechaFin_ahbb ?? new Date();
-            const fechasSeCruzan_ahbb = (inicioExistente_ahbb <= fechaFinNivel_ahbb) &&
-                (fechaInicioNivel_ahbb <= finExistente_ahbb);
+            const fechasSeCruzan_ahbb = inicioExistente_ahbb <= fechaFin_ahbb &&
+                fechaInicio_ahbb <= finExistente_ahbb;
             if (!fechasSeCruzan_ahbb)
                 continue;
             for (const horarioExistente_ahbb of cursoExistente_ahbb.horarios) {
@@ -539,11 +592,82 @@ let CursosService = class CursosService {
                         horarioNuevo_ahbb.diaSemana_ahbb.toUpperCase();
                     if (mismoDia_ahbb &&
                         this.hayCruceHoras_ahbb(horarioExistente_ahbb.horaInicio_ahbb, horarioExistente_ahbb.horaFin_ahbb, horarioNuevo_ahbb.horaInicio_ahbb, horarioNuevo_ahbb.horaFin_ahbb)) {
-                        throw new common_1.BadRequestException('Tu disponibilidad para este curso ya se encuentra ocupada parcial o totalmente por otro/s cursos, cambia el horario o espera a que finalice uno de los cursos');
+                        solapamientos_ahbb.push({
+                            cursoId: cursoExistente_ahbb.id_curso_ahbb,
+                            cursoNombre: cursoExistente_ahbb.nombre_ahbb,
+                            dia: horarioExistente_ahbb.diaSemana_ahbb,
+                            horaInicio: horarioExistente_ahbb.horaInicio_ahbb,
+                            horaFin: horarioExistente_ahbb.horaFin_ahbb,
+                        });
                     }
                 }
             }
         }
+        return solapamientos_ahbb;
+    }
+    async obtenerHuecosDisponibles_ahbb(id_usuario_ahbb, rol_ahbb, fechaInicio_ahbb, fechaFin_ahbb) {
+        let cursos_ahbb = [];
+        if (rol_ahbb === 'PROFESOR') {
+            cursos_ahbb = await this.prisma_ahbb.td_curso_ahbb.findMany({
+                where: {
+                    id_usuario_curso_ahbb: id_usuario_ahbb,
+                    estadoAprobacion_ahbb: { not: 'ARCHIVADO' },
+                },
+                include: { horarios: true },
+            });
+        }
+        else {
+            const inscripciones_ahbb = await this.prisma_ahbb.td_inscripcion_ahbb.findMany({
+                where: {
+                    id_usuario_inscripcion_ahbb: id_usuario_ahbb,
+                    estatus_ahbb: { in: ['INSCRITO', 'OYENTE'] },
+                },
+                include: {
+                    curso: {
+                        include: { horarios: true },
+                    },
+                },
+            });
+            cursos_ahbb = inscripciones_ahbb.map((i) => i.curso);
+        }
+        const huecos_ahbb = [];
+        const franjas_ahbb = [
+            { inicio: '07:00', fin: '10:00' },
+            { inicio: '10:00', fin: '13:00' },
+            { inicio: '13:00', fin: '16:00' },
+            { inicio: '16:00', fin: '19:00' },
+            { inicio: '19:00', fin: '22:00' },
+        ];
+        for (const dia_ahbb of this.DIAS_SEMANA_AHBB) {
+            if (dia_ahbb === 'DOMINGO')
+                continue;
+            for (const franja_ahbb of franjas_ahbb) {
+                let ocupado_ahbb = false;
+                for (const curso_ahbb of cursos_ahbb) {
+                    const inicioC = curso_ahbb.fechaInicio_ahbb ?? new Date();
+                    const finC = curso_ahbb.fechaFin_ahbb ?? new Date();
+                    if (inicioC <= fechaFin_ahbb && fechaInicio_ahbb <= finC) {
+                        for (const h_ahbb of curso_ahbb.horarios) {
+                            if (h_ahbb.diaSemana_ahbb === dia_ahbb &&
+                                this.hayCruceHoras_ahbb(h_ahbb.horaInicio_ahbb, h_ahbb.horaFin_ahbb, franja_ahbb.inicio, franja_ahbb.fin)) {
+                                ocupado_ahbb = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (ocupado_ahbb)
+                        break;
+                }
+                if (!ocupado_ahbb) {
+                    huecos_ahbb.push({
+                        dia: dia_ahbb,
+                        horaInicio: franja_ahbb.inicio,
+                        horaFin: franja_ahbb.fin,
+                    });
+                }
+            }
+        }
+        return huecos_ahbb.slice(0, 10);
     }
     hayCruceHoras_ahbb(inicioA_ahbb, finA_ahbb, inicioB_ahbb, finB_ahbb) {
         return inicioA_ahbb < finB_ahbb && inicioB_ahbb < finA_ahbb;
@@ -691,6 +815,7 @@ let CursosService = class CursosService {
             prelacionCursoId: curso_ahbb.prelacion?.id_curso_ahbb ?? null,
             prelacionNombre: curso_ahbb.prelacion?.nombre_ahbb ?? null,
             isPublished: curso_ahbb.isPublished_ahbb,
+            imagenBasePdf: curso_ahbb.imagenBasePdf_ahbb ?? null,
         };
     }
     async sincronizarEstadosInscritos_ahbb() {

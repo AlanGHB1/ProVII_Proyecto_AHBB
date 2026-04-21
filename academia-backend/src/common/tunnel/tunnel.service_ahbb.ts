@@ -40,6 +40,12 @@ export class TunnelService_ahbb implements OnModuleDestroy {
    * Reintenta automáticamente en caso de fallo.
    */
   async iniciarTunel_ahbb(puerto: number): Promise<string> {
+    // Si ya hay un túnel activo, lo cerramos antes de iniciar uno nuevo
+    if (this.tunnel_ahbb) {
+      this.logger_ahbb.log('Reiniciando túnel existente...');
+      await this.onModuleDestroy();
+    }
+
     try {
       // Importación dinámica de cloudflared
       const { Tunnel, install, bin } = await import('cloudflared');

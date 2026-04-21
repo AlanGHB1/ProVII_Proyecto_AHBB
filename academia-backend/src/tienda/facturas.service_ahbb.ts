@@ -21,6 +21,9 @@ export class FacturasService_ahbb {
   // IVA venezolano vigente: 16%
   private readonly IVA_PORCENTAJE_AHBB = 16;
 
+  /**
+   * Calcula el desglose impositivo (Subtotal, IVA 16%, Total) para un conjunto de items.
+   */
   private calcularDesglose_ahbb(detalles: any[]) {
     const subtotal = detalles.reduce((acc, d) =>
       acc + Number(d.precioUnitario_ahbb) * d.cantidad_ahbb, 0
@@ -35,7 +38,10 @@ export class FacturasService_ahbb {
     };
   }
 
-  // CHECKOUT: carrito → factura + detalles → vaciar carrito → descontar stock
+  /**
+   * Orquesta el proceso de checkout: transforma el carrito en una factura, gestiona inventarios y genera reportes.
+   * Valida la integridad de la referencia de pago antes de proceder.
+   */
   async crearFactura_ahbb(id_usuario_ahbb: number, nroReferenciaPago_ahbb: string) {
     // Trigger de validación: formato de referencia de pago venezolana
     validarReferenciaPago_ahbb(nroReferenciaPago_ahbb);
@@ -161,6 +167,9 @@ export class FacturasService_ahbb {
     }));
   }
 
+  /**
+   * Obtiene una factura específica por su ID, con validación opcional de pertenencia al usuario.
+   */
   async obtenerPorId_ahbb(id_factura_ahbb: number, id_usuario_ahbb?: number) {
     const where_ahbb: any = { id_factura_ahbb };
     if (id_usuario_ahbb) {
@@ -223,7 +232,11 @@ export class FacturasService_ahbb {
     });
   }
 
-  // Generar Factura en PDF usando pdfmake
+  /**
+   * Construye el documento PDF del comprobante de compra.
+   * Incluye logo institucional, desglose de productos con imágenes y QR de verificación.
+   * @returns Buffer binario del PDF.
+   */
   async generarPdf_ahbb(id_factura_ahbb: number, id_usuario_ahbb?: number): Promise<Buffer> {
     this.logger_ahbb.log(`Iniciando generación de PDF para factura ${id_factura_ahbb}`);
     try {

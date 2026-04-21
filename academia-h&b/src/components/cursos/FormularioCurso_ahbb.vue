@@ -26,6 +26,7 @@ const diasDisponibles_ahbb = [
   { label: 'Jueves', value: 'jueves' },
   { label: 'Viernes', value: 'viernes' },
   { label: 'Sábado', value: 'sabado' },
+  { label: 'Domingo', value: 'domingo' },
 ];
 
 const formulario_ahbb = ref({
@@ -87,6 +88,8 @@ const reglaseFechaInicio_ahbb = [
     if (!v || formulario_ahbb.value.dias.length === 0) return true;
     const dias_ahbb = ['domingo', 'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado'];
     const diaSeleccionado_ahbb = dias_ahbb[new Date(v + 'T12:00:00').getDay()];
+    // Normalizar nombres de días para la comparación si es necesario, 
+    // pero diasDisponibles_ahbb ya usa minúsculas y sin acentos.
     return formulario_ahbb.value.dias.includes(diaSeleccionado_ahbb) ||
       'La fecha debe coincidir con uno de los días de clase seleccionados';
   }
@@ -212,7 +215,7 @@ const enviarFormulario_ahbb = () => {
 <template>
   <q-card flat bordered>
     <q-card-section>
-      <q-form @submit.prevent="enviarFormulario_ahbb" class="q-gutter-md">
+      <q-form @submit.prevent="enviarFormulario_ahbb" class="q-gutter-y-md">
         <!-- Nombre y profesor -->
         <div class="row q-col-gutter-md">
           <div class="col-12 col-sm-6">
@@ -324,7 +327,7 @@ const enviarFormulario_ahbb = () => {
             inline
             color="secondary"
           />
-          <div v-if="formulario_ahbb.dias.length === 0" class="text-negative text-caption q-ml-sm">
+          <div v-if="formulario_ahbb.dias.length === 0" class="text-negative text-caption">
             Debes seleccionar al menos un día de clase
           </div>
         </div>

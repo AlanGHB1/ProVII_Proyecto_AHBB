@@ -387,6 +387,9 @@ let UsuariosService = class UsuariosService {
         if (!usuario_ahbb) {
             throw new common_1.NotFoundException('Alumno no encontrado.');
         }
+        if (usuario_ahbb.estadoCuenta_ahbb === 'ACTIVO') {
+            return this.mapearUsuarioPublico_ahbb(usuario_ahbb);
+        }
         const contrasenaTemporal_ahbb = this.generarContrasenaTemporal_ahbb();
         const contrasenaTemporalHash_ahbb = await this.hashearContrasena_ahbb(contrasenaTemporal_ahbb);
         const usuarioActualizado_ahbb = await this.prisma_ahbb.$transaction(async (tx_ahbb) => {

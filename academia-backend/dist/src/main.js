@@ -39,6 +39,7 @@ const path_1 = require("path");
 const express = __importStar(require("express"));
 const app_module_1 = require("./app.module");
 const tunnel_service_ahbb_1 = require("./common/tunnel/tunnel.service_ahbb");
+const http_exception_filter_ahbb_1 = require("./common/filters/http-exception.filter_ahbb");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     const puerto = Number(process.env.PORT) || 3000;
@@ -63,8 +64,12 @@ async function bootstrap() {
         },
         credentials: true,
     });
+    app.use(express.json({ limit: '50mb' }));
+    app.use(express.urlencoded({ limit: '50mb', extended: true }));
     app.setGlobalPrefix('api');
+    app.useGlobalFilters(new http_exception_filter_ahbb_1.HttpExceptionFilter_ahbb());
     app.use('/uploads', express.static((0, path_1.join)(process.cwd(), 'uploads')));
+    app.enableShutdownHooks();
     await app.listen(puerto);
     const tunnelService = app.get(tunnel_service_ahbb_1.TunnelService_ahbb);
     await tunnelService.iniciarTunel_ahbb(puerto);

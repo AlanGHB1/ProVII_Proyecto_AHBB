@@ -4,6 +4,7 @@ import { join } from 'path';
 import * as express from 'express';
 import { AppModule } from './app.module';
 import { TunnelService_ahbb } from './common/tunnel/tunnel.service_ahbb';
+import { HttpExceptionFilter_ahbb } from './common/filters/http-exception.filter_ahbb';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -44,7 +45,12 @@ async function bootstrap() {
   app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
   app.setGlobalPrefix('api');
+  app.useGlobalFilters(new HttpExceptionFilter_ahbb());
   app.use('/uploads', express.static(join(process.cwd(), 'uploads')));
+
+  // Habilitar hooks de cierre para que Nodemon y señales de sistema
+  // cierren correctamente los recursos (como el túnel de Cloudflare).
+  app.enableShutdownHooks();
 
   await app.listen(puerto);
 

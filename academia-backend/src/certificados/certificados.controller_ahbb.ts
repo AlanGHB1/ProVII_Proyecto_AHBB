@@ -9,6 +9,7 @@ import {
   Res,
   UseGuards,
 } from '@nestjs/common';
+import * as express from 'express';
 import { CertificadosService_ahbb } from './certificados.service_ahbb';
 import { JwtAuthGuard_ahbb } from '../common/guards/jwt-auth.guard_ahbb';
 import { RolesGuard_ahbb } from '../common/guards/roles.guard_ahbb';
@@ -27,8 +28,43 @@ export class CertificadosPublicController_ahbb {
   @Get('verificar/:id')
   async verificarCertificado_ahbb(
     @Param('id', ParseIntPipe) id_ahbb: number,
+    @Res() res_ahbb: express.Response,
   ) {
-    return this.certificadosService_ahbb.verificarCertificado_ahbb(id_ahbb);
+    // Redirigir al endpoint público de PDF para que sea accesible desde cualquier red
+    // (el túnel de Cloudflare expone el backend, no el frontend)
+    return res_ahbb.redirect(`/api/certificados/publico/${id_ahbb}/pdf`);
+  }
+
+  // Endpoint público para descargar PDF (sin JWT, para escaneo QR)
+  @Get('publico/:id/pdf')
+  async descargarPdfPublico_ahbb(
+    @Param('id', ParseIntPipe) id_ahbb: number,
+    @Res() res_ahbb: any,
+  ) {
+    try {
+      const pdfBuffer =
+        await this.certificadosService_ahbb.generarPdfCertificado_ahbb(
+          id_ahbb,
+        );
+
+      res_ahbb.set({
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': `inline; filename="certificado-${id_ahbb}.pdf"`,
+        'Content-Length': pdfBuffer.length,
+      });
+
+      res_ahbb.end(pdfBuffer);
+    } catch (error) {
+      console.error(
+        `Error al servir PDF público del certificado ${id_ahbb}:`,
+        error,
+      );
+      if (!res_ahbb.headersSent) {
+        res_ahbb
+          .status(500)
+          .json({ message: 'Error interno al generar el PDF del certificado.' });
+      }
+    }
   }
 }
 

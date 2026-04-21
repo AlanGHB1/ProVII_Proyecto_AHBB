@@ -18,23 +18,23 @@ export declare class FacturasController_ahbb {
             totalConIva: number;
         };
         usuario_ahbb: {
-            nombre_ahbb: string;
             id_usuario_ahbb: number;
-            apellido_ahbb: string;
             correo_ahbb: string;
+            nombre_ahbb: string;
+            apellido_ahbb: string;
         };
         detalles_ahbb: ({
             producto_ahbb: {
-                id_producto_ahbb: number;
                 nombre_ahbb: string;
+                creadoEn_ahbb: Date | null;
+                actualizadoEn_ahbb: Date | null;
                 descripcion_ahbb: string | null;
+                id_producto_ahbb: number;
                 precio_ahbb: import("@prisma/client-runtime-utils").Decimal;
                 stock_ahbb: number;
                 categoria_ahbb: string;
                 imagen_ahbb: string | null;
                 estado_producto_ahbb: string;
-                creadoEn_ahbb: Date | null;
-                actualizadoEn_ahbb: Date | null;
             };
         } & {
             cantidad_ahbb: number;
@@ -59,16 +59,16 @@ export declare class FacturasController_ahbb {
         };
         detalles_ahbb: ({
             producto_ahbb: {
-                id_producto_ahbb: number;
                 nombre_ahbb: string;
+                creadoEn_ahbb: Date | null;
+                actualizadoEn_ahbb: Date | null;
                 descripcion_ahbb: string | null;
+                id_producto_ahbb: number;
                 precio_ahbb: import("@prisma/client-runtime-utils").Decimal;
                 stock_ahbb: number;
                 categoria_ahbb: string;
                 imagen_ahbb: string | null;
                 estado_producto_ahbb: string;
-                creadoEn_ahbb: Date | null;
-                actualizadoEn_ahbb: Date | null;
             };
         } & {
             cantidad_ahbb: number;
@@ -92,23 +92,23 @@ export declare class FacturasController_ahbb {
             totalConIva: number;
         };
         usuario_ahbb: {
-            nombre_ahbb: string;
             id_usuario_ahbb: number;
-            apellido_ahbb: string;
             correo_ahbb: string;
+            nombre_ahbb: string;
+            apellido_ahbb: string;
         };
         detalles_ahbb: ({
             producto_ahbb: {
-                id_producto_ahbb: number;
                 nombre_ahbb: string;
+                creadoEn_ahbb: Date | null;
+                actualizadoEn_ahbb: Date | null;
                 descripcion_ahbb: string | null;
+                id_producto_ahbb: number;
                 precio_ahbb: import("@prisma/client-runtime-utils").Decimal;
                 stock_ahbb: number;
                 categoria_ahbb: string;
                 imagen_ahbb: string | null;
                 estado_producto_ahbb: string;
-                creadoEn_ahbb: Date | null;
-                actualizadoEn_ahbb: Date | null;
             };
         } & {
             cantidad_ahbb: number;
@@ -126,23 +126,23 @@ export declare class FacturasController_ahbb {
     }>;
     obtenerTodas_ahbb(): Promise<({
         usuario_ahbb: {
-            nombre_ahbb: string;
             id_usuario_ahbb: number;
-            apellido_ahbb: string;
             correo_ahbb: string;
+            nombre_ahbb: string;
+            apellido_ahbb: string;
         };
         detalles_ahbb: ({
             producto_ahbb: {
-                id_producto_ahbb: number;
                 nombre_ahbb: string;
+                creadoEn_ahbb: Date | null;
+                actualizadoEn_ahbb: Date | null;
                 descripcion_ahbb: string | null;
+                id_producto_ahbb: number;
                 precio_ahbb: import("@prisma/client-runtime-utils").Decimal;
                 stock_ahbb: number;
                 categoria_ahbb: string;
                 imagen_ahbb: string | null;
                 estado_producto_ahbb: string;
-                creadoEn_ahbb: Date | null;
-                actualizadoEn_ahbb: Date | null;
             };
         } & {
             cantidad_ahbb: number;

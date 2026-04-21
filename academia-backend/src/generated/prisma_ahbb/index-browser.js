@@ -184,8 +184,6 @@ exports.Prisma.Td_inscripcion_ahbbScalarFieldEnum = {
   id_inscripcion_ahbb: 'id_inscripcion_ahbb',
   estatus_ahbb: 'estatus_ahbb',
   intento_ahbb: 'intento_ahbb',
-  notaFinal_ahbb: 'notaFinal_ahbb',
-  observaciones_ahbb: 'observaciones_ahbb',
   id_usuario_inscripcion_ahbb: 'id_usuario_inscripcion_ahbb',
   id_curso_inscripcion_ahbb: 'id_curso_inscripcion_ahbb',
   creadoEn_ahbb: 'creadoEn_ahbb',

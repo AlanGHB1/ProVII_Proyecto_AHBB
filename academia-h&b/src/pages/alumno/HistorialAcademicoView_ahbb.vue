@@ -90,7 +90,7 @@ onMounted(cargarHistorial_ahbb);
           Historial Académico
         </div>
         <div class="text-caption text-grey-7 q-mt-sm">
-          Registro completo de tu trayectoria, cursos cursados y estatus. (Datos numéricos de calificaciones omitidos)
+          Registro completo de tu trayectoria, cursos cursados y estatus académico.
         </div>
       </div>
     </div>

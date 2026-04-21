@@ -99,8 +99,6 @@ model td_inscripcion_ahbb {
   id_inscripcion_ahbb         Int       @id @default(autoincrement())
   estatus_ahbb                String?   @default("INSCRITO") @db.VarChar(50)
   intento_ahbb                Int       @default(1)
-  notaFinal_ahbb              Decimal?  @db.Decimal(5, 2)
-  observaciones_ahbb          String?   @db.Text
   id_usuario_inscripcion_ahbb Int
   id_curso_inscripcion_ahbb   Int
   creadoEn_ahbb               DateTime? @default(now()) @db.Timestamp(6)
@@ -196,7 +194,6 @@ model td_factura_ahbb {
 model td_reportes_facturas_ahbb {
   id_reporte_ahbb         Int      @id @default(autoincrement())
   id_factura_reporte_ahbb Int
-  detalles_factura_ahbb   Json
   qr_base64_ahbb          String   @db.Text
   creadoEn_ahbb           DateTime @default(now()) @db.Timestamp(6)
 

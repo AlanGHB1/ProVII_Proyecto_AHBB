@@ -184,8 +184,6 @@ exports.Prisma.Td_inscripcion_ahbbScalarFieldEnum = {
   id_inscripcion_ahbb: 'id_inscripcion_ahbb',
   estatus_ahbb: 'estatus_ahbb',
   intento_ahbb: 'intento_ahbb',
-  notaFinal_ahbb: 'notaFinal_ahbb',
-  observaciones_ahbb: 'observaciones_ahbb',
   id_usuario_inscripcion_ahbb: 'id_usuario_inscripcion_ahbb',
   id_curso_inscripcion_ahbb: 'id_curso_inscripcion_ahbb',
   creadoEn_ahbb: 'creadoEn_ahbb',
@@ -247,7 +245,6 @@ exports.Prisma.Td_factura_ahbbScalarFieldEnum = {
 exports.Prisma.Td_reportes_facturas_ahbbScalarFieldEnum = {
   id_reporte_ahbb: 'id_reporte_ahbb',
   id_factura_reporte_ahbb: 'id_factura_reporte_ahbb',
-  detalles_factura_ahbb: 'detalles_factura_ahbb',
   qr_base64_ahbb: 'qr_base64_ahbb',
   creadoEn_ahbb: 'creadoEn_ahbb'
 };
@@ -272,10 +269,6 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
-exports.Prisma.JsonNullValueInput = {
-  JsonNull: Prisma.JsonNull
-};
-
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -284,12 +277,6 @@ exports.Prisma.QueryMode = {
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
-};
-
-exports.Prisma.JsonNullValueFilter = {
-  DbNull: Prisma.DbNull,
-  JsonNull: Prisma.JsonNull,
-  AnyNull: Prisma.AnyNull
 };
 
 

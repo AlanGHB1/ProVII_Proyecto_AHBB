@@ -24,7 +24,8 @@ export class CertificadosService_ahbb {
   ) {}
 
   /**
-   * Emitir certificado para una inscripción APROBADA.
+   * Formaliza la emisión de un certificado para una inscripción aprobada.
+   * Genera dinámicamente un código QR de verificación vinculado al portal público de la academia.
    */
   async emitirCertificado_ahbb(id_inscripcion_ahbb: number) {
     // Verificar inscripción
@@ -48,15 +49,31 @@ export class CertificadosService_ahbb {
       );
     }
 
+    // Verificar si el profesor tiene firma digital cargada
+    if (!inscripcion_ahbb.curso.profesor.firmaDigital_ahbb) {
+      throw new BadRequestException(
+        'El profesor debe cargar su firma digital antes de emitir certificados.',
+      );
+    }
+
     if (inscripcion_ahbb.certificado) {
       throw new BadRequestException(
         'Ya existe un certificado emitido para esta inscripción.',
       );
     }
 
-    // Generar QR con URL pública de verificación
+    // 1. Crear el registro del certificado primero para obtener su ID real
+    const certificado_ahbb =
+      await this.prisma_ahbb.td_certificado_ahbb.create({
+        data: {
+          id_inscripcion_certificado_ahbb: id_inscripcion_ahbb,
+          codigoQrUrl_ahbb: 'PENDIENTE', 
+        },
+      });
+
+    // 2. Generar QR apuntando al PDF público (accesible desde cualquier red vía túnel Cloudflare)
     const urlVerificacion_ahbb = this.tunnelService_ahbb.construirUrl_ahbb(
-      `/api/certificados/verificar/${id_inscripcion_ahbb}`,
+      `/api/certificados/publico/${certificado_ahbb.id_certificado_ahbb}/pdf`,
     );
 
     const qrBase64_ahbb = await QRCode.toDataURL(urlVerificacion_ahbb, {
@@ -65,18 +82,15 @@ export class CertificadosService_ahbb {
       color: { dark: '#1b2a4a', light: '#ffffff' },
     });
 
-    // Crear registro del certificado
-    const certificado_ahbb =
-      await this.prisma_ahbb.td_certificado_ahbb.create({
-        data: {
-          id_inscripcion_certificado_ahbb: id_inscripcion_ahbb,
-          codigoQrUrl_ahbb: qrBase64_ahbb,
-        },
-      });
+    // 3. Actualizar el certificado con el QR real
+    await this.prisma_ahbb.td_certificado_ahbb.update({
+      where: { id_certificado_ahbb: certificado_ahbb.id_certificado_ahbb },
+      data: { codigoQrUrl_ahbb: qrBase64_ahbb },
+    });
 
     return {
       exito: true,
-      certificado: certificado_ahbb,
+      certificado: { ...certificado_ahbb, codigoQrUrl_ahbb: qrBase64_ahbb },
       mensaje: `Certificado emitido exitosamente para ${inscripcion_ahbb.alumno.nombre_ahbb} ${inscripcion_ahbb.alumno.apellido_ahbb}.`,
     };
   }
@@ -128,7 +142,7 @@ export class CertificadosService_ahbb {
   }
 
   /**
-   * Obtener certificados de un alumno.
+   * Recupera el historial de certificaciones obtenidas por un alumno específico.
    */
   async obtenerCertificadosAlumno_ahbb(id_usuario_ahbb: number) {
     const certificados_ahbb =
@@ -297,7 +311,7 @@ export class CertificadosService_ahbb {
   }
 
   /**
-   * Verificar certificado (público, sin autenticación).
+   * Proporciona un punto de verificación público para validar la autenticidad de un certificado.
    */
   async verificarCertificado_ahbb(id_certificado_ahbb: number) {
     const certificado_ahbb =
@@ -341,7 +355,6 @@ export class CertificadosService_ahbb {
       curso: ins_ahbb.curso.nombre_ahbb,
       profesor: `${ins_ahbb.curso.profesor.nombre_ahbb} ${ins_ahbb.curso.profesor.apellido_ahbb}`,
       duracionHoras: ins_ahbb.curso.horasDefinidas_ahbb,
-      notaFinal: ins_ahbb.notaFinal_ahbb,
       fechaEmision: certificado_ahbb.creadoEn_ahbb,
       fechaInicioCurso: ins_ahbb.curso.fechaInicio_ahbb,
       fechaFinCurso: ins_ahbb.curso.fechaFin_ahbb,
@@ -369,7 +382,9 @@ export class CertificadosService_ahbb {
   }
 
   /**
-   * Generar PDF del certificado con pdfmake.
+   * Orquestación de la generación de documentos PDF.
+   * Resuelve activos (firmas, fondos), formatea metadatos y construye la definición del documento.
+   * @returns Buffer binario del PDF generado.
    */
   async generarPdfCertificado_ahbb(
     id_certificado_ahbb: number,
@@ -519,16 +534,45 @@ export class CertificadosService_ahbb {
     const printer = new PdfPrinter(fonts, fs, urlResolver);
 
     const contenido_ahbb: any[] = [];
+    const iconPath_ahbb = join(process.cwd(), 'uploads', 'graduation-cap.png');
 
     // Encabezado
-    contenido_ahbb.push({
-      text: [
-        { text: 'Academia ', style: 'headerText' },
-        { text: 'H&B', style: 'headerAccent' },
-      ],
-      alignment: 'center',
-      margin: [0, 15, 0, 5],
-    });
+    if (fs.existsSync(iconPath_ahbb)) {
+      contenido_ahbb.push({
+        columns: [
+          { width: '*', text: '' },
+          {
+            width: 'auto',
+            columns: [
+              {
+                image: iconPath_ahbb,
+                width: 38,
+                margin: [0, 0, 10, 0],
+              },
+              {
+                width: 'auto',
+                text: [
+                  { text: 'Academia ', style: 'headerText' },
+                  { text: 'H&B', style: 'headerAccent' },
+                ],
+                margin: [0, 4, 0, 0],
+              },
+            ],
+          },
+          { width: '*', text: '' },
+        ],
+        margin: [0, 15, 0, 5],
+      });
+    } else {
+      contenido_ahbb.push({
+        text: [
+          { text: 'Academia ', style: 'headerText' },
+          { text: 'H&B', style: 'headerAccent' },
+        ],
+        alignment: 'center',
+        margin: [0, 15, 0, 5],
+      });
+    }
 
     contenido_ahbb.push({
       text: 'CERTIFICADO DE APROBACIÓN',
@@ -539,18 +583,24 @@ export class CertificadosService_ahbb {
 
     // Línea decorativa
     contenido_ahbb.push({
-      canvas: [
+      columns: [
+        { width: '*', text: '' },
         {
-          type: 'line',
-          x1: 100,
-          y1: 0,
-          x2: 400,
-          y2: 0,
-          lineWidth: 2,
-          lineColor: '#f59e0b',
+          width: 'auto',
+          canvas: [
+            {
+              type: 'line',
+              x1: 0,
+              y1: 0,
+              x2: 550,
+              y2: 0,
+              lineWidth: 2,
+              lineColor: '#f59e0b',
+            },
+          ],
         },
+        { width: '*', text: '' },
       ],
-      alignment: 'center',
       margin: [0, 0, 0, 15],
     });
 
@@ -606,7 +656,7 @@ export class CertificadosService_ahbb {
     if (firmaProfesor_ahbb) {
       columnaFirma_ahbb.push({
         image: firmaProfesor_ahbb,
-        width: 120,
+        width: 190,
         alignment: 'center',
         margin: [0, 0, 0, 5],
       });
@@ -617,9 +667,9 @@ export class CertificadosService_ahbb {
       canvas: [
         {
           type: 'line',
-          x1: 20,
+          x1: 0,
           y1: 0,
-          x2: 180,
+          x2: 200,
           y2: 0,
           lineWidth: 1,
           lineColor: '#1b2a4a',
@@ -682,6 +732,101 @@ export class CertificadosService_ahbb {
       style: 'nroCertificado',
       alignment: 'center',
       margin: [0, 5, 0, 0],
+      pageBreak: 'after',
+    });
+
+    // ── SEGUNDA PÁGINA: TEMARIO ────────────────────────────────
+    const temario_ahbb =
+      curso_ahbb.temarioTexto_ahbb ||
+      'Contenido programático pendiente de cargar.';
+
+    this.logger_ahbb.log(
+      `Verificando temario para curso: ${curso_ahbb.nombre_ahbb}`,
+    );
+
+    // Encabezado de la segunda página
+    contenido_ahbb.push({
+      columns: [
+        {
+          width: '*',
+          text: [
+            { text: 'Temario del Curso: ', style: 'temarioSubtitle' },
+            { text: `"${curso_ahbb.nombre_ahbb}"`, style: 'temarioTitlePage' },
+          ],
+          margin: [0, 0, 0, 20],
+        },
+        {
+          width: 'auto',
+          stack: [
+            { text: 'Academia H&B', style: 'headerMini' },
+            {
+              text: `Certificado Nro. ${String(certificado_ahbb.id_certificado_ahbb).padStart(6, '0')}`,
+              fontSize: 8,
+              color: '#94a3b8',
+              alignment: 'right',
+            },
+          ],
+        },
+      ],
+    });
+
+    contenido_ahbb.push({
+      canvas: [
+        {
+          type: 'line',
+          x1: 0,
+          y1: 0,
+          x2: 720,
+          y2: 0,
+          lineWidth: 1,
+          lineColor: '#f59e0b',
+        },
+      ],
+      margin: [0, 0, 0, 20],
+    });
+
+    // Contenido del temario
+    const lineasTemario_ahbb = temario_ahbb
+      .split('\n')
+      .filter((l) => l.trim() !== '');
+
+    contenido_ahbb.push({
+      text: 'CONTENIDO PROGRAMÁTICO',
+      style: 'temarioSeccionHeader',
+      margin: [0, 0, 0, 15],
+    });
+
+    const itemsTemario_ahbb = lineasTemario_ahbb.map((linea) => {
+      return {
+        columns: [
+          {
+            width: 15,
+            text: '•',
+            color: '#f59e0b',
+            bold: true,
+            fontSize: 14,
+          },
+          {
+            width: '*',
+            text: linea.trim(),
+            style: 'temarioItemText',
+          },
+        ],
+        margin: [0, 0, 0, 8],
+      };
+    });
+
+    contenido_ahbb.push({
+      stack: itemsTemario_ahbb,
+      margin: [20, 0, 20, 0],
+    });
+
+    // Footer de la segunda página
+    contenido_ahbb.push({
+      text: 'Este temario forma parte integral del certificado de aprobación emitido por Academia H&B.',
+      style: 'temarioFooterText',
+      margin: [0, 30, 0, 0],
+      alignment: 'center',
     });
 
     // ── Imagen de fondo (background) ────────────────────────────
@@ -740,6 +885,12 @@ export class CertificadosService_ahbb {
         firmaSubtexto: { fontSize: 9, color: '#64748b' },
         fechaEmision: { fontSize: 10, color: '#94a3b8' },
         nroCertificado: { fontSize: 9, color: '#94a3b8' },
+        temarioSubtitle: { fontSize: 13, color: '#64748b' },
+        temarioTitlePage: { fontSize: 14, bold: true, color: '#1b2a4a' },
+        headerMini: { fontSize: 11, bold: true, color: '#1b2a4a', alignment: 'right' },
+        temarioSeccionHeader: { fontSize: 12, bold: true, color: '#1b2a4a', characterSpacing: 1 },
+        temarioItemText: { fontSize: 11, color: '#334155', lineHeight: 1.4 },
+        temarioFooterText: { fontSize: 9, italics: true, color: '#94a3b8' },
       },
     };
 
@@ -772,7 +923,6 @@ export class CertificadosService_ahbb {
       cursoId: ins_ahbb.id_curso_inscripcion_ahbb,
       profesor: `${ins_ahbb.curso.profesor.nombre_ahbb} ${ins_ahbb.curso.profesor.apellido_ahbb}`,
       duracionHoras: ins_ahbb.curso.horasDefinidas_ahbb,
-      notaFinal: ins_ahbb.notaFinal_ahbb,
       fechaEmision: cert_ahbb.creadoEn_ahbb,
       inscripcionId: ins_ahbb.id_inscripcion_ahbb,
     };

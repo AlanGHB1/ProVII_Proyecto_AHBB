@@ -121,10 +121,7 @@ const manejarLogin_ahbb = async () => {
           </router-link>
         </p>
 
-        <!-- Credenciales demo -->
-        <q-banner dense rounded class="bg-blue-1 text-primary q-mt-md text-center">
-          <strong>Demo:</strong> admin@academiah-b.edu / admin123
-        </q-banner>
+        <!-- Demo credentials removed for security -->
       </q-card-section>
     </q-card>
   </div>

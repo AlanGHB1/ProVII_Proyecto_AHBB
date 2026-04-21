@@ -3,6 +3,7 @@
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { verificarCertificado_ahbb } from '../servicios/certificadosServicio_ahbb';
+import { BASE_URL_API_AHBB } from '../servicios/api_ahbb';
 
 const route = useRoute();
 
@@ -22,6 +23,14 @@ const cargarVerificacion_ahbb = async () => {
     cargando_ahbb.value = false;
   }
 };
+
+const descargarPdfPublico_ahbb = () => {
+  const id_ahbb = route.params.id;
+  // Usar el endpoint público que no requiere token
+  const url_ahbb = `${BASE_URL_API_AHBB}/certificados/publico/${id_ahbb}/pdf`;
+  window.open(url_ahbb, '_blank');
+};
+
 
 onMounted(cargarVerificacion_ahbb);
 </script>
@@ -107,16 +116,10 @@ onMounted(cargarVerificacion_ahbb);
           </div>
 
           <div class="row q-col-gutter-md q-mt-sm">
-            <div class="col-6">
+            <div class="col-12">
               <div class="verificar-label">Duración</div>
               <div class="verificar-valor">
                 {{ datos_ahbb.duracionHoras }} horas académicas
-              </div>
-            </div>
-            <div class="col-6" v-if="datos_ahbb.notaFinal">
-              <div class="verificar-label">Calificación</div>
-              <div class="verificar-valor text-weight-bold text-green">
-                {{ datos_ahbb.notaFinal }}
               </div>
             </div>
           </div>
@@ -156,6 +159,22 @@ onMounted(cargarVerificacion_ahbb);
                 }}
               </div>
             </div>
+          </div>
+        </div>
+
+        <!-- Acciones -->
+        <div class="q-px-xl q-pb-xl text-center">
+          <q-btn
+            unelevated
+            color="primary"
+            icon="picture_as_pdf"
+            label="Descargar Certificado Original (PDF)"
+            class="full-width rounded-lg text-weight-bold"
+            padding="14px"
+            @click="descargarPdfPublico_ahbb"
+          />
+          <div class="q-mt-sm text-caption text-grey-6">
+            Documento firmado y verificado electrónicamente.
           </div>
         </div>
 
@@ -241,4 +260,6 @@ onMounted(cargarVerificacion_ahbb);
   color: #94a3b8;
   border-top: 1px solid #e2e8f0;
 }
+
+.rounded-lg { border-radius: 12px; }
 </style>

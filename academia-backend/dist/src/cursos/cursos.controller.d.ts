@@ -49,6 +49,7 @@ export declare class CursosController {
         prelacionCursoId: any;
         prelacionNombre: any;
         isPublished: any;
+        imagenBasePdf: any;
     }[]>;
     obtenerCursoPorId_ahbb(id_curso_ahbb: number): Promise<{
         id: any;
@@ -76,6 +77,7 @@ export declare class CursosController {
         prelacionCursoId: any;
         prelacionNombre: any;
         isPublished: any;
+        imagenBasePdf: any;
     }>;
     obtenerDisponibilidad_ahbb(id_curso_ahbb: number): Promise<{
         id_curso_ahbb: number;
@@ -110,6 +112,7 @@ export declare class CursosController {
         prelacionCursoId: any;
         prelacionNombre: any;
         isPublished: any;
+        imagenBasePdf: any;
     }>;
     actualizarCurso_ahbb(id_curso_ahbb: number, datos_ahbb: ActualizarCursoDto_ahbb, request_ahbb: RequestConUsuario_ahbb): Promise<{
         id: any;
@@ -137,6 +140,7 @@ export declare class CursosController {
         prelacionCursoId: any;
         prelacionNombre: any;
         isPublished: any;
+        imagenBasePdf: any;
     }>;
     eliminarCurso_ahbb(id_curso_ahbb: number): Promise<{
         exito: boolean;
@@ -147,6 +151,12 @@ export declare class CursosController {
         estado: string;
         motivo?: string;
     }): Promise<{
+        exito: boolean;
+        mensaje: string;
+    }>;
+    actualizarImagenCertificadoCurso_ahbb(id_curso_ahbb: number, datos: {
+        imagenBase64: string | null;
+    }, request_ahbb: RequestConUsuario_ahbb): Promise<{
         exito: boolean;
         mensaje: string;
     }>;

@@ -7408,7 +7408,6 @@ export namespace Prisma {
   export type Td_inscripcion_ahbbAvgAggregateOutputType = {
     id_inscripcion_ahbb: number | null
     intento_ahbb: number | null
-    notaFinal_ahbb: Decimal | null
     id_usuario_inscripcion_ahbb: number | null
     id_curso_inscripcion_ahbb: number | null
   }
@@ -7416,7 +7415,6 @@ export namespace Prisma {
   export type Td_inscripcion_ahbbSumAggregateOutputType = {
     id_inscripcion_ahbb: number | null
     intento_ahbb: number | null
-    notaFinal_ahbb: Decimal | null
     id_usuario_inscripcion_ahbb: number | null
     id_curso_inscripcion_ahbb: number | null
   }
@@ -7425,8 +7423,6 @@ export namespace Prisma {
     id_inscripcion_ahbb: number | null
     estatus_ahbb: string | null
     intento_ahbb: number | null
-    notaFinal_ahbb: Decimal | null
-    observaciones_ahbb: string | null
     id_usuario_inscripcion_ahbb: number | null
     id_curso_inscripcion_ahbb: number | null
     creadoEn_ahbb: Date | null
@@ -7437,8 +7433,6 @@ export namespace Prisma {
     id_inscripcion_ahbb: number | null
     estatus_ahbb: string | null
     intento_ahbb: number | null
-    notaFinal_ahbb: Decimal | null
-    observaciones_ahbb: string | null
     id_usuario_inscripcion_ahbb: number | null
     id_curso_inscripcion_ahbb: number | null
     creadoEn_ahbb: Date | null
@@ -7449,8 +7443,6 @@ export namespace Prisma {
     id_inscripcion_ahbb: number
     estatus_ahbb: number
     intento_ahbb: number
-    notaFinal_ahbb: number
-    observaciones_ahbb: number
     id_usuario_inscripcion_ahbb: number
     id_curso_inscripcion_ahbb: number
     creadoEn_ahbb: number
@@ -7462,7 +7454,6 @@ export namespace Prisma {
   export type Td_inscripcion_ahbbAvgAggregateInputType = {
     id_inscripcion_ahbb?: true
     intento_ahbb?: true
-    notaFinal_ahbb?: true
     id_usuario_inscripcion_ahbb?: true
     id_curso_inscripcion_ahbb?: true
   }
@@ -7470,7 +7461,6 @@ export namespace Prisma {
   export type Td_inscripcion_ahbbSumAggregateInputType = {
     id_inscripcion_ahbb?: true
     intento_ahbb?: true
-    notaFinal_ahbb?: true
     id_usuario_inscripcion_ahbb?: true
     id_curso_inscripcion_ahbb?: true
   }
@@ -7479,8 +7469,6 @@ export namespace Prisma {
     id_inscripcion_ahbb?: true
     estatus_ahbb?: true
     intento_ahbb?: true
-    notaFinal_ahbb?: true
-    observaciones_ahbb?: true
     id_usuario_inscripcion_ahbb?: true
     id_curso_inscripcion_ahbb?: true
     creadoEn_ahbb?: true
@@ -7491,8 +7479,6 @@ export namespace Prisma {
     id_inscripcion_ahbb?: true
     estatus_ahbb?: true
     intento_ahbb?: true
-    notaFinal_ahbb?: true
-    observaciones_ahbb?: true
     id_usuario_inscripcion_ahbb?: true
     id_curso_inscripcion_ahbb?: true
     creadoEn_ahbb?: true
@@ -7503,8 +7489,6 @@ export namespace Prisma {
     id_inscripcion_ahbb?: true
     estatus_ahbb?: true
     intento_ahbb?: true
-    notaFinal_ahbb?: true
-    observaciones_ahbb?: true
     id_usuario_inscripcion_ahbb?: true
     id_curso_inscripcion_ahbb?: true
     creadoEn_ahbb?: true
@@ -7602,8 +7586,6 @@ export namespace Prisma {
     id_inscripcion_ahbb: number
     estatus_ahbb: string | null
     intento_ahbb: number
-    notaFinal_ahbb: Decimal | null
-    observaciones_ahbb: string | null
     id_usuario_inscripcion_ahbb: number
     id_curso_inscripcion_ahbb: number
     creadoEn_ahbb: Date | null
@@ -7633,8 +7615,6 @@ export namespace Prisma {
     id_inscripcion_ahbb?: boolean
     estatus_ahbb?: boolean
     intento_ahbb?: boolean
-    notaFinal_ahbb?: boolean
-    observaciones_ahbb?: boolean
     id_usuario_inscripcion_ahbb?: boolean
     id_curso_inscripcion_ahbb?: boolean
     creadoEn_ahbb?: boolean
@@ -7648,8 +7628,6 @@ export namespace Prisma {
     id_inscripcion_ahbb?: boolean
     estatus_ahbb?: boolean
     intento_ahbb?: boolean
-    notaFinal_ahbb?: boolean
-    observaciones_ahbb?: boolean
     id_usuario_inscripcion_ahbb?: boolean
     id_curso_inscripcion_ahbb?: boolean
     creadoEn_ahbb?: boolean
@@ -7662,8 +7640,6 @@ export namespace Prisma {
     id_inscripcion_ahbb?: boolean
     estatus_ahbb?: boolean
     intento_ahbb?: boolean
-    notaFinal_ahbb?: boolean
-    observaciones_ahbb?: boolean
     id_usuario_inscripcion_ahbb?: boolean
     id_curso_inscripcion_ahbb?: boolean
     creadoEn_ahbb?: boolean
@@ -7676,15 +7652,13 @@ export namespace Prisma {
     id_inscripcion_ahbb?: boolean
     estatus_ahbb?: boolean
     intento_ahbb?: boolean
-    notaFinal_ahbb?: boolean
-    observaciones_ahbb?: boolean
     id_usuario_inscripcion_ahbb?: boolean
     id_curso_inscripcion_ahbb?: boolean
     creadoEn_ahbb?: boolean
     actualizadoEn_ahbb?: boolean
   }
 
-  export type td_inscripcion_ahbbOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_inscripcion_ahbb" | "estatus_ahbb" | "intento_ahbb" | "notaFinal_ahbb" | "observaciones_ahbb" | "id_usuario_inscripcion_ahbb" | "id_curso_inscripcion_ahbb" | "creadoEn_ahbb" | "actualizadoEn_ahbb", ExtArgs["result"]["td_inscripcion_ahbb"]>
+  export type td_inscripcion_ahbbOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_inscripcion_ahbb" | "estatus_ahbb" | "intento_ahbb" | "id_usuario_inscripcion_ahbb" | "id_curso_inscripcion_ahbb" | "creadoEn_ahbb" | "actualizadoEn_ahbb", ExtArgs["result"]["td_inscripcion_ahbb"]>
   export type td_inscripcion_ahbbInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     alumno?: boolean | td_usuario_ahbbDefaultArgs<ExtArgs>
     curso?: boolean | td_curso_ahbbDefaultArgs<ExtArgs>
@@ -7710,8 +7684,6 @@ export namespace Prisma {
       id_inscripcion_ahbb: number
       estatus_ahbb: string | null
       intento_ahbb: number
-      notaFinal_ahbb: Prisma.Decimal | null
-      observaciones_ahbb: string | null
       id_usuario_inscripcion_ahbb: number
       id_curso_inscripcion_ahbb: number
       creadoEn_ahbb: Date | null
@@ -8145,8 +8117,6 @@ export namespace Prisma {
     readonly id_inscripcion_ahbb: FieldRef<"td_inscripcion_ahbb", 'Int'>
     readonly estatus_ahbb: FieldRef<"td_inscripcion_ahbb", 'String'>
     readonly intento_ahbb: FieldRef<"td_inscripcion_ahbb", 'Int'>
-    readonly notaFinal_ahbb: FieldRef<"td_inscripcion_ahbb", 'Decimal'>
-    readonly observaciones_ahbb: FieldRef<"td_inscripcion_ahbb", 'String'>
     readonly id_usuario_inscripcion_ahbb: FieldRef<"td_inscripcion_ahbb", 'Int'>
     readonly id_curso_inscripcion_ahbb: FieldRef<"td_inscripcion_ahbb", 'Int'>
     readonly creadoEn_ahbb: FieldRef<"td_inscripcion_ahbb", 'DateTime'>
@@ -15381,7 +15351,6 @@ export namespace Prisma {
   export type Td_reportes_facturas_ahbbCountAggregateOutputType = {
     id_reporte_ahbb: number
     id_factura_reporte_ahbb: number
-    detalles_factura_ahbb: number
     qr_base64_ahbb: number
     creadoEn_ahbb: number
     _all: number
@@ -15415,7 +15384,6 @@ export namespace Prisma {
   export type Td_reportes_facturas_ahbbCountAggregateInputType = {
     id_reporte_ahbb?: true
     id_factura_reporte_ahbb?: true
-    detalles_factura_ahbb?: true
     qr_base64_ahbb?: true
     creadoEn_ahbb?: true
     _all?: true
@@ -15510,7 +15478,6 @@ export namespace Prisma {
   export type Td_reportes_facturas_ahbbGroupByOutputType = {
     id_reporte_ahbb: number
     id_factura_reporte_ahbb: number
-    detalles_factura_ahbb: JsonValue
     qr_base64_ahbb: string
     creadoEn_ahbb: Date
     _count: Td_reportes_facturas_ahbbCountAggregateOutputType | null
@@ -15537,7 +15504,6 @@ export namespace Prisma {
   export type td_reportes_facturas_ahbbSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id_reporte_ahbb?: boolean
     id_factura_reporte_ahbb?: boolean
-    detalles_factura_ahbb?: boolean
     qr_base64_ahbb?: boolean
     creadoEn_ahbb?: boolean
     factura_ahbb?: boolean | td_factura_ahbbDefaultArgs<ExtArgs>
@@ -15546,7 +15512,6 @@ export namespace Prisma {
   export type td_reportes_facturas_ahbbSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id_reporte_ahbb?: boolean
     id_factura_reporte_ahbb?: boolean
-    detalles_factura_ahbb?: boolean
     qr_base64_ahbb?: boolean
     creadoEn_ahbb?: boolean
     factura_ahbb?: boolean | td_factura_ahbbDefaultArgs<ExtArgs>
@@ -15555,7 +15520,6 @@ export namespace Prisma {
   export type td_reportes_facturas_ahbbSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id_reporte_ahbb?: boolean
     id_factura_reporte_ahbb?: boolean
-    detalles_factura_ahbb?: boolean
     qr_base64_ahbb?: boolean
     creadoEn_ahbb?: boolean
     factura_ahbb?: boolean | td_factura_ahbbDefaultArgs<ExtArgs>
@@ -15564,12 +15528,11 @@ export namespace Prisma {
   export type td_reportes_facturas_ahbbSelectScalar = {
     id_reporte_ahbb?: boolean
     id_factura_reporte_ahbb?: boolean
-    detalles_factura_ahbb?: boolean
     qr_base64_ahbb?: boolean
     creadoEn_ahbb?: boolean
   }
 
-  export type td_reportes_facturas_ahbbOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_reporte_ahbb" | "id_factura_reporte_ahbb" | "detalles_factura_ahbb" | "qr_base64_ahbb" | "creadoEn_ahbb", ExtArgs["result"]["td_reportes_facturas_ahbb"]>
+  export type td_reportes_facturas_ahbbOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_reporte_ahbb" | "id_factura_reporte_ahbb" | "qr_base64_ahbb" | "creadoEn_ahbb", ExtArgs["result"]["td_reportes_facturas_ahbb"]>
   export type td_reportes_facturas_ahbbInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     factura_ahbb?: boolean | td_factura_ahbbDefaultArgs<ExtArgs>
   }
@@ -15588,7 +15551,6 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id_reporte_ahbb: number
       id_factura_reporte_ahbb: number
-      detalles_factura_ahbb: Prisma.JsonValue
       qr_base64_ahbb: string
       creadoEn_ahbb: Date
     }, ExtArgs["result"]["td_reportes_facturas_ahbb"]>
@@ -16017,7 +15979,6 @@ export namespace Prisma {
   interface td_reportes_facturas_ahbbFieldRefs {
     readonly id_reporte_ahbb: FieldRef<"td_reportes_facturas_ahbb", 'Int'>
     readonly id_factura_reporte_ahbb: FieldRef<"td_reportes_facturas_ahbb", 'Int'>
-    readonly detalles_factura_ahbb: FieldRef<"td_reportes_facturas_ahbb", 'Json'>
     readonly qr_base64_ahbb: FieldRef<"td_reportes_facturas_ahbb", 'String'>
     readonly creadoEn_ahbb: FieldRef<"td_reportes_facturas_ahbb", 'DateTime'>
   }
@@ -18750,8 +18711,6 @@ export namespace Prisma {
     id_inscripcion_ahbb: 'id_inscripcion_ahbb',
     estatus_ahbb: 'estatus_ahbb',
     intento_ahbb: 'intento_ahbb',
-    notaFinal_ahbb: 'notaFinal_ahbb',
-    observaciones_ahbb: 'observaciones_ahbb',
     id_usuario_inscripcion_ahbb: 'id_usuario_inscripcion_ahbb',
     id_curso_inscripcion_ahbb: 'id_curso_inscripcion_ahbb',
     creadoEn_ahbb: 'creadoEn_ahbb',
@@ -18834,7 +18793,6 @@ export namespace Prisma {
   export const Td_reportes_facturas_ahbbScalarFieldEnum: {
     id_reporte_ahbb: 'id_reporte_ahbb',
     id_factura_reporte_ahbb: 'id_factura_reporte_ahbb',
-    detalles_factura_ahbb: 'detalles_factura_ahbb',
     qr_base64_ahbb: 'qr_base64_ahbb',
     creadoEn_ahbb: 'creadoEn_ahbb'
   };
@@ -18871,13 +18829,6 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
-  export const JsonNullValueInput: {
-    JsonNull: typeof JsonNull
-  };
-
-  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
-
-
   export const QueryMode: {
     default: 'default',
     insensitive: 'insensitive'
@@ -18892,15 +18843,6 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
-  export const JsonNullValueFilter: {
-    DbNull: typeof DbNull,
-    JsonNull: typeof JsonNull,
-    AnyNull: typeof AnyNull
-  };
-
-  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -18968,20 +18910,6 @@ export namespace Prisma {
    * Reference to a field of type 'Decimal[]'
    */
   export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Json'
-   */
-  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
-    
-
-
-  /**
-   * Reference to a field of type 'QueryMode'
-   */
-  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -19410,8 +19338,6 @@ export namespace Prisma {
     id_inscripcion_ahbb?: IntFilter<"td_inscripcion_ahbb"> | number
     estatus_ahbb?: StringNullableFilter<"td_inscripcion_ahbb"> | string | null
     intento_ahbb?: IntFilter<"td_inscripcion_ahbb"> | number
-    notaFinal_ahbb?: DecimalNullableFilter<"td_inscripcion_ahbb"> | Decimal | DecimalJsLike | number | string | null
-    observaciones_ahbb?: StringNullableFilter<"td_inscripcion_ahbb"> | string | null
     id_usuario_inscripcion_ahbb?: IntFilter<"td_inscripcion_ahbb"> | number
     id_curso_inscripcion_ahbb?: IntFilter<"td_inscripcion_ahbb"> | number
     creadoEn_ahbb?: DateTimeNullableFilter<"td_inscripcion_ahbb"> | Date | string | null
@@ -19425,8 +19351,6 @@ export namespace Prisma {
     id_inscripcion_ahbb?: SortOrder
     estatus_ahbb?: SortOrderInput | SortOrder
     intento_ahbb?: SortOrder
-    notaFinal_ahbb?: SortOrderInput | SortOrder
-    observaciones_ahbb?: SortOrderInput | SortOrder
     id_usuario_inscripcion_ahbb?: SortOrder
     id_curso_inscripcion_ahbb?: SortOrder
     creadoEn_ahbb?: SortOrderInput | SortOrder
@@ -19443,8 +19367,6 @@ export namespace Prisma {
     NOT?: td_inscripcion_ahbbWhereInput | td_inscripcion_ahbbWhereInput[]
     estatus_ahbb?: StringNullableFilter<"td_inscripcion_ahbb"> | string | null
     intento_ahbb?: IntFilter<"td_inscripcion_ahbb"> | number
-    notaFinal_ahbb?: DecimalNullableFilter<"td_inscripcion_ahbb"> | Decimal | DecimalJsLike | number | string | null
-    observaciones_ahbb?: StringNullableFilter<"td_inscripcion_ahbb"> | string | null
     id_usuario_inscripcion_ahbb?: IntFilter<"td_inscripcion_ahbb"> | number
     id_curso_inscripcion_ahbb?: IntFilter<"td_inscripcion_ahbb"> | number
     creadoEn_ahbb?: DateTimeNullableFilter<"td_inscripcion_ahbb"> | Date | string | null
@@ -19458,8 +19380,6 @@ export namespace Prisma {
     id_inscripcion_ahbb?: SortOrder
     estatus_ahbb?: SortOrderInput | SortOrder
     intento_ahbb?: SortOrder
-    notaFinal_ahbb?: SortOrderInput | SortOrder
-    observaciones_ahbb?: SortOrderInput | SortOrder
     id_usuario_inscripcion_ahbb?: SortOrder
     id_curso_inscripcion_ahbb?: SortOrder
     creadoEn_ahbb?: SortOrderInput | SortOrder
@@ -19478,8 +19398,6 @@ export namespace Prisma {
     id_inscripcion_ahbb?: IntWithAggregatesFilter<"td_inscripcion_ahbb"> | number
     estatus_ahbb?: StringNullableWithAggregatesFilter<"td_inscripcion_ahbb"> | string | null
     intento_ahbb?: IntWithAggregatesFilter<"td_inscripcion_ahbb"> | number
-    notaFinal_ahbb?: DecimalNullableWithAggregatesFilter<"td_inscripcion_ahbb"> | Decimal | DecimalJsLike | number | string | null
-    observaciones_ahbb?: StringNullableWithAggregatesFilter<"td_inscripcion_ahbb"> | string | null
     id_usuario_inscripcion_ahbb?: IntWithAggregatesFilter<"td_inscripcion_ahbb"> | number
     id_curso_inscripcion_ahbb?: IntWithAggregatesFilter<"td_inscripcion_ahbb"> | number
     creadoEn_ahbb?: DateTimeNullableWithAggregatesFilter<"td_inscripcion_ahbb"> | Date | string | null
@@ -19870,7 +19788,6 @@ export namespace Prisma {
     NOT?: td_reportes_facturas_ahbbWhereInput | td_reportes_facturas_ahbbWhereInput[]
     id_reporte_ahbb?: IntFilter<"td_reportes_facturas_ahbb"> | number
     id_factura_reporte_ahbb?: IntFilter<"td_reportes_facturas_ahbb"> | number
-    detalles_factura_ahbb?: JsonFilter<"td_reportes_facturas_ahbb">
     qr_base64_ahbb?: StringFilter<"td_reportes_facturas_ahbb"> | string
     creadoEn_ahbb?: DateTimeFilter<"td_reportes_facturas_ahbb"> | Date | string
     factura_ahbb?: XOR<Td_factura_ahbbScalarRelationFilter, td_factura_ahbbWhereInput>
@@ -19879,7 +19796,6 @@ export namespace Prisma {
   export type td_reportes_facturas_ahbbOrderByWithRelationInput = {
     id_reporte_ahbb?: SortOrder
     id_factura_reporte_ahbb?: SortOrder
-    detalles_factura_ahbb?: SortOrder
     qr_base64_ahbb?: SortOrder
     creadoEn_ahbb?: SortOrder
     factura_ahbb?: td_factura_ahbbOrderByWithRelationInput
@@ -19891,7 +19807,6 @@ export namespace Prisma {
     OR?: td_reportes_facturas_ahbbWhereInput[]
     NOT?: td_reportes_facturas_ahbbWhereInput | td_reportes_facturas_ahbbWhereInput[]
     id_factura_reporte_ahbb?: IntFilter<"td_reportes_facturas_ahbb"> | number
-    detalles_factura_ahbb?: JsonFilter<"td_reportes_facturas_ahbb">
     qr_base64_ahbb?: StringFilter<"td_reportes_facturas_ahbb"> | string
     creadoEn_ahbb?: DateTimeFilter<"td_reportes_facturas_ahbb"> | Date | string
     factura_ahbb?: XOR<Td_factura_ahbbScalarRelationFilter, td_factura_ahbbWhereInput>
@@ -19900,7 +19815,6 @@ export namespace Prisma {
   export type td_reportes_facturas_ahbbOrderByWithAggregationInput = {
     id_reporte_ahbb?: SortOrder
     id_factura_reporte_ahbb?: SortOrder
-    detalles_factura_ahbb?: SortOrder
     qr_base64_ahbb?: SortOrder
     creadoEn_ahbb?: SortOrder
     _count?: td_reportes_facturas_ahbbCountOrderByAggregateInput
@@ -19916,7 +19830,6 @@ export namespace Prisma {
     NOT?: td_reportes_facturas_ahbbScalarWhereWithAggregatesInput | td_reportes_facturas_ahbbScalarWhereWithAggregatesInput[]
     id_reporte_ahbb?: IntWithAggregatesFilter<"td_reportes_facturas_ahbb"> | number
     id_factura_reporte_ahbb?: IntWithAggregatesFilter<"td_reportes_facturas_ahbb"> | number
-    detalles_factura_ahbb?: JsonWithAggregatesFilter<"td_reportes_facturas_ahbb">
     qr_base64_ahbb?: StringWithAggregatesFilter<"td_reportes_facturas_ahbb"> | string
     creadoEn_ahbb?: DateTimeWithAggregatesFilter<"td_reportes_facturas_ahbb"> | Date | string
   }
@@ -20488,8 +20401,6 @@ export namespace Prisma {
   export type td_inscripcion_ahbbCreateInput = {
     estatus_ahbb?: string | null
     intento_ahbb?: number
-    notaFinal_ahbb?: Decimal | DecimalJsLike | number | string | null
-    observaciones_ahbb?: string | null
     creadoEn_ahbb?: Date | string | null
     actualizadoEn_ahbb?: Date | string | null
     alumno: td_usuario_ahbbCreateNestedOneWithoutInscripcionesInput
@@ -20501,8 +20412,6 @@ export namespace Prisma {
     id_inscripcion_ahbb?: number
     estatus_ahbb?: string | null
     intento_ahbb?: number
-    notaFinal_ahbb?: Decimal | DecimalJsLike | number | string | null
-    observaciones_ahbb?: string | null
     id_usuario_inscripcion_ahbb: number
     id_curso_inscripcion_ahbb: number
     creadoEn_ahbb?: Date | string | null
@@ -20513,8 +20422,6 @@ export namespace Prisma {
   export type td_inscripcion_ahbbUpdateInput = {
     estatus_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     intento_ahbb?: IntFieldUpdateOperationsInput | number
-    notaFinal_ahbb?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    observaciones_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     alumno?: td_usuario_ahbbUpdateOneRequiredWithoutInscripcionesNestedInput
@@ -20526,8 +20433,6 @@ export namespace Prisma {
     id_inscripcion_ahbb?: IntFieldUpdateOperationsInput | number
     estatus_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     intento_ahbb?: IntFieldUpdateOperationsInput | number
-    notaFinal_ahbb?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    observaciones_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     id_usuario_inscripcion_ahbb?: IntFieldUpdateOperationsInput | number
     id_curso_inscripcion_ahbb?: IntFieldUpdateOperationsInput | number
     creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -20539,8 +20444,6 @@ export namespace Prisma {
     id_inscripcion_ahbb?: number
     estatus_ahbb?: string | null
     intento_ahbb?: number
-    notaFinal_ahbb?: Decimal | DecimalJsLike | number | string | null
-    observaciones_ahbb?: string | null
     id_usuario_inscripcion_ahbb: number
     id_curso_inscripcion_ahbb: number
     creadoEn_ahbb?: Date | string | null
@@ -20550,8 +20453,6 @@ export namespace Prisma {
   export type td_inscripcion_ahbbUpdateManyMutationInput = {
     estatus_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     intento_ahbb?: IntFieldUpdateOperationsInput | number
-    notaFinal_ahbb?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    observaciones_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -20560,8 +20461,6 @@ export namespace Prisma {
     id_inscripcion_ahbb?: IntFieldUpdateOperationsInput | number
     estatus_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     intento_ahbb?: IntFieldUpdateOperationsInput | number
-    notaFinal_ahbb?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    observaciones_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     id_usuario_inscripcion_ahbb?: IntFieldUpdateOperationsInput | number
     id_curso_inscripcion_ahbb?: IntFieldUpdateOperationsInput | number
     creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -20929,7 +20828,6 @@ export namespace Prisma {
   }
 
   export type td_reportes_facturas_ahbbCreateInput = {
-    detalles_factura_ahbb: JsonNullValueInput | InputJsonValue
     qr_base64_ahbb: string
     creadoEn_ahbb?: Date | string
     factura_ahbb: td_factura_ahbbCreateNestedOneWithoutReportes_ahbbInput
@@ -20938,13 +20836,11 @@ export namespace Prisma {
   export type td_reportes_facturas_ahbbUncheckedCreateInput = {
     id_reporte_ahbb?: number
     id_factura_reporte_ahbb: number
-    detalles_factura_ahbb: JsonNullValueInput | InputJsonValue
     qr_base64_ahbb: string
     creadoEn_ahbb?: Date | string
   }
 
   export type td_reportes_facturas_ahbbUpdateInput = {
-    detalles_factura_ahbb?: JsonNullValueInput | InputJsonValue
     qr_base64_ahbb?: StringFieldUpdateOperationsInput | string
     creadoEn_ahbb?: DateTimeFieldUpdateOperationsInput | Date | string
     factura_ahbb?: td_factura_ahbbUpdateOneRequiredWithoutReportes_ahbbNestedInput
@@ -20953,7 +20849,6 @@ export namespace Prisma {
   export type td_reportes_facturas_ahbbUncheckedUpdateInput = {
     id_reporte_ahbb?: IntFieldUpdateOperationsInput | number
     id_factura_reporte_ahbb?: IntFieldUpdateOperationsInput | number
-    detalles_factura_ahbb?: JsonNullValueInput | InputJsonValue
     qr_base64_ahbb?: StringFieldUpdateOperationsInput | string
     creadoEn_ahbb?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -20961,13 +20856,11 @@ export namespace Prisma {
   export type td_reportes_facturas_ahbbCreateManyInput = {
     id_reporte_ahbb?: number
     id_factura_reporte_ahbb: number
-    detalles_factura_ahbb: JsonNullValueInput | InputJsonValue
     qr_base64_ahbb: string
     creadoEn_ahbb?: Date | string
   }
 
   export type td_reportes_facturas_ahbbUpdateManyMutationInput = {
-    detalles_factura_ahbb?: JsonNullValueInput | InputJsonValue
     qr_base64_ahbb?: StringFieldUpdateOperationsInput | string
     creadoEn_ahbb?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -20975,7 +20868,6 @@ export namespace Prisma {
   export type td_reportes_facturas_ahbbUncheckedUpdateManyInput = {
     id_reporte_ahbb?: IntFieldUpdateOperationsInput | number
     id_factura_reporte_ahbb?: IntFieldUpdateOperationsInput | number
-    detalles_factura_ahbb?: JsonNullValueInput | InputJsonValue
     qr_base64_ahbb?: StringFieldUpdateOperationsInput | string
     creadoEn_ahbb?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21630,17 +21522,6 @@ export namespace Prisma {
     id_curso_horario_ahbb?: SortOrder
   }
 
-  export type DecimalNullableFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
-  }
-
   export type Td_certificado_ahbbNullableScalarRelationFilter = {
     is?: td_certificado_ahbbWhereInput | null
     isNot?: td_certificado_ahbbWhereInput | null
@@ -21650,8 +21531,6 @@ export namespace Prisma {
     id_inscripcion_ahbb?: SortOrder
     estatus_ahbb?: SortOrder
     intento_ahbb?: SortOrder
-    notaFinal_ahbb?: SortOrder
-    observaciones_ahbb?: SortOrder
     id_usuario_inscripcion_ahbb?: SortOrder
     id_curso_inscripcion_ahbb?: SortOrder
     creadoEn_ahbb?: SortOrder
@@ -21661,7 +21540,6 @@ export namespace Prisma {
   export type td_inscripcion_ahbbAvgOrderByAggregateInput = {
     id_inscripcion_ahbb?: SortOrder
     intento_ahbb?: SortOrder
-    notaFinal_ahbb?: SortOrder
     id_usuario_inscripcion_ahbb?: SortOrder
     id_curso_inscripcion_ahbb?: SortOrder
   }
@@ -21670,8 +21548,6 @@ export namespace Prisma {
     id_inscripcion_ahbb?: SortOrder
     estatus_ahbb?: SortOrder
     intento_ahbb?: SortOrder
-    notaFinal_ahbb?: SortOrder
-    observaciones_ahbb?: SortOrder
     id_usuario_inscripcion_ahbb?: SortOrder
     id_curso_inscripcion_ahbb?: SortOrder
     creadoEn_ahbb?: SortOrder
@@ -21682,8 +21558,6 @@ export namespace Prisma {
     id_inscripcion_ahbb?: SortOrder
     estatus_ahbb?: SortOrder
     intento_ahbb?: SortOrder
-    notaFinal_ahbb?: SortOrder
-    observaciones_ahbb?: SortOrder
     id_usuario_inscripcion_ahbb?: SortOrder
     id_curso_inscripcion_ahbb?: SortOrder
     creadoEn_ahbb?: SortOrder
@@ -21693,25 +21567,8 @@ export namespace Prisma {
   export type td_inscripcion_ahbbSumOrderByAggregateInput = {
     id_inscripcion_ahbb?: SortOrder
     intento_ahbb?: SortOrder
-    notaFinal_ahbb?: SortOrder
     id_usuario_inscripcion_ahbb?: SortOrder
     id_curso_inscripcion_ahbb?: SortOrder
-  }
-
-  export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedDecimalNullableFilter<$PrismaModel>
-    _sum?: NestedDecimalNullableFilter<$PrismaModel>
-    _min?: NestedDecimalNullableFilter<$PrismaModel>
-    _max?: NestedDecimalNullableFilter<$PrismaModel>
   }
 
   export type Td_inscripcion_ahbbScalarRelationFilter = {
@@ -21972,29 +21829,6 @@ export namespace Prisma {
     total_ahbb?: SortOrder
     id_usuario_factura_ahbb?: SortOrder
   }
-  export type JsonFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
-
-  export type JsonFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
 
   export type Td_factura_ahbbScalarRelationFilter = {
     is?: td_factura_ahbbWhereInput
@@ -22004,7 +21838,6 @@ export namespace Prisma {
   export type td_reportes_facturas_ahbbCountOrderByAggregateInput = {
     id_reporte_ahbb?: SortOrder
     id_factura_reporte_ahbb?: SortOrder
-    detalles_factura_ahbb?: SortOrder
     qr_base64_ahbb?: SortOrder
     creadoEn_ahbb?: SortOrder
   }
@@ -22031,32 +21864,6 @@ export namespace Prisma {
   export type td_reportes_facturas_ahbbSumOrderByAggregateInput = {
     id_reporte_ahbb?: SortOrder
     id_factura_reporte_ahbb?: SortOrder
-  }
-  export type JsonWithAggregatesFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
-
-  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedJsonFilter<$PrismaModel>
-    _max?: NestedJsonFilter<$PrismaModel>
   }
 
   export type td_detalle_factura_ahbbCountOrderByAggregateInput = {
@@ -22729,14 +22536,6 @@ export namespace Prisma {
     connect?: td_certificado_ahbbWhereUniqueInput
   }
 
-  export type NullableDecimalFieldUpdateOperationsInput = {
-    set?: Decimal | DecimalJsLike | number | string | null
-    increment?: Decimal | DecimalJsLike | number | string
-    decrement?: Decimal | DecimalJsLike | number | string
-    multiply?: Decimal | DecimalJsLike | number | string
-    divide?: Decimal | DecimalJsLike | number | string
-  }
-
   export type td_usuario_ahbbUpdateOneRequiredWithoutInscripcionesNestedInput = {
     create?: XOR<td_usuario_ahbbCreateWithoutInscripcionesInput, td_usuario_ahbbUncheckedCreateWithoutInscripcionesInput>
     connectOrCreate?: td_usuario_ahbbCreateOrConnectWithoutInscripcionesInput
@@ -23378,56 +23177,6 @@ export namespace Prisma {
     _max?: NestedDecimalFilter<$PrismaModel>
   }
 
-  export type NestedDecimalNullableFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
-  }
-
-  export type NestedDecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedDecimalNullableFilter<$PrismaModel>
-    _sum?: NestedDecimalNullableFilter<$PrismaModel>
-    _min?: NestedDecimalNullableFilter<$PrismaModel>
-    _max?: NestedDecimalNullableFilter<$PrismaModel>
-  }
-  export type NestedJsonFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
-        Required<NestedJsonFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
-
-  export type NestedJsonFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
-
   export type td_curso_ahbbCreateWithoutProfesorInput = {
     nombre_ahbb: string
     tematica_ahbb: string
@@ -23494,8 +23243,6 @@ export namespace Prisma {
   export type td_inscripcion_ahbbCreateWithoutAlumnoInput = {
     estatus_ahbb?: string | null
     intento_ahbb?: number
-    notaFinal_ahbb?: Decimal | DecimalJsLike | number | string | null
-    observaciones_ahbb?: string | null
     creadoEn_ahbb?: Date | string | null
     actualizadoEn_ahbb?: Date | string | null
     curso: td_curso_ahbbCreateNestedOneWithoutInscripcionesInput
@@ -23506,8 +23253,6 @@ export namespace Prisma {
     id_inscripcion_ahbb?: number
     estatus_ahbb?: string | null
     intento_ahbb?: number
-    notaFinal_ahbb?: Decimal | DecimalJsLike | number | string | null
-    observaciones_ahbb?: string | null
     id_curso_inscripcion_ahbb: number
     creadoEn_ahbb?: Date | string | null
     actualizadoEn_ahbb?: Date | string | null
@@ -23717,8 +23462,6 @@ export namespace Prisma {
     id_inscripcion_ahbb?: IntFilter<"td_inscripcion_ahbb"> | number
     estatus_ahbb?: StringNullableFilter<"td_inscripcion_ahbb"> | string | null
     intento_ahbb?: IntFilter<"td_inscripcion_ahbb"> | number
-    notaFinal_ahbb?: DecimalNullableFilter<"td_inscripcion_ahbb"> | Decimal | DecimalJsLike | number | string | null
-    observaciones_ahbb?: StringNullableFilter<"td_inscripcion_ahbb"> | string | null
     id_usuario_inscripcion_ahbb?: IntFilter<"td_inscripcion_ahbb"> | number
     id_curso_inscripcion_ahbb?: IntFilter<"td_inscripcion_ahbb"> | number
     creadoEn_ahbb?: DateTimeNullableFilter<"td_inscripcion_ahbb"> | Date | string | null
@@ -24048,8 +23791,6 @@ export namespace Prisma {
   export type td_inscripcion_ahbbCreateWithoutCursoInput = {
     estatus_ahbb?: string | null
     intento_ahbb?: number
-    notaFinal_ahbb?: Decimal | DecimalJsLike | number | string | null
-    observaciones_ahbb?: string | null
     creadoEn_ahbb?: Date | string | null
     actualizadoEn_ahbb?: Date | string | null
     alumno: td_usuario_ahbbCreateNestedOneWithoutInscripcionesInput
@@ -24060,8 +23801,6 @@ export namespace Prisma {
     id_inscripcion_ahbb?: number
     estatus_ahbb?: string | null
     intento_ahbb?: number
-    notaFinal_ahbb?: Decimal | DecimalJsLike | number | string | null
-    observaciones_ahbb?: string | null
     id_usuario_inscripcion_ahbb: number
     creadoEn_ahbb?: Date | string | null
     actualizadoEn_ahbb?: Date | string | null
@@ -24829,8 +24568,6 @@ export namespace Prisma {
   export type td_inscripcion_ahbbCreateWithoutCertificadoInput = {
     estatus_ahbb?: string | null
     intento_ahbb?: number
-    notaFinal_ahbb?: Decimal | DecimalJsLike | number | string | null
-    observaciones_ahbb?: string | null
     creadoEn_ahbb?: Date | string | null
     actualizadoEn_ahbb?: Date | string | null
     alumno: td_usuario_ahbbCreateNestedOneWithoutInscripcionesInput
@@ -24841,8 +24578,6 @@ export namespace Prisma {
     id_inscripcion_ahbb?: number
     estatus_ahbb?: string | null
     intento_ahbb?: number
-    notaFinal_ahbb?: Decimal | DecimalJsLike | number | string | null
-    observaciones_ahbb?: string | null
     id_usuario_inscripcion_ahbb: number
     id_curso_inscripcion_ahbb: number
     creadoEn_ahbb?: Date | string | null
@@ -24868,8 +24603,6 @@ export namespace Prisma {
   export type td_inscripcion_ahbbUpdateWithoutCertificadoInput = {
     estatus_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     intento_ahbb?: IntFieldUpdateOperationsInput | number
-    notaFinal_ahbb?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    observaciones_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     alumno?: td_usuario_ahbbUpdateOneRequiredWithoutInscripcionesNestedInput
@@ -24880,8 +24613,6 @@ export namespace Prisma {
     id_inscripcion_ahbb?: IntFieldUpdateOperationsInput | number
     estatus_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     intento_ahbb?: IntFieldUpdateOperationsInput | number
-    notaFinal_ahbb?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    observaciones_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     id_usuario_inscripcion_ahbb?: IntFieldUpdateOperationsInput | number
     id_curso_inscripcion_ahbb?: IntFieldUpdateOperationsInput | number
     creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -25480,14 +25211,12 @@ export namespace Prisma {
   }
 
   export type td_reportes_facturas_ahbbCreateWithoutFactura_ahbbInput = {
-    detalles_factura_ahbb: JsonNullValueInput | InputJsonValue
     qr_base64_ahbb: string
     creadoEn_ahbb?: Date | string
   }
 
   export type td_reportes_facturas_ahbbUncheckedCreateWithoutFactura_ahbbInput = {
     id_reporte_ahbb?: number
-    detalles_factura_ahbb: JsonNullValueInput | InputJsonValue
     qr_base64_ahbb: string
     creadoEn_ahbb?: Date | string
   }
@@ -25596,7 +25325,6 @@ export namespace Prisma {
     NOT?: td_reportes_facturas_ahbbScalarWhereInput | td_reportes_facturas_ahbbScalarWhereInput[]
     id_reporte_ahbb?: IntFilter<"td_reportes_facturas_ahbb"> | number
     id_factura_reporte_ahbb?: IntFilter<"td_reportes_facturas_ahbb"> | number
-    detalles_factura_ahbb?: JsonFilter<"td_reportes_facturas_ahbb">
     qr_base64_ahbb?: StringFilter<"td_reportes_facturas_ahbb"> | string
     creadoEn_ahbb?: DateTimeFilter<"td_reportes_facturas_ahbb"> | Date | string
   }
@@ -25990,8 +25718,6 @@ export namespace Prisma {
     id_inscripcion_ahbb?: number
     estatus_ahbb?: string | null
     intento_ahbb?: number
-    notaFinal_ahbb?: Decimal | DecimalJsLike | number | string | null
-    observaciones_ahbb?: string | null
     id_curso_inscripcion_ahbb: number
     creadoEn_ahbb?: Date | string | null
     actualizadoEn_ahbb?: Date | string | null
@@ -26115,8 +25841,6 @@ export namespace Prisma {
   export type td_inscripcion_ahbbUpdateWithoutAlumnoInput = {
     estatus_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     intento_ahbb?: IntFieldUpdateOperationsInput | number
-    notaFinal_ahbb?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    observaciones_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     curso?: td_curso_ahbbUpdateOneRequiredWithoutInscripcionesNestedInput
@@ -26127,8 +25851,6 @@ export namespace Prisma {
     id_inscripcion_ahbb?: IntFieldUpdateOperationsInput | number
     estatus_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     intento_ahbb?: IntFieldUpdateOperationsInput | number
-    notaFinal_ahbb?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    observaciones_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     id_curso_inscripcion_ahbb?: IntFieldUpdateOperationsInput | number
     creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -26139,8 +25861,6 @@ export namespace Prisma {
     id_inscripcion_ahbb?: IntFieldUpdateOperationsInput | number
     estatus_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     intento_ahbb?: IntFieldUpdateOperationsInput | number
-    notaFinal_ahbb?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    observaciones_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     id_curso_inscripcion_ahbb?: IntFieldUpdateOperationsInput | number
     creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -26296,8 +26016,6 @@ export namespace Prisma {
     id_inscripcion_ahbb?: number
     estatus_ahbb?: string | null
     intento_ahbb?: number
-    notaFinal_ahbb?: Decimal | DecimalJsLike | number | string | null
-    observaciones_ahbb?: string | null
     id_usuario_inscripcion_ahbb: number
     creadoEn_ahbb?: Date | string | null
     actualizadoEn_ahbb?: Date | string | null
@@ -26412,8 +26130,6 @@ export namespace Prisma {
   export type td_inscripcion_ahbbUpdateWithoutCursoInput = {
     estatus_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     intento_ahbb?: IntFieldUpdateOperationsInput | number
-    notaFinal_ahbb?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    observaciones_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     alumno?: td_usuario_ahbbUpdateOneRequiredWithoutInscripcionesNestedInput
@@ -26424,8 +26140,6 @@ export namespace Prisma {
     id_inscripcion_ahbb?: IntFieldUpdateOperationsInput | number
     estatus_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     intento_ahbb?: IntFieldUpdateOperationsInput | number
-    notaFinal_ahbb?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    observaciones_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     id_usuario_inscripcion_ahbb?: IntFieldUpdateOperationsInput | number
     creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -26436,8 +26150,6 @@ export namespace Prisma {
     id_inscripcion_ahbb?: IntFieldUpdateOperationsInput | number
     estatus_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     intento_ahbb?: IntFieldUpdateOperationsInput | number
-    notaFinal_ahbb?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    observaciones_ahbb?: NullableStringFieldUpdateOperationsInput | string | null
     id_usuario_inscripcion_ahbb?: IntFieldUpdateOperationsInput | number
     creadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     actualizadoEn_ahbb?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -26558,7 +26270,6 @@ export namespace Prisma {
 
   export type td_reportes_facturas_ahbbCreateManyFactura_ahbbInput = {
     id_reporte_ahbb?: number
-    detalles_factura_ahbb: JsonNullValueInput | InputJsonValue
     qr_base64_ahbb: string
     creadoEn_ahbb?: Date | string
   }
@@ -26584,21 +26295,18 @@ export namespace Prisma {
   }
 
   export type td_reportes_facturas_ahbbUpdateWithoutFactura_ahbbInput = {
-    detalles_factura_ahbb?: JsonNullValueInput | InputJsonValue
     qr_base64_ahbb?: StringFieldUpdateOperationsInput | string
     creadoEn_ahbb?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type td_reportes_facturas_ahbbUncheckedUpdateWithoutFactura_ahbbInput = {
     id_reporte_ahbb?: IntFieldUpdateOperationsInput | number
-    detalles_factura_ahbb?: JsonNullValueInput | InputJsonValue
     qr_base64_ahbb?: StringFieldUpdateOperationsInput | string
     creadoEn_ahbb?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type td_reportes_facturas_ahbbUncheckedUpdateManyWithoutFactura_ahbbInput = {
     id_reporte_ahbb?: IntFieldUpdateOperationsInput | number
-    detalles_factura_ahbb?: JsonNullValueInput | InputJsonValue
     qr_base64_ahbb?: StringFieldUpdateOperationsInput | string
     creadoEn_ahbb?: DateTimeFieldUpdateOperationsInput | Date | string
   }

@@ -52,19 +52,18 @@ export const crearInscripcion_ahbb = async (datos_ahbb) => {
       exito: false,
       inscripcion: null,
       mensaje: error_ahbb.response?.data?.message ?? 'Error al crear inscripción.',
+      payload: error_ahbb.response?.data?.payload ?? null,
     };
   }
 };
 
 export const actualizarEstadoInscripcion_ahbb = async (
   inscripcionId_ahbb,
-  nuevoEstado_ahbb,
-  notaFinal_ahbb,
+  nuevoEstado_ahbb
 ) => {
   try {
     await apiCliente_ahbb.patch(`/inscripciones/${inscripcionId_ahbb}/estado`, {
-      estatus_ahbb: nuevoEstado_ahbb,
-      notaFinal_ahbb,
+      estatus_ahbb: nuevoEstado_ahbb
     });
     return true;
   } catch {

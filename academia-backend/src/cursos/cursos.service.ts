@@ -48,7 +48,7 @@ export class CursosService {
   }
 
   private formatearFechaISO_ahbb(fecha_ahbb: Date): string {
-    // Si la fecha viene de Prisma (Postgres DATE), suele estar en UTC 00:00:00
+    // Normalización de fechas UTC para consistencia
     // Usamos los métodos UTC para asegurar consistencia independientemente de la zona horaria del servidor
     const anio = fecha_ahbb.getUTCFullYear();
     const mes = String(fecha_ahbb.getUTCMonth() + 1).padStart(2, '0');
@@ -279,6 +279,10 @@ export class CursosService {
     return { whereCursos_ahbb };
   }
 
+  /**
+   * Recupera la lista de cursos disponibles, aplicando filtros de visibilidad y pertenencia según el rol del usuario.
+   * Realiza una sincronización automática de estados de inscripciones al ser consultada.
+   */
   async obtenerTodos_ahbb(
     rol_ahbb?: string,
     id_usuario_ahbb?: number,
@@ -348,6 +352,9 @@ export class CursosService {
     return cursos_ahbb.map((curso_ahbb) => this.mapearCurso_ahbb(curso_ahbb));
   }
 
+  /**
+   * Obtiene el detalle completo de un curso y sus dependencias (profesor, horarios, prelaciones).
+   */
   async obtenerPorId_ahbb(id_curso_ahbb: number) {
     const curso_ahbb = await this.prisma_ahbb.td_curso_ahbb.findUnique({
       where: { id_curso_ahbb },
@@ -393,6 +400,10 @@ export class CursosService {
     }
   }
 
+  /**
+   * Gestiona la creación de un nuevo curso, validando solapamientos de horarios y fechas de inicio.
+   * Genera de forma atómica el registro del curso, sus horarios y sesiones programadas.
+   */
   async crearCurso_ahbb(
     id_usuario_logueado: number,
     datos_ahbb: CrearCursoDto_ahbb & { id_usuario_curso_ahbb?: number },
@@ -480,6 +491,10 @@ export class CursosService {
     return this.mapearCurso_ahbb(curso_ahbb);
   }
 
+  /**
+   * Actualiza la información de un curso existente garantizando la integridad de las inscripciones actuales.
+   * Regenera la programación de sesiones si hay cambios detectados en las fechas o el horario.
+   */
   async actualizarCurso_ahbb(
     id_curso_ahbb: number,
     id_usuario_logueado: number,
@@ -532,7 +547,7 @@ export class CursosService {
       id_curso_ahbb, // Excluir este curso de la validación de solapamiento
     );
 
-    // Si intenta cambiar la fechaInicio y ya hay alumnos, lanzar error
+    // Validación de restricción de cambio de fecha con inscritos
     if (datos_ahbb.fechaInicio_ahbb) {
       const nuevaFecha_str = this.convertirFechaSoloDia_ahbb(
         datos_ahbb.fechaInicio_ahbb,
@@ -562,7 +577,7 @@ export class CursosService {
           where: { id_curso_horario_ahbb: id_curso_ahbb },
         });
 
-        // When a PROFESOR updates a course, reset it to PENDIENTE for re-approval
+        // Reinicio de flujo de aprobación ante cambios del profesor
         const esProfesorActualizando_ahbb = rol_ahbb === 'PROFESOR';
         const nuevoEstadoAprobacion_ahbb = esProfesorActualizando_ahbb ? 'PENDIENTE' : undefined;
         const nuevoIsPublished_ahbb = esProfesorActualizando_ahbb ? false : undefined;
@@ -670,13 +685,16 @@ export class CursosService {
     };
   }
 
+  /**
+   * Gestiona la eliminación de un curso favoreciendo el archivado (soft-delete) si existen dependencias.
+   */
   async eliminarCurso_ahbb(id_curso_ahbb: number) {
     const inscripciones = await this.prisma_ahbb.td_inscripcion_ahbb.count({
       where: { id_curso_inscripcion_ahbb: id_curso_ahbb },
     });
 
     if (inscripciones > 0) {
-      // Soft-delete
+      // Eliminación lógica para preservar integridad referencial
       await this.prisma_ahbb.td_curso_ahbb.update({
         where: { id_curso_ahbb },
         data: {
@@ -692,7 +710,7 @@ export class CursosService {
       };
     }
 
-    // Hard-delete
+    // Eliminación física del registro
     await this.prisma_ahbb.td_curso_ahbb.delete({
       where: { id_curso_ahbb },
     });
@@ -704,6 +722,9 @@ export class CursosService {
     };
   }
 
+  /**
+   * Permite a la administración evaluar (aprobar o rechazar) un curso propuesto por un profesor.
+   */
   async evaluarCurso_ahbb(
     id_curso_ahbb: number,
     data: { estado: string; motivo?: string },
@@ -733,6 +754,9 @@ export class CursosService {
     };
   }
 
+  /**
+   * Calcula la disponibilidad de cupos y el estado de matrícula de un curso específico.
+   */
   async obtenerDisponibilidad_ahbb(id_curso_ahbb: number) {
     const curso_ahbb = await this.prisma_ahbb.td_curso_ahbb.findUnique({
       where: { id_curso_ahbb },
@@ -768,23 +792,75 @@ export class CursosService {
     fechaFinNivel_ahbb: Date,
     id_curso_excluir?: number,
   ) {
-    const cursos_ahbb = await this.prisma_ahbb.td_curso_ahbb.findMany({
-      where: {
-        id_usuario_curso_ahbb: id_profesor_ahbb,
-        id_curso_ahbb: id_curso_excluir ? { not: id_curso_excluir } : undefined,
-        estadoAprobacion_ahbb: { not: 'ARCHIVADO' },
-      },
-      include: { horarios: true },
-    });
+    const solapamientos_ahbb = await this.obtenerSolapamientos_ahbb(
+      id_profesor_ahbb,
+      'PROFESOR',
+      horariosNuevos_ahbb,
+      fechaInicioNivel_ahbb,
+      fechaFinNivel_ahbb,
+      id_curso_excluir,
+    );
+
+    if (solapamientos_ahbb.length > 0) {
+      const huecos_ahbb = await this.obtenerHuecosDisponibles_ahbb(
+        id_profesor_ahbb,
+        'PROFESOR',
+        fechaInicioNivel_ahbb,
+        fechaFinNivel_ahbb,
+      );
+
+      throw new BadRequestException({
+        message: 'SOLAPAMIENTO_DETECTADO',
+        payload: {
+          solapamientos: solapamientos_ahbb,
+          huecosDisponibles: huecos_ahbb,
+        },
+      });
+    }
+  }
+
+  async obtenerSolapamientos_ahbb(
+    id_usuario_ahbb: number,
+    rol_ahbb: 'PROFESOR' | 'ALUMNO',
+    horariosNuevos_ahbb: any[],
+    fechaInicio_ahbb: Date,
+    fechaFin_ahbb: Date,
+    id_curso_excluir?: number,
+  ) {
+    const solapamientos_ahbb: any[] = [];
+    let cursos_ahbb: any[] = [];
+
+    if (rol_ahbb === 'PROFESOR') {
+      cursos_ahbb = await this.prisma_ahbb.td_curso_ahbb.findMany({
+        where: {
+          id_usuario_curso_ahbb: id_usuario_ahbb,
+          id_curso_ahbb: id_curso_excluir ? { not: id_curso_excluir } : undefined,
+          estadoAprobacion_ahbb: { not: 'ARCHIVADO' },
+        },
+        include: { horarios: true },
+      });
+    } else {
+      const inscripciones_ahbb = await this.prisma_ahbb.td_inscripcion_ahbb.findMany({
+        where: {
+          id_usuario_inscripcion_ahbb: id_usuario_ahbb,
+          estatus_ahbb: { in: ['INSCRITO', 'OYENTE'] },
+        },
+        include: {
+          curso: {
+            include: { horarios: true },
+          },
+        },
+      });
+      cursos_ahbb = inscripciones_ahbb.map((i) => i.curso);
+    }
 
     for (const cursoExistente_ahbb of cursos_ahbb) {
-      // Solo hay solapamiento si las fechas de los cursos también se cruzan
       const inicioExistente_ahbb = cursoExistente_ahbb.fechaInicio_ahbb ?? new Date();
       const finExistente_ahbb = cursoExistente_ahbb.fechaFin_ahbb ?? new Date();
 
-      const fechasSeCruzan_ahbb = 
-        (inicioExistente_ahbb <= fechaFinNivel_ahbb) &&
-        (fechaInicioNivel_ahbb <= finExistente_ahbb);
+      const fechasSeCruzan_ahbb =
+        inicioExistente_ahbb <= fechaFin_ahbb &&
+        fechaInicio_ahbb <= finExistente_ahbb;
 
       if (!fechasSeCruzan_ahbb) continue;
 
@@ -803,13 +879,99 @@ export class CursosService {
               horarioNuevo_ahbb.horaFin_ahbb,
             )
           ) {
-            throw new BadRequestException(
-              'Tu disponibilidad para este curso ya se encuentra ocupada parcial o totalmente por otro/s cursos, cambia el horario o espera a que finalice uno de los cursos',
-            );
+            solapamientos_ahbb.push({
+              cursoId: cursoExistente_ahbb.id_curso_ahbb,
+              cursoNombre: cursoExistente_ahbb.nombre_ahbb,
+              dia: horarioExistente_ahbb.diaSemana_ahbb,
+              horaInicio: horarioExistente_ahbb.horaInicio_ahbb,
+              horaFin: horarioExistente_ahbb.horaFin_ahbb,
+            });
           }
         }
       }
     }
+    return solapamientos_ahbb;
+  }
+
+  async obtenerHuecosDisponibles_ahbb(
+    id_usuario_ahbb: number,
+    rol_ahbb: 'PROFESOR' | 'ALUMNO',
+    fechaInicio_ahbb: Date,
+    fechaFin_ahbb: Date,
+  ) {
+    let cursos_ahbb: any[] = [];
+    if (rol_ahbb === 'PROFESOR') {
+      cursos_ahbb = await this.prisma_ahbb.td_curso_ahbb.findMany({
+        where: {
+          id_usuario_curso_ahbb: id_usuario_ahbb,
+          estadoAprobacion_ahbb: { not: 'ARCHIVADO' },
+        },
+        include: { horarios: true },
+      });
+    } else {
+      const inscripciones_ahbb = await this.prisma_ahbb.td_inscripcion_ahbb.findMany({
+        where: {
+          id_usuario_inscripcion_ahbb: id_usuario_ahbb,
+          estatus_ahbb: { in: ['INSCRITO', 'OYENTE'] },
+        },
+        include: {
+          curso: {
+            include: { horarios: true },
+          },
+        },
+      });
+      cursos_ahbb = inscripciones_ahbb.map((i) => i.curso);
+    }
+
+    const huecos_ahbb: any[] = [];
+    const franjas_ahbb = [
+      { inicio: '07:00', fin: '10:00' },
+      { inicio: '10:00', fin: '13:00' },
+      { inicio: '13:00', fin: '16:00' },
+      { inicio: '16:00', fin: '19:00' },
+      { inicio: '19:00', fin: '22:00' },
+    ];
+
+    for (const dia_ahbb of this.DIAS_SEMANA_AHBB) {
+      if (dia_ahbb === 'DOMINGO') continue; // No clases los domingos por defecto
+
+      for (const franja_ahbb of franjas_ahbb) {
+        let ocupado_ahbb = false;
+
+        for (const curso_ahbb of cursos_ahbb) {
+          const inicioC = curso_ahbb.fechaInicio_ahbb ?? new Date();
+          const finC = curso_ahbb.fechaFin_ahbb ?? new Date();
+
+          if (inicioC <= fechaFin_ahbb && fechaInicio_ahbb <= finC) {
+            for (const h_ahbb of curso_ahbb.horarios) {
+              if (
+                h_ahbb.diaSemana_ahbb === dia_ahbb &&
+                this.hayCruceHoras_ahbb(
+                  h_ahbb.horaInicio_ahbb,
+                  h_ahbb.horaFin_ahbb,
+                  franja_ahbb.inicio,
+                  franja_ahbb.fin,
+                )
+              ) {
+                ocupado_ahbb = true;
+                break;
+              }
+            }
+          }
+          if (ocupado_ahbb) break;
+        }
+
+        if (!ocupado_ahbb) {
+          huecos_ahbb.push({
+            dia: dia_ahbb,
+            horaInicio: franja_ahbb.inicio,
+            horaFin: franja_ahbb.fin,
+          });
+        }
+      }
+    }
+
+    return huecos_ahbb.slice(0, 10); // Retornar max 10 sugerencias
   }
 
   hayCruceHoras_ahbb(

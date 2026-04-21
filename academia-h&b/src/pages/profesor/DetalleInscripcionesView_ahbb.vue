@@ -1,4 +1,4 @@
-<!-- DetalleInscripcionesView_ahbb.vue — Calificación de alumnos (Aprobado/Reprobado) -->
+<!-- DetalleInscripcionesView_ahbb.vue — Estatus de alumnos (Aprobado/Reprobado) -->
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
@@ -9,9 +9,11 @@ import {
   obtenerCertificadosCurso_ahbb,
   descargarPdfCertificado_ahbb,
 } from 'src/servicios/certificadosServicio_ahbb';
+import { useAutenticacionStore_ahbb } from 'src/stores/autenticacionStore_ahbb';
 import { useQuasar } from 'quasar';
 
 const $q = useQuasar();
+const authStore = useAutenticacionStore_ahbb();
 const route = useRoute();
 const router = useRouter();
 const idCurso = route.params.id;
@@ -27,7 +29,7 @@ const columnas = [
   { name: 'alumno', label: 'Estudiante', field: row => `${row.alumno.nombre_ahbb} ${row.alumno.apellido_ahbb}`, align: 'left', sortable: true },
   { name: 'cedula', label: 'Cédula', field: row => row.alumno.cedula_ahbb, align: 'left' },
   { name: 'correo', label: 'Correo', field: row => row.alumno.correo_ahbb, align: 'left' },
-  { name: 'estado', label: 'Calificación (Switch)', field: 'estatus_ahbb', align: 'center' },
+  { name: 'estado', label: 'Estatus (Switch)', field: 'estatus_ahbb', align: 'center' },
   { name: 'estadoLabel', label: 'Estado Actual', field: 'estatus_ahbb', align: 'center' },
   { name: 'certificado', label: 'Certificado', field: 'id_inscripcion_ahbb', align: 'center' },
 ];
@@ -95,22 +97,49 @@ const obtenerCertificadoPorInscripcion = (idInscripcion) => {
   return certificadosCurso.value.find(c => c.inscripcionId === idInscripcion);
 };
 
-const cambiarEstadoSilencioso = async (row, valorSwitch) => {
-  const nuevoEstado = valorSwitch ? 'APROBADO' : 'REPROBADO';
+const mostrarModalEvaluacion = ref(false);
+const noRecordarAdvertencia = ref(localStorage.getItem('no_recordar_evaluacion_ahbb') === 'true');
+const omitirAdvertenciaTemp = ref(false);
+const estudianteAEvaluar = ref(null);
+const accionEvaluacion = ref('');
+
+const intentarEvaluar = (row, accion) => {
+  if (row.estatus_ahbb === 'APROBADO' || row.estatus_ahbb === 'REPROBADO') return;
+  
+  if (noRecordarAdvertencia.value) {
+    ejecutarEvaluacion(row, accion);
+  } else {
+    estudianteAEvaluar.value = row;
+    accionEvaluacion.value = accion;
+    omitirAdvertenciaTemp.value = false;
+    mostrarModalEvaluacion.value = true;
+  }
+};
+
+const confirmarEvaluacionModal = () => {
+  if (omitirAdvertenciaTemp.value) {
+    localStorage.setItem('no_recordar_evaluacion_ahbb', 'true');
+    noRecordarAdvertencia.value = true;
+  }
+  ejecutarEvaluacion(estudianteAEvaluar.value, accionEvaluacion.value);
+  mostrarModalEvaluacion.value = false;
+};
+
+const ejecutarEvaluacion = async (row, nuevoEstado) => {
   const exito = await actualizarEstadoInscripcion_ahbb(row.id_inscripcion_ahbb, nuevoEstado);
   
   if (exito) {
     row.estatus_ahbb = nuevoEstado;
     $q.notify({
-      color: valorSwitch ? 'positive' : 'orange',
-      message: `${row.alumno.nombre_ahbb} ahora está ${nuevoEstado.toLowerCase()}`,
+      color: nuevoEstado === 'APROBADO' ? 'positive' : 'negative',
+      message: `${row.alumno.nombre_ahbb} ha sido ${nuevoEstado.toLowerCase()}`,
       timeout: 1500,
-      icon: valorSwitch ? 'check_circle' : 'cancel'
+      icon: nuevoEstado === 'APROBADO' ? 'check_circle' : 'cancel'
     });
   } else {
     $q.notify({
       color: 'negative',
-      message: 'Error al actualizar calificación',
+      message: 'Error al actualizar estatus',
       icon: 'error'
     });
     cargarDatos();
@@ -118,6 +147,27 @@ const cambiarEstadoSilencioso = async (row, valorSwitch) => {
 };
 
 const emitirCertificados = async () => {
+  // Antes de redirigir, intentar recargar el perfil por si la firma ya existe en la DB
+  if (!authStore.usuarioActivo_ahbb?.firmaDigital) {
+    await authStore.recargarPerfil_ahbb();
+  }
+
+  // Validar si el profesor tiene firma digital antes de proceder
+  if (!authStore.usuarioActivo_ahbb?.firmaDigital) {
+    $q.notify({
+      color: 'warning',
+      message: 'Debes cargar tu firma digital antes de emitir certificados.',
+      icon: 'edit_square',
+      timeout: 4000,
+      actions: [{ label: 'Ir a Firma', color: 'white', handler: () => router.push({ name: 'profesorFirmaDigital', query: { redirect: route.fullPath } }) }]
+    });
+    // Redirigir automáticamente después de un breve delay
+    setTimeout(() => {
+      router.push({ name: 'profesorFirmaDigital', query: { redirect: route.fullPath } });
+    }, 2500);
+    return;
+  }
+
   emitiendo.value = true;
   try {
     const resultado = await emitirCertificadosMasivo_ahbb(idCurso);
@@ -148,6 +198,22 @@ const emitirCertificados = async () => {
 };
 
 const descargarCertificadoPdf = async (idInscripcion) => {
+  // Intentar recargar perfil antes de bloquear por falta de firma
+  if (!authStore.usuarioActivo_ahbb?.firmaDigital) {
+    await authStore.recargarPerfil_ahbb();
+  }
+
+  // Validar si el profesor tiene firma digital (por seguridad)
+  if (!authStore.usuarioActivo_ahbb?.firmaDigital) {
+    $q.notify({
+      color: 'warning',
+      message: 'Debes cargar tu firma digital para generar los PDFs.',
+      icon: 'report_problem',
+    });
+    router.push({ name: 'profesorFirmaDigital', query: { redirect: route.fullPath } });
+    return;
+  }
+
   const cert = obtenerCertificadoPorInscripcion(idInscripcion);
   if (cert) {
     try {
@@ -170,7 +236,7 @@ onMounted(cargarDatos);
           <q-icon name="how_to_reg" class="q-mr-sm" />
           {{ curso.nombre }}
         </div>
-        <div class="text-caption text-grey-7">Gestión de calificaciones finales</div>
+        <div class="text-caption text-grey-7">Gestión de estatus finales</div>
       </div>
     </div>
 
@@ -180,14 +246,15 @@ onMounted(cargarDatos);
         <q-icon name="lock" color="blue-9" />
       </template>
       Este curso aún se encuentra en progreso (Termina: {{ new Date(curso.fechaFin).toLocaleDateString() }}). 
-      No se pueden asignar calificaciones finales hasta que el curso haya culminado.
+      No se puede asignar el estatus final hasta que el curso haya culminado.
     </q-banner>
 
     <q-banner v-else-if="cursoFinalizado && !cargando" class="bg-green-1 text-green-9 shadow-1 q-mb-lg" rounded inline-actions>
       <template v-slot:avatar>
-        <q-icon name="check_circle" color="green-9" />
+        <q-icon name="check_circle" color="green-7" />
       </template>
-      El curso ha finalizado. Puedes usar los interruptores para Aprobar o Reprobar a los estudiantes.
+      El curso ha finalizado. Puedes usar los botones para escoger <strong>Aprobar</strong> o <strong>Reprobar</strong> a los estudiantes. Recuerda que no podrás revertir esta acción de evaluación de cursante una vez se haya tomado la decisión.
+      
       <template v-slot:action>
         <q-btn
           v-if="aprobadosSinCertificado > 0"
@@ -240,17 +307,32 @@ onMounted(cargarDatos);
     >
       <template v-slot:body-cell-estado="props">
         <q-td :props="props">
-          <q-toggle
-            :model-value="props.row.estatus_ahbb === 'APROBADO'"
-            @update:model-value="(val) => cambiarEstadoSilencioso(props.row, val)"
-            color="green"
-            keep-color
-            icon="check"
-            unchecked-icon="close"
-            :disable="!cursoFinalizado"
-          >
+          <template v-if="props.row.estatus_ahbb === 'INSCRITO' || props.row.estatus_ahbb === 'OYENTE'">
+            <q-btn-group rounded outline>
+              <q-btn 
+                size="sm" 
+                color="green" 
+                :disable="!cursoFinalizado" 
+                icon="check" 
+                label="Aprobar" 
+                @click="intentarEvaluar(props.row, 'APROBADO')" 
+              />
+              <q-btn 
+                size="sm" 
+                color="red" 
+                :disable="!cursoFinalizado" 
+                icon="close" 
+                label="Reprobar" 
+                @click="intentarEvaluar(props.row, 'REPROBADO')" 
+              />
+            </q-btn-group>
             <q-tooltip v-if="!cursoFinalizado">Solo disponible al culminar el curso</q-tooltip>
-          </q-toggle>
+          </template>
+          <template v-else>
+            <q-btn flat dense icon="lock" color="grey" disable>
+              <q-tooltip>Evaluación ya asignada de forma irreversible</q-tooltip>
+            </q-btn>
+          </template>
         </q-td>
       </template>
 
@@ -300,6 +382,36 @@ onMounted(cargarDatos);
       </template>
     </q-table>
   </div>
+
+  <!-- Modal Confirmación de Evaluación -->
+  <q-dialog v-model="mostrarModalEvaluacion" persistent>
+    <q-card style="min-width: 380px; border-radius: 12px;">
+      <q-card-section class="row items-center q-pb-none">
+        <div class="text-h6 text-primary row items-center">
+          <q-icon name="warning_amber" size="md" color="orange" class="q-mr-sm" /> 
+          Confirmar Evaluación
+        </div>
+        <q-space />
+        <q-btn icon="close" flat round dense v-close-popup />
+      </q-card-section>
+
+      <q-card-section class="q-pt-md text-subtitle1">
+        Estás a punto de evaluar permanentemente a <strong>{{ estudianteAEvaluar?.alumno?.nombre_ahbb }} {{ estudianteAEvaluar?.alumno?.apellido_ahbb }}</strong> como <strong :class="accionEvaluacion === 'APROBADO' ? 'text-green-8' : 'text-red-8'">{{ accionEvaluacion }}</strong>.
+        <br><br>
+        <span class="text-body2 text-grey-8">Esta acción es para proteger la emisión de certificados. De aprobar o reprobar a un alumno, el estatus se <strong>bloqueará permanentemente</strong> y no podrá revertirse haciendo clics por accidente. ¿Deseas continuar?</span>
+      </q-card-section>
+
+      <q-card-section class="q-pt-none">
+        <q-checkbox v-model="omitirAdvertenciaTemp" label="No volver a avisarme en este navegador" color="primary" />
+      </q-card-section>
+
+      <q-card-actions align="right" class="bg-grey-1 q-pa-md">
+        <q-btn flat label="Cancelar" color="grey-8" v-close-popup />
+        <q-btn unelevated :color="accionEvaluacion === 'APROBADO' ? 'green' : 'red'" label="Sí, Confirmar" @click="confirmarEvaluacionModal" />
+      </q-card-actions>
+    </q-card>
+  </q-dialog>
+
 </template>
 
 <style scoped>

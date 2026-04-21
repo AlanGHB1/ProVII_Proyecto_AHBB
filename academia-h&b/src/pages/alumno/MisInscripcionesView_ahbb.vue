@@ -164,11 +164,7 @@ onMounted(cargarInscripciones_ahbb);
                 <span class="text-subtitle2 grey-8">Horario:</span> 
                 <span class="text-weight-bold">{{ formatearHora12h_ahbb(ins.curso.horaInicio_ahbb) }} - {{ formatearHora12h_ahbb(ins.curso.horaFin_ahbb) }}</span>
               </div>
-              <div class="col-12" v-if="ins.notaFinal_ahbb">
-                <q-icon name="grade" color="amber-8" class="q-mr-xs" />
-                <span class="text-subtitle2 grey-8">Nota Final:</span> 
-                <span class="text-h6 text-amber-9">{{ ins.notaFinal_ahbb }}</span>
-              </div>
+
             </div>
           </q-card-section>
 

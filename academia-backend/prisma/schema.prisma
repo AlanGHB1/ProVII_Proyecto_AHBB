@@ -100,8 +100,6 @@ model td_inscripcion_ahbb {
   id_inscripcion_ahbb         Int      @id @default(autoincrement())
   estatus_ahbb                String?  @default("INSCRITO") @db.VarChar(50)
   intento_ahbb                Int      @default(1)
-  notaFinal_ahbb              Decimal? @db.Decimal(5, 2)
-  observaciones_ahbb          String?  @db.Text
   id_usuario_inscripcion_ahbb Int
   id_curso_inscripcion_ahbb   Int
   creadoEn_ahbb               DateTime? @default(now()) @db.Timestamp(6)

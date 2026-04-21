@@ -13,6 +13,7 @@ import { useAutenticacionStore_ahbb } from '../stores/autenticacionStore_ahbb';
 import { obtenerProfesoresParaSelect_ahbb } from '../servicios/usuariosServicio_ahbb';
 import { obtenerCursoPorId_ahbb } from '../servicios/cursosServicio_ahbb';
 import FormularioCurso_ahbb from '../components/cursos/FormularioCurso_ahbb.vue';
+import DialogoSolapamiento_ahbb from '../components/cursos/DialogoSolapamiento_ahbb.vue';
 
 const $q_ahbb = useQuasar();
 const route_ahbb = useRoute();
@@ -117,6 +118,19 @@ const manejarGuardar_ahbb = async (datos_ahbb) => {
       }
     }
   } catch (error) {
+    // Manejo de solapamiento de horario (Silencioso para la consola)
+    if (error.response?.data?.message === 'SOLAPAMIENTO_DETECTADO') {
+      const { solapamientos, huecosDisponibles } = error.response.data.payload;
+      $q_ahbb.dialog({
+        component: DialogoSolapamiento_ahbb,
+        componentProps: {
+          solapamientos,
+          huecosDisponibles
+        }
+      });
+      return;
+    }
+
     console.error('Error al guardar el curso:', error);
     const mensaje_ahbb = error.response?.data?.message || 'Ocurrió un error al intentar guardar el curso.';
     $q_ahbb.notify({

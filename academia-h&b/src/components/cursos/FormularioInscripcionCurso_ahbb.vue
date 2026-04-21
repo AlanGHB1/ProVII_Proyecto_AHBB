@@ -6,6 +6,7 @@ import {
   crearInscripcion_ahbb,
   verificarDisponibilidadCurso_ahbb,
 } from '../../servicios/inscripcionesServicio_ahbb';
+import DialogoSolapamiento_ahbb from './DialogoSolapamiento_ahbb.vue';
 
 const props = defineProps({
   curso_ahbb: { type: Object, required: true },
@@ -34,7 +35,17 @@ const inscribirse_ahbb = async () => {
     });
 
     if (!resultado_ahbb.exito) {
-      $q_ahbb.notify({ type: 'negative', message: resultado_ahbb.mensaje });
+      if (resultado_ahbb.mensaje === 'SOLAPAMIENTO_DETECTADO') {
+        $q_ahbb.dialog({
+          component: DialogoSolapamiento_ahbb,
+          componentProps: {
+            solapamientos: resultado_ahbb.payload?.solapamientos || [],
+            huecosDisponibles: resultado_ahbb.payload?.huecosDisponibles || []
+          }
+        });
+      } else {
+        $q_ahbb.notify({ type: 'negative', message: resultado_ahbb.mensaje });
+      }
       return;
     }
 

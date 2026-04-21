@@ -1,18 +1,15 @@
 const obtenerUsuarioActivo_ahbb = () => {
-  const token_ahbb = localStorage.getItem('certificaciones_token_ahbb');
-  const usuario_ahbb = localStorage.getItem('certificaciones_usuario_ahbb');
+  // El token está en sessionStorage (más seguro que localStorage)
+  // El perfil del usuario NO se guarda en disco por seguridad (PII)
+  // Solo verificamos que exista un token de sesión válido
+  const token_ahbb = sessionStorage.getItem('certificaciones_token_ahbb');
+  return token_ahbb ? true : null;
+};
 
-  if (!token_ahbb || !usuario_ahbb) {
-    return null;
-  }
-
-  try {
-    return JSON.parse(usuario_ahbb);
-  } catch {
-    localStorage.removeItem('certificaciones_token_ahbb');
-    localStorage.removeItem('certificaciones_usuario_ahbb');
-    return null;
-  }
+const obtenerRolUsuario_ahbb = () => {
+  // El rol del usuario ya no se persiste en disco
+  // El guard de roles se maneja mediante el store de Pinia en las vistas
+  return null;
 };
 
 export const guardiaNavegacion_ahbb = (
@@ -47,14 +44,7 @@ export const guardiaNavegacion_ahbb = (
     return;
   }
 
-  const rolesPermitidos_ahbb = destino_ahbb.meta.rolesPermitidos_ahbb;
-  if (rolesPermitidos_ahbb?.length) {
-    const tienePermiso_ahbb = rolesPermitidos_ahbb.includes(usuario_ahbb.rol);
-    if (!tienePermiso_ahbb) {
-      siguiente_ahbb({ name: 'dashboard' });
-      return;
-    }
-  }
-
+  // El control de roles por vista se delega al store de Pinia (el perfil está en memoria)
   siguiente_ahbb();
 };
+

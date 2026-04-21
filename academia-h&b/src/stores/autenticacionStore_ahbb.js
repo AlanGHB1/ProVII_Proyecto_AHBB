@@ -7,6 +7,10 @@ import {
   recuperarSesion_ahbb as servicioRecuperarSesion_ahbb,
 } from '../servicios/autenticacionServicio_ahbb';
 
+/**
+ * Store de Pinia para la gestión del estado de autenticación y sesión del usuario.
+ * Centraliza la información del perfil activo y las acciones de acceso al sistema.
+ */
 export const useAutenticacionStore_ahbb = defineStore('autenticacion_ahbb', {
   state: () => ({
     usuarioActivo_ahbb: null,
@@ -40,10 +44,17 @@ export const useAutenticacionStore_ahbb = defineStore('autenticacion_ahbb', {
   },
 
   actions: {
+    /**
+     * Inicializa la sesión recuperando el perfil del usuario desde la persistencia segura.
+     */
     async inicializar_ahbb() {
       this.usuarioActivo_ahbb = await servicioRecuperarSesion_ahbb();
     },
 
+    /**
+     * Gestiona el proceso de registro de un nuevo usuario delegando en el servicio de autenticación.
+     * @param datosUsuario_ahbb Objeto con la información del registro.
+     */
     async registrarUsuario_ahbb(datosUsuario_ahbb) {
       this.errorAuth_ahbb = '';
       this.cargando_ahbb = true;
@@ -60,6 +71,11 @@ export const useAutenticacionStore_ahbb = defineStore('autenticacion_ahbb', {
       }
     },
 
+    /**
+     * Autentica a un usuario y establece su perfil en el estado global.
+     * @param correo_ahbb Correo electrónico del usuario.
+     * @param contrasena_ahbb Contraseña.
+     */
     async iniciarSesion_ahbb(correo_ahbb, contrasena_ahbb) {
       this.errorAuth_ahbb = '';
       this.cargando_ahbb = true;
@@ -82,6 +98,25 @@ export const useAutenticacionStore_ahbb = defineStore('autenticacion_ahbb', {
       await servicioCerrarSesion_ahbb();
       this.usuarioActivo_ahbb = null;
       this.listaUsuarios_ahbb = [];
+    },
+
+    /**
+     * Actualiza la ruta de la firma digital en el perfil activo tras una carga exitosa.
+     */
+    actualizarFirmaEnSesion_ahbb(nuevaRuta_ahbb) {
+      if (this.usuarioActivo_ahbb) {
+        this.usuarioActivo_ahbb.firmaDigital = nuevaRuta_ahbb;
+        // La firma ya NO se guarda en localStorage por seguridad PII
+      }
+    },
+
+    async recargarPerfil_ahbb() {
+      const perfil_ahbb = await servicioRecuperarSesion_ahbb();
+      if (perfil_ahbb) {
+        this.usuarioActivo_ahbb = perfil_ahbb;
+        return true;
+      }
+      return false;
     },
 
     limpiarError_ahbb() {

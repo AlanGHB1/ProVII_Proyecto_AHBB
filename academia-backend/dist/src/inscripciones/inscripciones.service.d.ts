@@ -12,17 +12,15 @@ export declare class InscripcionesService_ahbb {
         id_inscripcion_ahbb: number;
         estatus_ahbb: string | null;
         intento_ahbb: number;
-        notaFinal_ahbb: import("@prisma/client-runtime-utils").Decimal | null;
-        observaciones_ahbb: string | null;
         id_usuario_inscripcion_ahbb: number;
         id_curso_inscripcion_ahbb: number;
     }>;
     obtenerTodas_ahbb(): Promise<({
         alumno: {
-            nombre_ahbb: string;
             id_usuario_ahbb: number;
-            apellido_ahbb: string;
             correo_ahbb: string;
+            nombre_ahbb: string;
+            apellido_ahbb: string;
         };
         curso: {
             nombre_ahbb: string;
@@ -34,8 +32,6 @@ export declare class InscripcionesService_ahbb {
         id_inscripcion_ahbb: number;
         estatus_ahbb: string | null;
         intento_ahbb: number;
-        notaFinal_ahbb: import("@prisma/client-runtime-utils").Decimal | null;
-        observaciones_ahbb: string | null;
         id_usuario_inscripcion_ahbb: number;
         id_curso_inscripcion_ahbb: number;
     })[]>;
@@ -54,13 +50,11 @@ export declare class InscripcionesService_ahbb {
             }[];
         } & {
             nombre_ahbb: string;
-            descripcion_ahbb: string | null;
             creadoEn_ahbb: Date | null;
             actualizadoEn_ahbb: Date | null;
-            isPublished_ahbb: boolean;
-            id_usuario_curso_ahbb: number;
             id_curso_ahbb: number;
             tematica_ahbb: string;
+            descripcion_ahbb: string | null;
             diasDefinidos_ahbb: number;
             horasDefinidas_ahbb: number;
             fechaInicio_ahbb: Date | null;
@@ -70,9 +64,11 @@ export declare class InscripcionesService_ahbb {
             temarioTexto_ahbb: string | null;
             imagenBasePdf_ahbb: string | null;
             imagenBloqueada_ahbb: boolean | null;
+            isPublished_ahbb: boolean;
             estadoAprobacion_ahbb: string;
             motivoRechazo_ahbb: string | null;
             mensajeCorreccion_ahbb: string | null;
+            id_usuario_curso_ahbb: number;
             id_curso_curso_ahbb: number | null;
         };
     } & {
@@ -81,28 +77,24 @@ export declare class InscripcionesService_ahbb {
         id_inscripcion_ahbb: number;
         estatus_ahbb: string | null;
         intento_ahbb: number;
-        notaFinal_ahbb: import("@prisma/client-runtime-utils").Decimal | null;
-        observaciones_ahbb: string | null;
         id_usuario_inscripcion_ahbb: number;
         id_curso_inscripcion_ahbb: number;
     })[]>;
     obtenerPorCurso_ahbb(id_curso_ahbb: number): Promise<({
         alumno: {
-            nombre_ahbb: string;
             id_usuario_ahbb: number;
             cedula_ahbb: string;
-            apellido_ahbb: string;
             correo_ahbb: string;
+            nombre_ahbb: string;
+            apellido_ahbb: string;
         };
         curso: {
             nombre_ahbb: string;
-            descripcion_ahbb: string | null;
             creadoEn_ahbb: Date | null;
             actualizadoEn_ahbb: Date | null;
-            isPublished_ahbb: boolean;
-            id_usuario_curso_ahbb: number;
             id_curso_ahbb: number;
             tematica_ahbb: string;
+            descripcion_ahbb: string | null;
             diasDefinidos_ahbb: number;
             horasDefinidas_ahbb: number;
             fechaInicio_ahbb: Date | null;
@@ -112,9 +104,11 @@ export declare class InscripcionesService_ahbb {
             temarioTexto_ahbb: string | null;
             imagenBasePdf_ahbb: string | null;
             imagenBloqueada_ahbb: boolean | null;
+            isPublished_ahbb: boolean;
             estadoAprobacion_ahbb: string;
             motivoRechazo_ahbb: string | null;
             mensajeCorreccion_ahbb: string | null;
+            id_usuario_curso_ahbb: number;
             id_curso_curso_ahbb: number | null;
         };
     } & {
@@ -123,18 +117,16 @@ export declare class InscripcionesService_ahbb {
         id_inscripcion_ahbb: number;
         estatus_ahbb: string | null;
         intento_ahbb: number;
-        notaFinal_ahbb: import("@prisma/client-runtime-utils").Decimal | null;
-        observaciones_ahbb: string | null;
         id_usuario_inscripcion_ahbb: number;
         id_curso_inscripcion_ahbb: number;
     })[]>;
     obtenerAlumnosPorProfesor_ahbb(id_profesor_ahbb: number): Promise<({
         alumno: {
-            nombre_ahbb: string;
             id_usuario_ahbb: number;
             cedula_ahbb: string;
-            apellido_ahbb: string;
             correo_ahbb: string;
+            nombre_ahbb: string;
+            apellido_ahbb: string;
         };
         curso: {
             nombre_ahbb: string;
@@ -146,8 +138,6 @@ export declare class InscripcionesService_ahbb {
         id_inscripcion_ahbb: number;
         estatus_ahbb: string | null;
         intento_ahbb: number;
-        notaFinal_ahbb: import("@prisma/client-runtime-utils").Decimal | null;
-        observaciones_ahbb: string | null;
         id_usuario_inscripcion_ahbb: number;
         id_curso_inscripcion_ahbb: number;
     })[]>;
@@ -157,8 +147,6 @@ export declare class InscripcionesService_ahbb {
         id_inscripcion_ahbb: number;
         estatus_ahbb: string | null;
         intento_ahbb: number;
-        notaFinal_ahbb: import("@prisma/client-runtime-utils").Decimal | null;
-        observaciones_ahbb: string | null;
         id_usuario_inscripcion_ahbb: number;
         id_curso_inscripcion_ahbb: number;
     }>;

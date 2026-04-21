@@ -52,10 +52,16 @@ let TunnelService_ahbb = TunnelService_ahbb_1 = class TunnelService_ahbb {
     }
     construirUrl_ahbb(rutaRelativa) {
         const base = this.urlPublica_ahbb || `http://localhost:${process.env.PORT ?? 3000}`;
-        const ruta = rutaRelativa.startsWith('/') ? rutaRelativa : `/${rutaRelativa}`;
+        const ruta = rutaRelativa.startsWith('/')
+            ? rutaRelativa
+            : `/${rutaRelativa}`;
         return `${base}${ruta}`;
     }
     async iniciarTunel_ahbb(puerto) {
+        if (this.tunnel_ahbb) {
+            this.logger_ahbb.log('Reiniciando túnel existente...');
+            await this.onModuleDestroy();
+        }
         try {
             const { Tunnel, install, bin } = await import('cloudflared');
             this.logger_ahbb.log(`Verificando binario de cloudflared...`);

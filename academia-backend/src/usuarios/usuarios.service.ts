@@ -31,6 +31,9 @@ export class UsuariosService {
     );
   }
 
+  /**
+   * Localiza un registro de usuario por su dirección de correo electrónico única.
+   */
   async encontrarPorCorreo_ahbb(correo_ahbb: string) {
     return this.prisma_ahbb.td_usuario_ahbb.findUnique({
       where: { correo_ahbb },
@@ -49,14 +52,14 @@ export class UsuariosService {
 
     const hash_ahbb = await bcrypt.hash(contrasenaPlana_ahbb, 10);
 
-    // Validación de robustez: Verificar que el hash generado sea válido para Bcrypt
+    // Validación defensiva del formato y estructura del hash generado
     if (!hash_ahbb || hash_ahbb.length !== 60 || !hash_ahbb.startsWith('$2b$')) {
       throw new Error(
         'Error crítico de seguridad: El hash generado es inválido.',
       );
     }
 
-    // Doble verificación: Asegurar que el hash realmente coincida con la entrada antes de retornar
+    // Verificación inmediata de la integridad del hash antes de persistirlo
     const coincide_ahbb = await bcrypt.compare(contrasenaPlana_ahbb, hash_ahbb);
     if (!coincide_ahbb) {
       throw new Error(
@@ -72,7 +75,7 @@ export class UsuariosService {
       datos_ahbb.rol || 'ALUMNO',
     );
 
-    // Trigger: validar referencia si es alumno con suscripción
+    // Validación de integridad de referencia de pago móvil
     if (rolNormalizado_ahbb === 'ALUMNO' && datos_ahbb.referenciaPagoMovil) {
       validarReferenciaPago_ahbb(datos_ahbb.referenciaPagoMovil);
     }
@@ -131,6 +134,9 @@ export class UsuariosService {
     });
   }
 
+  /**
+   * Actualiza la información personal de un usuario en la base de datos.
+   */
   async actualizarPerfil_ahbb(id_usuario_ahbb: number, datos_ahbb: any) {
     const usuarioActualizado_ahbb =
       await this.prisma_ahbb.td_usuario_ahbb.update({
@@ -154,7 +160,7 @@ export class UsuariosService {
   ) {
     const estadoNuevo_ahbb = estadoCuenta_ahbb.toUpperCase();
 
-    // Fetch current user to get email before updating
+    // Recuperación del registro actual para validaciones previas a la actualización
     const usuarioActual_ahbb = await this.prisma_ahbb.td_usuario_ahbb.findUnique({
       where: { id_usuario_ahbb },
     });
@@ -165,7 +171,7 @@ export class UsuariosService {
         data: { estadoCuenta_ahbb: estadoNuevo_ahbb },
       });
 
-    // Send email notification when account is set to INACTIVO
+    // Notificación automática vía email en caso de desactivación administrativa de la cuenta
     if (estadoNuevo_ahbb === 'INACTIVO' && usuarioActual_ahbb) {
       try {
         const transporter = nodemailer.createTransport({
@@ -206,6 +212,9 @@ export class UsuariosService {
     return this.mapearUsuarioPublico_ahbb(usuarioActualizado_ahbb);
   }
 
+  /**
+   * Elimina un usuario del sistema de forma permanente.
+   */
   async eliminarUsuario_ahbb(id_usuario_ahbb: number) {
     await this.prisma_ahbb.td_usuario_ahbb.delete({
       where: { id_usuario_ahbb },
@@ -336,7 +345,7 @@ export class UsuariosService {
     }
 
     const usuariosAImportar: any[] = [];
-    // Recolectar contraseñas temporalmente para enviarlas en el correo
+    // Preparación de credenciales para procesamiento masivo
     const correosYClaves: { correo: string; nombre: string; claveBase: string }[] = [];
 
     for (const fila of jsonData as any[]) {
@@ -407,8 +416,8 @@ export class UsuariosService {
         subject: 'Tus credenciales de acceso como Profesor',
         text: `Hola ${data.nombre},\n\nHas sido registrado como profesor en la Academia H&B.\nTu contraseña temporal es: ${data.claveBase}\n\nPor favor inicia sesión y cámbiala de inmediato en el panel.\n\nSaludos cordiales.`,
       }).then(info => {
-         // Para propósitos de debug, se mostraría la url del correo si se usa ethereal
-         // console.log("Correo enviado:", nodemailer.getTestMessageUrl(info));
+         
+         
       }).catch(console.error);
     });
 
@@ -468,6 +477,11 @@ export class UsuariosService {
 
     if (!usuario_ahbb) {
       throw new NotFoundException('Alumno no encontrado.');
+    }
+
+    // Si ya está activo, no hacemos nada para evitar duplicar correos o procesos
+    if (usuario_ahbb.estadoCuenta_ahbb === 'ACTIVO') {
+      return this.mapearUsuarioPublico_ahbb(usuario_ahbb);
     }
 
     // Generar contraseña temporal internamente para asegurar sincronía
@@ -604,10 +618,16 @@ export class UsuariosService {
     return { exito: true, rutaFirma_ahbb: rutaPublica_ahbb };
   }
 
+  /**
+   * Genera una cadena aleatoria criptográficamente segura para ser usada como contraseña temporal.
+   */
   generarContrasenaTemporal_ahbb() {
     return randomBytes(6).toString('base64url');
   }
 
+  /**
+   * Normaliza los roles provenientes del frontend a los valores internos de la base de datos.
+   */
   normalizarRolInterno_ahbb(rol_ahbb: string) {
     const rolNormalizado_ahbb = String(rol_ahbb ?? '')
       .trim()
@@ -634,6 +654,9 @@ export class UsuariosService {
     return 'alumno';
   }
 
+  /**
+   * Transforma un objeto de base de datos en un perfil de usuario para consumo público.
+   */
   mapearUsuarioPublico_ahbb(usuario_ahbb: any) {
     return {
       id: usuario_ahbb.id_usuario_ahbb,

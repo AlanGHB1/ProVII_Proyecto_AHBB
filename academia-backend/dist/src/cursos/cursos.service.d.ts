@@ -40,6 +40,7 @@ export declare class CursosService {
         prelacionCursoId: any;
         prelacionNombre: any;
         isPublished: any;
+        imagenBasePdf: any;
     }[]>;
     obtenerPorId_ahbb(id_curso_ahbb: number): Promise<{
         id: any;
@@ -67,6 +68,7 @@ export declare class CursosService {
         prelacionCursoId: any;
         prelacionNombre: any;
         isPublished: any;
+        imagenBasePdf: any;
     }>;
     private validarFechaInicio_ahbb;
     crearCurso_ahbb(id_usuario_logueado: number, datos_ahbb: CrearCursoDto_ahbb & {
@@ -97,6 +99,7 @@ export declare class CursosService {
         prelacionCursoId: any;
         prelacionNombre: any;
         isPublished: any;
+        imagenBasePdf: any;
     }>;
     actualizarCurso_ahbb(id_curso_ahbb: number, id_usuario_logueado: number, datos_ahbb: CrearCursoDto_ahbb & {
         id_usuario_curso_ahbb?: number;
@@ -126,6 +129,11 @@ export declare class CursosService {
         prelacionCursoId: any;
         prelacionNombre: any;
         isPublished: any;
+        imagenBasePdf: any;
+    }>;
+    actualizarImagenCertificadoCurso_ahbb(id_curso_ahbb: number, imagenBase64_ahbb: string | null, id_usuario_ahbb: number, rol_ahbb: string): Promise<{
+        exito: boolean;
+        mensaje: string;
     }>;
     eliminarCurso_ahbb(id_curso_ahbb: number): Promise<{
         exito: boolean;
@@ -147,6 +155,8 @@ export declare class CursosService {
         cuposRestantes_ahbb: number;
     }>;
     validarSolapamientoProfesor_ahbb(id_profesor_ahbb: number, horariosNuevos_ahbb: any[], fechaInicioNivel_ahbb: Date, fechaFinNivel_ahbb: Date, id_curso_excluir?: number): Promise<void>;
+    obtenerSolapamientos_ahbb(id_usuario_ahbb: number, rol_ahbb: 'PROFESOR' | 'ALUMNO', horariosNuevos_ahbb: any[], fechaInicio_ahbb: Date, fechaFin_ahbb: Date, id_curso_excluir?: number): Promise<any[]>;
+    obtenerHuecosDisponibles_ahbb(id_usuario_ahbb: number, rol_ahbb: 'PROFESOR' | 'ALUMNO', fechaInicio_ahbb: Date, fechaFin_ahbb: Date): Promise<any[]>;
     hayCruceHoras_ahbb(inicioA_ahbb: string, finA_ahbb: string, inicioB_ahbb: string, finB_ahbb: string): boolean;
     obtenerSesiones_ahbb(rolLogueado_ahbb: string, idLogueado_ahbb: number, rolFiltro_ahbb?: string, idUsuarioFiltro_ahbb?: number, id_curso_ahbb?: number): Promise<{
         sesiones: {
@@ -192,6 +202,7 @@ export declare class CursosService {
         prelacionCursoId: any;
         prelacionNombre: any;
         isPublished: any;
+        imagenBasePdf: any;
     };
     private sincronizarEstadosInscritos_ahbb;
 }
