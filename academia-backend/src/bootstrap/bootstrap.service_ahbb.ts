@@ -225,7 +225,7 @@ export class BootstrapService_ahbb implements OnModuleInit {
           topeEstudiantes_ahbb: 20,
           isPublished_ahbb: true,
           estadoAprobacion_ahbb: 'ACTIVO',
-          id_usuario_curso_ahbb: c_ahbb.profesor,
+          id_usuario_curso_ahbb: c_ahbb.profesor || profesoresIds_ahbb[0] || 1,
           horarios: {
             create: c_ahbb.dias.map(d => ({
               diaSemana_ahbb: d,
@@ -254,11 +254,12 @@ export class BootstrapService_ahbb implements OnModuleInit {
 
       // Inscribimos a los alumnos
       for(const ins of c_ahbb.inscritos) {
+        if (!ins.id) continue; // Previene fallos si no hay suficientes alumnos de prueba
         await this.prisma_ahbb.td_inscripcion_ahbb.create({
           data: {
             id_usuario_inscripcion_ahbb: ins.id,
             id_curso_inscripcion_ahbb: curso_ahbb.id_curso_ahbb,
-            estatus_ahbb: ins.estatus,
+            estatus_ahbb: ins.estatus as any,
             intento_ahbb: 1
           }
         });
