@@ -49,7 +49,9 @@ const manejarLogin_ahbb = async () => {
     <q-card class="auth-card_ahbb" flat bordered>
       <!-- Logo -->
       <q-card-section class="text-center q-pb-none">
-        <div style="font-size: 2.5rem">🎓</div>
+        <div class="flex flex-center q-mb-xs">
+          <img src="/graduation-cap.png" alt="Academia H&B" style="width:60px;height:60px;object-fit:contain;" />
+        </div>
         <div class="text-h5 text-weight-bold text-primary q-mt-sm">
           Academia <span class="text-accent">H&B</span>
         </div>

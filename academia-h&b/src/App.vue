@@ -152,8 +152,9 @@ onMounted(async () => {
     <q-header elevated class="bg-primary text-white">
       <q-toolbar>
         <q-btn dense flat round icon="menu" @click="alternarMenuLateral_ahbb" />
-        <q-toolbar-title class="text-weight-bold" style="font-family: 'Outfit', 'Inter', sans-serif">
-          🎓 Academia <span style="color: #f59e0b">H&B</span>
+        <q-toolbar-title class="text-weight-bold row items-center q-gutter-xs" style="font-family: 'Outfit', 'Inter', sans-serif">
+          <img src="/graduation-cap.png" alt="H&B" style="width:24px;height:24px;object-fit:contain;display:block;" />
+          Academia <span style="color: #f59e0b">H&B</span>
         </q-toolbar-title>
         <q-space />
         <div class="row items-center q-gutter-sm">
@@ -208,7 +209,7 @@ onMounted(async () => {
       <!-- Logo -->
       <q-item clickable to="/dashboard" class="q-py-md">
         <q-item-section avatar>
-          <span style="font-size: 1.5rem">🎓</span>
+          <img src="/graduation-cap.png" alt="H&B" style="width:22px;height:22px;object-fit:contain;display:block;" />
         </q-item-section>
         <q-item-section>
           <q-item-label class="text-weight-bold text-white" style="font-size: 1.1rem">

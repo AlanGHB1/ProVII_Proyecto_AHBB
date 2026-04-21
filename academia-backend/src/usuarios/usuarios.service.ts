@@ -178,7 +178,7 @@ export class UsuariosService {
           service: 'gmail',
           auth: { user: process.env.MAIL_USER, pass: process.env.MAIL_PASS },
         });
-        await transporter.sendMail({
+        transporter.sendMail({
           from: '"Academia H&B" <no-reply@academiahb.com>',
           to: usuarioActual_ahbb.correo_ahbb,
           subject: 'Aviso importante sobre tu cuenta — Academia H&B',
@@ -523,7 +523,7 @@ export class UsuariosService {
         service: 'gmail',
         auth: { user: process.env.MAIL_USER, pass: process.env.MAIL_PASS },
       });
-      await transporter.sendMail({
+      transporter.sendMail({
         from: '"Academia H&B" <no-reply@academiahb.com>',
         to: usuario_ahbb.correo_ahbb,
         subject: '¡Tu membresía ha sido aprobada! — Academia H&B',

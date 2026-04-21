@@ -7,7 +7,7 @@ export const BASE_URL_API_AHBB =
 
 export const apiCliente_ahbb = axios.create({
   baseURL: BASE_URL_API_AHBB,
-  timeout: 15000,
+  timeout: 30000,
   headers: {
     'Content-Type': 'application/json',
   },

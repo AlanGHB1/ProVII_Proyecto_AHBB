@@ -10,7 +10,7 @@ const authStore_ahbb = useAutenticacionStore_ahbb();
   <nav id="navbar_ah" class="navbar_ah">
     <div class="contenedor_ah navbar-contenido_ah">
       <router-link to="/" class="navbar-logo_ah">
-        <span class="logo-icono_ah">🎓</span>
+        <img src="/graduation-cap.png" alt="Academia H&B" class="logo-icono_ah" />
         <span class="logo-texto_ah"
           >Academia <span class="logo-acento_ah">H&B</span></span
         >
@@ -92,7 +92,10 @@ const authStore_ahbb = useAutenticacionStore_ahbb();
 }
 
 .logo-icono_ah {
-  font-size: 1.75rem;
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  display: block;
 }
 
 .logo-texto_ah {
@@ -110,6 +113,7 @@ const authStore_ahbb = useAutenticacionStore_ahbb();
 .navbar-enlaces_ah {
   display: flex;
   gap: var(--espacio-xl_ah);
+  align-items: center;
 }
 
 .navbar-enlace_ah {

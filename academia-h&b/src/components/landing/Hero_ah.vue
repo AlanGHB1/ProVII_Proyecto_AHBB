@@ -24,8 +24,9 @@
       <!-- Columna de texto -->
       <div class="hero-texto_ah">
         <!-- Etiqueta superior decorativa -->
-        <span class="hero-etiqueta_ah animar-entrada_ah">
-          🎓 Plataforma Académica Online
+        <span class="hero-etiqueta_ah animar-entrada_ah row items-center inline-flex no-wrap q-gutter-x-xs">
+          <img src="/graduation-cap.png" alt="Icon" style="width:20px;height:20px;object-fit:contain;" />
+          Plataforma Académica Online
         </span>
 
         <!-- a) Encabezado principal -->

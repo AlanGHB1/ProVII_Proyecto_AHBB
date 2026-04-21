@@ -383,8 +383,9 @@ onMounted(async () => {
             <!-- Membrete -->
             <div class="row justify-between items-start q-mb-xl">
               <div>
-                <div class="text-h4 text-weight-bolder text-primary" style="font-family: 'Outfit', sans-serif;">
-                  🎓 Academia <span style="color: #f59e0b;">H&B</span>
+                <div class="text-h4 text-weight-bolder text-primary row items-center q-gutter-x-sm" style="font-family: 'Outfit', sans-serif;">
+                  <img src="/graduation-cap.png" alt="Logo" style="width:32px;height:32px;object-fit:contain;" />
+                  <span>Academia <span style="color: #f59e0b;">H&B</span></span>
                 </div>
                 <div class="text-caption text-grey-7 q-mt-xs">merch@academiahb.com</div>
                 <div class="text-caption text-grey-7">Caracas, Venezuela</div>

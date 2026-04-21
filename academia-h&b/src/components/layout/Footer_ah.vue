@@ -18,7 +18,7 @@
         <!-- Columna 1: Información de la academia -->
         <div class="footer-col_ah">
           <div class="footer-logo_ah">
-            <span class="logo-icono_ah">🎓</span>
+            <img src="/graduation-cap.png" alt="Academia H&B" class="logo-icono_ah" />
             <span class="logo-texto_ah"
               >Academia <span class="logo-acento_ah">H&B</span></span
             >
@@ -118,7 +118,10 @@
 }
 
 .footer-logo_ah .logo-icono_ah {
-  font-size: 1.5rem;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  display: block;
 }
 
 .footer-logo_ah .logo-texto_ah {
