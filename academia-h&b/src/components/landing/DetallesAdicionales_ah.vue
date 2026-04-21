@@ -7,36 +7,36 @@
 
 const productosMerch_ah = [
   {
-    icono: '👕',
-    nombre: 'Franelas Oficiales',
+    nombre: 'Suéter Azul H&B',
     descripcion:
-      'Algodón 100% premium con el logo de Academia H&B. Disponibles en múltiples colores y tallas (S–XXL).',
-    precio: 'Desde $25',
+      'Suéter cómodo y abrigador con el logo oficial de Academia H&B. Ideal para el frío. Color Azul Oficial.',
+    precio: '$25.00',
     etiqueta: 'Más vendido',
+    imagen: '/img/SueterH&B_Azul.jpg',
   },
   {
-    icono: '🧥',
-    nombre: 'Chaqueta Bomber',
+    nombre: 'Suéter Mostaza H&B',
     descripcion:
-      'Chaqueta bomber con bordado del logo. Perfecta para eventos tech, meetups y tu día a día.',
-    precio: 'Desde $65',
+      'Suéter cómodo estilo urbano con el logo bordado de Academia H&B. Color Mostaza.',
+    precio: '$25.00',
     etiqueta: 'Nuevo',
+    imagen: '/img/SueterH&B_mostaza.jpg',
   },
   {
-    icono: '☕',
-    nombre: 'Taza de Cerámica',
+    nombre: 'Franela Azul H&B',
     descripcion:
-      'Cerámica de alta resistencia, ideal para acompañar tus sesiones de código con café o té.',
-    precio: 'Desde $15',
+      'Franela fresca 100% algodón con el logo de Academia H&B. Perfecta para el día a día.',
+    precio: '$15.00',
     etiqueta: 'Popular',
+    imagen: '/img/franelaH&B_Azul.jpg',
   },
   {
-    icono: '🎒',
-    nombre: 'Accesorios Tech',
+    nombre: 'Lapicero Azul H&B',
     descripcion:
-      'Stickers, lanyards, libretas y mousepads con diseños exclusivos de la comunidad H&B.',
-    precio: 'Desde $5',
-    etiqueta: 'Pack disponible',
+      'Lapicero elegante con acabado premium y el logo grabado de Academia H&B. Color Azul.',
+    precio: '$2.50',
+    etiqueta: 'Accesorio',
+    imagen: '/img/lapiceroH&B_Azul.jpg',
   },
 ];
 </script>
@@ -55,16 +55,7 @@ const productosMerch_ah = [
               class="merch-img_ah"
               loading="lazy"
             />
-            <!-- Badge decorativo sobre la imagen -->
-            <div class="merch-badge_ah">
-              <span class="badge-icono_ah">🛍️</span>
-              <span class="badge-texto_ah">Tienda Oficial</span>
-            </div>
-            <!-- Tarjeta flotante de descuento -->
-            <div class="merch-descuento_ah">
-              <span class="descuento-numero_ah">15%</span>
-              <span class="descuento-texto_ah">Dcto. para estudiantes activos</span>
-            </div>
+
           </div>
         </div>
 
@@ -88,26 +79,25 @@ const productosMerch_ah = [
               :key="indice"
               class="merch-producto_ah"
             >
-              <div class="producto-header_ah">
-                <span class="producto-icono_ah">{{ producto.icono }}</span>
+              <!-- Imagen del producto -->
+              <div class="producto-imagen-wrapper_ah">
+                <img
+                  :src="producto.imagen"
+                  :alt="producto.nombre"
+                  class="producto-imagen_ah"
+                  loading="lazy"
+                />
                 <span class="producto-etiqueta_ah">{{ producto.etiqueta }}</span>
               </div>
-              <h4 class="producto-nombre_ah">{{ producto.nombre }}</h4>
-              <p class="producto-descripcion_ah">{{ producto.descripcion }}</p>
-              <span class="producto-precio_ah">{{ producto.precio }}</span>
+              <!-- Detalles del producto -->
+              <div class="producto-detalles_ah">
+                <h4 class="producto-nombre_ah">{{ producto.nombre }}</h4>
+                <p class="producto-descripcion_ah">{{ producto.descripcion }}</p>
+                <span class="producto-precio_ah">{{ producto.precio }}</span>
+              </div>
             </div>
           </div>
 
-          <!-- CTA de próximamente -->
-          <div class="merch-cta_ah">
-            <div class="merch-proximamente_ah">
-              <span class="proximamente-icono_ah">🚧</span>
-              <div>
-                <span class="proximamente-titulo_ah">Tienda en construcción</span>
-                <span class="proximamente-texto_ah">Próximamente podrás comprar directamente desde la plataforma</span>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -235,10 +225,10 @@ const productosMerch_ah = [
 
 .merch-producto_ah {
   background: white;
-  padding: var(--espacio-lg_ah);
   border-radius: var(--radio-lg_ah);
   border: 1px solid var(--color-borde_ah);
   transition: all var(--transicion-media_ah);
+  overflow: hidden;
 }
 
 .merch-producto_ah:hover {
@@ -247,24 +237,41 @@ const productosMerch_ah = [
   transform: translateY(-3px);
 }
 
-.producto-header_ah {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: var(--espacio-sm_ah);
+.merch-producto_ah:hover .producto-imagen_ah {
+  transform: scale(1.05);
 }
 
-.producto-icono_ah {
-  font-size: 1.75rem;
+/* — Imagen del producto — */
+.producto-imagen-wrapper_ah {
+  position: relative;
+  overflow: hidden;
+  height: 160px;
+  background: #f8fafc;
+}
+
+.producto-imagen_ah {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
 }
 
 .producto-etiqueta_ah {
-  background: rgba(59, 130, 246, 0.1);
-  color: var(--color-secundario_ah);
-  padding: 2px 8px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(59, 130, 246, 0.9);
+  color: white;
+  padding: 3px 10px;
   border-radius: var(--radio-completo_ah);
   font-size: 0.7rem;
   font-weight: 600;
+  backdrop-filter: blur(4px);
+}
+
+/* — Detalles del producto — */
+.producto-detalles_ah {
+  padding: var(--espacio-md_ah) var(--espacio-lg_ah) var(--espacio-lg_ah);
 }
 
 .producto-nombre_ah {
