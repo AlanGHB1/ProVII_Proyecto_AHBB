@@ -12,6 +12,7 @@ import Beneficios_ah from '../components/landing/Beneficios_ah.vue';
 import Galeria_ah from '../components/landing/Galeria_ah.vue';
 import Testimonios_ah from '../components/landing/Testimonios_ah.vue';
 import DetallesAdicionales_ah from '../components/landing/DetallesAdicionales_ah.vue';
+import EquipoDesarrollo_ah from '../components/landing/EquipoDesarrollo_ah.vue';
 import Faq_ah from '../components/landing/Faq_ah.vue';
 </script>
 
@@ -32,6 +33,9 @@ import Faq_ah from '../components/landing/Faq_ah.vue';
 
     <!-- g) Tienda de Merch oficial (próximamente) -->
     <DetallesAdicionales_ah />
+
+    <!-- Equipo de Desarrollo -->
+    <EquipoDesarrollo_ah />
 
     <!-- h) Preguntas frecuentes (FAQ acordeón) -->
     <Faq_ah />
