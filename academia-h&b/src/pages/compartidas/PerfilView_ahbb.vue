@@ -16,7 +16,12 @@ const contrasenaNueva = ref('');
 const contrasenaConfirmacion = ref('');
 const cargandoClave = ref(false);
 
+const mostrarActual = ref(false);
+const mostrarNueva = ref(false);
+const mostrarConfirmacion = ref(false);
+
 const cambiarClave = async () => {
+// ... (rest of script remains the same until template)
   if (contrasenaNueva.value !== contrasenaConfirmacion.value) {
     $q.notify({ type: 'negative', message: 'La confirmación no coincide con la nueva contraseña.' });
     return;
@@ -131,30 +136,54 @@ const cambiarClave = async () => {
               v-model="contrasenaActual" 
               dense 
               outlined 
-              type="password" 
+              :type="mostrarActual ? 'text' : 'password'" 
               label="Contraseña Actual Temporal" 
               placeholder="Ingresa la recibida por el correo"
               required 
-            />
+            >
+              <template v-slot:append>
+                <q-icon
+                  :name="mostrarActual ? 'visibility_off' : 'visibility'"
+                  class="cursor-pointer"
+                  @click="mostrarActual = !mostrarActual"
+                />
+              </template>
+            </q-input>
             
             <q-input 
               v-model="contrasenaNueva" 
               dense 
               outlined 
-              type="password" 
+              :type="mostrarNueva ? 'text' : 'password'" 
               label="Nueva Contraseña Definitiva" 
               hint="Minímo 6 caracteres" 
               required 
-            />
+            >
+              <template v-slot:append>
+                <q-icon
+                  :name="mostrarNueva ? 'visibility_off' : 'visibility'"
+                  class="cursor-pointer"
+                  @click="mostrarNueva = !mostrarNueva"
+                />
+              </template>
+            </q-input>
             
             <q-input 
               v-model="contrasenaConfirmacion" 
               dense 
               outlined 
-              type="password" 
+              :type="mostrarConfirmacion ? 'text' : 'password'" 
               label="Confirmar Nueva Contraseña" 
               required 
-            />
+            >
+              <template v-slot:append>
+                <q-icon
+                  :name="mostrarConfirmacion ? 'visibility_off' : 'visibility'"
+                  class="cursor-pointer"
+                  @click="mostrarConfirmacion = !mostrarConfirmacion"
+                />
+              </template>
+            </q-input>
 
             <div class="q-mt-xl text-right">
               <q-btn 
@@ -163,6 +192,9 @@ const cambiarClave = async () => {
                 color="secondary" 
                 icon="save"
                 :loading="cargandoClave"
+                unelevated
+                class="full-width"
+                style="border-radius: 8px"
               />
             </div>
           </q-form>

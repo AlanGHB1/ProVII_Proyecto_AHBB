@@ -2,7 +2,7 @@
   LoginView_ahbb.vue — Vista de inicio de sesión con Quasar
 -->
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAutenticacionStore_ahbb } from '../stores/autenticacionStore_ahbb';
 
@@ -13,6 +13,20 @@ const correo_ahbb = ref('');
 const contrasena_ahbb = ref('');
 const cargando_ahbb = ref(false);
 const mostrarContrasena_ahbb = ref(false);
+
+// Sugerencias de correos (Test + Cache)
+const sugerenciasCorreos_ahbb = ref([
+  'admin@academiah-b.edu',
+  'carlos@academiah-b.edu',
+  'maria@estudiante.edu'
+]);
+
+onMounted(() => {
+  const ultimoCorreo = localStorage.getItem('ahbb_ultimo_correo');
+  if (ultimoCorreo && !sugerenciasCorreos_ahbb.value.includes(ultimoCorreo)) {
+    sugerenciasCorreos_ahbb.value.unshift(ultimoCorreo);
+  }
+});
 
 const manejarLogin_ahbb = async () => {
   cargando_ahbb.value = true;
@@ -28,6 +42,8 @@ const manejarLogin_ahbb = async () => {
   cargando_ahbb.value = false;
 
   if (exito_ahbb) {
+    // Guardar en cache para el datalist
+    localStorage.setItem('ahbb_ultimo_correo', correo_ahbb.value);
     void router_ahbb.push({ name: 'dashboard' });
   }
 };
@@ -78,6 +94,9 @@ const manejarLogin_ahbb = async () => {
             type="email"
             outlined
             dense
+            autocomplete="username"
+            name="email"
+            list="login-emails"
             :rules="[(v) => !!v || 'El correo es requerido']"
           >
             <template v-slot:prepend>
@@ -85,12 +104,19 @@ const manejarLogin_ahbb = async () => {
             </template>
           </q-input>
 
+          <!-- Datalist para sugerencias -->
+          <datalist id="login-emails">
+            <option v-for="email in sugerenciasCorreos_ahbb" :key="email" :value="email" />
+          </datalist>
+
           <q-input
             v-model="contrasena_ahbb"
             label="Contraseña"
             :type="mostrarContrasena_ahbb ? 'text' : 'password'"
             outlined
             dense
+            autocomplete="current-password"
+            name="password"
             :rules="[(v) => !!v || 'La contraseña es requerida']"
           >
             <template v-slot:prepend>

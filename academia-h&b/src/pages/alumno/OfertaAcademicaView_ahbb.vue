@@ -1,17 +1,44 @@
 <!-- OfertaAcademicaView_ahbb.vue — Catálogo de cursos para alumnos -->
 <script setup>
-import { onMounted, computed } from 'vue';
+import { onMounted, computed, ref } from 'vue';
 import { useCursosStore_ahbb } from '../../stores/cursosStore_ahbb';
 import { useAutoRefresh_ahbb } from '../../composables/useAutoRefresh_ahbb';
 
 const cursosStore_ahbb = useCursosStore_ahbb();
 const recargarOferta_ahbb = () => cursosStore_ahbb.recargarCursos_ahbb();
 
+// Filtros locales
+const filtroEstado_ahbb = ref('todos');
+const busqueda_ahbb = ref('');
+
+const opcionesEstado_ahbb = [
+  { label: 'Todos los cursos', value: 'todos' },
+  { label: 'Disponibles para Inscripción', value: 'activo' },
+  { label: 'Ya Iniciados', value: 'iniciado' }
+];
+
 // Polling cada 90s: nuevos cursos publicados aparecen automáticamente
 useAutoRefresh_ahbb(recargarOferta_ahbb, 90_000);
 
 const cursosOfertados_ahbb = computed(() => {
-  return cursosStore_ahbb.listaCursos_ahbb.filter(c => c.estatus === 'activo' || c.isPublished);
+  let filtrados = cursosStore_ahbb.listaCursos_ahbb.filter(c => c.estatus === 'activo' || c.estatus === 'iniciado' || c.isPublished);
+
+  // Filtro por estado
+  if (filtroEstado_ahbb.value !== 'todos') {
+    filtrados = filtrados.filter(c => c.estatus === filtroEstado_ahbb.value);
+  }
+
+  // Filtro por búsqueda
+  if (busqueda_ahbb.value.trim()) {
+    const term = busqueda_ahbb.value.toLowerCase();
+    filtrados = filtrados.filter(c => 
+      c.nombre.toLowerCase().includes(term) || 
+      c.descripcion.toLowerCase().includes(term) ||
+      c.profesor.toLowerCase().includes(term)
+    );
+  }
+
+  return filtrados;
 });
 
 const formatearFecha_ahbb = (fecha) => {
@@ -22,6 +49,10 @@ const formatearFecha_ahbb = (fecha) => {
     year: 'numeric'
   });
 };
+
+onMounted(() => {
+  recargarOferta_ahbb();
+});
 </script>
 
 <template>
@@ -31,12 +62,50 @@ const formatearFecha_ahbb = (fecha) => {
       Oferta Académica
     </div>
 
-    <q-banner class="bg-blue-1 text-blue-9 q-mb-xl" rounded>
+    <q-banner class="bg-blue-1 text-blue-9 q-mb-md" rounded>
       <template v-slot:avatar>
         <q-icon name="info" color="blue" />
       </template>
       Explora los cursos disponibles, revisa horarios, profesores e inscríbete para avanzar en tu ruta de aprendizaje.
     </q-banner>
+
+    <!-- Barra de Filtros -->
+    <div class="row q-col-gutter-md q-mb-xl items-center">
+      <div class="col-12 col-sm-7 col-md-8">
+        <q-input
+          v-model="busqueda_ahbb"
+          placeholder="Buscar por nombre, profesor o descripción..."
+          outlined
+          dense
+          bg-color="white"
+          class="shadow-sm"
+        >
+          <template v-slot:prepend>
+            <q-icon name="search" />
+          </template>
+          <template v-slot:append v-if="busqueda_ahbb">
+            <q-icon name="close" class="cursor-pointer" @click="busqueda_ahbb = ''" />
+          </template>
+        </q-input>
+      </div>
+      <div class="col-12 col-sm-5 col-md-4">
+        <q-select
+          v-model="filtroEstado_ahbb"
+          :options="opcionesEstado_ahbb"
+          label="Estado del curso"
+          outlined
+          dense
+          emit-value
+          map-options
+          bg-color="white"
+          class="shadow-sm"
+        >
+          <template v-slot:prepend>
+            <q-icon name="filter_list" />
+          </template>
+        </q-select>
+      </div>
+    </div>
 
     <div v-if="cursosStore_ahbb.cargando_ahbb" class="flex flex-center q-pa-xl">
       <q-spinner-dots color="primary" size="50px" />

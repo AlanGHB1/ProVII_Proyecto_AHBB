@@ -38,8 +38,7 @@ export class AuthService {
       usuario_ahbb.contrasena_ahbb,
     );
 
-    // Validación dual: soporta hash de bcrypt y contraseñas temporales en texto plano (migración)
-    if (!contrasenaValida_ahbb && contrasena_ahbb !== usuario_ahbb.contrasena_ahbb) {
+    if (!contrasenaValida_ahbb) {
       throw new UnauthorizedException('Correo o contraseña incorrectos.');
     }
 
@@ -77,14 +76,29 @@ export class AuthService {
    * @throws BadRequestException Si el correo ya está registrado.
    */
   async registrarUsuario_ahbb(datos_ahbb: any) {
-    const existe_ahbb = await this.usuariosService_ahbb.encontrarPorCorreo_ahbb(
-      datos_ahbb.correo_ahbb ?? datos_ahbb.correo,
+    const correoNormalizado_ahbb = (datos_ahbb.correo_ahbb ?? datos_ahbb.correo).toLowerCase();
+    const cedulaRecibida_ahbb = datos_ahbb.cedula_ahbb ?? datos_ahbb.cedula;
+
+    const existeCorreo_ahbb = await this.usuariosService_ahbb.encontrarPorCorreo_ahbb(
+      correoNormalizado_ahbb,
     );
-    if (existe_ahbb) {
+    if (existeCorreo_ahbb) {
       throw new BadRequestException({
         exito: false,
         mensaje: 'Ya existe un usuario con ese correo electrónico.',
       });
+    }
+
+    if (cedulaRecibida_ahbb) {
+      const existeCedula_ahbb = await this.usuariosService_ahbb.encontrarPorCedula_ahbb(
+        cedulaRecibida_ahbb,
+      );
+      if (existeCedula_ahbb) {
+        throw new BadRequestException({
+          exito: false,
+          mensaje: 'Ya existe un usuario con esa cédula de identidad.',
+        });
+      }
     }
 
     const contrasenaBase_ahbb =
@@ -223,10 +237,7 @@ export class AuthService {
       usuario_ahbb.contrasena_ahbb,
     );
 
-    if (
-      !contrasenaValida_ahbb &&
-      contrasenaActual_ahbb !== usuario_ahbb.contrasena_ahbb
-    ) {
+    if (!contrasenaValida_ahbb) {
       throw new UnauthorizedException('La contraseña actual no coincide.');
     }
 

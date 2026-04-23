@@ -41,6 +41,15 @@ export class UsuariosService {
   }
 
   /**
+   * Localiza un registro de usuario por su cédula de identidad única.
+   */
+  async encontrarPorCedula_ahbb(cedula_ahbb: string) {
+    return this.prisma_ahbb.td_usuario_ahbb.findUnique({
+      where: { cedula_ahbb },
+    });
+  }
+
+  /**
    * Centraliza el hasheo de contraseñas con validaciones de seguridad.
    */
   async hashearContrasena_ahbb(contrasenaPlana_ahbb: string): Promise<string> {

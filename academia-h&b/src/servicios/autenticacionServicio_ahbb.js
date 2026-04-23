@@ -63,10 +63,26 @@ export const registrarUsuario_ahbb = async (datosUsuario_ahbb) => {
       mensaje: respuesta_ahbb.data.mensaje,
     };
   } catch (error_ahbb) {
+    const respuestaError_ahbb = error_ahbb.response?.data;
+
+    // El backend puede enviar el mensaje en diferentes formatos:
+    // 1. { mensaje: "..." }  — respuesta estándar del filtro global
+    // 2. { message: { mensaje: "..." } } — BadRequestException con objeto
+    // 3. { message: "..." } — formato estándar de NestJS
+    let mensajeFinal_ahbb = 'Error al registrar usuario.';
+
+    if (typeof respuestaError_ahbb?.mensaje === 'string') {
+      mensajeFinal_ahbb = respuestaError_ahbb.mensaje;
+    } else if (typeof respuestaError_ahbb?.message === 'string') {
+      mensajeFinal_ahbb = respuestaError_ahbb.message;
+    } else if (typeof respuestaError_ahbb?.message?.mensaje === 'string') {
+      mensajeFinal_ahbb = respuestaError_ahbb.message.mensaje;
+    }
+
     return {
       exito: false,
       usuario: null,
-      mensaje: error_ahbb.response?.data?.mensaje ?? 'Error al registrar usuario.',
+      mensaje: mensajeFinal_ahbb,
     };
   }
 };

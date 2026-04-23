@@ -66,6 +66,12 @@ export const useAutenticacionStore_ahbb = defineStore('autenticacion_ahbb', {
           return false;
         }
         return true;
+      } catch (error_ahbb) {
+        this.errorAuth_ahbb =
+          error_ahbb?.response?.data?.mensaje ??
+          error_ahbb?.message ??
+          'Ocurrió un error inesperado al registrar el usuario.';
+        return false;
       } finally {
         this.cargando_ahbb = false;
       }
@@ -89,6 +95,12 @@ export const useAutenticacionStore_ahbb = defineStore('autenticacion_ahbb', {
 
         this.usuarioActivo_ahbb = resultado_ahbb.usuario;
         return true;
+      } catch (error_ahbb) {
+        this.errorAuth_ahbb =
+          error_ahbb?.response?.data?.mensaje ??
+          error_ahbb?.message ??
+          'Ocurrió un error inesperado al iniciar sesión.';
+        return false;
       } finally {
         this.cargando_ahbb = false;
       }

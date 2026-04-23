@@ -27,36 +27,25 @@ apiCliente_ahbb.interceptors.request.use(
 apiCliente_ahbb.interceptors.response.use(
   (respuesta_ahbb) => respuesta_ahbb,
   (error_ahbb) => {
-    const errorData_ahbb = error_ahbb.response?.data;
+    const status_ahbb = error_ahbb.response?.status;
 
     // Redirección si la sesión expiró (401), pero NO si es el login
-    if (error_ahbb.response?.status === 401 && !error_ahbb.config.url.includes('iniciar-sesion')) {
+    if (status_ahbb === 401 && !error_ahbb.config.url.includes('iniciar-sesion')) {
       console.warn('Sesión expirada o inválida. Redirigiendo al login...');
       sessionStorage.removeItem('certificaciones_token_ahbb');
       localStorage.removeItem('certificaciones_usuario_ahbb');
       window.location.href = '/#/login';
     }
 
-    // Alerta silenciosa para permisos (403)
-    if (error_ahbb.response?.status === 403) {
-      console.error(
-        'Acceso denegado:',
-        errorData_ahbb?.mensaje || 'No tienes permisos para esta acción.',
-      );
+    // Errores de servidor (5xx) y fallos de red: loguear para diagnóstico
+    if (!error_ahbb.response) {
+      console.error('[API Red]:', error_ahbb.message);
+    } else if (status_ahbb >= 500) {
+      console.error(`[API Error ${status_ahbb}]:`, error_ahbb.response.data?.mensaje ?? error_ahbb.message);
     }
 
-    // Log estructurado para depuración sin "ensuciar" la consola en exceso
-    if (error_ahbb.response) {
-      const status = error_ahbb.response.status;
-      const msg =
-        errorData_ahbb?.mensaje ||
-        errorData_ahbb?.message ||
-        error_ahbb.message;
-      console.error(`[API Error ${status}]: ${msg}`);
-    } else {
-      console.error('[API Network/Unknown Error]:', error_ahbb.message);
-    }
-
+    // Errores de cliente (4xx) se propagan silenciosamente para que
+    // el store o componente los muestre al usuario a través de la UI.
     return Promise.reject(error_ahbb);
   },
 );
